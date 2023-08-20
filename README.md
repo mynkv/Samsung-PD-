@@ -54,8 +54,18 @@ Below is the screenshot showing sucessful launch of yosys:
 
  <details>
  <summary>gtkwave </summary>
+
+  
 GTKWave is the best free wave viewer and is the recommended viewer by Icarus Verilog simulation tool. The GTKWave software is used as a simulation tool to verify the Verilog design code through a testbench. I invoked gtkwave using the following commands: gtkwave
 Below is the screenshot showing sucessful launch of gtkwave:
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3dc72d18e69a8d032ac187e060f722427e034ef3/Samsung_PD_%23day0/gtkave.PNG">
 </details>
+
+
+## Day-1-Introduction to RTL and Synthesis
+
+
+
+
+
