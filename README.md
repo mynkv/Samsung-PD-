@@ -82,7 +82,7 @@ Simulator : Simultor is a tool used to check adherence of RTL to specifications.
  <details>
  <summary>Environment Setup</summary>
 
-Environment Setup includes tool flow setup and file setup. For setting up the environment import the library files and verilog files into your directory from github. Command to do so is : **git clone link.git**. Below screenshot shows the cloning of directories from github, and the files inside the directories. Command to view files inside directories is : ls. 
+Environment Setup includes tool flow setup and file setup. For setting up the environment import the library files and verilog files into your directory from github. Command to do so is : **git clone link.git**. Below screenshot shows the cloning of directories from github, and the files inside the directories. Command to view files inside directories is : **ls**. <br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e0dc7fffa135b027e14a3d91350622731803ce3/Cloning%20git.PNG">
 
@@ -92,14 +92,14 @@ In the image above we can see the files inside the directories "vsdflow" and "sk
  <details>
  <summary>Working with iverilog and gtkwave</summary>
 
-Inside the folder verilog_files in the directory "sky130RTLDesignANDSynthesisWorkshop" we have all the verilog design files as well as testbenches. To lload these files into the iverilog, first change directory to verilog_files and to load files use command : **iverilog design.v tb_xyz.v**. Below image shows the all the files inside verilog_files, verilog_model.
+Inside the folder verilog_files in the directory "sky130RTLDesignANDSynthesisWorkshop" we have all the verilog design files as well as testbenches. To lload these files into the iverilog, first change directory to verilog_files and to load files use command : **iverilog design.v tb_xyz.v**. Below image shows the all the files inside verilog_files, verilog_model.<br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e0dc7fffa135b027e14a3d91350622731803ce3/files%20under%20diff%20directories.PNG">
 
-After **iverilog design.v tb_xyz.v** command a.out executable file is created which is used to dump the output into the vcd file. Now execute a.out by command : **./a.out**, after this a vcd file is created. Open the vcd file in gtkwave by using the following command : gtkwave **name.vcd**. Below image shows the execution for good_mux design file and its testbench.
+After **iverilog design.v tb_xyz.v** command a.out executable file is created which is used to dump the output into the vcd file. Now execute a.out by command : **./a.out**, after this a vcd file is created. Open the vcd file in gtkwave by using the following command : gtkwave **name.vcd**. Below image shows the execution for good_mux design file and its testbench.<br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f41ffd6297d24485a22ffe519de2e79ea50f5915/verilog.PNG">
 
-Gtkwave output for the good_mux vcd file is shown below.
+Gtkwave output for the good_mux vcd file is shown below.<br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f41ffd6297d24485a22ffe519de2e79ea50f5915/gtkwave.PNG">
 
@@ -108,7 +108,7 @@ Gtkwave output for the good_mux vcd file is shown below.
  <details>
  <summary>Design and testbench structure</summary>
 
-To view the design or testbench file use command : vim file_mane.v. Below figures shows the design files for good_mux and its testbench
+To view the design or testbench file use command : vim file_mane.v. Below figures shows the design files for good_mux and its testbench.<br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9b4f3b27cd43f1ee50d3190ece7e0a372cd85db5/mux_design.png">
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9b4f3b27cd43f1ee50d3190ece7e0a372cd85db5/tb_mux.png">
 
@@ -117,10 +117,10 @@ To view the design or testbench file use command : vim file_mane.v. Below figure
  <details>
  <summary>Introduction to Yosys</summary>
 
-Yosys is the synthesizer used to convert the RTL into the netlist. Netlist is the representation of the design in the form of the cells from library. Below figure shows the flow for the yosys synthesizer.
+Yosys is the synthesizer used to convert the RTL into the netlist. Netlist is the representation of the design in the form of the cells from library. Below figure shows the flow for the yosys synthesizer.<br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b0dee97319264489ff2f5620d28c60efd2e4964/yosys_Setup.PNG">
 
- To verify the synthesis same testbench is given along with the netlist to observe the funtionality of the design.
+ To verify the synthesis same testbench is given along with the netlist to observe the funtionality of the design.<br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b0dee97319264489ff2f5620d28c60efd2e4964/verifysynthesis.PNG">
 
 </details>
@@ -136,12 +136,28 @@ The . lib (library) file contains important information about the electrical beh
 In the library we have fast cells to meet the setup time constraing and slow cells to meet up the hold time constraint.
 
  
-
-
-
-
-
 </details>
+
+<details>
+ <summary>Yosys</summary>
+	
+Steps in the yosys are as follows :
+	
+1. Yosys is the synthesizer we are using. Command to invoke yosys is : **yosys**.<br>
+2. Inside yosys, first we need to read the library file. Command to read the library file is : **read_liberty -lib ../path_where_library_is**.<br>
+3. Now read the verilog file by using the command : **read_verilog file_name.v**.<br>
+4. After this we need to specify the module for synthesis by using command : **synth -top file_name**.<br>
+5. Now we move on to generating the netlist. Command to generate the netlist is : **abc -liberty ../path**. Path we specifies is the library path for the library which we want to use. This also gives the report about the design such as number of i/p and o/p ext. Below image shows the report for the design good_mux.<br>
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/95aaab7969f9daedac9753f19158df9484d434e0/info_design.PNG"><br>
+6. To see the graphical representation of the design, we give command : **show**. Below figure shows the graphical representation of good_mux.<br>
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/95aaab7969f9daedac9753f19158df9484d434e0/design_graphical.PNG">
+
+
+ 
+</details>
+
+
+
 
 
 
