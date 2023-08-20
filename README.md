@@ -42,3 +42,19 @@ Below is the screenshot showing sucessful launch:
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/62d7ee871bd844bd10a8d7179474934facc356a3/Samsung_PD_%23day0/pt_shell.png">
 </details>
+
+ <details>
+ <summary>iverilog</summary>
+I invoked iverilog using the following commands: iverilog
+Below is the screenshot showing sucessful launch:
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f2f500b02358a0ffd22f6ab4a733df28374119b0/iverilog.PNG">
+</details>
+
+ <details>
+ <summary>yosys </summary>
+I invoked yosys using the following commands: yosys
+Below is the screenshot showing sucessful launch:
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f2f500b02358a0ffd22f6ab4a733df28374119b0/yosys.PNG">
+</details>
