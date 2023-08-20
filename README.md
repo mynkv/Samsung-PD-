@@ -103,7 +103,25 @@ Gtkwave output for the good_mux vcd file is shown below.
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f41ffd6297d24485a22ffe519de2e79ea50f5915/gtkwave.PNG">
 
+</details>
 
+ <details>
+ <summary>Design and testbench structure</summary>
+
+To view the design or testbench file use command : vim file_mane.v. Below figures shows the design files for good_mux and its testbench
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9b4f3b27cd43f1ee50d3190ece7e0a372cd85db5/mux_design.png">
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9b4f3b27cd43f1ee50d3190ece7e0a372cd85db5/tb_mux.png">
+
+</details>
+
+ <details>
+ <summary>Introduction to Yosys</summary>
+
+Yosys is the synthesizer used to convert the RTL into the netlist. Netlist is the representation of the design in the form of the cells from library. Below figure shows the flow for the yosys synthesizer.
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b0dee97319264489ff2f5620d28c60efd2e4964/yosys_Setup.PNG">
+
+ To verify the synthesis same testbench is given along with the netlist to observe the funtionality of the design.
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b0dee97319264489ff2f5620d28c60efd2e4964/verifysynthesis.PNG">
 
 </details>
 
