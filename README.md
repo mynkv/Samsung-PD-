@@ -1,5 +1,5 @@
 # Samsung-PD-
-## Day-0-Installation
+## Day-0-Invoking-tools
 
 I invoked tools on day-0 using these commands, each briefly explained.
 
