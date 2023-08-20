@@ -148,9 +148,12 @@ Steps in the yosys are as follows :
 3. Now read the verilog file by using the command : **read_verilog file_name.v**.<br>
 4. After this we need to specify the module for synthesis by using command : **synth -top file_name**.<br>
 5. Now we move on to generating the netlist. Command to generate the netlist is : **abc -liberty ../path**. Path we specifies is the library path for the library which we want to use. This also gives the report about the design such as number of i/p and o/p ext. Below image shows the report for the design good_mux.<br>
-<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/95aaab7969f9daedac9753f19158df9484d434e0/info_design.PNG"><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/95aaab7969f9daedac9753f19158df9484d434e0/info_design.PNG"><br>
 6. To see the graphical representation of the design, we give command : **show**. Below figure shows the graphical representation of good_mux.<br>
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/00f664d9b80c323bacd73c9e319e19524cd51bc7/netlist.jpeg">
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0916fd2212262c81d86e6af8d7ec4a9186f6b9d6/design_graphical.PNG">.<br>
+7. To write the netlist we give command : **write_verilog filename_netlist.v**.<br>
+8. Now to see the generated netlist we use command : **!vim filename_netlist.v**. Below figure shows the generated netlist for a latch.<br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0916fd2212262c81d86e6af8d7ec4a9186f6b9d6/netlist.jpeg">.<br>
 
 
  
