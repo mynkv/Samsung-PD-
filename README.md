@@ -22,7 +22,7 @@ Below is the screenshot showing sucessful launch of icc2_shell:
 
  <details>
  <summary>lc_shell </summary>
-The Library Compiler tool from Synopsys captures ASIC libraries and translates them into Synopsys internal database format for physical synthesis or into VHDL format for simulation.I invoked lc_shell using the following command: lc_shell
+The Library Compiler tool from Synopsys captures ASIC libraries and translates them into Synopsys internal database format for physical synthesis or into VHDL format for simulation. I invoked lc_shell using the following command: lc_shell
 Below is the screenshot showing sucessful launch of lc_shell:
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/62d7ee871bd844bd10a8d7179474934facc356a3/Samsung_PD_%23day0/lc_shell.png">
