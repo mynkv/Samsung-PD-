@@ -125,6 +125,25 @@ Yosys is the synthesizer used to convert the RTL into the netlist. Netlist is th
 
 </details>
 
+<details>
+ <summary>Introduction to Logic Synthesis</summary>
+
+Synthesis is the  conversion of RTL to netlist using library file. Below figure shows the synthesis flow. 
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/22d9c52faace141b21dc7da24cc196928b6c52a3/Synthesisflow.PNG">
+
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c884dc9a3a35e04a740aa1ad498671849b18a3a/synthesizer%20_illustration.PNG">
+The . lib (library) file contains important information about the electrical behavior of the standard cells used in the IC design. It includes data such as cell timing models, power characteristics, voltage thresholds, and other parameters necessary for accurate timing analysis. 
+In the library we have fast cells to meet the setup time constraing and slow cells to meet up the hold time constraint.
+
+ 
+
+
+
+
+
+</details>
+
+
 
 
 
