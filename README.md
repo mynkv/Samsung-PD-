@@ -58,3 +58,11 @@ Below is the screenshot showing sucessful launch:
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f2f500b02358a0ffd22f6ab4a733df28374119b0/yosys.PNG">
 </details>
+
+ <details>
+ <summary>gtkwave </summary>
+I invoked gtkwave using the following commands: gtkwave
+Below is the screenshot showing sucessful launch:
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3dc72d18e69a8d032ac187e060f722427e034ef3/Samsung_PD_%23day0/gtkave.PNG">
+</details>
