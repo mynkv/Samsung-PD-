@@ -159,6 +159,21 @@ Steps in the yosys are as follows :
  
 </details>
 
+## Day-2-synthesis-FFcoding-styles
+
+The library file contains the definitions of all the available standard cells for a particular technology and is used for RTL to gate level conversion. In other words it is the cells that the synthesizer is allowed to use for conversion. The library which we are using is **sky130_fd_sc_hd_tt_025C_1v80**, here: <br>
+1. tt - Typical Library
+2. 025C - Temperature
+3. 1v80 - Voltage
+Command to open lib file is: **vim path-of_lib**. PVT (Process, Voltage, Temperature) determines how our silicon is going to work i.e. fast, slow or typical.
+ 
+<details>
+ <summary>Comparison of different cells of same gate.</summary>
+Below image contains comparison of 3, 2 input AND gate. We can see that as the area increases, performance increases but at the same time cost also increases. So a design contains all the tye of cells, fast as well slow, and there is always a trade off between area and performance
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+</details>
+
 
 
 
