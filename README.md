@@ -169,7 +169,7 @@ Command to open lib file is: **vim path-of_lib**. PVT (Process, Voltage, Tempera
  
 <details>
  <summary>Comparison of different cells of same gate.</summary>
-Below image contains comparison of 3, 2 input AND gate. We can see that as the area increases, performance increases but at the same time cost also increases. So a design contains all the tye of cells, fast as well slow, and there is always a trade off between area and performance
+Below image contains comparison of 3, 2 input AND gate. We can see that as the area increases, performance increases but at the same time cost also increases. So a design library contains all the tye of cells, fast as well slow, and there is always a trade off between area and performance.
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
 </details>
