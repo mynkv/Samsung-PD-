@@ -314,7 +314,7 @@ GTKWAve output of DFF with Asynchronous reset and Synchronous reset:
 </details>
 
 
-## Day-2-Logic-Optimization
+## Day-3-Logic-Optimization
 
 Combinational logic optimization is a process used in digital circuit design to improve the efficiency, speed, and overall performance of digital circuits. Combinational logic refers to logic circuits where the outputs depend solely on the current inputs, with no memory or feedback elements. The goal of optimization is to minimize the complexity of the logic circuit while maintaining the desired functionality. Techniques to optimise combinational circuits are: <br><br>
 1. Constant Propagation.
@@ -342,6 +342,68 @@ So, both area and speed of operation is improved.<br>
  	  = a'c' + ab'c + abc <br>
 	  = a'c' + ac <br>
    	  = a ex_nor b
+ 	
+</details>
+
+<details>
+<summary> Examples in yosys </summary> <br>
+
+ <details>
+<summary> Example 1 </summary> <br>
+Consider the verilog model as shown in fig below: <br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_verilog.png"><br>	<br>
+Here :<br>	 
+	 y = a ? b:0  <br>
+	   = a.b + a.0 <br>
+	   = a.b <br><br>
+Graphical reperesentation of above example:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_gui.png"><br>	
+Netlist of above example:<br><br>
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_net.png"><br>	
+</details>
+
+<details>
+<summary> Example 2 </summary> <br>
+Consider the verilog model as shown in fig below: <br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_verilog.png"><br>	<br>
+Here :<br>	 
+	y = a ? 1:b  <br>
+	   = a + a'.b <br>
+	   = a + b <br><br>
+Graphical reperesentation of above example:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_gui.png"><br>	
+Netlist of above example:<br><br>
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_net.png"><br>	
+</details>
+
+<details>
+<summary> Example 3 </summary> <br>
+Consider the verilog model as shown in fig below: <br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_verilog.png"><br>	<br>
+Here :<br>	 
+	y = a ? (c ? b:0):0  <br>
+	   = a ( cb + c'.0) <br>
+	   = abc <br><br>
+Graphical reperesentation of above example:<br><br>
+<img width="600" alt="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_gui.png"><br>	
+Netlist of above example:<br><br>
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_gui.png"><br>	
+</details>
+
+<details>
+<summary> Example 4 </summary> <br>
+Consider the verilog model as shown in fig below: <br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_verilog.png"><br>	<br>
+Here :<br>	 
+	y = a ? (c ? b:0):0  <br>
+	   = a ( bac + b'c ) + a'c' <br>
+	   = abc + ab'c + a'c' <br>
+	   = a ex-nor b <br><br>
+Graphical reperesentation of above example:<br><br>
+<img width="600" alt="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_gui.png"><br>	
+Netlist of above example:<br><br>
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_net.png"><br>	
+</details>
  	
 </details>
 
