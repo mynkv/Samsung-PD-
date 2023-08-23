@@ -168,11 +168,29 @@ The library file contains the definitions of all the available standard cells fo
 Command to open lib file is: **vim path-of_lib**. PVT (Process, Voltage, Temperature) determines how our silicon is going to work i.e. fast, slow or typical.
  
 <details>
- <summary>Comparison of different cells of same gate.</summary>
-Below image contains comparison of 3, 2 input AND gate. We can see that as the area increases, performance increases but at the same time cost also increases. So a design library contains all the tye of cells, fast as well slow, and there is always a trade off between area and performance.
+ <summary>Comparison of different cells of same gate.</summary><br>
+The provided image illustrates a comparison between 3 different configurations of 2-input AND gates. It's evident that when the gate's physical size is enlarged, its performance improves; however, this enhancement comes at the expense of increased production costs. Consequently, a comprehensive design library encompasses a spectrum of cell types, spanning from high-speed to slower variants. Invariably, there exists a delicate balance between the occupied area and the operational efficiency of these cells.<br>
+To check the functionality of a cell we can loof for its verilog code by command: **:sp ../my_lib/verilog_model/cell_name.behavioral.v**
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a8d3ae0ddc0f504590c562c1a09af0d4b3f336cf/Samsung_PD_%23day0/1_cell_comparison.png">
 </details>
+
+<details>
+ <summary>Hierarchial and Flat Netlist</summary><br>
+**Hirarchial Netlist** <br>
+A hierarchical level netlist refers to a structured representation of a digital circuit's connectivity and components, organized in a hierarchical manner. In this approach, the circuit is broken down into smaller functional blocks, which are then represented as modules or subcircuits. Each module encapsulates its internal logic and connectivity, which is connected to other modules through defined input and output ports.<br>
+In a hierarchical level netlist, each module has its own associated netlist, which details the interconnections of its internal components. The top-level netlist connects the various modules and their respective input and output ports. <br>
+Let us consider a design with 2 modules, deatils of those two modules is as shown in fig below.<br>
+
+
+ 
+	Below images shows the raphical representation as well as netliest for a design having two modules																																												
+
+
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a8d3ae0ddc0f504590c562c1a09af0d4b3f336cf/Samsung_PD_%23day0/1_cell_comparison.png">
+</details>
+
 
 
 
