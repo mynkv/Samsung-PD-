@@ -314,6 +314,42 @@ GTKWAve output of DFF with Asynchronous reset and Synchronous reset:
 </details>
 
 
+## Day-2-Logic-Optimization
+
+Combinational logic optimization is a process used in digital circuit design to improve the efficiency, speed, and overall performance of digital circuits. Combinational logic refers to logic circuits where the outputs depend solely on the current inputs, with no memory or feedback elements. The goal of optimization is to minimize the complexity of the logic circuit while maintaining the desired functionality. Techniques to optimise combinational circuits are: <br><br>
+1. Constant Propagation.
+2. Boolean logic optimization.
+
+<details>
+<summary>Examples of Combinational Logic</summary>
+	
+<details>
+<summary>Example for constant propagation</summary><br>
+	
+ Let us consider an exression: Y = (A.B + C)<br>
+	In the original expression one AND gate and one NOR gate is used.<br>
+ If A is grounded in the above expression then: Y = C'<br>
+ 	Now only one NOT gate is used.<br>
+So, both area and speed of operation is improved.<br>
+ 	
+</details>
+
+<details>
+<summary> Example for Boolean logic optimization </summary> <br>
+	
+ Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
+	Y = a'c' + a.(b'ac + bc) <br>
+ 	  = a'c' + ab'c + abc <br>
+	  = a'c' + ac <br>
+   	  = a ex_nor b
+ 	
+</details>
+
+
+
+</details>
+
+
 
 
 
