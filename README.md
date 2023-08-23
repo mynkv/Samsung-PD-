@@ -228,6 +228,7 @@ To see the netlist or the gui of a submodule in the design, command for synthesi
 A flip-flop is a fundamental digital electronic circuit component used to store binary information. It serves as a basic building block for memory elements and sequential logic circuits in digital systems. Flip-flops are designed to retain their state until a specific signal triggers a change, making them crucial for storing data and creating time-dependent operations in digital circuits.<br>
 Glitches can emerge due to the presence of combinational circuits within a design. To mitigate the propagation of these glitches into subsequent combinational circuits, a strategic approach involves introducing flip-flops between the initial combinational circuit and its output. Various coding styles for the flops are discussed below.<br><br>
 
+command to specify library in case of D-FF: **dfflibmap -liberty library_path**.<br><br>
 <details>
  <summary>Asynchronous Set</summary><br>
 
