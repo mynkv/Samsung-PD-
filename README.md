@@ -283,6 +283,27 @@ GTKWAve output of DFF with Asynchronous reset and Synchronous reset:
 
 </details>
 
+<details>
+ <summary>Optimising Design</summary><br>
+
+1. Multiplication by 2: Shift the binary number 1 bit left, and pu "0" at the LSB.
+2. Multiplication by 4: Shift the binary number 2 bit left, and pu "0" at the LSB and 'LSB + 1'.
+
+<details>
+ <summary>Special Case</summary><br>
+ Let us consider a 3 bit number a = {a[2], a[1], a[0]}.<br>
+ Suppose we need to find 9a. <br>
+ so, 9a = 8a + a ;<br>
+ 9a = {a[2], a[1], a[0], a[2], a[1], a[0]}<br>
+
+ So for this kind of assignment there is no cell generated. Hence the need of multiplier is eliminated.<br>
+
+
+	
+</details>
+	
+</details>
+
 
 
 
