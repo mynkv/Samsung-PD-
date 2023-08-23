@@ -288,9 +288,9 @@ GTKWAve output of DFF with Asynchronous reset and Synchronous reset:
 
 1. Multiplication by 2: Shift the binary number 1 bit left, and pu "0" at the LSB.<br>
    Below image shows thegraphical representation of multiplier by 2:<br>
-   <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/Screenshot_2023-08-23_11-06-53.png"><br>
+   <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/Screenshot_2023-08-23_11-06-53.png"><br>
    Netlist for multiplier by 2: <br>
-    <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/milt_2_net.png"><br>
+    <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/milt_2_net.png"><br>
 3. Multiplication by 4: Shift the binary number 2 bit left, and pu "0" at the LSB and 'LSB + 1'.
 
 <details>
@@ -301,9 +301,9 @@ GTKWAve output of DFF with Asynchronous reset and Synchronous reset:
  9a = {a[2], a[1], a[0], a[2], a[1], a[0]}<br>
 
  Below image shows thegraphical representation of multiplier by 9:<br>
-   <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/gui_mult_8.png"><br>
+   <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/gui_mult_8.png"><br>
    Netlist for multiplier by 9: <br>
-    <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+    <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
 
  So for this kind of assignment there is no cell generated. Hence the need of multiplier is eliminated.<br>
 
