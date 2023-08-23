@@ -385,25 +385,26 @@ Here :<br>
 	   = a ( cb + c'.0) <br>
 	   = abc <br><br>
 Graphical reperesentation of above example:<br><br>
-<img width="600" alt="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_gui.png"><br>	
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/3_optcheck_gui.png"><br>	
 Netlist of above example:<br><br>
-<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_gui.png"><br>	
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/3_optcheck_net.png"><br>	
 </details>
 
 <details>
 <summary> Example 4 </summary> <br>
 Consider the verilog model as shown in fig below: <br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_verilog.png"><br>	<br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4__optcheck_verilog.png"><br>	<br>
 Here :<br>	 
 	y = a ? (c ? b:0):0  <br>
 	   = a ( bac + b'c ) + a'c' <br>
 	   = abc + ab'c + a'c' <br>
 	   = a ex-nor b <br><br>
 Graphical reperesentation of above example:<br><br>
-<img width="600" alt="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_gui.png"><br>	
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4_optcheck_gui.png"><br>	
 Netlist of above example:<br><br>
-<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_net.png"><br>	
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4_optcheck_net.png"><br>	
 </details>
+
  	
 </details>
 
