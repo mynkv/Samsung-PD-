@@ -327,9 +327,18 @@ Combinational logic optimization is a process used in digital circuit design to 
 <summary>Example for constant propagation</summary><br>
 	
  Let us consider an exression: Y = (A.B + C)<br>
-	In the original expression one AND gate and one NOR gate is used.<br>
+ 
+ The expected synthesis of the above function is as shown in figure below:<br><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+
+ 
+In the original expression one AND gate and one NOR gate is used.<br>
  If A is grounded in the above expression then: Y = C'<br>
  	Now only one NOT gate is used.<br>
+  
+  After optimisation we get only a NOT gate as shown below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+  
 So, both area and speed of operation is improved.<br>
  	
 </details>
@@ -338,10 +347,17 @@ So, both area and speed of operation is improved.<br>
 <summary> Example for Boolean logic optimization </summary> <br>
 	
  Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
-	Y = a'c' + a.(b'ac + bc) <br>
- 	  = a'c' + ab'c + abc <br>
-	  = a'c' + ac <br>
-   	  = a ex_nor b
+
+ The expected synthesis of the above function is as shown in figure below:<br><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ 
+Y = a'c' + a.(b'ac + bc) <br>
+  = a'c' + ab'c + abc <br>
+  = a'c' + ac <br>
+  = a ex_nor b
+
+The optimised design is as shown below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
  	
 </details>
 
@@ -352,11 +368,16 @@ So, both area and speed of operation is improved.<br>
 <summary> Example 1 </summary> <br>
 Consider the verilog model as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_verilog.png"><br>	<br>
+
+The expected synthesis of the above verilog model is as shown in figure below:<br><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ 
+
 Here :<br>	 
 	 y = a ? b:0  <br>
 	   = a.b + a.0 <br>
 	   = a.b <br><br>
-Graphical reperesentation of above example:<br><br>
+The optimised design is as shown below:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_gui.png"><br>	
 Netlist of above example:<br><br>
 <img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_net.png"><br>	
@@ -366,11 +387,15 @@ Netlist of above example:<br><br>
 <summary> Example 2 </summary> <br>
 Consider the verilog model as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_verilog.png"><br>	<br>
+
+The expected synthesis of the above verilog model is as shown in figure below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ 
 Here :<br>	 
 	y = a ? 1:b  <br>
 	   = a + a'.b <br>
 	   = a + b <br><br>
-Graphical reperesentation of above example:<br><br>
+The optimised design is as shown below:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_gui.png"><br>	
 Netlist of above example:<br><br>
 <img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_net.png"><br>	
@@ -380,11 +405,16 @@ Netlist of above example:<br><br>
 <summary> Example 3 </summary> <br>
 Consider the verilog model as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/3_optcheck_verilog.png"><br>	<br>
+
+
+The expected synthesis of the above verilog model is as shown in figure below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ 
 Here :<br>	 
 	y = a ? (c ? b:0):0  <br>
 	   = a ( cb + c'.0) <br>
 	   = abc <br><br>
-Graphical reperesentation of above example:<br><br>
+The optimised design is as shown below:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/3_optcheck_gui.png"><br>	
 Netlist of above example:<br><br>
 <img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/3_optcheck_net.png"><br>	
@@ -393,13 +423,17 @@ Netlist of above example:<br><br>
 <details>
 <summary> Example 4 </summary> <br>
 Consider the verilog model as shown in fig below: <br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4__optcheck_verilog.png"><br>	<br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4__optcheck_verilog.png"><br><br>
+
+The expected synthesis of the above verilog model is as shown in figure below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ 
 Here :<br>	 
 	y = a ? (c ? b:0):0  <br>
 	   = a ( bac + b'c ) + a'c' <br>
 	   = abc + ab'c + a'c' <br>
 	   = a ex-nor b <br><br>
-Graphical reperesentation of above example:<br><br>
+The optimised design is as shown below:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4_optcheck_gui.png"><br>	
 Netlist of above example:<br><br>
 <img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4_optcheck_net.png"><br>	
