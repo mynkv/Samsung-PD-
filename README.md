@@ -329,7 +329,7 @@ Combinational logic optimization is a process used in digital circuit design to 
  Let us consider an exression: Y = (A.B + C)<br>
  
  The expected synthesis of the above function is as shown in figure below:<br><br>
- <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4607.jpeg"><br>
 
  
 In the original expression one AND gate and one NOR gate is used.<br>
@@ -337,7 +337,7 @@ In the original expression one AND gate and one NOR gate is used.<br>
  	Now only one NOT gate is used.<br>
   
   After optimisation we get only a NOT gate as shown below:<br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4608.jpeg"><br>
   
 So, both area and speed of operation is improved.<br>
  	
@@ -349,7 +349,7 @@ So, both area and speed of operation is improved.<br>
  Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
 
  The expected synthesis of the above function is as shown in figure below:<br><br>
- <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>
  
 Y = a'c' + a.(b'ac + bc) <br>
   = a'c' + ab'c + abc <br>
@@ -370,7 +370,7 @@ Consider the verilog model as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/1_optcheck_verilog.png"><br>	<br>
 
 The expected synthesis of the above verilog model is as shown in figure below:<br><br>
- <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
  
 
 Here :<br>	 
@@ -389,7 +389,7 @@ Consider the verilog model as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/41c7129ae2201155a42693cb74310202ad028e34/2_optcheck_verilog.png"><br>	<br>
 
 The expected synthesis of the above verilog model is as shown in figure below:<br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4605.jpeg"><br>
  
 Here :<br>	 
 	y = a ? 1:b  <br>
@@ -408,7 +408,7 @@ Consider the verilog model as shown in fig below: <br>
 
 
 The expected synthesis of the above verilog model is as shown in figure below:<br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4604.jpeg"><br>
  
 Here :<br>	 
 	y = a ? (c ? b:0):0  <br>
@@ -426,7 +426,7 @@ Consider the verilog model as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2b34bd0cc1c7ed9ed79b89bc028505ab0607466b/4__optcheck_verilog.png"><br><br>
 
 The expected synthesis of the above verilog model is as shown in figure below:<br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4606.jpeg"><br>
  
 Here :<br>	 
 	y = a ? (c ? b:0):0  <br>
