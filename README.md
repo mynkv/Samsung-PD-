@@ -572,20 +572,34 @@ Why Synthesis Simulation Mismatches occur:<br>
  <details>
  <summary>Missing Sensitivity List </summary>
 Consider an example of mux coded as:<br><br>
-always@(sel)
-begin 
-if(sel)
-y=i1;
-else
-y=i0;
-end
-endmodule <br><br>
+always@(sel)<br>
+begin <br>
+if(sel)<br>
+y=i1;<br>
+else<br>
+y=i0;<br>
+end<br><br>
 
 In the above code the always block is triggered only when 'sel' changes, if 'sel' remains same, i0 and i1 changes it will not reflect on the output. In this case instead of a mux, a **double edged flop will be synthesised**. To synthesize a mux correct sensitivity list will be: **always @ (*)**.
 </details>
 
+ <details>
+ <summary>Synthesis and Simulation Mismatches due to Blocking and Non Blocking Assignment</summary>
+Consider an example of shift register coded as:<br><br>
+	 
+always@(popsedge clk, posedge rst)<br>
+begin <br>
+if(rst)<br>
+q0 = 1'b0;<br>
+q1 = 1'b0;<br>
+else<br>
+q0 = d;<br>
+q1 = q0;<br>
+end <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+In the above code the always block is triggered only when 'sel' changes, if 'sel' remains same, i0 and i1 changes it will not reflect on the output. In this case instead of a mux, a **double edged flop will be synthesised**. To synthesize a mux correct sensitivity list will be: **always @ (*)**.
+</details>
+
 </details>
 
 
