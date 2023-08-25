@@ -597,7 +597,21 @@ q0 = d;<br>
 q1 = q0;<br>
 end <br><br>
 
-In the above code the always block is triggered only when 'sel' changes, if 'sel' remains same, i0 and i1 changes it will not reflect on the output. In this case instead of a mux, a **double edged flop will be synthesised**. To synthesize a mux correct sensitivity list will be: **always @ (*)**.
+Above code will synthesize a single flipflop as shown in the figuree below: <br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/7_dff_con5_gui.PNG"><br><br>
+
+Correct code for the shift register will be:<br><br>
+
+always@(popsedge clk, posedge rst)<br>
+begin <br>
+if(rst)<br>
+q0 = 1'b0;<br>
+q1 = 1'b0;<br>
+else<br>
+q = q0;<br>
+q0 = d;<br>
+end <br><br>
+
 </details>
 
 </details>
