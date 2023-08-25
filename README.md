@@ -554,6 +554,40 @@ Netlist for the counter module: <br><br>
 
 </details><br>	
 
+## Day-4-Introduction-to-GLS
+
+GLS stands for Gate Level Synthesis, in this testbench is run with the netlist of the design as  DUT. GLS is done to:<br>
+1. Verify the logical correctness of the design after synthesis.<br>
+2. Ensuring the timing of the design are net.<br>
+It is important to note that functional verification of the design is neccessary so that there are no **Synthesis Simulation Mismatches**.<br>
+
+	
+ <details>
+ <summary>Synthesis Simulation Mismatches </summary>
+Why Synthesis Simulation Mismatches occur:<br>
+1. Missing Sensitivity List.<br>
+2. Blocking and Non-Blocking Assignment.<br>
+3. Non standard Verilog coding.<br>
+
+ <details>
+ <summary>Missing Sensitivity List </summary>
+Consider an example of mux coded as:<br><br>
+always@(sel)
+begin 
+if(sel)
+y=i1;
+else
+y=i0;
+end
+endmodule <br><br>
+
+In the above code the always block is triggered only when 'sel' changes, if 'sel' remains same, i0 and i1 changes it will not reflect on the output. In this case instead of a mux, a **double edged flop will be synthesised**. To synthesize a mux correct sensitivity list will be: **always @ (*)**.
+</details>
+
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+</details>
+
 
 
 
