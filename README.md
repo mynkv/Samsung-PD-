@@ -548,16 +548,7 @@ Graphical reperesentation of above example:<br><br>
 Consider the following counter example as shown in fig below: <br><br>
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br>
 Here we can clearly see that only th emsb of the counter is used for the output, rest 2 bits are unused. Now let for a counter:<br><br>
-count [2] | counr [1] | count [0] <br>
-     0    |     0     |     0     <br>
-     0    |     0     |     1     <br>
-     0    |     1     |     0     <br>
-     0    |     1     |     1     <br>     
-     1    |     0     |     0     <br>
-     1    |     0     |     1     <br>     
-     1    |     1     |     0     <br>
-     1    |     1     |     1     <br><br>
-
+<img width="250" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/77849ff7b577447e818144a1686bbe129eb72ef3/Day3/table.PNG"><br>
 Here count[0] is toggling for every clock cycle so the circuit can be optimised. Stats of above example:<br><br>
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_stat.PNG"><br>
 Graphical reperesentation of above example:<br><br>
@@ -576,11 +567,11 @@ It is important to note that functional verification of the design is neccessary
 
 	
  <details>
- <summary>Synthesis Simulation Mismatches </summary>
-Why Synthesis Simulation Mismatches occur:<br>
+ <summary>Synthesis Simulation Mismatches </summary> <br>
+Why Synthesis Simulation Mismatches occur:<br><br>
 1. Missing Sensitivity List.<br>
 2. Blocking and Non-Blocking Assignment.<br>
-3. Non standard Verilog coding.<br>
+3. Non standard Verilog coding.<br><br>
 
  <details>
  <summary>Missing Sensitivity List </summary>
