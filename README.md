@@ -602,7 +602,7 @@ q1 = q0;<br>
 end <br><br>
 
 Above code will synthesize a single flipflop as shown in the figuree below: <br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/7_dff_con5_gui.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/ff_2.PNG"><br><br>
 
 Correct code for the shift register will be:<br><br>
 
@@ -610,11 +610,14 @@ always@(popsedge clk, posedge rst)<br>
 begin <br>
 if(rst)<br>
 q0 = 1'b0;<br>
-q1 = 1'b0;<br>
+q = 1'b0;<br>
 else<br>
 q = q0;<br>
 q0 = d;<br>
 end <br><br>
+
+Above code will synthesize a single flipflop as shown in the figuree below: <br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/ff_1.PNG"><br><br>
 
 </details>
 
