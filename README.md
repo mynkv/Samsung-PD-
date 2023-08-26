@@ -356,8 +356,7 @@ Y = a'c' + a.(b'ac + bc) <br>
   = a'c' + ac <br>
   = a ex_nor b
 
-The optimised design is as shown below:<br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0f1af4e8178810f113fef96c397925b1e0c2a421/mult_8_net.png"><br>
+The optimised design will only contain a ex-nor gate, instead og 3 mux.
  	
 </details>
 
@@ -443,6 +442,7 @@ Netlist of above example:<br><br>
 <summary> Example 5 </summary> <br>
 Consider the verilog model with multiple modules as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/5_multi_opt1.png"><br>	<br>
+In the code above, submodule1 is called 1 time and submodule2 is called 2 time, i.e. 1 AND gate and 2 OR gates, but this that does not happen beacause one of the input is zero to U2 and one input is 1 in U1.
 Graphical reperesentation of above example:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/5_multi_opt1_gui.png"><br>	
 Netlist of above example:<br><br>
@@ -453,6 +453,8 @@ Netlist of above example:<br><br>
 <summary> Example 6 </summary> <br>
 Consider the verilog model with multiple modules as shown in fig below: <br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/6_multi_opt2.png"><br>	<br>
+In the code above, submodule is called 4 times, i.e. AND gate is called 4 timess, but this that does not happen beacause one of the input is zero.
+Graphical reperesentation of above example:<br><br>
 Graphical reperesentation of above example:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/5_multi_opt1_gui.png"><br>	
 Netlist of above example:<br><br>
@@ -545,7 +547,18 @@ Graphical reperesentation of above example:<br><br>
 
 Consider the following counter example as shown in fig below: <br><br>
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br>
-Stats of above example:<br><br>
+Here we can clearly see that only th emsb of the counter is used for the output, rest 2 bits are unused. Now let for a counter:<br><br>
+count [2] | counr [1] | count [0] <br>
+     0    |     0     |     0     <br>
+     0    |     0     |     1     <br>
+     0    |     1     |     0     <br>
+     0    |     1     |     1     <br>     
+     1    |     0     |     0     <br>
+     1    |     0     |     1     <br>     
+     1    |     1     |     0     <br>
+     1    |     1     |     1     <br><br>
+
+Here count[0] is toggling for every clock cycle so the circuit can be optimised. Stats of above example:<br><br>
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_stat.PNG"><br>
 Graphical reperesentation of above example:<br><br>
 <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br>
