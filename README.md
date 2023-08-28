@@ -693,11 +693,13 @@ Despite the incorrect sensitivity list, when applying the same stimulus to desig
 
 Consider the following verilog code as shown in fig below: <br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c83f706def1e81c50d20c3c252e3418641f0a7d4/%23day4/3_caveat_verilog.png"><br>
-Hardware for the above verilog code is as shown in fig below: <br><br>
+Hardware for the above verilog code consists of a AND and a OR gate as shown in fig below: <br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/5a3ea9400e8496424e88b1ffcd9a92df552238b0/%23day4/3_caveat_hardware.PNG"><br>
-GtkWave simulation of above example:<br><br>
+
+When test bench is given as stimulus to the verilog code of the blocking_caveat, simulation result comes out as follows:<br><br>
 <img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c83f706def1e81c50d20c3c252e3418641f0a7d4/%23day4/3_caveat_gtk.png"><br>
-Graphical reperesentation of above example:<br><br>
+
+Here we see that 'x' is evaluated after 'd' is evaluted, so whenever the always block gets triggered, previous value of the 'x' is taken to evaluate 'd' and afterwards 'x' is evaluated based on new value of 'a' and 'b'. This happens because of blocking assignment statement. Now lets see what happens when same stimulus is given to the design netlist. Graphical reperesentation of above example:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c83f706def1e81c50d20c3c252e3418641f0a7d4/%23day4/3_caveat_gui.png"><br>	
 Simulation results for GLS:<br><br>
 <img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c83f706def1e81c50d20c3c252e3418641f0a7d4/%23day4/3_caveat_gls.png"><br>	
