@@ -574,7 +574,7 @@ Why Synthesis Simulation Mismatches occur:<br><br>
 3. Non standard Verilog coding.<br><br>
 
  <details>
- <summary>Missing Sensitivity List </summary>
+ <summary>Missing Sensitivity List </summary><br>
 Consider an example of mux coded as:<br><br>
 always@(sel)<br>
 begin <br>
@@ -588,7 +588,7 @@ In the above code the always block is triggered only when 'sel' changes, if 'sel
 </details>
 
  <details>
- <summary>Synthesis and Simulation Mismatches due to Blocking and Non Blocking Assignment</summary>
+ <summary>Synthesis and Simulation Mismatches due to Blocking and Non Blocking Assignment</summary><br>
 Consider an example of shift register coded as:<br><br>
 	 
 always@(popsedge clk, posedge rst)<br>
@@ -601,7 +601,7 @@ q0 = d;<br>
 q1 = q0;<br>
 end <br><br>
 
-Above code will synthesize a single flipflop as shown in the figuree below: <br><br>
+Above code will synthesize a single flipflop as output q0 willbe synthesized as a wire as shown in the figuree below: <br><br>
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/ff_2.PNG"><br><br>
 
 Correct code for the shift register will be:<br><br>
@@ -616,8 +616,10 @@ q = q0;<br>
 q0 = d;<br>
 end <br><br>
 
-Above code will synthesize a single flipflop as shown in the figuree below: <br><br>
+Above code will synthesize a two bit shift register as shown in the figuree below: <br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/ff_1.PNG"><br><br>
+
+It is important to note that **non-blocking assignment should be used for sequential circuits** to avoid Synthesis Simulation mismatches. 
 
 </details>
 
@@ -656,8 +658,9 @@ GtkWave simulation of above example:<br><br>
 Graphical reperesentation of above example:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/1_ter_gui.png"><br>	
 Simulation results for GLS:<br><br>
-<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/1_ter_GLS.png"><br>	
+<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/1_ter_GLS.png"><br>	<br>
 
+For this example simulation result when design was simulated with the testbench and when the netlist was simulated with the testbench are same so there are no synthesis simulation mismatches.
 </details><br>
 
 <details>
@@ -666,10 +669,12 @@ Simulation results for GLS:<br><br>
 Consider the following verilog code as shown in fig below: <br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/2_badmux_verilog.png"><br>
 GtkWave simulation of above example:<br><br>
-<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/2_badmux_gtk.png"><br>
+<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/2_badmux_gtk.png"><br><br>
+In the above simulation result for the 2 X 1  MUX the output changes only when sel line is changed. This is because the always block sensitivity list contains onlty 'sel' as the input. But lets see what happens when th esame stimulus is given to the the netlist.
 Graphical reperesentation of above example:<br><br>
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/2_badmux_mux_gui.png"><br>	
-Simulation results for GLS:<br><br>
+When the esame stimulus which was given to the design, is given to the netlist, simulation results comes out as we expected them to. This happens because the synthesi Simulation results for GLS:<br><br>
+
 <img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/2_badmux_gls.png"><br>	
 </details><br>	
 
