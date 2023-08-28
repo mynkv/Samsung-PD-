@@ -560,10 +560,16 @@ Netlist for the counter module: <br><br>
 
 ## Day-4-Introduction-to-GLS
 
-GLS stands for Gate Level Synthesis, in this testbench is run with the netlist of the design as  DUT. GLS is done to:<br>
-1. Verify the logical correctness of the design after synthesis.<br>
-2. Ensuring the timing of the design are net.<br>
-It is important to note that functional verification of the design is neccessary so that there are no **Synthesis Simulation Mismatches**.<br>
+GLS, an acronym for Gate Level Simulation, involves executing a testbench using the netlist of the design as the Design Under Test (DUT). The primary objectives of GLS are as follows:<br><br>
+
+1. **Validate Logical Accuracy**: GLS aims to confirm the correctness of the design's logic post-synthesis. By employing the netlist representation, it ensures that the synthesized design aligns with the intended logical functionality.<br><br>
+2. **Verify Timing Consistency**: GLS plays a vital role in verifying that the timing aspects of the design are properly reflected in the netlist. This involves assessing whether the signal propagation delays and timing constraints are appropriately adhered to.<br><br>
+It's crucial to highlight that functional verification of the design is of utmost importance to prevent any discrepancies known as Synthesis Simulation Mismatches from arising. This process aims to bridge the gap between the pre-synthesis and post-synthesis behaviors of the design.
+
+
+
+
+
 
 	
  <details>
@@ -584,11 +590,12 @@ else<br>
 y=i0;<br>
 end<br><br>
 
-In the above code the always block is triggered only when 'sel' changes, if 'sel' remains same, i0 and i1 changes it will not reflect on the output. In this case instead of a mux, a **double edged flop will be synthesised**. To synthesize a mux correct sensitivity list will be: **always @ (*)**.
+In the previous code snippet, the always block is activated solely when there's a transition in the 'sel' signal. If the 'sel' signal remains constant, any changes in 'i0' and 'i1' will not manifest in the output. In this scenario, if the design isn't adjusted, it might inadvertently result in the synthesis of a double-edged flip-flop instead of a multiplexer. To ensure accurate synthesis of a multiplexer, the appropriate sensitivity list should be defined as **always @ (*)**.
 </details>
 
  <details>
  <summary>Synthesis and Simulation Mismatches due to Blocking and Non Blocking Assignment</summary><br>
+	 
 Consider an example of shift register coded as:<br><br>
 	 
 always@(popsedge clk, posedge rst)<br>
@@ -601,7 +608,8 @@ q0 = d;<br>
 q1 = q0;<br>
 end <br><br>
 
-Above code will synthesize a single flipflop as output q0 willbe synthesized as a wire as shown in the figuree below: <br><br>
+Above code will synthesize a single flipflop as output q0 will be synthesized as a wire as shown in the figuree below: <br><br>
+
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/ff_2.PNG"><br><br>
 
 Correct code for the shift register will be:<br><br>
@@ -617,9 +625,10 @@ q0 = d;<br>
 end <br><br>
 
 Above code will synthesize a two bit shift register as shown in the figuree below: <br><br>
+
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/ff_1.PNG"><br><br>
 
-It is important to note that **non-blocking assignment should be used for sequential circuits** to avoid Synthesis Simulation mismatches. 
+t's worth emphasizing that when dealing with sequential circuits, utilizing non-blocking assignments is crucial to mitigate the potential for Synthesis Simulation mismatches.
 
 </details>
 
@@ -660,7 +669,8 @@ Graphical reperesentation of above example:<br><br>
 Simulation results for GLS:<br><br>
 <img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/9f38bb7643eaa2609fd3595fec3307b14e36915d/%23day4/1_ter_GLS.png"><br>	<br>
 
-For this example simulation result when design was simulated with the testbench and when the netlist was simulated with the testbench are same so there are no synthesis simulation mismatches, or the design is correct.
+In this particular case, the simulation results obtained from running the design with the testbench and simulating the netlist with the same testbench match perfectly. As a result, there are no indications of synthesis simulation mismatches, underscoring the correctness of the design.
+
 </details><br>
 
 <details>
