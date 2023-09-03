@@ -890,6 +890,16 @@ MBIST involves incorporating specialized circuitry within the memory components 
 
 </details><br>	
 
+## Day-6-Introduction to logic Synthesis
+
+I invoked tools on day-0 using these commands, each briefly explained.
+
+	
+ <details>
+ <summary>dc_shell </summary>
+
+</details>
+
 
 
 
