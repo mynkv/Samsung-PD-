@@ -942,7 +942,7 @@ In the context of physical design in VLSI (Very Large Scale Integration), ".lib"
 
 * **Synthesis Illustration:** <br><br>
 
-  <img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0e97a0b9aae10cc7cbe30c82d5c8777714e89e7b/day6/Synthesis_illustration.PNG"><br><br>
+  <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0e97a0b9aae10cc7cbe30c82d5c8777714e89e7b/day6/Synthesis_illustration.PNG"><br><br>
 
 * **Implementation of design and its selection:** <br><br>
 
@@ -985,10 +985,83 @@ In physical design in VLSI (Very Large Scale Integration), constraints are essen
 
 	* **Functional Constraints**: These constraints relate to the specific functionality and behavior of the chip, including requirements for input and output pins, interface standards, and operational modes.<br><br>
 
-
-  
-  
 </details>
+
+<details>
+<summary>Design Compiler </summary>
+Design Compiler, developed by Synopsys, is a widely used electronic design automation (EDA) tool for logic synthesis in the field of Very Large Scale Integration (VLSI) design. Here are its key uses and advantages:<br>
+
+Uses:<br>
+
+* **Logic Synthesis:** Design Compiler takes a high-level hardware description (usually in VHDL or Verilog) and translates it into a gate-level netlist. This netlist consists of logic gates and flip-flops that implement the specified functionality. It optimizes the design for factors such as area, power consumption, and speed.<br><br>
+
+* **Technology Mapping**: The tool maps the logic functions in the design to specific cells available in the target technology library (e.g., standard cells in CMOS processes). This step involves selecting the most appropriate gates to implement the desired functionality.<br><br>
+
+* **Clock Tree Synthesis**: Design Compiler helps create a balanced and efficient clock distribution network (clock tree) to ensure synchronous operation within the design. Proper clock tree synthesis is critical for avoiding clock skew and meeting timing constraints.<br><br>
+
+* **Area Optimization**: It offers various optimization techniques to reduce the physical area occupied by the design, which is essential for minimizing chip size and cost.<br><br>
+
+* **Timing Optimization**: Design Compiler aims to meet specified timing constraints by optimizing the placement of logic elements and minimizing signal delays. It performs optimizations like retiming and logic restructuring to achieve this.<br><br>
+
+* **Power Optimization**: The tool provides features to reduce dynamic and static power consumption through techniques like clock gating, power gating, and efficient logic synthesis.<br><br>
+
+Advantages:
+
+* **Industry Standard**: Design Compiler is an industry-standard tool widely used by VLSI designers and semiconductor companies. It has a robust user base and extensive support.<br><br>
+
+* **High Performance**: It's known for its ability to optimize designs for high performance and meet strict timing requirements, making it suitable for applications like microprocessors and high-speed interfaces.<br><br>
+
+**Synopsys Design Constraints**:<br>
+SDC stands for "Synopsys Design Constraints." It is a file format and set of constraints used in the field of electronic design automation (EDA) and Very Large Scale Integration (VLSI) design. SDC files are typically used in conjunction with tools like Synopsys Design Compiler to specify various timing and functional requirements for a digital design. Here's a more detailed explanation of SDC:<br><br>
+
+1. **Timing Constraints**: SDC files primarily define timing constraints for a digital design. These constraints include information such as:<br>
+
+	* **Clock definitions**: Specifying clock signals and their characteristics, like clock frequency and source.<br>
+
+	* **Input and output delays**: Specifying maximum and minimum delay requirements for inputs and outputs relative to clock edges.<br>
+
+	* **Setup and hold times**: Defining the setup time (time before the clock edge) and hold time (time after the clock edge) for flip-flops and other sequential elements.<br>
+
+	* **Clock-to-Q delays**: Setting constraints on the time it takes for signals to propagate through sequential elements.<br>
+
+	* **Maximum operating frequency**: Specifying the maximum clock frequency at which the design must operate correctly.<br>
+
+2. **Area and Power Constraints**: In addition to timing constraints, SDC files may also include constraints related to chip area and power consumption, allowing designers to balance performance, area, and power efficiency.<br><br>
+
+3. **Functional Constraints**: SDC files can contain functional constraints that specify certain behaviors or requirements for the design beyond just timing. These may include specifying the behavior of specific blocks or interfaces.<br><br>
+
+4. **Design Hierarchy**: SDC files often account for design hierarchy, allowing constraints to be applied at various levels of the design, from the top-level chip to individual modules or cells.<br><br>
+
+5. **Physical Constraints**: Some SDC files may include physical design constraints, such as placement preferences or rules related to physical design implementation.<br><br>
+
+6. **Derivation of Constraints**: Constraints in SDC files can be derived from various sources, including chip specifications, desired performance characteristics, and vendor-specific libraries.<br><br>
+
+**DC Setup:** <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d5078e9671741bca3ed0ef74e00ef0e56a3d3b4c/day6/DC_setup.PNG"><br><br>
+
+**DC Synthesis flow:** <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+
+</details>
+
+<details>
+<summary>Labs on Design Compiler</summary> <br>
+
+In VLSI (Very Large Scale Integration) design, a ".lib" file for Design Compiler is a library file specifically tailored for a particular Process, Voltage, and Temperature (PVT) corner:<br><br>
+
+1. **Process Corner**: Semiconductor manufacturing processes have inherent variations. A PVT corner represents a specific combination of manufacturing process conditions, such as variations in transistor threshold voltage (Vt), channel length, and oxide thickness. These variations can significantly impact the performance, power consumption, and reliability of integrated circuits. Therefore, it's essential to characterize and model these variations for different corners.<br><br>
+
+2. **Voltage Corner**: The voltage corner refers to the supply voltage level at which the integrated circuit operates. Different voltage levels can affect the power consumption, speed, and reliability of a chip. Low-voltage corners are often associated with lower power consumption but may sacrifice performance, while high-voltage corners offer higher performance at the cost of increased power.<br><br>
+
+3. **Temperature Corner**: Temperature variations also play a crucial role in chip behavior. Integrated circuits may operate differently under different temperature conditions, affecting their performance and power characteristics. Extreme temperature corners, such as high-temperature or low-temperature scenarios, are essential to consider for reliable chip operation.<br><br>
+
+
+
+</details>
+
+
 
 
 
