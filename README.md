@@ -915,34 +915,34 @@ Synthesis in VLSI (Very Large Scale Integration) refers to the process of transl
 * **.lib file:** <br><br>
 In the context of physical design in VLSI (Very Large Scale Integration), ".lib" files, short for library files, are essential components. These files contain information about the standard cells and their characteristics used in a specific semiconductor manufacturing process. Here's a breakdown of what ".lib" files typically include:
 
-	**Cell Definitions**: ".lib" files contain definitions for standard cells. These cells are fundamental building blocks of digital integrated circuits and include logic gates (e.g., AND, OR, NAND, NOR, 	XOR), flip-flops, latches, multiplexers, etc. Each cell definition includes details about the cell's functionality, input and output pins, and timing information.
+	* **Cell Definitions**: ".lib" files contain definitions for standard cells. These cells are fundamental building blocks of digital integrated circuits and include logic gates (e.g., AND, OR, NAND, 		NOR, XOR), flip-flops, latches, multiplexers, etc. Each cell definition includes details about the cell's functionality, input and output pins, and timing information.
 
-	**Timing Data**: Timing data is critical for the physical design process. ".lib" files include information about the timing characteristics of each standard cell, such as input and output delay, setup 	time, hold time, and transition times. This data helps in accurately estimating the overall performance and timing constraints of the designed chip.
+	* **Timing Data**: Timing data is critical for the physical design process. ".lib" files include information about the timing characteristics of each standard cell, such as input and output delay, 		setup time, hold time, and transition times. This data helps in accurately estimating the overall performance and timing constraints of the designed chip.
 
-	**Power Data**: Power consumption is a crucial consideration in VLSI design. ".lib" files may also include information about the power characteristics of standard cells, including static power (leakage 	power) and dynamic power (power consumed during transitions).
+	* **Power Data**: Power consumption is a crucial consideration in VLSI design. ".lib" files may also include information about the power characteristics of standard cells, including static power 		(leakage power) and dynamic power (power consumed during transitions).
 
-	**Area Information**: ".lib" files often include data about the physical area occupied by each standard cell. This information is essential for estimating the chip's overall size and layout.
+	* **Area Information**: ".lib" files often include data about the physical area occupied by each standard cell. This information is essential for estimating the chip's overall size and layout.
 
-	**Voltage and Temperature Dependencies**: Some ".lib" files may provide data that varies with voltage and temperature, enabling designers to consider different operating conditions.
+	* **Voltage and Temperature Dependencies**: Some ".lib" files may provide data that varies with voltage and temperature, enabling designers to consider different operating conditions.
 
-	**Library Variants**: In more advanced processes, different variants of standard cells (e.g., low-power variants, high-performance variants) may be available. ".lib" files might include data for 		various library variants to support different design goals.
+	* **Library Variants**: In more advanced processes, different variants of standard cells (e.g., low-power variants, high-performance variants) may be available. ".lib" files might include data for 		various library variants to support different design goals.
 	In VLSI design, libraries often include both faster and slower cells to accommodate various design goals and trade-offs. Here's why having such cells is important:
 
-	**Performance Optimization**: Faster cells are designed to have shorter propagation delays and faster switching times. They are crucial for achieving high-speed operation in digital circuits. In 		applications where speed is a primary concern, such as microprocessors or high-frequency communication interfaces, designers use these faster cells to meet stringent timing constraints.
+	* **Performance Optimization**: Faster cells are designed to have shorter propagation delays and faster switching times. They are crucial for achieving high-speed operation in digital circuits. In 		applications where speed is a primary concern, such as microprocessors or high-frequency communication interfaces, designers use these faster cells to meet stringent timing constraints.
 
-	**Power Consumption Reduction**: Slower cells, on the other hand, are designed with a focus on reducing power consumption. They often have larger transistor sizes and slower switching characteristics, 	which result in lower dynamic power consumption. In battery-powered devices, IoT applications, and scenarios where power efficiency is a priority, slower cells can help extend the battery life and 		reduce heat generation.
+	* **Power Consumption Reduction**: Slower cells, on the other hand, are designed with a focus on reducing power consumption. They often have larger transistor sizes and slower switching 			characteristics, which result in lower dynamic power consumption. In battery-powered devices, IoT applications, and scenarios where power efficiency is a priority, slower cells can help extend 		the battery life and reduce heat generation.
 
-	**Timing Closure**: In VLSI design, designers need to ensure that the logic paths within the chip meet specific timing requirements. This involves balancing the arrival times of signals at different 		parts of the circuit. Slower cells can be strategically inserted in longer paths to help balance timing and achieve timing closure without violating setup and hold time constraints.
+	* **Timing Closure**: In VLSI design, designers need to ensure that the logic paths within the chip meet specific timing requirements. This involves balancing the arrival times of signals at different 	parts of the circuit. Slower cells can be strategically inserted in longer paths to help balance timing and achieve timing closure without violating setup and hold time constraints.
 
-	**Mixed-Signal and Analog Blocks**: In mixed-signal and analog-digital integrated circuits, slower cells may be used in the digital portions of the design to avoid signal integrity issues and 		interference with analog components. This ensures that the digital signals do not introduce noise or distortion into the analog sections.
+	* **Mixed-Signal and Analog Blocks**: In mixed-signal and analog-digital integrated circuits, slower cells may be used in the digital portions of the design to avoid signal integrity issues and 		interference with analog components. This ensures that the digital signals do not introduce noise or distortion into the analog sections.
 
-	**Variability Mitigation**: Semiconductor manufacturing processes introduce variability in transistor characteristics, which can affect the performance of digital cells. Having both faster and slower 	cells allows designers to account for this variability. They can select cells that are more robust against process variations, ensuring the chip's reliability and yield.
+	* **Variability Mitigation**: Semiconductor manufacturing processes introduce variability in transistor characteristics, which can affect the performance of digital cells. Having both faster and slower 	cells allows designers to account for this variability. They can select cells that are more robust against process variations, ensuring the chip's reliability and yield.
 
-	**Design Flexibility**: The availability of both faster and slower cells provides designers with flexibility to make trade-offs between performance, power, and area. Depending on the specific 		requirements of the project, designers can choose the appropriate cells to optimize their design for different parameters.
+	* **Design Flexibility**: The availability of both faster and slower cells provides designers with flexibility to make trade-offs between performance, power, and area. Depending on the specific 		requirements of the project, designers can choose the appropriate cells to optimize their design for different parameters.
 
 * **Synthesis Illustration:** <br><br>
 
-  <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0e97a0b9aae10cc7cbe30c82d5c8777714e89e7b/day6/Synthesis_illustration.PNG"><br><br>
+  <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/0e97a0b9aae10cc7cbe30c82d5c8777714e89e7b/day6/Synthesis_illustration.PNG"><br><br>
 
 * **Implementation of design and its selection:** <br><br>
 
