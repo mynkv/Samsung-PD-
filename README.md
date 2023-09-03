@@ -1057,6 +1057,40 @@ In VLSI (Very Large Scale Integration) design, a ".lib" file for Design Compiler
 
 3. **Temperature Corner**: Temperature variations also play a crucial role in chip behavior. Integrated circuits may operate differently under different temperature conditions, affecting their performance and power characteristics. Extreme temperature corners, such as high-temperature or low-temperature scenarios, are essential to consider for reliable chip operation.<br><br>
 
+Steps in DC Synthesis flow:<br><br>
+
+STEP 1: Invoke c shell<br>
+	Command: **c_shell**<br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+
+STEP 2: Invoke DC<br>
+	Command: **dc_shell** <br><br>
+
+ <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+
+STEP 3: Read tandard cells from the tech.lib<br>
+	Command: **echo $target_library** <br>
+ 	Command: **echo $link_library** <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+
+The presence of an imaginary, non-existent library is evident because we have not yet configured the target and linked libraries. Let's examine the components that will be included in the generated netlist. <br><br>
+
+STEP 5: Read verilog file<br>
+	command: **read_verilog <file_with_path.v>** <br><br>
+
+The file we've specified is named "lab1_flop_wit_en.v," and the anticipated GUI for this design is depicted in the image below. We will subsequently compare the expected GUI with the actual one.<br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+
+We received a warning stating, "Cannot read link library 'your library.db.'" This warning is triggered because we haven't configured the link library; instead, we've used a fictional library. <br><br>
+
+STEP 6: Write the netlist.<br>
+	command: write -f verilog -out <name_to_give.v>
+
+
+ 
 
 
 </details>
