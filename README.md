@@ -1171,17 +1171,137 @@ GUI after specifying the link an dtarget library: <br>
 	* command 1: **set target_library <target_lib_path.db>**<br>
    	* command 2: set link_library {* $target_library}<br><br>
 
+Below image shows the ".synopsys_dc.setup" file:<br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8848905775eeb26277d79512832833576e798c8e/day66/5_synopsys_setup.png"><br><br>
+
+The figure below illustrates that by configuring the ".synopsys_dc.setup" file in the home directory, there is no longer a need to manually specify the target library and link library each time we launch the dc shell.<br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8848905775eeb26277d79512832833576e798c8e/day66/5_synopsys_setup.png"><br><br> 
+
 
 
 </details>
 
 <details>
  <summary>Labs on TCL </summary>
-IC Compiler II is a complete netlist-to-GDSII implementation system that includes early design exploration and prototyping, detailed design planning, block implementation, chip assembly and sign-off driven design closure. I invoked icc2_shell using the following command: icc2_shell
-Below is the screenshot showing sucessful launch of icc2_shell:
+Tcl is a scripting language that is often pronounced as "tickle." Tcl is a versatile and easy-to-learn scripting language that is commonly used for a wide range of tasks, including automation, text processing, and building graphical user interfaces (GUIs). Various commands of tickle are discused:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/62d7ee871bd844bd10a8d7179474934facc356a3/Samsung_PD_%23day0/icc2_shell.png">
+<details>
+<summary>Set </summary>
+	
+* In Tcl (Tool Command Language), the set command is used to create and assign values to variables. It has the following syntax: **set variableName value**. <br>
+eg:<br>
+	set name "John Doe"<br>
+	set age 30<br>
+ 
+* You can also use the set command to retrieve the value of a variable.<br>
+eg:<br>
+	set myVariable "Hello, World!"<br>
+	echo $myVariable<br>
+
+ * We can also use curly braces {} to specify variable names, which is useful when you want to access variables with special characters in their names.<br>
+eg:<br>
+	set {my var} "Special Variable"<br>
+	echo $my\ var<br><br>
+
+ * Set command with [] can be used for nesting the commands.<br>
+eg:<br>
+	set a [expr $a + $b]<br>
+
+
 </details>
+
+<details>
+<summary>if-else </summary><br>
+Syntax:<br>	
+**if { condition }** <br>
+	**{ statements if true }** <br>
+**else** <br>
+	**{ statements if false }** <br><br>
+eg: <br>
+	if { $a < 10}<br>
+ 		{ echo "$a is less than 10"; }<br>
+	else<br>
+ 		{ echo "$a is greater than 10"; }<br>
+</details>
+
+<details>
+<summary>while loop </summary><br>
+
+Syntax:<br><br>	
+**while { condition }** <br>
+	**{ statements}** <br><br>
+eg:<br>
+set i 0<br>
+while { $i < 10} {<br>
+echo $i;<br>
+incr i;<br>
+}<br>
+</details>
+
+<details>
+<summary>for loop </summary><br>
+Syntax:<br><br>	
+for {looping variable} {condition} { looping variable modifications } { <br>	
+statements <br>	
+} <br><br>
+eg: <br>
+for {set i 0} {$i < 10} {incr i} { <br>
+echo $i; <br>
+} <br>
+</details>
+
+<details>
+<summary>foreach </summary><br>
+Syntax:<br><br>	
+**foreach var list {** <br>
+**statements** <br>
+**}** <br>
+
+</details>
+
+* Here's a terminal output for the **set**, **echo**, and **incr** commands: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8848905775eeb26277d79512832833576e798c8e/day66/6_set_incr.png"><br><br> 
+
+* Here is the terminal output for the "for" loop: <br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2d4a8d1310458e773c34bdbaffc9ccf2417cac6e/day66/for_loop_errors.PNG"><br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2dab7d790715ea22c604af32b753eb16cf87d9a0/day66/correct_for_loop.PNG"><br><br>
+
+* Here is the terminal output for the "while" loop: <br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/16e3d72f323e52eed82a61c02cb7628ac467d32a/day66/while_loop.PNG"><br><br>
+
+* Here is an example of creating a list, and also demonstrating how to utilize a foreach loop to print each element of the list separately: <br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/feaf80a37dcc811e03158f3fa1cf20a0569335cd/day66/list.PNG"><br><br>
+
+* To get all the cells from the loaded library we use command : **get_lib_cells**. Figure below shows all the "and" cells of the choosen library. <br>
+
+<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2dab7d790715ea22c604af32b753eb16cf87d9a0/day66/9_lib_cells.png"><br><br>
+
+* Let's try to explore the use of a foreach loop to iterate through the previously mentioned list and display its elements one by one.<br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2dab7d790715ea22c604af32b753eb16cf87d9a0/day66/9_lib_cells_foreach.png"><br><br>
+
+* In the image above, you may have noticed that 'sel' is displayed instead of cells. This occurred because we mistakenly treated elements obtained from the get_lib_cells function as a list when, in fact, they are a collection. Collections are enclosed within curly brackets, as seen in the image for **get_lib_cells** */*and*. Collections are similar to pointers, and to iterate through and display their elements one by one using a foreach loop, the correct syntax is provided below: <br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/aab328d62a67cd5f437406fdb1f71948ec8a6a5e/day66/foreach_collection.PNG"><br><br>
+
+* We have the flexibility to create a Tcl file and incorporate various custom code snippets as needed, which can significantly enhance our efficiency. <br>
+* To generate a Tcl file, initiate by opening a file using the command: **sh gvim name**, and save it with the **.tcl** extension. 
+* To launch the tcl file use command: **source name.tcl** <br>
+* An illustration of this is presented in the figure below.<br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/aab328d62a67cd5f437406fdb1f71948ec8a6a5e/day66/tickle.PNG"><br><br>
+
+* "In this context, it's important to highlight that if we intend to showcase the result of an arithmetic operation, we should use the following syntax: echo [expr arithmatic_expression]. <br>
+
+
+</details>
+
+
 
 
 
