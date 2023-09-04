@@ -1122,10 +1122,14 @@ In the context of digital design and electronic design automation (EDA) tools li
 STEP 10: Now lets write and see the new generated netlist:<br>
 command: **write -f verilog -out <name.v>** <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/2_netlist_with%20lib.png"><br><br>
+
+Here we can see the cells used are from sky130 library as expected. <br><br>
 
 STEP 11: Write the ddc file. <br>
 command: **write -f ddc -out <name.ddc>** <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/2_write_ddc.png"><br><br>
 
 In the context of Synopsys Design Compiler (DC) and digital design, a ".ddc" file typically refers to a design constraints file. Design constraints are essential specifications and requirements that guide the synthesis and optimization process, ensuring that the resulting design meets the desired performance, power, and area goals.<br><br>
 
@@ -1149,18 +1153,18 @@ STEP 16: Within the Design Vision graphical user interface (GUI) window, open th
 command: **read_verlog <netlist_name.v>** <br><br>
 
 Netlist before specifying the link and target library: <br>
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/3_netlist_without_lib_in_gui.png"><br><br>
 
 Netlist after specifying the link and target library: <br>
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/3_read_ddc.png"><br><br>
 
 STEP 17: Take a look at the graphical user interface (GUI) generated both before and after specifying the link and the target library. <br><br>
 
 GUI before specifying the link an dtarget library: <br>
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/4_gui_withoutlib.png"><br><br>
 
 GUI after specifying the link an dtarget library: <br>
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/4_gui.png"><br><br>
 
 * Numerous .db files consistently exist within the DC environment, and they are indispensable components that should not be overlooked. Additionally, it is mandatory to manually configure the link and target library settings every time we initiate the DC shell. To streamline this process and enable the automatic reading of the link and target library, we can create a file named ".synopsys_dc.setup" in the home directory and incorporate the following two commands within it:<br><br>
 
