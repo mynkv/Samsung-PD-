@@ -1069,22 +1069,22 @@ STEP 2: Invoke DC<br>
 
  <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_dc_shell1.png"><br><br>
 
-STEP 3: Read tandard cells from the tech.lib<br>
+STEP 3: Read standard cells from the tech.lib <br>
 	Command: **echo $target_library** <br>
  	Command: **echo $link_library** <br><br>
 
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_inag_libs.png"><br><br>
 
-The presence of an imaginary, non-existent library is evident because we have not yet configured the target and linked libraries. Let's examine the components that will be included in the generated netlist. <br><br>
+* The presence of an imaginary, non-existent library is evident because we have not yet configured the target and linked libraries. Let's examine the components that will be included in the generated netlist. <br><br>
 
 STEP 4: Read verilog file<br>
 	command: **read_verilog <file_with_path.v>** <br><br>
  
  <img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_read_design%20without_lib.png"><br><br>
 
-We received a warning stating, "Cannot read link library 'your library.db.'" This warning is triggered because we haven't configured the link library; instead, we've used a fictional library. <br><br>
+* We received a warning stating, "Cannot read link library 'your library.db.'" This warning is triggered because we haven't configured the link library; instead, we've used a fictional library. <br><br>
 
-The file we've specified is named "lab1_flop_wit_en.v," and the anticipated GUI for this design is depicted in the image below. We will subsequently compare the expected GUI with the actual one.<br><br>
+* The file we've specified is named "lab1_flop_wit_en.v," and the anticipated GUI for this design is depicted in the image below. We will subsequently compare the expected GUI with the actual one.<br><br>
 
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
 
@@ -1099,21 +1099,23 @@ STEP 6: Lets see the generated netlist.<br>
 
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_netlist_without_lib.png"><br><br>
 
-In this observation, we notice that the cells currently in use originate from the Gtech.lib library, which is readily available in the DC's memory. However, our initial anticipation was for the utilization of the sky 130 library, which has not occurred. This discrepancy can be attributed to the fact that the target and link library settings have not been specified. In order to employ the sky 130 library, it is imperative to configure both the target and link library settings accordingly. In the following steps, we will delve into how to achieve this. <br><br>
+* In this observation, we notice that the cells currently in use originate from the Gtech.lib library, which is readily available in the DC's memory. However, our initial anticipation was for the utilization of the sky 130 library, which has not occurred. This discrepancy can be attributed to the fact that the target and link library settings have not been specified. In order to employ the sky 130 library, it is imperative to configure both the target and link library settings accordingly. In the following steps, we will delve into how to achieve this. <br><br>
 
 STEP 7: Setting link and target library.<br>
 	command: **set target_library <sky130.db_path>** <br>
 	command: **set link_library {* <sky130.db_path> }**  OR **set link_library {* $target_library}** <br><br>
 
-The use of '*' symbolizes that the libraries already present in the DC memory are not replaced or erased. Instead, they are supplemented with the addition of new libraries, coexisting alongside the existing ones. <br><br>
+* The use of '*' symbolizes that the libraries already present in the DC memory are not replaced or erased. Instead, they are supplemented with the addition of new libraries, coexisting alongside the existing ones. <br><br>
 
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_set_tl_ll_link.png"><br><br>
 
 STEP 8: command: **link**  <br>
-The "link" command in DC typically refers to a command used in digital design or electronic design automation (EDA) tools like Synopsys Design Compiler. This command is used to link or connect various design and library files, enabling the creation of a complete, synthesized design.<br><br>
+
+* The "link" command in DC typically refers to a command used in digital design or electronic design automation (EDA) tools like Synopsys Design Compiler. This command is used to link or connect various design and library files, enabling the creation of a complete, synthesized design.<br><br>
 
 STEP 9: command: **compile** <br>
-In the context of digital design and electronic design automation (EDA) tools like Synopsys Design Compiler (DC), the "compile" command is used to initiate the synthesis process. The "compile" command in DC typically requires specifying input files, design constraints, and other configuration options. <br><br>
+
+* In the context of digital design and electronic design automation (EDA) tools like Synopsys Design Compiler (DC), the "compile" command is used to initiate the synthesis process. The "compile" command in DC typically requires specifying input files, design constraints, and other configuration options. <br><br>
 
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_compile_1.png"><br><br>
 
@@ -1124,14 +1126,14 @@ command: **write -f verilog -out <name.v>** <br><br>
 
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/2_netlist_with%20lib.png"><br><br>
 
-Here we can see the cells used are from sky130 library as expected. <br><br>
+* Here we can see the cells used are from sky130 library as expected. <br><br>
 
 STEP 11: Write the ddc file. <br>
 command: **write -f ddc -out <name.ddc>** <br><br>
 
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/2_write_ddc.png"><br><br>
 
-In the context of Synopsys Design Compiler (DC) and digital design, a ".ddc" file typically refers to a design constraints file. Design constraints are essential specifications and requirements that guide the synthesis and optimization process, ensuring that the resulting design meets the desired performance, power, and area goals.<br><br>
+* In the context of Synopsys Design Compiler (DC) and digital design, a ".ddc" file typically refers to a design constraints file. Design constraints are essential specifications and requirements that guide the synthesis and optimization process, ensuring that the resulting design meets the desired performance, power, and area goals.<br><br>
 
 STEP 12: Exit the dc_shell. <br>
 command: **exit** <br><br>
@@ -1141,7 +1143,7 @@ STEP 13: command: **csh** <br><br>
 STEP 14: Invoke the design vision. <br>
 command: **design_vision** <br><br>
 
-Design Vision is a part of the Synopsys suite of Electronic Design Automation (EDA) tools, and it is commonly used for RTL (Register Transfer Level) synthesis and formal verification tasks in digital design. Specifically, Design Vision is the front-end tool that interfaces with other Synopsys tools like Design Compiler and Formality to perform these tasks.<br><br>
+* Design Vision is a part of the Synopsys suite of Electronic Design Automation (EDA) tools, and it is commonly used for RTL (Register Transfer Level) synthesis and formal verification tasks in digital design. Specifically, Design Vision is the front-end tool that interfaces with other Synopsys tools like Design Compiler and Formality to perform these tasks.<br><br>
 
 STEP 15: In the design vision:<br>
 	command: **read_ddc <ddc_file_name.ddc>** <br><br>
@@ -1152,18 +1154,22 @@ STEP 16: Within the Design Vision graphical user interface (GUI) window, open th
 
 command: **read_verlog <netlist_name.v>** <br><br>
 
-Netlist before specifying the link and target library: <br>
+* Netlist before specifying the link and target library: <br>
+
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/3_netlist_without_lib_in_gui.png"><br><br>
 
-Netlist after specifying the link and target library: <br>
+* Netlist after specifying the link and target library: <br>
+
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/3_read_ddc.png"><br><br>
 
 STEP 17: Take a look at the graphical user interface (GUI) generated both before and after specifying the link and the target library. <br><br>
 
-GUI before specifying the link and target library: <br>
+* GUI before specifying the link and target library: <br>
+
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/4_gui_withoutlib.png"><br><br>
 
-GUI after specifying the link and target library: <br>
+* GUI after specifying the link and target library: <br>
+
 <img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bd0add3ac55c44efe21a651c0028bcc8c04ed25c/day66/4_gui.png"><br><br>
 
 * Numerous .db files consistently exist within the DC environment, and they are indispensable components that should not be overlooked. Additionally, it is mandatory to manually configure the link and target library settings every time we initiate the DC shell. To streamline this process and enable the automatic reading of the link and target library, we can create a file named ".synopsys_dc.setup" in the home directory and incorporate the following two commands within it:<br><br>
@@ -1171,10 +1177,12 @@ GUI after specifying the link and target library: <br>
 	* command 1: **set target_library <target_lib_path.db>**<br>
    	* command 2: set link_library {* $target_library}<br><br>
 
-Below image shows the ".synopsys_dc.setup" file:<br>
+* Below image shows the ".synopsys_dc.setup" file:<br>
+
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8848905775eeb26277d79512832833576e798c8e/day66/5_synopsys_setup.png"><br><br>
 
-The figure below illustrates that by configuring the ".synopsys_dc.setup" file in the home directory, there is no longer a need to manually specify the target library and link library each time we launch the dc shell.<br>
+* The figure below illustrates that by configuring the ".synopsys_dc.setup" file in the home directory, there is no longer a need to manually specify the target library and link library each time we launch the dc shell.<br>
+
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6363bc16aa3fdacc64018e9b04a8560b27b59360/day66/5_automatic_lib_set.png"><br><br> 
 
 
