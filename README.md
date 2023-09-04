@@ -1062,37 +1062,42 @@ Steps in DC Synthesis flow:<br><br>
 STEP 1: Invoke c shell<br>
 	Command: **c_shell**<br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_dc_shell1.png"><br><br>
 
 STEP 2: Invoke DC<br>
 	Command: **dc_shell** <br><br>
 
- <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+ <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_dc_shell1.png"><br><br>
 
 STEP 3: Read tandard cells from the tech.lib<br>
 	Command: **echo $target_library** <br>
  	Command: **echo $link_library** <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/83994aa5ee163420356a0898ffea7147e1bebb78/day6/dc_flow.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_inag_libs.png"><br><br>
 
 The presence of an imaginary, non-existent library is evident because we have not yet configured the target and linked libraries. Let's examine the components that will be included in the generated netlist. <br><br>
 
 STEP 4: Read verilog file<br>
 	command: **read_verilog <file_with_path.v>** <br><br>
+ 
+ <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_read_design%20without_lib.png"><br><br>
+
+We received a warning stating, "Cannot read link library 'your library.db.'" This warning is triggered because we haven't configured the link library; instead, we've used a fictional library. <br><br>
 
 The file we've specified is named "lab1_flop_wit_en.v," and the anticipated GUI for this design is depicted in the image below. We will subsequently compare the expected GUI with the actual one.<br><br>
 
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
 
-We received a warning stating, "Cannot read link library 'your library.db.'" This warning is triggered because we haven't configured the link library; instead, we've used a fictional library. <br><br>
-
 STEP 5: Write the netlist.<br>
 	command: write -f verilog -out <name_to_give.v><br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_write_netlist.png"><br><br>
+
 
 STEP 6: Lets see the generated netlist.<br>
  	command: sh gvim <name.v> <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_netlist_without_lib.png"><br><br>
 
 In this observation, we notice that the cells currently in use originate from the Gtech.lib library, which is readily available in the DC's memory. However, our initial anticipation was for the utilization of the sky 130 library, which has not occurred. This discrepancy can be attributed to the fact that the target and link library settings have not been specified. In order to employ the sky 130 library, it is imperative to configure both the target and link library settings accordingly. In the following steps, we will delve into how to achieve this. <br><br>
 
@@ -1102,13 +1107,17 @@ STEP 7: Setting link and target library.<br>
 
 The use of '*' symbolizes that the libraries already present in the DC memory are not replaced or erased. Instead, they are supplemented with the addition of new libraries, coexisting alongside the existing ones. <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_set_tl_ll_link.png"><br><br>
 
 STEP 8: command: **link**  <br>
 The "link" command in DC typically refers to a command used in digital design or electronic design automation (EDA) tools like Synopsys Design Compiler. This command is used to link or connect various design and library files, enabling the creation of a complete, synthesized design.<br><br>
 
 STEP 9: command: **compile** <br>
 In the context of digital design and electronic design automation (EDA) tools like Synopsys Design Compiler (DC), the "compile" command is used to initiate the synthesis process. The "compile" command in DC typically requires specifying input files, design constraints, and other configuration options. <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_compile_1.png"><br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1fc97850bebc958e21465a671a638a0a9a2d8e3/day66/1_compile_2.png"><br><br>
 
 STEP 10: Now lets write and see the new generated netlist:<br>
 command: **write -f verilog -out <name.v>** <br><br>
