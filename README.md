@@ -1153,6 +1153,11 @@ GUI before specifying the link an dtarget library: <br>
 GUI after specifying the link an dtarget library: <br>
 <img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/da83ae0c12e88db842e24adb38253d575b95752c/day6/expected%20_hardware.PNG"><br><br>
 
+* Numerous .db files consistently exist within the DC environment, and they are indispensable components that should not be overlooked. Additionally, it is mandatory to manually configure the link and target library settings every time we initiate the DC shell. To streamline this process and enable the automatic reading of the link and target library, we can create a file named ".synopsys_dc.setup" in the home directory and incorporate the following two commands within it:<br><br>
+
+	* command 1: **set target_library <target_lib_path.db>**<br>
+   	* command 2: set link_library {* $target_library}<br><br>
+
 
 
 </details>
