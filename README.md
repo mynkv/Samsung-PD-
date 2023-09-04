@@ -1162,6 +1162,14 @@ GUI after specifying the link an dtarget library: <br>
 
 </details>
 
+<details>
+ <summary>Labs on TCL </summary>
+IC Compiler II is a complete netlist-to-GDSII implementation system that includes early design exploration and prototyping, detailed design planning, block implementation, chip assembly and sign-off driven design closure. I invoked icc2_shell using the following command: icc2_shell
+Below is the screenshot showing sucessful launch of icc2_shell:
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/62d7ee871bd844bd10a8d7179474934facc356a3/Samsung_PD_%23day0/icc2_shell.png">
+</details>
+
 
 
 
