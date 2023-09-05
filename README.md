@@ -1221,10 +1221,10 @@ eg:<br>
 <details>
 <summary>if-else </summary><br>
 Syntax:<br>	
-**if { condition }** <br>
-	**{ statements if true }** <br>
-**else** <br>
-	**{ statements if false }** <br><br>
+if { condition } <br>
+	{ statements if true } <br>
+else <br>
+	{ statements if false } <br><br>
 eg: <br>
 	if { $a < 10}<br>
  		{ echo "$a is less than 10"; }<br>
