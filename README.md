@@ -1198,72 +1198,103 @@ Tcl is a scripting language that is often pronounced as "tickle." Tcl is a versa
 	
 * In Tcl (Tool Command Language), the set command is used to create and assign values to variables. It has the following syntax: **set variableName value**. <br>
 eg:<br>
-	set name "John Doe"<br>
-	set age 30<br>
- 
+```ruby
+set name "John Doe"
+set age 30
+``` 
 * You can also use the set command to retrieve the value of a variable.<br>
 eg:<br>
-	set myVariable "Hello, World!"<br>
-	echo $myVariable<br>
+```ruby
+set myVariable "Hello, World!"
+echo $myVariable
+```
 
  * We can also use curly braces {} to specify variable names, which is useful when you want to access variables with special characters in their names.<br>
 eg:<br>
-	set {my var} "Special Variable"<br>
-	echo $my\ var<br><br>
+```ruby
+	set {my var} "Special Variable"
+	echo $my\ var
+```
 
  * Set command with [] can be used for nesting the commands.<br>
 eg:<br>
-	set a [expr $a + $b]<br>
+```ruby
+	set a [expr $a + $b]
+```
 
 
 </details>
 
 <details>
 <summary>if-else </summary><br>
-Syntax:<br>	
+Syntax:<br>
+	
+```ruby
 if { condition } <br>
-	{ statements if true } <br>
+	{ statements if true } 
 else <br>
-	{ statements if false } <br><br>
+	{ statements if false } 
+```
 eg: <br>
-	if { $a < 10}<br>
- 		{ echo "$a is less than 10"; }<br>
-	else<br>
- 		{ echo "$a is greater than 10"; }<br>
+
+```ruby
+	if { $a < 10}
+ 		{ echo "$a is less than 10"; }
+	else
+ 		{ echo "$a is greater than 10"; }
+```
+
 </details>
 
 <details>
 <summary>while loop </summary><br>
 
 Syntax:<br><br>	
-**while { condition }** <br>
-	**{ statements}** <br><br>
+
+```ruby
+while { condition } 
+	{ statements}
+```
+
 eg:<br>
-set i 0<br>
-while { $i < 10} {<br>
-echo $i;<br>
-incr i;<br>
-}<br>
+
+```ruby
+set i 0
+while { $i < 10} {
+echo $i;
+incr i;
+}
+```
 </details>
 
 <details>
 <summary>for loop </summary><br>
 Syntax:<br><br>	
-for {looping variable} {condition} { looping variable modifications } { <br>	
-statements <br>	
-} <br><br>
+
+```ruby
+for {looping variable} {condition} { looping variable modifications } { 	
+statements 
+}
+```
 eg: <br>
-for {set i 0} {$i < 10} {incr i} { <br>
-echo $i; <br>
-} <br>
+
+```ruby
+for {set i 0} {$i < 10} {incr i} { 
+echo $i; 
+}
+```
+
 </details>
 
 <details>
 <summary>foreach </summary><br>
 Syntax:<br><br>	
-**foreach var list {** <br>
-**statements** <br>
-**}** <br>
+
+```ruby
+foreach var list {
+statements
+}
+```
 
 </details>
 
@@ -1321,16 +1352,22 @@ In comparison to circuit simulation, static timing analysis is:<br>
 * Once again Note this thing_ Static timing analysis checks the design only for proper timing, not for correct logical Functionality.<br>
 
 Maximum and Minimum delay constraints: <br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/tree/d53020a66fe32f2484b5042169c435bbbef2c925/day7"><br><br>
-* Tclk > Tcq_a + Tcomb + Tsetup_b<br>
-* Lets introduce buffer components into the clock path of a D Flip-Flop (DFF_B) without specifying any minimum delay requirements. <br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/2.PNG"><br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/3.PNG"><br><br>
-* When there's zero delay in the clock path of DFF_B, data sent by DFF_A at the first clock edge arrives at DFF_B precisely at the following (second) clock edge, defining the setup time (Tsetup) for DFF_B. However, when we introduce delay into DFF_B's clock path, it extends the setup window, subsequently reducing the likelihood of a setup violation occurring.<br>
-* If we have a hold window also, i.e. minimum delay the:<br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/4.PNG"><br><br>
-*ntroducing delay in the clock path of DFF_B results in an expanded hold window for DFF_B. Consequently, the probability of DFF_A transmitting additional data within that extended window increases, raising the potential for a hold violation. Therefore, adding clock path delay to the capture flip-flop may not be advisable in terms of meeting the hold criteria.<br>
 
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d53020a66fe32f2484b5042169c435bbbef2c925/day7/1.PNG"> <br><br>
+
+* Tclk > Tcq_a + Tcomb + Tsetup_b<br>
+* Lets introduce buffer components into the clock path of a D Flip-Flop (DFF_B) without specifying any minimum delay requirements. <br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/2.PNG"><br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/3.PNG"><br><br>
+* When there's zero delay in the clock path of DFF_B, data sent by DFF_A at the first clock edge arrives at DFF_B precisely at the following (second) clock edge, defining the setup time (Tsetup) for DFF_B. However, when we introduce delay into DFF_B's clock path, it extends the setup window, subsequently reducing the likelihood of a setup violation occurring.<br>
+* If we have a hold window also, i.e. minimum delay the:<br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/4.PNG"><br><br>
+*Introducing delay in the clock path of DFF_B results in an expanded hold window for DFF_B. Consequently, the probability of DFF_A transmitting additional data within that extended window increases, raising the potential for a hold violation. Therefore, adding clock path delay to the capture flip-flop may not be advisable in terms of meeting the hold criteria.<br>
+* Timing equations with skew:
+  	* Tclk > Tcq_a + Tcomb + Tsetup_b - Tskew<br>
+	* Thold_b < Tcq_a + Tcomb - Tskew<br>
+* The delay of a gate in a digital circuit is determined by the RC time constant, where R represents the resistance (related to current) and C signifies the load capacitance. When a gate transitions from one logic state to another, it must charge or discharge the load capacitance. Higher current allows for quicker charging or discharging, reducing delay. Conversely, a larger load capacitance increases delay. This relationship highlights the crucial trade-off between power consumption and speed in digital design, as increasing current to minimize delay results in higher power consumption, while reducing power consumption typically lengthens the gate's delay. Below image depicts the same:<br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/5.PNG"><br><br>
 
 </details>
 
@@ -1343,35 +1380,75 @@ Timing arc has a Start-point and an Endpoint.<br>
 * The End is always an output pin or an inout pin (with few exception).<br>
 	* Most of the Time arc Endpoint is always an output pin. But there are few cases where it can be input pin.<br>
 	* These are constraint timing arc. Like Setup, Hold, Recovery or Removal constraint. These are between input to input pins.<br>
-* Below image shows the timing arc in a combinational cell.<br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2dbc35402281cbbe1da36204935b3e3c84d14309/day7/4.1.PNG"><br><br>
+* Below image shows the timing arc in a combinational cell.<br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2dbc35402281cbbe1da36204935b3e3c84d14309/day7/4.1.PNG"><br><br>
 * Timing arc in Sequential cell
   	* Delay from clock to Q for D-FF.<br>
    	* Delay from clock to Q, D to Q for D latch. <br>
     	* Setup and Hold time.<br>
      	* Below image shows the timing arcs for a D-FF and a D-Latch.<br>
 
-      <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/6.PNG"><br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/6.PNG"><br><br>
 
+* Setup and hold for a flip flop are around the sampling edge of a clock. Below table shares one of the most important information regarding delay. <br>
 
-      
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8bfd13b29321bf29e98ce56100ee17e3b368f0aa/day7/4.2.png"><br><br>
 
+</details>
 
+<details>
+<summary>Timing Paths </summary><br>
+	
+* A timing path refer to the logical paths within a circuit that dictate the flow of data and are critical for timing analysis. These paths help determine how signals propagate through a digital system and are essential for ensuring that the circuit operates correctly and meets timing constraints. <br>
 
-Lets consider the Below System, where there are 4 input X1- X4 and 1 output Y1. You can see that there are 4 Arcs between Input pins and output pin. For better understanding we named these as "Input to output Timing Arcs"
-Maximum and Minimum delay constraints: <br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/tree/d53020a66fe32f2484b5042169c435bbbef2c925/day7"><br><br>
-* Tclk > Tcq_a + Tcomb + Tsetup_b<br>
-* Lets introduce buffer components into the clock path of a D Flip-Flop (DFF_B) without specifying any minimum delay requirements. <br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/2.PNG"><br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/3.PNG"><br><br>
-* When there's zero delay in the clock path of DFF_B, data sent by DFF_A at the first clock edge arrives at DFF_B precisely at the following (second) clock edge, defining the setup time (Tsetup) for DFF_B. However, when we introduce delay into DFF_B's clock path, it extends the setup window, subsequently reducing the likelihood of a setup violation occurring.<br>
-* If we have a hold window also, i.e. minimum delay the:<br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/4.PNG"><br><br>
-*ntroducing delay in the clock path of DFF_B results in an expanded hold window for DFF_B. Consequently, the probability of DFF_A transmitting additional data within that extended window increases, raising the potential for a hold violation. Therefore, adding clock path delay to the capture flip-flop may not be advisable in terms of meeting the hold criteria.<br>
+* A timing path have a starting as well as ending point. <br>
+	
+	* Start Point<br>
+ 
+		* Input port of the design (because the input data can be launched from some external source). <br>
+		* Clock pin of the flip-flop/latch/memory (sequential cell). <br>
+  
+	* End Point <br>
+ 
+		* Data input pin of the flip-flop/latch/memory (sequential cell). <br>
+		* Output port of the design (because the output data can be captured by some external sink). <br>
+
+* If we use all the combination of 2 types of Starting Point and 2 types of End Point, we can say that there are 4 types of Timing Paths on the basis of Start and End point.<br>
+ 
+	* Input pin/port to Register(flip-flop). <br>
+	* Input pin/port to Output pin/port. <br>
+	* Register (flip-flop) to Register (flip-flop). <br>
+	* Register (flip-flop) to Output pin/port. <br>
+
+* See the following fig: <br><br>
+	
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03dc7329c998ffc98ae2fb8d2937ac9779478197/day7/8.jpg"><br><br>
+
+* PATH1 - starts at an input port and ends at the data input of a sequential element. (Input port to Register). <br>
+* PATH2- starts at the clock pin of a sequential element and ends at the data input of a sequential element (Register to Register). <br>
+* PATH3- starts at the clock pin of a sequential element and ends at an output port. (Register to Output port). <br>
+* PATH4- starts at an input port and ends at an output port (Input port to Output port). <br><br>
+
+NOTE: The clock determines the delay in the combinational circuit, not vice versa. The clock period sets an upper limit on the delays in all "register-to-register" paths. Constraints specify which cells to use in the combinational logic of these paths. Therefore, all the combinational logic between registers must be optimized with respect to the clock's timing requirements.<br><br> 
+
+* Paths that start from a register within the design and terminate at a register located outside the design are referred to as "register-to-out" paths. These paths are constrained by both the external output delay and the clock period.<br>
+* Consider the image shown below.<br><br>
+
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b62aaaa493bea031dec1e3ce56b8ccadb11ae5e0/day7/9.PNG"><br><br>
+
+* Looking at the provided image, let's focus on the path from D_FF1 to D_FF2. If we analyze a single clock period, a portion of that period will be consumed by the time requirement (Tcq) of D_FF1 and the delay introduced by the output combinational logic. The remaining part of the clock period must be allocated for the external path, and this allocation is known as the output external delay. <br><br>
+
+* Paths that start from a register outside the design and terminate at a register located inside the design are referred to as "In-to-reg" paths. These paths are constrained by both the input external delay and the clock period.<br>
+
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/179fb23da04071ffe16ca8807b72b5f6b372c297/day7/10.PNG"><br><br>
+
+* Similarly Looking at the above image, let's focus on the path from D_FF1 to D_FF2. If we analyze a single clock period, a portion of that period will be consumed by the setup time requirement (Tcq) of D_FF2 and the delay introduced by the output combinational logic. The remaining part of the clock period must be allocated for the D_FF1-to-input port path, and this allocation is known as the input external delay. <br><br>
+
+* Together, the paths that extend from inputs to registers (In-to-reg paths) and from registers to outputs (reg-to-out paths) are collectively referred to as IO paths. The modeling of delay discussed earlier in relation to these paths is commonly known as IO delay modeling.<br><br>
 
 
 </details>
+
 
 
 
