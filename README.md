@@ -1309,6 +1309,69 @@ Syntax:<br><br>
 
 </details>
 
+## Day-7-STA
+	
+<details>
+<summary>Introduction </summary><br>
+	
+Static timing analysis is a method of validating the timing performance of a design by checking all possible paths for timing violations under worst-case conditions. It considers the worst possible delay through each logic element, but not the logical operation of the circuit.<br><br>
+In comparison to circuit simulation, static timing analysis is:<br>
+* Faster - It is faster because it does not need to simulate multiple test vectors<br>
+* More Thorough - It is more thorough because it checks the worst-case timing for all possible logic conditions, not just those sensitized by a particular set of test vectors.<br>
+* Once again Note this thing_ Static timing analysis checks the design only for proper timing, not for correct logical Functionality.<br>
+
+Maximum and Minimum delay constraints: <br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/tree/d53020a66fe32f2484b5042169c435bbbef2c925/day7"><br><br>
+* Tclk > Tcq_a + Tcomb + Tsetup_b<br>
+* Lets introduce buffer components into the clock path of a D Flip-Flop (DFF_B) without specifying any minimum delay requirements. <br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/2.PNG"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/3.PNG"><br><br>
+* When there's zero delay in the clock path of DFF_B, data sent by DFF_A at the first clock edge arrives at DFF_B precisely at the following (second) clock edge, defining the setup time (Tsetup) for DFF_B. However, when we introduce delay into DFF_B's clock path, it extends the setup window, subsequently reducing the likelihood of a setup violation occurring.<br>
+* If we have a hold window also, i.e. minimum delay the:<br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/4.PNG"><br><br>
+*ntroducing delay in the clock path of DFF_B results in an expanded hold window for DFF_B. Consequently, the probability of DFF_A transmitting additional data within that extended window increases, raising the potential for a hold violation. Therefore, adding clock path delay to the capture flip-flop may not be advisable in terms of meeting the hold criteria.<br>
+
+
+</details>
+
+<details>
+<summary>Timing arcs and constraints </summary><br>
+	
+Timing Arc represents the timing relationship between 2 Pins of any element or Block or any boundaries. Basically it represents the timing characteristic of the element or block or Boundaries.
+Timing arc has a Start-point and an Endpoint.<br>
+* The start-point can be an Input, output or inout.<br>
+* The End is always an output pin or an inout pin (with few exception).<br>
+	* Most of the Time arc Endpoint is always an output pin. But there are few cases where it can be input pin.<br>
+	* These are constraint timing arc. Like Setup, Hold, Recovery or Removal constraint. These are between input to input pins.<br>
+* Below image shows the timing arc in a combinational cell.<br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2dbc35402281cbbe1da36204935b3e3c84d14309/day7/4.1.PNG"><br><br>
+* Timing arc in Sequential cell
+  	* Delay from clock to Q for D-FF.<br>
+   	* Delay from clock to Q, D to Q for D latch. <br>
+    	* Setup and Hold time.<br>
+     	* Below image shows the timing arcs for a D-FF and a D-Latch.<br>
+
+      <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/6.PNG"><br><br>
+
+
+      
+
+
+
+Lets consider the Below System, where there are 4 input X1- X4 and 1 output Y1. You can see that there are 4 Arcs between Input pins and output pin. For better understanding we named these as "Input to output Timing Arcs"
+Maximum and Minimum delay constraints: <br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/tree/d53020a66fe32f2484b5042169c435bbbef2c925/day7"><br><br>
+* Tclk > Tcq_a + Tcomb + Tsetup_b<br>
+* Lets introduce buffer components into the clock path of a D Flip-Flop (DFF_B) without specifying any minimum delay requirements. <br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/2.PNG"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7fc98da248bda002ca4cb47a2b83d836347b5c48/day7/3.PNG"><br><br>
+* When there's zero delay in the clock path of DFF_B, data sent by DFF_A at the first clock edge arrives at DFF_B precisely at the following (second) clock edge, defining the setup time (Tsetup) for DFF_B. However, when we introduce delay into DFF_B's clock path, it extends the setup window, subsequently reducing the likelihood of a setup violation occurring.<br>
+* If we have a hold window also, i.e. minimum delay the:<br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4c56f5f9de209893a58149e163ee7ecd4c94c51f/day7/4.PNG"><br><br>
+*ntroducing delay in the clock path of DFF_B results in an expanded hold window for DFF_B. Consequently, the probability of DFF_A transmitting additional data within that extended window increases, raising the potential for a hold violation. Therefore, adding clock path delay to the capture flip-flop may not be advisable in terms of meeting the hold criteria.<br>
+
+
+</details>
 
 
 
