@@ -1465,7 +1465,7 @@ NOTE: The clock determines the delay in the combinational circuit, not vice vers
  
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
 
-2. Delay Model: Look Up Table: <br><br>
+2. **Delay Model: Look Up Table**: <br><br>
 
 * LUTs play a crucial role in modern FPGA (Field-Programmable Gate Array) and ASIC (Application-Specific Integrated Circuit) designs. Here's an overview of what a LUT is and how it is used in VLSI physical design:<br>
 
@@ -1483,14 +1483,143 @@ NOTE: The clock determines the delay in the combinational circuit, not vice vers
  
  * Consider the LUT shown below, here x, y and z are the delay values corresponding to the specific capacitance value and input transition. <br><br>
 
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/fc77fb31936f2a3f8eb490cbf786e6776f44e396/day7/13.PNG"><br><br>
+<img width="300" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/fc77fb31936f2a3f8eb490cbf786e6776f44e396/day7/13.PNG"><br><br>
 
 * If the input transition is 0.07 and the output load capacitance is 0.12, and these specific values are not available in the table, the system will interpolate between the entries for blocks B1, B2, C1, and C2 to determine the corresponding delay value. <br>
 
 
-* We encounter various versions of the same gate, each offering distinct characteristics. The following images provides details about the area and leakage power for these different variations of the same gate.<br><br>
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
+* We encounter various versions of the same gate, each offering distinct characteristics. The following images provides details about the area, capacitance, clock pin, direction, leakage and function power for these different variations of the same gate.<br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/14.PNG"><br><br>
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/15.PNG"><br><br>
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/4_and_function_index_lut.png"><br><br>
+
+3. **Unateness**: <br><br>
+
+* In digital circuits, "unateness" refers to the unate property of a Boolean function or a signal within the circuit. The unate property characterizes how a Boolean function behaves with respect to the variables (inputs) it depends on. There are two types of unateness: positive unateness and negative unateness.<br>
+
+* Positive Unateness:<br>
+
+	*A Boolean function or signal is positively unate with respect to a variable if, when that variable increases (from 0 to 1), the function's output can only either stay the same or increase. In other 		words, increasing the input variable can only result in the same or a higher output value.<br>
+
+* Negative Unateness:<br>
+
+	* A Boolean function or signal is negatively unate with respect to a variable if, when that variable increases (from 0 to 1), the function's output can only either stay the same or decrease. In this 		case, increasing the input variable can only lead to the same or a lower output value.<br>
+
+* Non-Unate Function:<br>
+
+	* A Boolean function or signal is considered non-unate if its behavior with respect to at least one of its input variables is not strictly monotonic. In other words, changing the value of that input 		variable does not consistently lead to a clear increase or decrease in the function's output.<br>
+
+
+* The unateness of a Boolean function or signal is an important concept in digital circuit analysis and optimization for several reasons:<br>
+
+	* Simplification: Unate functions are easier to simplify than non-unate functions. Positive unate functions can be minimized using techniques like the Quine-McCluskey method, while negative unate 		functions can be minimized using the Petrick's method.<br>
+
+	* Timing Analysis: Unateness properties are used in timing analysis to determine the critical path delay in digital circuits. This information helps in optimizing circuit performance.<br>
+
+	* Logic Synthesis: Unateness information is used by logic synthesis tools to optimize the implementation of digital circuits, reducing area and power consumption.<br>
+
+	* Test Generation: Unateness properties can be exploited in test generation algorithms to improve test coverage and reduce the number of test patterns required to test a digital circuit.<br>
+
+* Below image shows the unateness of the AND cells: <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/5_timing_unate_path.png"> <br><br>
+
+* Unateness in Sequential circuits: <br>
+
+ 	* The output of a flip-flop remains constant regardless of the clock edge; instead, it depends solely on the input D of the flip-flop, indicating that flip-flops exhibit non-unate behavior. The image 	below illustrates the non-unateness of a D-flip-flop. <br><br>
+
+   	* A rising edge indicates a positive-edge-triggered flip-flop, while a falling edge represents a negative-edge-triggered flip-flop. <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/6_ff_unate_type.png"><br><br>
+
+* The image below illustrates the clock's active edge concerning the setup and hold time for a D Flip Flop. <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/7_setup_hold_rise_fall.png"><br><br>
+
+* The image below illustrates the clock's active edge concerning the setup and hold time for a D Latch. <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7/8__latch_setup_rise_fall.png"><br><br>
+
+</details>
+
+<details>
+<summary>Labs on .lib inside dc compiler</summary><br>
+
+Step 1: <br>
+```ruby
+csh
+dc_shell
+```
+
+Step 2: Check whether your target and link library are set or not.<br><br>
+```ruby
+list_lib
+```
+
+Step 3: Listing all the AND cells of the library.<br>
+
+<img width="1200" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7_1/14.png"><br><br>
+
+Step 4: Displaying the collection of AND cells individually. <br> 
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7_1/15.png"><br><br>
+
+Step 5: Listing of all the pins and their respective functions for a specific AND gate cell. <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7_1/14.1.png"><br><br>
+
+Step 6: TCL program that accepts a list of cells as input and then displays the output pins along with their corresponding functionalities. <br>
+
+```ruby
+set mylist [list sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2_1 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2_2 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2_4 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2_8 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2b_1 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2b_2 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand2b_4 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand3_1 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand3_2 \
+sky130_fd_sc_hd__tt_025C_1v80/sky130_fd_sc_hd__nand3_4 ];
+
+foreach var $mylist {
+  foreach_in_collection var_pins [get_lib_pins ${var}/* ] {
+      set pin_name [get_object_name $var_pins];
+      set pin_dir [get_lib_attribute $pin_name direction];
+      if { $pin_dir == 2 } {
+
+
+          set pin_func [get_lib_attribute $pin_name function];
+
+          echo $pin_name $pin_dir $pin_func ;
+       }
+    }
+}
+```
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3ff18905e55176bbae6c96b9643141df7720a6cf/day7_1/15.1.PNG"><br><br>
+
+Step 7: Checking the direction and the funtionality a pin of a cell. <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4430771daf71f22e570155579058ab2918662030/day7_1/direction_function.PNG"><br><br>
+
+Step 8: For a particular pin checking its are, capacitance and whether its a clock pin or not. <br>
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c1283b5e3e3b02a299a940502995b48bba982f3a/day7_1/area_cap_clk.PNG"><br><br>
+
+Step 9: Printing all the sequential cells and examining their clock pins. If the clock attribute is set to true, it indicates that the pin functions as a clock port. <br>
+
+<img width="1200" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e572e36b327c6d884c902391963185aed37f24b0/day7_1/filter_seq.PNG"><br><br>
+
+Step 10: Listing all the attributes along with their class.<br>
+
+```ruby
+list_attributes
+```
+
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7_1/19.png"><br><br>
+
+
+
 
 </details>
 
