@@ -1452,7 +1452,7 @@ NOTE: The clock determines the delay in the combinational circuit, not vice vers
 <details>
 <summary> Library </summary><br>
 	
-**1. Default Max transition ** <br><br>
+1. **Default Max transition** <br><br>
 * There is a predefined capacitance limit for the load connected to a specific gate, and this limit must not be exceeded. In cases where the load capacitance surpasses this limit, additional buffer stages are introduced at the output of that particular gate to evenly distribute the load.<br>
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/11.png"><br><br>
 
@@ -1465,9 +1465,32 @@ NOTE: The clock determines the delay in the combinational circuit, not vice vers
  
 <img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
 
-* Then we have different flavors of the same gate. Below image gives the information regarding the 
+2. Delay Model: Look Up Table: <br><br>
+
+* LUTs play a crucial role in modern FPGA (Field-Programmable Gate Array) and ASIC (Application-Specific Integrated Circuit) designs. Here's an overview of what a LUT is and how it is used in VLSI physical design:<br>
+
+* Definition of a LUT:<br>
+
+	* A Look-Up Table is essentially a memory element or a data storage structure that stores predefined output values for all possible input combinations of a logic function.<br>
+	* It can be thought of as a truth table in hardware form, where the LUT stores the output values for each possible input combination.<br>
+
+* Structure of a LUT:<br>
+
+	* A typical LUT consists of multiple input pins (often referred to as address lines) and one or more output pins.<br>
+	* The number of input pins is determined by the number of variables in the logic function it represents. For example, a 2-input LUT would have two input pins, and an 8-input LUT would have eight input 	pins.<br>
+	* The number of output pins is typically one, but there can be multiple outputs in some designs.<br>
+	* Inside the LUT, there is a memory array where the output values for all possible input combinations are stored.<br>
+ 
+ * Consider the LUT shown below, here x, y and z are the delay values corresponding to the specific capacitance value and input transition. <br><br>
+
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/fc77fb31936f2a3f8eb490cbf786e6776f44e396/day7/13.PNG"><br><br>
+
+* If the input transition is 0.07 and the output load capacitance is 0.12, and these specific values are not available in the table, the system will interpolate between the entries for blocks B1, B2, C1, and C2 to determine the corresponding delay value. <br>
 
 
+* We encounter various versions of the same gate, each offering distinct characteristics. The following images provides details about the area and leakage power for these different variations of the same gate.<br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
 
 </details>
 
