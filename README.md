@@ -1449,6 +1449,28 @@ NOTE: The clock determines the delay in the combinational circuit, not vice vers
 
 </details>
 
+<details>
+<summary> Library </summary><br>
+	
+**1. Default Max transition ** <br><br>
+* There is a predefined capacitance limit for the load connected to a specific gate, and this limit must not be exceeded. In cases where the load capacitance surpasses this limit, additional buffer stages are introduced at the output of that particular gate to evenly distribute the load.<br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/11.png"><br><br>
+
+* The image below provides a representation of a standard library and offers details regarding its contents, such as:<br>
+	* Time unit: ns <br>
+	* Voltage unit: V <br>
+ 	* Current unit: mA <br>
+  	* Leakage Power unit: nW <br>
+	* Some others parameters are shown in the image below. <br>
+ 
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ea45d3daee64f6f6eebf666f84f6b40070fd84c0/day7/1_parameters.png"><br><br>
+
+* Then we have different flavors of the same gate. Below image gives the information regarding the 
+
+
+
+</details>
+
 
 
 
