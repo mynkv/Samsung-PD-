@@ -1618,13 +1618,150 @@ list_attributes
 
 <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/1e564cdc60344adfeae5c0be18ad52fd3fe20e2f/day7_1/19.png"><br><br>
 
+</details>
+
+## Day-8-Advanced-Constraints
 
 
+<details>
+<summary>Introduction</summary><br>
+
+* **Clock Generator**: are pivotal elements within VLSI (Very Large Scale Integration) circuits, holding a central function in harmonizing diverse components within an integrated circuit (IC). Their primary role is to furnish clock signals, which serve as the temporal orchestrators for digital operations inside the IC. The design of clock generators is centered on producing clock signals with precise attributes, including frequency, duty cycle, and phase, tailored to satisfy the demands of the entire system.. <br>
+
+* Types of clock generators:<br>
+
+	* **Oscillators**: These are widely used as clock generators. They generate continuous periodic signals without an external input. Common types include RC oscillators, LC oscillators, and crystal oscillators.
+
+	* **Phase-Locked Loops (PLLs)**: PLLs are versatile clock generators that can generate clock signals with adjustable frequency and phase. They are often used for clock synchronization and multiplication.
+
+	* **Crystal Oscillators**: They are highly stable and accurate oscillators that use piezoelectric crystals to generate clock signals.
+	
+* **Clock Skew**: Clock skew refers to the difference in arrival times of a clock signal at various elements (such as flip-flops or latches) within a synchronous digital circuit. In a synchronous digital system, all the elements are driven by the same clock signal to ensure that operations happen at predictable times and that data is sampled correctly. However, due to various factors, the clock signal may not arrive simultaneously at all elements, leading to clock skew.<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b8ba98416b1a43e4cadccf6d4f24bef27035e9f0/day8/1.1.PNG"><br><br>
+
+* In the given diagram, R2 and R3 do not receive the clock signal simultaneously. The clock signal is generated and becomes active only during the Clock Tree Synthesis (CTS) process. Prior to that, the clock operates as if it's in an ideal network. During the synthesis phase, logic optimization is performed with the assumption of an ideal clock network.<br><br>
+
+* There are two main types of clock skew:<br><br>
+
+	* **Positive Clock Skew**: In this case, the clock signal arrives later at some elements compared to others. Positive skew can occur due to variations in trace lengths on a printed circuit board (PCB), differences in gate delays, or other factors. It means that the data at elements with positive skew are sampled slightly later than at elements with negative skew.<br>
+ 	* Ts + Skew ≤ Tcq + Tcomb + Tst <br>
+
+	* **Negative Clock Skew**: Conversely, negative clock skew occurs when the clock signal arrives earlier at some elements compared to others. This can also result from variations in trace lengths, gate delays, or other factors. Elements with negative skew sample data slightly earlier than those with positive skew.<br>
+ 	* Tc2q + Tcomb ≥ Thold + Tskew 
+
+* Setup and Hold Time Violations: Clock skew can lead to setup time violations, where data may not be stable for the required setup time before a clock edge arrives at some elements but is stable for too long at others. Conversely, hold time violations can occur when data remains stable for too long after the clock edge.<br>
+
+* **Clock jitter**: refers to the fluctuation or lack of precision in the timing of a clock signal, which leads to deviations of the actual clock signal edges from their expected, evenly spaced positions. Clock jitter can arise from various sources and can exert notable effects on the operational efficiency and dependability of digital systems.<br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/1.2.PNG">
+
+* **Clock latency**: denotes the temporal delay or propagation delay encountered by a clock signal as it traverses from its origin to different points within an integrated circuit (IC) or digital system. It denotes the duration required for the clock signal to navigate through various components, interconnections, and buffers before it reaches its intended destination. <br>
+
+	* **Source latency**:, also recognized as clock source latency, pertains to the delay or latency that arises from the clock generation circuitry at its inception, preceding the distribution of the clock signal to other segments of the integrated circuit (IC) or digital system. <br>
+
+	* **Regarding network latency**: concerning a clock, it typically denotes the delay or temporal discrepancy that arises when transmitting a clock signal through a network or communication medium. <br>
 
 </details>
 
 
+<details>
+ <summary>Lab on Advanced Constraints</summary>
+We start the Design Compiles as follows: <br>
+	
+```ruby
+csh
+dc_shell
+set target_library <path.db>
+set link_library {* target_library}
+```
 
+* Reading the verilog file:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/1_verilog.png"><br><br>
+
+* Expected GUI of the design is as shown:<br><br> 
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/21c0ce3660d128772bd4f316a4b2660beb8614f4/day8/1.3.PNG"><br><br>
+
+* Compile the design using command: compile_ultra. <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/2_compile_ultra.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/2_compile_ultra2.png"><br><br>
+
+* Ports of the design with their direction are listed below: <br><br> 
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/3_ports_direction.png"><br><br>
+
+* Command to get all the cells of the design: <br><br> 
+
+```ruby
+get_cells
+```
+* Hierarchial and physical cells: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/05296bdb13db556997158462c452490f79006d9e/day8/1.4.PNG"><br><br>
+
+* Getting physical cells of the design with their reference name: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/963c63aafbb77d87da06b8ba40b013e99342cfd4/day8/1.5.PNG"><br><br>
+
+* GUI of the design: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/5_gui.png"><br><br>
+
+* Enumerating all the nets, identifying their connected components, and specifying which components are actively transmitting signals on each connection: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/6_nets.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/7_nets_pins.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/7_nets_pins2.png"><br><br>
+
+* In digital design a net can have only one driver. See the example in the figure given below: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/1.6.PNG"><br><br>
+
+* Getting all the pins of the design and listing them: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/8_all_pins.png"><br><br>
+
+* Getting all the clock pins of the design and listing them: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/9_all_pins_clock.png"><br><br>
+
+* Identifying and listing the common elements or intersections between the set of input pins and clock pins in the design: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/10_all_pins_clock.png"><br><br>
+
+* Obtaining a list of all the clock signals present in the design. Currently, there are no clock signals configured, as indicated in the figure below, which states, "No clocks have been established." <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/11_clocks_current_design.png"><br><br>
+
+* Creating and removing the clock: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/12_create%20clock.png"><br><br>
+
+* When analyzing the timing characteristics of the design in the absence of any defined clocks, the report indicates that the path is unconstrained. <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/13_noclock_unconstrained_path.png"><br><br>
+
+* After establishing the clock and conducting a timing report, the results are displayed as follows:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/14_clock_constrained_path.png"><br><br>
+
+* Setting the clock latency and clock uncertainty in the design: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/15_set_clock_par.png"><br><br>
+
+* After setting the latency and uncertainty parameters the timing report comes out as follows: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/16_timing_after_par.png"><br><br>
+
+* NOTE: In the provided figure, it's noticeable that after setting the clock latency and clock uncertainty, the slack has been adjusted from 9.55 to 9.05.
+
+* Now if we want to see the timing report af a reg to reg path then:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/17_timing.png"><br><br>
+</details>
 
 
 
