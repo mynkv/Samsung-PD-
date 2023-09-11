@@ -1748,7 +1748,7 @@ get_cells
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/14_clock_constrained_path.png"><br><br>
 
-* Setting the clock latency and clock uncertainty in the design: <br><br>
+* Setting the clock latency, clock uncertainty, Setup delay and hold delay in the design: <br><br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/15_set_clock_par.png"><br><br>
 
@@ -1761,6 +1761,73 @@ get_cells
 * Now if we want to see the timing report af a reg to reg path then:<br><br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/17_timing.png"><br><br>
+
+* Input and output external delays are not subject to constraints. Below reports shows the same: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/18.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/19.png"><br><br>
+
+* We model the input delay by commands: <br><br>
+
+```ruby
+set_input_delay -max 5 - clock [get_clocks MYCLK] [get_ports IN_A]
+
+set_input_delay -max 5 - clock [get_clocks MYCLK] [get_ports IN_B]
+```
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/20.png"><br><br>
+
+* We have not yet restricted the minimum delay path. <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/21.png"><br><br>
+
+* The minimum delay path was constrained using command
+
+```ruby
+set_input_delay -min 1 - clock [get_clocks MYCLK] [get_ports IN_A]
+
+set_input_delay -min 1 - clock [get_clocks MYCLK] [get_ports IN_B]
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/22.png"><br><br>
+
+* Now we will add the input transition delay and output load to the design: <br><br>
+
+```ruby
+set_input_transition -max 0.3 [get_ports IN_A]
+
+set_input_transition -max 0.3 [get_ports IN_B]
+
+set_input_transition -min 0.1 [get_ports IN_A]
+
+set_input_transition -min 0.1 [get_ports IN_B]
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/23.png"><br><br>
+
+* Here we will add the output constraint delay: <br><br>
+
+```ruby
+set_output_delay -max 5 [get_clocks MYCLK] [get_ports OUT_Y]
+
+set_output_delay -min 1 [get_clocks MYCLK][get_ports OUT_Y]
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/24.png"><br><br>
+
+* The delay of the design is significantly influenced by the output load, and we will now incorporate the output load to observe how it impacts the delay. <br><br>
+
+```ruby
+set_load -max 0.3 [get_ports OUT_Y]
+set_load -min 0.1 [get_ports OUT_Y]
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/25.png"><br><br>
+
+```ruby
+set_load -max 0.3 [get_ports OUT_Y]
+set_load -min 0.3 [get_ports OUT_Y]
+```
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/26.png"><br><br>
 </details>
 
 
