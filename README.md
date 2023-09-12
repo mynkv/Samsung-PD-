@@ -2012,7 +2012,7 @@ compilr_ultra
 
 * GUI of the optimised design is as shown: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/35_optimised.png"><br><br>
+<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/35_optimised.png"><br><br>
 
 </details>
 
