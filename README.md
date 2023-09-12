@@ -1831,7 +1831,38 @@ set_load -min 0.3 [get_ports OUT_Y]
 </details>
 
 
+ <details>
+ <summary>Lab on constraining input tp output path delay</summary><br>
 
+* Insight on new commands:<br>
+ 
+ ```ruby
+all_inputs:
+all_outputs:
+all_clocks:
+all_registers:
+all_registers -clock MYCLK:
+all_fanout -from IN_A:
+all_fanout -flat -endpoints_only -from IN_A:
+all_fanin -to REGA_reg/D:
+all_fanin -to REGA_reg/D -start:
+```
+* Starting the lab to constraint the input to output path:
+
+```ruby
+csh
+dc_shell
+set target_library <path>
+set link_library {* <path>}
+read_verilog <file_path>
+link
+compile_ultra
+```
+* Design which we have loaded is:<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/27_verilog.png">
+
+</details>
 
 
 
