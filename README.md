@@ -1847,6 +1847,11 @@ all_fanout -flat -endpoints_only -from IN_A:
 all_fanin -to REGA_reg/D:
 all_fanin -to REGA_reg/D -start:
 ```
+* Above commands in action are shown below:<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/32_commands.png"><br><br>
+
+
 * Starting the lab to constraint the input to output path:
 
 ```ruby
@@ -1860,8 +1865,83 @@ compile_ultra
 ```
 * Design which we have loaded is:<br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/27_verilog.png">
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/27_verilog.png">br><br>
 
+* To source all the clocks which we created previously we will source the tickle script made previouly and will see the clocks generated: <br><br>
+
+```ruby
+sourch lab8_cons.tcl
+```
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/28_all_clocks.png">br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/29_report_timing.png">br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/30_report_timing.png">br><br>
+
+* When we check the path to outpuz Z which is a direct input to output we see that it is uncontrained as shown in figure below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/31_report_timing_outz_unconstrained.png">br><br>
+
+* Now we will set the delay between all th einput to output paths.
+
+```ruby
+set_max_delay 0.1 -from [all_inputs] -to [get_port <output_port_name>]
+```
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/33_set_op_delay_slack_violated.png">br><br>
+
+* Since we have not compiled the design it shows slack is violated. After compiling the design, it gets optimised and there slack violation is not seen. This is illustrated in the figure below:
+
+```ruby
+compilr_ultra
+```
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/34_after_compileultra.png">br><br>
+
+* GUI of the optimised design is as shown: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/35_optimised.png">br><br>
+
+</details>
+
+<details>
+<summary> Using Virtual clock to constraint the input to output path</summary><br>
+
+* Reset the design. <br><br>
+
+* Making the virtual clock: <br>
+
+```ruby
+create_clock -name MYVCLK -per 10
+```
+* There is no source specified in for the virtual clock. Below figure shows ss for creating the virtual clock. <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/37_virtual_clock.png">br><br>
+
+* Information on all the clocks is given below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/38_virtualclock.png">br><br>
+
+* Since we have not compiled the design the path to OUT_Z is still unconstrained as shown: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/39_outz_unconstrained.png">br><br>
+
+* Now we will constraint the path to OUT_Z by using the virtual clock: <br>
+
+```ruby
+set_input_delay -max 5 [get_ports IN_C] -clock [get_clocks MYVCLK];
+set_input_delay -max 5 [get_ports IN_D] -clock [get_clocks MYVCLK];
+set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
+```
+* We set the time period of the clock to 10 ns. Now out of 10 ns, 5 ns has gone into input delay and 4.9 ns is used up by the output path. So out of 10ns only 100 ps is left for the combinational delay of the XOR gate between IN_A, IN_C to OUT_Z. In the below we see that XOR gate needs 120 ps, but only 100 ps is available for the combination logic, hence slack is violated.
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/40_set_delays_slack_violate.png">br><br>
+
+* Now we will compile the design to optimise to fix slack violation as shown:<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/41_set_delays_slack_optimised.png">br><br>
+
+* It is noted that the input and the output delays are with respect to virtual clock now as shown:<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/42_verbode_ip_op_myvclk.png">br><br>
+
+ 
 </details>
 
 
