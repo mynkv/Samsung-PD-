@@ -1638,7 +1638,7 @@ list_attributes
 	
 * **Clock Skew**: Clock skew refers to the difference in arrival times of a clock signal at various elements (such as flip-flops or latches) within a synchronous digital circuit. In a synchronous digital system, all the elements are driven by the same clock signal to ensure that operations happen at predictable times and that data is sampled correctly. However, due to various factors, the clock signal may not arrive simultaneously at all elements, leading to clock skew.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b8ba98416b1a43e4cadccf6d4f24bef27035e9f0/day8/1.1.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b8ba98416b1a43e4cadccf6d4f24bef27035e9f0/day8/1.1.PNG"><br><br>
 
 * In the given diagram, R2 and R3 do not receive the clock signal simultaneously. The clock signal is generated and becomes active only during the Clock Tree Synthesis (CTS) process. Prior to that, the clock operates as if it's in an ideal network. During the synthesis phase, logic optimization is performed with the assumption of an ideal clock network.<br><br>
 
@@ -1654,7 +1654,7 @@ list_attributes
 
 * **Clock jitter**: refers to the fluctuation or lack of precision in the timing of a clock signal, which leads to deviations of the actual clock signal edges from their expected, evenly spaced positions. Clock jitter can arise from various sources and can exert notable effects on the operational efficiency and dependability of digital systems.<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/1.2.PNG">
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/1.2.PNG">
 
 * **Clock latency**: denotes the temporal delay or propagation delay encountered by a clock signal as it traverses from its origin to different points within an integrated circuit (IC) or digital system. It denotes the duration required for the clock signal to navigate through various components, interconnections, and buffers before it reaches its intended destination. <br>
 
@@ -1678,20 +1678,20 @@ set link_library {* target_library}
 
 * Reading the verilog file:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/1_verilog.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/1_verilog.png"><br><br>
 
 * Expected GUI of the design is as shown:<br><br> 
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/21c0ce3660d128772bd4f316a4b2660beb8614f4/day8/1.3.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/21c0ce3660d128772bd4f316a4b2660beb8614f4/day8/1.3.PNG"><br><br>
 
 * Compile the design using command: compile_ultra. <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/2_compile_ultra.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/2_compile_ultra2.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/2_compile_ultra.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/2_compile_ultra2.png"><br><br>
 
 * Ports of the design with their direction are listed below: <br><br> 
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/3_ports_direction.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/3_ports_direction.png"><br><br>
 
 * Command to get all the cells of the design: <br><br> 
 
@@ -1700,72 +1700,72 @@ get_cells
 ```
 * Hierarchial and physical cells: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/05296bdb13db556997158462c452490f79006d9e/day8/1.4.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/05296bdb13db556997158462c452490f79006d9e/day8/1.4.PNG"><br><br>
 
 * Getting physical cells of the design with their reference name: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/963c63aafbb77d87da06b8ba40b013e99342cfd4/day8/1.5.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/963c63aafbb77d87da06b8ba40b013e99342cfd4/day8/1.5.PNG"><br><br>
 
 * GUI of the design: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/5_gui.png"><br><br>
+<img width="1400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/5_gui.png"><br><br>
 
 * Enumerating all the nets, identifying their connected components, and specifying which components are actively transmitting signals on each connection: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/6_nets.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/7_nets_pins.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/7_nets_pins2.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/6_nets.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/7_nets_pins.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/7_nets_pins2.png"><br><br>
 
 * In digital design a net can have only one driver. See the example in the figure given below: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/1.6.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/1.6.PNG"><br><br>
 
 * Getting all the pins of the design and listing them: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/8_all_pins.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/23585bb65106044b6de2f77893b7b2e051013a53/day8/8_all_pins.png"><br><br>
 
 * Getting all the clock pins of the design and listing them: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/9_all_pins_clock.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/9_all_pins_clock.png"><br><br>
 
 * Identifying and listing the common elements or intersections between the set of input pins and clock pins in the design: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/10_all_pins_clock.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/10_all_pins_clock.png"><br><br>
 
 * Obtaining a list of all the clock signals present in the design. Currently, there are no clock signals configured, as indicated in the figure below, which states, "No clocks have been established." <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/11_clocks_current_design.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/11_clocks_current_design.png"><br><br>
 
 * Creating and removing the clock: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/12_create%20clock.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/12_create%20clock.png"><br><br>
 
 * When analyzing the timing characteristics of the design in the absence of any defined clocks, the report indicates that the path is unconstrained. <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/13_noclock_unconstrained_path.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/13_noclock_unconstrained_path.png"><br><br>
 
 * After establishing the clock and conducting a timing report, the results are displayed as follows:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/14_clock_constrained_path.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/14_clock_constrained_path.png"><br><br>
 
 * Setting the clock latency, clock uncertainty, Setup delay and hold delay in the design: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/15_set_clock_par.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/15_set_clock_par.png"><br><br>
 
 * After setting the latency and uncertainty parameters the timing report comes out as follows: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/16_timing_after_par.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/16_timing_after_par.png"><br><br>
 
 * NOTE: In the provided figure, it's noticeable that after setting the clock latency and clock uncertainty, the slack has been adjusted from 9.55 to 9.05.
 
 * Now if we want to see the timing report af a reg to reg path then:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/17_timing.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f9f82c4e07afedf687642e3765fca2540a5e319b/day8/17_timing.png"><br><br>
 
 * Input and output external delays are not subject to constraints. Below reports shows the same: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/18.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/19.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/18.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/19.png"><br><br>
 
 * We model the input delay by commands: <br><br>
 
@@ -1774,11 +1774,11 @@ set_input_delay -max 5 - clock [get_clocks MYCLK] [get_ports IN_A]
 
 set_input_delay -max 5 - clock [get_clocks MYCLK] [get_ports IN_B]
 ```
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/20.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/20.png"><br><br>
 
 * We have not yet restricted the minimum delay path. <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/21.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/21.png"><br><br>
 
 * The minimum delay path was constrained using command
 
@@ -1788,7 +1788,7 @@ set_input_delay -min 1 - clock [get_clocks MYCLK] [get_ports IN_A]
 set_input_delay -min 1 - clock [get_clocks MYCLK] [get_ports IN_B]
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/22.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/22.png"><br><br>
 
 * Now we will add the input transition delay and output load to the design: <br><br>
 
@@ -1802,7 +1802,7 @@ set_input_transition -min 0.1 [get_ports IN_A]
 set_input_transition -min 0.1 [get_ports IN_B]
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/23.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/23.png"><br><br>
 
 * Here we will add the output constraint delay: <br><br>
 
@@ -1812,7 +1812,7 @@ set_output_delay -max 5 [get_clocks MYCLK] [get_ports OUT_Y]
 set_output_delay -min 1 [get_clocks MYCLK][get_ports OUT_Y]
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/24.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/24.png"><br><br>
 
 * The delay of the design is significantly influenced by the output load, and we will now incorporate the output load to observe how it impacts the delay. <br><br>
 
@@ -1821,13 +1821,13 @@ set_load -max 0.3 [get_ports OUT_Y]
 set_load -min 0.1 [get_ports OUT_Y]
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/25.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/25.png"><br><br>
 
 ```ruby
 set_load -max 0.3 [get_ports OUT_Y]
 set_load -min 0.3 [get_ports OUT_Y]
 ```
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4712be044fb810b40c0f04ce7776213f8f4e5086/day8/26.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/34c4ce3c66f6aae9bbcd8c6615c5425408259a41/day8/26.png"><br><br>
 
 
 * In the context of Static Timing Analysis (STA), generated clocks are a critical concept. STA is a crucial step in digital design that helps ensure the proper operation of integrated circuits by verifying that all signals meet their timing requirements. Generated clocks are not actual physical clocks but are virtual clocks generated by the STA tool to represent specific signal transitions in the circuit.<br>
@@ -1929,9 +1929,9 @@ set_load -min 0.1 [get_ports OUT_Y];
 
 * Clock reports and port reports of the new design are shown in the images below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d68dc4cfdc416f69a68c46c7319c24b21226e587/day8/47.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d68dc4cfdc416f69a68c46c7319c24b21226e587/day8/48.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d68dc4cfdc416f69a68c46c7319c24b21226e587/day8/49.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d68dc4cfdc416f69a68c46c7319c24b21226e587/day8/47.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d68dc4cfdc416f69a68c46c7319c24b21226e587/day8/48.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d68dc4cfdc416f69a68c46c7319c24b21226e587/day8/49.png"><br><br>
 
 
 
