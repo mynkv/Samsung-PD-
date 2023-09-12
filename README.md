@@ -1945,17 +1945,25 @@ set_load -min 0.1 [get_ports OUT_Y];
 * Insight on new commands:<br>
  
  ```ruby
-all_inputs:
-all_outputs:
-all_clocks:
-all_registers:
-all_registers -clock MYCLK:
-all_fanout -from IN_A:
-all_fanout -flat -endpoints_only -from IN_A:
-all_fanin -to REGA_reg/D:
-all_fanin -to REGA_reg/D -start:
+all_inputs: This command lists or selects all the primary input (PI) ports in your design. Primary inputs are external signals or inputs to your digital circuit.
+
+all_outputs: This command lists or selects all the primary output (PO) ports in your design. Primary outputs are external signals or outputs from your digital circuit.
+
+all_clocks: This command lists or selects all the clock signals in your design. Clock signals are essential for synchronizing the operation of your digital circuit.
+
+all_registers: This command lists or selects all the flip-flops or registers in your design. Registers are sequential elements that store data in your circuit.
+
+all_registers -clock MYCLK: This command lists or selects all the flip-flops or registers in your design that are clocked by a specific clock signal named "MYCLK." It helps you identify registers associated with a particular clock domain.
+
+all_fanout -from IN_A: This command lists or selects all the signals that are driven by (fanout from) a specific signal or net named "IN_A." It helps you identify all the downstream signals affected by a particular input.
+
+all_fanout -flat -endpoints_only -from IN_A: This command lists or selects all the endpoint signals (e.g., flip-flops or output pins) that are directly driven by a specific signal "IN_A." It provides a list of the final destinations of a signal.
+
+all_fanin -to REGA_reg/D: This command lists or selects all the signals that drive (fanin to) a specific data input of a register named "REGA_reg/D." It helps you identify all the sources feeding data into a particular register.
+
+all_fanin -to REGA_reg/D -start: This command lists or selects all the signals that directly drive the data input of a register named "REGA_reg/D." The "-start" flag signifies that you want to identify only the immediate sources, excluding any further upstream logic.
 ```
-* Above commands in action are shown below:<br><br>
+* These commands are useful for querying and selecting various elements in your digital design, which can be beneficial for debugging, analysis, or applying specific optimizations during the synthesis process using dc_shell. Above commands in action are shown below:<br><br>
 
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dbc3cbdfa27fe9f700e399b99d36f1b5e158b2c1/day8/32_commands.png"><br><br>
 
