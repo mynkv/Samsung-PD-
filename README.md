@@ -2057,7 +2057,7 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/42_verbode_ip_op_myvclk.png"><br><br>
 
- 
+ </details>
 
 ## Day-9-Optimization
 
@@ -2172,6 +2172,9 @@ Here we can clearly see that only th emsb of the counter is used for the output,
 <img width="250" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/77849ff7b577447e818144a1686bbe129eb72ef3/Day3/table.PNG"><br>
 Here count[0] is toggling for every clock cycle so the circuit can be optimised. In GUI we can clearty see that only the inverter cell is used to implement the design, this also shown below<br><br>
 <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br>
+</details>
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <details> 
 <summary> Labs on Combinational Logic Optimization </summary> <br><br>
@@ -2272,7 +2275,7 @@ In the timing report above, only an OR cell is present in the path to y, with a 
 </details>
 
 <details> 
-<summary> Example3 : opt_check3 </summary> <br>
+<summary> Example 3 : opt_check3 </summary> <br>
 
 Consider the verilog code: <br>
 
@@ -2286,12 +2289,11 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
 
 Now if we consider the expression: <br>
-y = a ? 1:b <br>
-y1 = a.1 + a'.b <br>
-y1 = a + b <br><br>
+y = a ? (c.b):0 <br>
+y = a.b.c <br>
 
 
 * We will now optimize the same design in the dc_shell:<br>
@@ -2299,38 +2301,85 @@ y1 = a + b <br><br>
 ```ruby
 set target_library <lib_path.db>
 set link_library {* <lib_path.db>}
-read_verilog opt_check2.v
+read_verilog opt_check3.v
 link
 compile
 ```
 * Timing report of the design is as follows: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/5_optcheck2_timinng_post_compile.png"><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/7_optcheck3_timinng_post_compile.png"><br>
 
-In the timing report above, only an OR cell is present in the path to y, with a and b as inputs. Same is depicted in the GUI of the design shown below: <br>
+In the timing report above, only an 3 input AND cell is present in the path to y, with a, b and c as inputs. Same is depicted in the GUI of the design shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/6_GUI.png"><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/8_GUI.png"><br>
 
 </details>
 	
+<details> 
+<summary> Example 4 : opt_check4 </summary> <br>
+
+Consider the verilog code: <br>
+
+```ruby
+module opt_check4 (input a , input b , input c , output y);
+ assign y = a?(b?(a & c ):c):(!c);
+ endmodule
+```
+
+* Expected synthesis of the design is as shown below : <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+
+Now if we consider the expression: <br>
+y = a?(b?(a & c ):c):(!c)<br>
+y = a ? (a.b.c + b'.c) : c' <br>
+y = a.b.c + a.b'.c + a'c' <br>
+y = a exnor c<br>
 
 
+* We will now optimize the same design in the dc_shell:<br>
 
+```ruby
+set target_library <lib_path.db>
+set link_library {* <lib_path.db>}
+read_verilog opt_check4.v
+link
+compile
+```
+* Timing report of the design is as follows: <br>
 
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/9_optcheck4_timinng_post_compile.png"><br>
 
+In the timing report above, only a X-NOR cell is present in the path to y, with a and c as inputs. Same is depicted in the GUI of the design shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/13_GUI.png"><br>
+
+* Now we will contraint the path from input to output as and check the timing vilation, if any. This is depicted in the image below.<br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/10_set_delay_timing_violate.png"><br>
+
+* In the above image we see that slack is getting violated by 20 ps, as we constrainted the input to output path to 60 ps, and at the same time EXNOR gate requires 80 ps alone, hence slack is violated by 20 ps.<br>
+* Now we will change the EXNOR gate with some other exnor gate. Timing report after using the new EXNOR gate is shown below is shown below: <br> 
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/11_change_xnor_timing_violate_up.png"><br>
+
+* Here timimg violation increases from 20 ps to 50 ps because new EXNOR gate have 110 ps delay.
+* Lets try to optimise the design using compule_ultra. Timing report post com_ultra is shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/12_timing_after_compile.png"><br>
+
+* Slack violation has come down to 20 ps again, as tool optimized the design and picked up the previos xnor gate which was used.
 
 </details>
+</details>
+
+
 
 </details><br>
 
 
 
 ```ruby
-module opt_check4 (input a , input b , input c , output y);
- assign y = a?(b?(a & c ):c):(!c);
- endmodule
-
-
 
  module resource_sharing_mult_check (input [3:0] a , input [3:0] b, input [3:0] c , input [3:0] d, output [7:0] y  , input sel);
 	assign y = sel ? (a*b) : (c*d);
