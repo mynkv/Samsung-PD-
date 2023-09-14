@@ -2918,7 +2918,7 @@ Here we see that val_out_reg[0]/Q have a large output load capacitanc, due which
 
 * Now we will isolate the ports by command ```set_isolate_ports -type buffer [all_outputs]. This is shown in the image below:<br><br>
 
-<img width="700" alt="[icc2_shell" src="hhttps://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/56_isolate_isolating_ports.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/56_isolate_isolating_ports.png"><br><br>
 
 * Compiling the design: <br><br>
 
@@ -2938,25 +2938,15 @@ In this observation, it's evident that the load capacitance for val_out_reg[0]/Q
 </details>
 
 
+<details>
 
+<summary>Multicycle Path</summary><br>
 
+Multicycle path optimization is a technique employed in VLSI (Very Large Scale Integration) design to address specific timing constraints where a signal is allowed to take multiple clock cycles to propagate through a combinational logic path. This optimization aims to ensure that the design meets these relaxed timing requirements while still achieving the desired functionality and performance.
 
-
-
-
-
-
-</details><br>
-
-
+Consider the verilog code: <br>
 
 ```ruby
-
-
-tcl file
-
-
-
 module mcp_check (input clk , input res  , input [7:0] a , input [7:0] b, input en , output reg [15:0] prod);
 
 reg valid; 
@@ -2980,7 +2970,23 @@ begin
 end
 
 endmodule
+```
 
+* Expected GUI of the design is shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/mcp1.png"><br><br>
+
+* Screenshot for reading the design: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/61_mcp_compile_link_compile.png"><br><br>
+
+* Screenshot for link and compile the design: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/61_mcp_compile_link_compile.png"><br><br>
+
+* Now to add the clocks, input delays, output delays and other constraints, we will add a tcl file shown below: <br><br>
+
+```ruby
 #create the clock
 create_clock -per 4 -name myclk [get_ports clk];
 
@@ -3001,13 +3007,88 @@ set_input_transition -min 0.05 [all_inputs];
 
 set_load -max 0.4 [all_outputs];
 set_load -min 0.05 [all_outputs];
-
-
-
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+* Screenshot of sourcing the script file and checking the timing: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/62_mcp_source_timing_report.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/63_mcp_source_timing_report.png"><br><br>
+
+* Screenshot of the timing report after optimizing the design: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/64_timing_report_post_-compile.png"><br><br>
+
+* Screenshot of setting up the multicycle path:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/65_setmcp_timing_report_post_-compile.png"><br><br>
+
+* Timing report after setting up the multicycle path: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/66_setmcp_timing_report_post_change_tcl.png"><br><br>
+
+* Changing the constraint file: <br><br>
+
+```ruby
+#create the clock
+create_clock -per 4 -name myclk [get_ports clk];
+
+#model the practicality of the clock
+set_clock_uncertainty -setup 0.5 [get_clocks myclk];
+set_clock_uncertainty -hold 0.2 [get_clocks myclk];
+
+#Annotate the IO Delays
+set_input_delay -max 3.0 -clock myclk [all_inputs];
+set_input_delay -min 0.5 -clock myclk [all_inputs];
+
+set_output_delay -max 2.5 -clock myclk [all_outputs];
+set_output_delay -min 0.5 -clock myclk [all_outputs];
+
+#Model the practicalities of the IOs
+set_input_transition -max 0.3 [all_inputs];
+set_input_transition -min 0.05 [all_inputs];
+
+set_load -max 0.4 [all_outputs];
+set_load -min 0.05 [all_outputs];
+```
+
+* Timing reports to pro_reg[*]/D: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/67_timing_report_to_prod_reg.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/68_timing_report_to_prod_reg.png"><br><br>
+
+* Timing reports to pro_reg[*]/D from all_inputs: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/69_timing_report_input_op.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/70_timing_report_input_op.png"><br><br>
+
+* Hold timing report: <br><br>
+
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/71_timing_delay_min.png"><br><br>
+
+This issue is significant as it's reporting a timing violation spanning from '0 ns' to '4 ns'. The problem lies in the hold check, which should ideally be a zero-cycle check. However, the tool is currently performing a hold check over the entire one-cycle duration of the input path.<br><br>
+
+* Constraining the multicycle path for the hold time and checking the timing report: <br><br>
+
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/72_timing_hold_delay_min.png"><br><br>
+
+* Timing reports to pro_reg[*]/D from all_inputs: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/73_timing_delay_min_from_inputs.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/74_timing_report_inp_cap.png"><br><br>
+
+The path from the input to pro_reg has now been designated as a zero-cycle path, eliminating any slack violations. However, it's important to note that the load capacitance of pro__reg[10] stands at a notably high value of 403 pF. This substantial load capacitance contributes to a significant delay, prompting us to consider isolation as a means to enhance the delay profile. <br><br>
+
+* Screenshot of isolating the ports and compiling it is shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/75_isolate_compile.png"><br><br>
+
+* Timing report after isolating the output port:<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/76_timing_report_last.png"><br><br>
+
+
 </details>
+
 
 
 
