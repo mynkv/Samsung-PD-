@@ -2085,26 +2085,26 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 
 * **Gate Selection**: Choosing the appropriate types of logic gates (AND, OR, XOR, etc.) based on the specific logic functions can have a significant impact on optimization. Some gates may be more area-efficient or have lower power consumption for specific functions. <br>
 
-* **Constant Propagation**: <br><br>
+**Constant Propagation**: <br><br>
 
 * Constant propagation optimization is a technique used in VLSI (Very Large Scale Integration) design to improve the efficiency and performance of digital circuits by identifying and replacing portions of the design with constant values or expressions. This optimization can lead to reduced logic complexity, better power efficiency, and improved timing. <br><br>
 
 Let us consider an exression: Y = (A.B + C)<br>
  
 The expected synthesis of the above function is as shown in figure below:<br><br>
- **<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4607.jpeg"><br>**
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4607.jpeg"><br>
 
  
 In the original expression one AND gate and one NOR gate is used.<br>
  If A is grounded in the above expression then: Y = C'<br>
  	Now only one NOT gate is used.<br>
   
-  After optimisation we get only a NOT gate as shown below:<br><br>
-**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4608.jpeg"><br>**
+After optimisation we get only a NOT gate as shown below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4608.jpeg"><br>
   
 So, both area and speed of operation is improved.<br>
 
-* **Boolean Logic Optimization**: <br><br>
+Boolean Logic Optimization**: <br>
 
 Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
 
@@ -2118,7 +2118,7 @@ Y = a'c' + a.(b'ac + bc) <br>
 
 The optimised design will only contain a ex-nor gate, instead of 3 mux. <br>
 
-* **Resource Sharing**:<br>
+**Resource Sharing**:<br>
 
 Consider the expression: assign y = sel ? (a * b) : (c * d). This can be implemented in two ways as shown in the figure below: <br>
 
