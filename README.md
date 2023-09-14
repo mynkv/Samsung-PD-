@@ -2174,8 +2174,6 @@ Here count[0] is toggling for every clock cycle so the circuit can be optimised.
 </details>
 
 
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 <details> 
 <summary> Labs on Combinational Logic Optimization </summary> <br><br>
 
