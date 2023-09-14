@@ -2058,7 +2058,125 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f6a2f53027c822123ffba3492a79b1108a823732/day8/42_verbode_ip_op_myvclk.png"><br><br>
 
  
+
+## Day-9-Optimization
+
+
+
+<details>
+<summary>Introdiction</summary><br>
+
+**GOALS** <br>
+
+* Optimazation til the cost is met. <br>
+* Over optimization of one goal will harm other goals. <br>
+* Goals for synthesis: <br>
+	* Meet Timing <br>
+ 	* Meet Area <br>
+  	* Meet Power <br>
+
+**COMBINATION LOGIC OPTIMIZATION** <br>
+
+* **Constant Propagation**: <br><br>
+Let us consider an exression: Y = (A.B + C)<br>
+ 
+The expected synthesis of the above function is as shown in figure below:<br><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4607.jpeg"><br>
+
+ 
+In the original expression one AND gate and one NOR gate is used.<br>
+ If A is grounded in the above expression then: Y = C'<br>
+ 	Now only one NOT gate is used.<br>
+  
+  After optimisation we get only a NOT gate as shown below:<br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4608.jpeg"><br>
+  
+So, both area and speed of operation is improved.<br>
+
+* **Boolean Logic Optimization**: <br><br>
+
+Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
+
+ The expected synthesis of the above function is as shown in figure below:<br><br>
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>
+ 
+Y = a'c' + a.(b'ac + bc) <br>
+  = a'c' + ab'c + abc <br>
+  = a'c' + ac <br>
+  = a ex_nor b
+
+The optimised design will only contain a ex-nor gate, instead of 3 mux. <br>
+
+* **Resource Sharing**:<br>
+
+Consider the expression: assign y = sel ? (a * b) : (c * d). This can be implemented in two ways as shown in the figure below: <br>
+
+**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
+
+* In the design on the left there are 2 multipliers and oneMUX while on the RHS we have one Multiplier and 2 MUX, cleary design on the right will have comparativeli less area, power and delay as compared to one the RHS. This was possible because the operations a*b and c*d do not occur at the same time, instead they only one of them occur at a time. o only one multiplier is =need to perform the task hence the muntiplier is shared depending on the "sel" input.<br>
+
+* **Logic Sharing**:<br>
+
+```ruby
+assign y = a & b & c;
+assign y = (a & b) | c;
+```
+Above two statements can be implemented as shown in the filugure below: <br>
+
+**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
+
+On the right side of the inade, output a*b of the AND is shared and hence the need of a 3 input AND gate is eliminated.
+
+* **Balanced vs Prefenrential Implementation**: <br>
+
+```ruby
+assign y = a & b & c & d & e;
+```
+
+Assuming 4 and 5 input AND gates, above statement can be implemented as shown in figure below: <br>
+
+**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
+
+* The right side implementaion is preffered when: <br>
+
+	* e to y path is very tight i.e. 'e' is a late arriving signal.<br>
+ 	* Say a to y, b to y, c to y, d to y paths are having sufficient time margin to meet the contraint, then e to y path can be given prefference. <br>
+  	* Which design is preffered is decided why the contraints file. <br>
+
+
+**SEQUENTIAL LOGIC OPTIMIZATION**
+
+**Constant Propagation**
+Example:<br>
+Consider the following verilog code: <br><br>
+
+```ruby
+always@ (posedge clk, posedge rst)
+begin
+if(rst)
+q <= 1;
+else 
+q <= 1;
+end
+```
+
+Graphical reperesentation of above example:<br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/7_dff_con2_gui.PNG"><br>	
+Here there are no flops inferred because output always renains high irrespective of the rst signal
 </details>
+
+**Optimisation of the unloaded outputs**:<br>
+Consider the following counter example as shown in fig below: <br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br>
+Here we can clearly see that only th emsb of the counter is used for the output, rest 2 bits are unused. Now let for a counter:<br><br>
+<img width="250" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/77849ff7b577447e818144a1686bbe129eb72ef3/Day3/table.PNG"><br>
+Here count[0] is toggling for every clock cycle so the circuit can be optimised. In GUI we can clearty see that only the inverter cell is used to implement the design, this also shown below<br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br>
+
+
+
+</details><br>
+
 ```ruby
 module opt_check (input a , input b , input c , output y1, output y2);
 wire a1;
