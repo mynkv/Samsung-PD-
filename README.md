@@ -2173,9 +2173,13 @@ Here we can clearly see that only th emsb of the counter is used for the output,
 Here count[0] is toggling for every clock cycle so the circuit can be optimised. In GUI we can clearty see that only the inverter cell is used to implement the design, this also shown below<br><br>
 <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br>
 
+<details> 
+<summary> Labs on Combinational Logic Optimization </summary> <br><br>
 
+<details> 
+<summary> Example1 : opt_check </summary> <br>
 
-</details><br>
+Consider the verilog code: <br>
 
 ```ruby
 module opt_check (input a , input b , input c , output y1, output y2);
@@ -2184,20 +2188,144 @@ assign y1 = a?b:0;
 assign y2 = ~((a1 & b) | c);
 assign a1 = 1'b0;
 endmodule
+```
 
+* Expected synthesis of the design is as shown below : <br>
 
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br>**
+
+Now if we consider the expression: <br>
+y1 = a ? b:0 <br>
+y1 = a.b + a'.0 <br>
+y1 = a.b <br><br>
+
+Similarly <br>
+y2 = ~((a1 & b) | c) <br>
+y2 = c' <br><br>
+
+* We will now optimize the same design in the dc_shell:<br>
+
+```ruby
+set target_library <lib_path.db>
+set link_library {* <lib_path.db>}
+read_verilog opt_check.v
+```
+* Timing report of the design is as follows, we have not yet linked and compiled the design: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/1_read_timing.png"><br>
+
+* Now
+
+```ruby
+link
+compile
+```
+* Timing report after compiling the design: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/2_timing_aftercompile.png"><br>
+
+In the timing report above, only an ANd cell is present in the path to y1. In the path to y2 we see only an inverter cell with 'c' as input, this is shown in GUI of the design in the figure below.
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/4_GUI.png"><br>
+
+</details>
+
+<details> 
+<summary> Example2 : opt_check2 </summary> <br>
+
+Consider the verilog code: <br>
+
+```ruby
 module opt_check2 (input a , input b , output y);
 	assign y = a?1:b;
 endmodule
 
+```
+
+* Expected synthesis of the design is as shown below : <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
+
+Now if we consider the expression: <br>
+y = a ? 1:b <br>
+y1 = a.1 + a'.b <br>
+y1 = a + b <br><br>
 
 
+* We will now optimize the same design in the dc_shell:<br>
+
+```ruby
+set target_library <lib_path.db>
+set link_library {* <lib_path.db>}
+read_verilog opt_check2.v
+link
+compile
+```
+* Timing report of the design is as follows: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/5_optcheck2_timinng_post_compile.png"><br>
+
+In the timing report above, only an OR cell is present in the path to y, with a and b as inputs. Same is depicted in the GUI of the design shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/6_GUI.png"><br>
+
+</details>
+
+<details> 
+<summary> Example3 : opt_check3 </summary> <br>
+
+Consider the verilog code: <br>
+
+```ruby
 module opt_check3 (input a , input b, input c , output y);
 	assign y = a?(c?b:0):0;
 endmodule
 
 
+```
 
+* Expected synthesis of the design is as shown below : <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
+
+Now if we consider the expression: <br>
+y = a ? 1:b <br>
+y1 = a.1 + a'.b <br>
+y1 = a + b <br><br>
+
+
+* We will now optimize the same design in the dc_shell:<br>
+
+```ruby
+set target_library <lib_path.db>
+set link_library {* <lib_path.db>}
+read_verilog opt_check2.v
+link
+compile
+```
+* Timing report of the design is as follows: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/5_optcheck2_timinng_post_compile.png"><br>
+
+In the timing report above, only an OR cell is present in the path to y, with a and b as inputs. Same is depicted in the GUI of the design shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/6_GUI.png"><br>
+
+</details>
+	
+
+
+
+
+
+
+</details>
+
+</details><br>
+
+
+
+```ruby
 module opt_check4 (input a , input b , input c , output y);
  assign y = a?(b?(a & c ):c):(!c);
  endmodule
