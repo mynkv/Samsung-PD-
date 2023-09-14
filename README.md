@@ -3090,7 +3090,7 @@ The path from the input to pro_reg has now been designated as a zero-cycle path,
 
 * Screenshot of isolating the ports and compiling it is shown below: <br><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/75_isolate_compile.png"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/75_isolate_compile.png"><br><br>
 
 * Timing report after isolating the output port:<br><br>
 
