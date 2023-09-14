@@ -2081,7 +2081,7 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 Let us consider an exression: Y = (A.B + C)<br>
  
 The expected synthesis of the above function is as shown in figure below:<br><br>
- <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4607.jpeg"><br>
+ **<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4607.jpeg"><br>**
 
  
 In the original expression one AND gate and one NOR gate is used.<br>
@@ -2089,7 +2089,7 @@ In the original expression one AND gate and one NOR gate is used.<br>
  	Now only one NOT gate is used.<br>
   
   After optimisation we get only a NOT gate as shown below:<br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4608.jpeg"><br>
+**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4608.jpeg"><br>**
   
 So, both area and speed of operation is improved.<br>
 
@@ -2098,7 +2098,7 @@ So, both area and speed of operation is improved.<br>
 Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
 
  The expected synthesis of the above function is as shown in figure below:<br><br>
- <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>
+ **<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
  
 Y = a'c' + a.(b'ac + bc) <br>
   = a'c' + ab'c + abc <br>
@@ -2163,7 +2163,6 @@ end
 Graphical reperesentation of above example:<br><br>
 <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/7_dff_con2_gui.PNG"><br>	
 Here there are no flops inferred because output always renains high irrespective of the rst signal
-</details>
 
 **Optimisation of the unloaded outputs**:<br>
 Consider the following counter example as shown in fig below: <br><br>
@@ -2173,6 +2172,7 @@ Here we can clearly see that only th emsb of the counter is used for the output,
 Here count[0] is toggling for every clock cycle so the circuit can be optimised. In GUI we can clearty see that only the inverter cell is used to implement the design, this also shown below<br><br>
 <img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br>
 </details>
+
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -2371,7 +2371,114 @@ In the timing report above, only a X-NOR cell is present in the path to y, with 
 * Slack violation has come down to 20 ps again, as tool optimized the design and picked up the previos xnor gate which was used.
 
 </details>
+
+<summary> Example 5 : Resource sharing </summary> <br>
+
+Consider the verilog code: <br>
+
+```ruby
+module resource_sharing_mult_check (input [3:0] a , input [3:0] b, input [3:0] c , input [3:0] d, output [7:0] y  , input sel);
+	assign y = sel ? (a*b) : (c*d);
+endmodule
+```
+
+* Expected synthesis of the design is as shown below : <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+
+Now if we consider the expression y = sel ? (a*b) : (c*d), here depending on the value of sel either a*b or c*d takes place. Both the operations never take place toghether. So we can optimise the dsign as follows: <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+
+* We will now optimize the same design in the dc_shell:<br>
+
+```ruby
+set target_library <lib_path.db>
+set link_library {* <lib_path.db>}
+read_verilog resource_sharing_mult_check.v
+link
+compile_ultra
+```
+* Screenshot for ```read_verilog``` and ```compile_ultra``` is shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/14_readv_resourcesharing_compile.png"><br>
+
+* Now lets write the ddc file and see the GUI of the design: <br>
+
+```ruby
+write -f ddc -out resource_sharing_mult_check1.ddc
+```
+GUI is shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/15_GUI.png"><br><br>
+
+In GUI we have multiplexer as shown: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/16_GUI_mux.png"><br><br>
+
+In the GUI we can see the two Multiplexer and a multiplier, which is what the optimised design looks like with no constraints.<br>
+
+* Area report of the design with no constraints is as shown below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/17_report_area.png"><br><br>
+
+* Timing report of the design with no constraints is as shown: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/18_timing_pastcompile.png"><br><br>
+
+* Setting the max delay from all inputs to all outputs paths to 2.5 ns and checking the timing report we see that slack is getting violated. This is shown in the design below: <br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/19_set_delay_timing_violate.png"><br><br>
+
+* Now we will optimise the design by ```compile_ultra```. Timing report of the design after optimization is as shown below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/20_timing_post_compile.png"><br><br>
+
+* Now slack is met. Area report of the design after constraining the input to ouput paths is shown below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/21_area_report_2.png"><br><br>
+
+* In the expected design we can see that paths from a, b, c and d to y have the same delay. Now if we tighten the paht from sel to y lets see what happens. This is shown in figure below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/22_sel_delay_timing_report.png"><br><br>
+
+* In the above image we see that slack is getting violated by a huge time. We will now optimise the design by using ```compile_ultra``` and then check the timing report. This is shown in the image below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/23_timing_post_compile.png"><br><br>
+
+* Area report with constrained sel to output y is shown below: <br><br> 
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/25_area_report_3.png"><br><br>
+
+* Here it is seen that the area has almost tripled, it shows that the instead of one multiplier, two multipliers are used. This can also be seen in the GUI of the design below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/24_GUI.png"><br><br>
+
+* Now we will constraint the are using ```set_max_area 800```. Timing report after constraining the area is shown below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/26_timing_report_postareaconstraint.png"><br><br>
+
+* Area report after contraining the are is as shown below: <br><br>
+
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/27_area_report4.png"><br><br>
+
 </details>
+
+
+
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2380,13 +2487,6 @@ In the timing report above, only a X-NOR cell is present in the path to y, with 
 
 
 ```ruby
-
- module resource_sharing_mult_check (input [3:0] a , input [3:0] b, input [3:0] c , input [3:0] d, output [7:0] y  , input sel);
-	assign y = sel ? (a*b) : (c*d);
-
-endmodule
-
-
 module dff_const1(input clk, input reset, output reg q);
 always @(posedge clk, posedge reset)
 begin
