@@ -2935,10 +2935,6 @@ In this observation, it's evident that the load capacitance for val_out_reg[0]/Q
 
 <img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/60_isolate_GUI_post_isolate.png"><br><br>
 
-
-
-
-
 </details>
 
 
