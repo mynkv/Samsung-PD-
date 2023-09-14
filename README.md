@@ -2851,6 +2851,92 @@ While there is still a slack violation, it's worth noting that when compared to 
 
 </details>
 
+<details>
+
+<summary> Isolate Output Ports </summary><br>
+
+In VLSI (Very Large Scale Integration) design, "Isolate Output Ports" optimization refers to a technique where designers aim to optimize the routing and layout of output ports of digital circuits to achieve better performance, power efficiency, and signal integrity. This optimization is particularly important in complex integrated circuits where there are numerous output ports. <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f019af42ef0772aaf2b386c870c83975c06ff582/day9/Isolate1.png"><br><br>
+
+* When a variable load is connected to be driven by Flip Flop 1, there's a risk of causing fluctuations in the internal 'path 1' logic. These fluctuations can lead to incorrect outputs from the combinational logic downstream. To mitigate this issue, we can insert a buffer between Flip Flop 1 and the output variable load. This buffer will drive the output load, ensuring that the fluctuations in the 'path 1' logic do not affect the output. Additionally, this buffering approach can also contribute to a reduction in the delay introduced by Flip Flop 1. <br><br>
+
+Consider the verilog code: <br>
+
+```ruby
+module check_boundary (input clk , input res , input [3:0] val_in , output reg [3:0] val_out);
+wire en;
+internal_module u_im (.clk(clk) , .res(res) , .cnt_roll(en));
+
+always @ (posedge clk , posedge res)
+begin
+	if(res)
+		val_out <= 4'b0;
+	else if(en)
+		val_out <= val_in;	
+end
+endmodule
+
+module internal_module (input clk , input res , output cnt_roll);
+reg [2:0] cnt;
+
+always @(posedge clk , posedge res)
+begin
+	if(res)
+		cnt <= 3'b0;
+	else
+		cnt <= cnt + 1;
+end
+
+assign cnt_roll = (cnt == 3'b111);
+
+endmodule
+```
+
+* Screenshot for reading the design: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/50_isolate_read.png"><br><br>
+
+* Screenshot for link and compile the design: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/51_isolate_link_compile.png"><br><br>
+
+* In this design we get output as a feedback, as shown in the image below: <br>
+
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/52_isolate_GUI_without_isolate.png"><br>
+
+* Screenshot for creating clock, setting input - output delays and amx load: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/53_isolate_set_clock_delay_load.png"><br><br>
+
+* Timing report before isolating the output port.: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/54_isolate_timing_report_past_isolate.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/55_isolate_timing_report_toout_past_isolate.png"><br><br>
+
+Here we see that val_out_reg[0]/Q have a large output load capacitanc, due which it have a large delay also.
+
+* Now we will isolate the ports by command ```set_isolate_ports -type buffer [all_outputs]. This is shown in the image below:<br><br>
+
+<img width="700" alt="[icc2_shell" src="hhttps://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/56_isolate_isolating_ports.png"><br><br>
+
+* Compiling the design: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/57_isolate_isolating_ports_compile.png"><br><br>
+
+* Timing reports after isolating the ports: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/58_isolate_timing_report_post_isolate.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/59_isolate_timing_report_toout_post_isolate.png"><br><br>
+
+In this observation, it's evident that the load capacitance for val_out_reg[0]/Q has been significantly reduced, leading to a substantial improvement in the delay of the register.<br><br>
+
+* In the isolated port GUI of the design we can see the output load is driven by the buffers, and the feedback path logic becomes much more stable. GUI of the design is shown below: <br><br>
+
+<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/60_isolate_GUI_post_isolate.png"><br><br>
+
+
+
 
 
 </details>
