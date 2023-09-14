@@ -2104,7 +2104,7 @@ After optimisation we get only a NOT gate as shown below:<br><br>
   
 So, both area and speed of operation is improved.<br>
 
-Boolean Logic Optimization**: <br>
+**Boolean Logic Optimization**: <br>
 
 Let us consider an exression: Y = a ? (b ? c:(c ? a:0)):(!c) <br>
 
@@ -2126,19 +2126,19 @@ Consider the expression: assign y = sel ? (a * b) : (c * d). This can be impleme
 
 * In the design on the left there are 2 multipliers and oneMUX while on the RHS we have one Multiplier and 2 MUX, cleary design on the right will have comparativeli less area, power and delay as compared to one the RHS. This was possible because the operations a*b and c*d do not occur at the same time, instead they only one of them occur at a time. o only one multiplier is =need to perform the task hence the muntiplier is shared depending on the "sel" input.<br>
 
-* **Logic Sharing**:<br>
+**Logic Sharing**:<br>
 
 ```ruby
 assign y = a & b & c;
 assign y = (a & b) | c;
 ```
-Above two statements can be implemented as shown in the filugure below: <br><br>
+Above two statements can be implemented as shown in the figure below: <br><br>
 
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/logic-sharing.png"><br><br>
 
-On the right side of the inade, output a*b of the AND is shared and hence the need of a 3 input AND gate is eliminated.
+On the right side of the image, output a*b of the AND is shared and hence the need of a 3 input AND gate is eliminated.
 
-* **Balanced vs Prefenrential Implementation**: <br>
+**Balanced vs Prefenrential Implementation**: <br>
 
 ```ruby
 assign y = a & b & c & d & e;
