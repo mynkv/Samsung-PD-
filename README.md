@@ -2372,6 +2372,7 @@ In the timing report above, only a X-NOR cell is present in the path to y, with 
 
 </details>
 
+<details>
 <summary> Example 5 : Resource sharing </summary> <br>
 
 Consider the verilog code: <br>
@@ -2464,27 +2465,29 @@ In the GUI we can see the two Multiplexer and a multiplier, which is what the op
 
 </details>
 
-
-
-
 </details>
 
 
+<details> 
+<summary> Labs on Sequential Logic Optimization </summary> <br>
 
+**Tie Cells**<br>
 
+* To prevent potential damage to the delicate oxide layer of the MOSFETs in CMOS logic circuits, tie cells are essential when providing logic zero or one inputs to a flip-flop. The presence of tie cells safeguards against any fluctuations or disturbances at the gate of the MOSFET, which could otherwise compromise the integrity of the oxide layer, leading to adverse consequences for the chip's functionality and reliability.<br>
+* Other uses:<br>
+  
+	* Connectivity and Routing
+	* Density and Area Utilization
+	* Electromigration and Current Handling
+	* Doping and Isolation
+	* Manufacturing and Process Variation
+	* ESD Protection
+	* Well Tapping
 
-
-
-
-
-
-
-
-
-
-</details><br>
-
-
+<details>
+<summary> Example 1 : dff_cont1 </summary> <br>
+	
+Consider the verilog code: <br>
 
 ```ruby
 module dff_const1(input clk, input reset, output reg q);
@@ -2497,9 +2500,43 @@ begin
 end
 
 endmodule
+```
+
+* Expected synthesis of the design is as shown below : <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
 
 
+* We will begin in dc_shell as follows: <br>
 
+```ruby
+read_verilog dff_const1.v
+link
+compile
+```
+
+* Cells of the design are shown in the figure below: <br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/28_seq_dff_const1_cells.png"><br>
+
+* Write the ddc file to view the GUI of the design: <br>
+
+```ruby
+write -f ddc -out dff-const1.ddc
+```
+
+* In the GUI of the design we can clearly see the Tie cells used to provice the logic 1. GUI of the design is as shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/29_dff_c1_GUI.png"><br><br>
+
+</details>
+
+<details>
+<summary> Example 2 : dff_cont2 </summary> <br>
+	
+Consider the verilog code: <br>
+
+```ruby
 module dff_const2(input clk, input reset, output reg q);
 always @(posedge clk, posedge reset)
 begin
@@ -2510,8 +2547,48 @@ begin
 end
 
 endmodule
+```
+
+* Expected synthesis of the design is as shown below : <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
 
 
+* We will begin in dc_shell as follows: <br>
+
+```ruby
+read_verilog dff_const2.v
+link
+compile
+```
+
+* Write the ddc file to view the GUI of the design: <br>
+
+```ruby
+write -f ddc -out dff-const2.ddc
+```
+
+* In the GUI of the design we can clearly see the Tie cells used to provice the logic 1. GUI of the design is as shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/30_dff_c2_GUI.png"><br><br>
+
+* We employ a command to prevent optimization from taking place ```set compile_seqmap_propagate_constants false```. Same is shown in the figure below.<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/31_dff_c2_restrict_optimisation.png"><br><br>
+
+* The graphical user interface (GUI) for the constrained customization design appears as depicted below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/32_dff_c2_restrict_optimisation.png"><br><br>
+
+</details>
+
+
+<details>
+<summary> Example 3 : dff_cont3 </summary> <br>
+	
+Consider the verilog code: <br>
+
+```ruby
 module dff_const3(input clk, input reset, output reg q);
 reg q1;
 
@@ -2530,8 +2607,35 @@ begin
 end
 
 endmodule
+```
+
+* Expected synthesis of the design is as shown below : <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
 
 
+* We will begin in dc_shell as follows: <br>
+
+```ruby
+read_verilog dff_const3.v
+link
+compile
+write -f ddc -out dff_const3.ddc
+```
+
+* GUI of the design is as shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/33_dff_c3_GUI.png"><br><br>
+
+</details>
+
+
+<details>
+<summary> Example 4 : dff_cont4 </summary> <br>
+	
+Consider the verilog code: <br>
+
+```ruby
 module dff_const4(input clk, input reset, output reg q);
 reg q1;
 
@@ -2550,7 +2654,45 @@ begin
 end
 
 endmodule
+```
 
+* Expected synthesis of the design is as shown below : <br>
+
+**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+
+
+* We will begin in dc_shell as follows: <br>
+
+```ruby
+read_verilog dff_const4.v
+link
+compile
+write -f ddc -out dff_const4.ddc
+```
+
+* GUI of the optimised design design is as shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/34_dff_c4_GUI_unconstrained.png"><br><br>
+
+* We employ a command to prevent optimization from taking place ```set compile_seqmap_propagate_constants false```. The graphical user interface (GUI) for the constrained customization design appears as depicted below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/34_dff_c5_GUI_constrained.png"><br><br>
+
+</details>
+
+</details>
+
+<details>
+<summary> Boundary Optimization </summary> <br>
+
+Boundary optimization" typically refers to optimizing the boundary of a digital design, often for power, performance, or area (PPA) improvements. It involves optimizing the input and output (I/O) interfaces and the interface between digital blocks.<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d32cf1d18cae59897643dca48b3fc447b94de244/day9/boundary_1.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d32cf1d18cae59897643dca48b3fc447b94de244/day9/boundary_2.png"><br><br>
+	
+Consider the verilog code: <br>
+
+```ruby
 module check_boundary (input clk , input res , input [3:0] val_in , output reg [3:0] val_out);
 wire en;
 internal_module u_im (.clk(clk) , .res(res) , .cnt_roll(en));
@@ -2563,7 +2705,6 @@ begin
 		val_out <= val_in;	
 end
 endmodule
-
 
 module internal_module (input clk , input res , output cnt_roll);
 reg [2:0] cnt;
@@ -2579,8 +2720,48 @@ end
 assign cnt_roll = (cnt == 3'b111);
 
 endmodule
+```
 
+* Expected synthesis of the design is as shown below : <br>
 
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/boundary_3.png"><br>
+
+* Reading the design as shown in image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/35_boundary_read.png"><br><br>
+
+* Compiling the design as shown in image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/36_boundary_compile_ultra.png"><br><br>
+
+* Cells of the design are shown in image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/37_boundary_cell_nohier.png"><br><br>
+
+* GUI of the design design with no hierarchy is as shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/38_boundary_GUI_nohier.png"><br><br>
+
+* We employ a command to prevent boundary optimization from taking place ```set_boundary_optimization u_im false```. u-im is the sub module in the design. The GUI of the design with intact hierarchy is shown in the images below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/39_boundary_cells_hier_set_no_hier_in_gui.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/40_compile_ultra.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/41_boundary_GUI_withhier.png"><br><br>
+
+</details>
+
+<details>
+<summary> Register Retiming </summary> <br>
+
+Register retiming is a technique used to optimize the performance of digital circuits by rearranging the registers in the circuit without changing its functionality. The primary goal of register retiming is to minimize the critical path delay, which is the longest path in the circuit from an input to an output.<br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/78ef74baa74f227c15b6a34610e241e443cf0f58/day9/reg_time1.png"><br><br>
+
+In the aforementioned example, a significant positive slack of 48 ns is observed, indicating that the maximum achievable frequency for the design is 20 MHz. However, by breaking down the large logic blocks into smaller portions, we can enhance the design's performance. Currently, the tool doesn't evenly distribute the logic; it optimizes the design as much as possible. Thus, if the logic is distributed as illustrated, the critical path delay will reduce to 20 ns, resulting in an improved design performance capable of operating at 50 MHz. <br><br>
+	
+Consider the verilog code: <br>
+
+```ruby
 module check_reg_retime (input clk , input [3:0] a, input [3:0] b , output [7:0] c , input reset);
 
 wire [7:0] mult;
@@ -2588,9 +2769,6 @@ assign mult = a * b;
 reg [7:0] q1;
 reg [7:0] q2;
 reg [7:0] q3;
-
-
-
 
 always @ (posedge clk , posedge reset)
 begin
@@ -2610,10 +2788,27 @@ end
 assign c = q3;
 
 endmodule
+```
 
+* Expected synthesis of the design is as shown below : <br>
 
-tcl file
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/regtime2.png"><br>
 
+* Reading the design as shown in image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/42_retime_read.png"><br><br>
+
+* Compiling the design as shown in image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/43_retime_compile.png"><br><br>
+
+* Timing report of the design shows that the path is uncontrained, as shown in image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/44_retime_timing_pastclock.png"><br><br>
+
+* Now to add the clocks, input delays, output delays and other constraints, we will add a tcl file shown below: <br><br>
+
+```ruby
 #create_the_clocks
 create_clock -name myclk -per 2 [get_ports clk];
 #model the practicalities of the clock
@@ -2632,6 +2827,53 @@ set_input_transition -min 0.05 [all_inputs];
 
 set_load -max 0.2 [all_outputs];
 set_load -min 0.05 [all_outputs];
+```
+
+* Now we will source the tickle file and report the clocks as shown in the image below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/45_retime_clocks.png"><br><br>
+
+* Timing report of the design without ```retime``` is shown below, it shows that slack violation has occured: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/46_retime_timig_report.png"><br><br>
+
+* Now we will optimise the design with ```retime``` as shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/47_retime_compile_ultra_retime.png"><br><br>
+
+* Timing report after the ```retime``` optimization is shown below: <br><br>
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/48_retime_compile_ultra_post_compile.png"><br><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/49_retime_timing_report_input_post_compile.png"><br><br>
+
+While there is still a slack violation, it's worth noting that when compared to the previous timing report, the situation has improved significantly. <br>
+
+
+</details>
+
+
+
+</details>
+
+
+
+
+
+
+
+
+
+
+</details><br>
+
+
+
+```ruby
+
+
+tcl file
+
+
 
 module mcp_check (input clk , input res  , input [7:0] a , input [7:0] b, input en , output reg [15:0] prod);
 
