@@ -2064,7 +2064,7 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 
 
 <details>
-<summary>Introdiction</summary><br>
+<summary>Introduction</summary><br>
 
 **GOALS** <br>
 
@@ -2122,7 +2122,7 @@ The optimised design will only contain a ex-nor gate, instead of 3 mux. <br>
 
 Consider the expression: assign y = sel ? (a * b) : (c * d). This can be implemented in two ways as shown in the figure below: <br>
 
-**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/resourcesharing.png"><br><br>
 
 * In the design on the left there are 2 multipliers and oneMUX while on the RHS we have one Multiplier and 2 MUX, cleary design on the right will have comparativeli less area, power and delay as compared to one the RHS. This was possible because the operations a*b and c*d do not occur at the same time, instead they only one of them occur at a time. o only one multiplier is =need to perform the task hence the muntiplier is shared depending on the "sel" input.<br>
 
@@ -2132,9 +2132,9 @@ Consider the expression: assign y = sel ? (a * b) : (c * d). This can be impleme
 assign y = a & b & c;
 assign y = (a & b) | c;
 ```
-Above two statements can be implemented as shown in the filugure below: <br>
+Above two statements can be implemented as shown in the filugure below: <br><br>
 
-**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/logic-sharing.png"><br><br>
 
 On the right side of the inade, output a*b of the AND is shared and hence the need of a 3 input AND gate is eliminated.
 
@@ -2146,7 +2146,7 @@ assign y = a & b & c & d & e;
 
 Assuming 4 and 5 input AND gates, above statement can be implemented as shown in figure below: <br>
 
-**<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4609.jpeg"><br>**
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/balanced_preferential.png"><br><br>
 
 * The right side implementaion is preffered when: <br>
 
@@ -2205,7 +2205,7 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br>**
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/optcheck.png"><br><br>
 
 Now if we consider the expression: <br>
 y1 = a ? b:0 <br>
@@ -2216,6 +2216,10 @@ Similarly <br>
 y2 = ~((a1 & b) | c) <br>
 y2 = c' <br><br>
 
+Expected Optimized Design: <br><br>
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/optcheck1.png"><br><br>
+
+
 * We will now optimize the same design in the dc_shell:<br>
 
 ```ruby
@@ -2225,7 +2229,7 @@ read_verilog opt_check.v
 ```
 * Timing report of the design is as follows, we have not yet linked and compiled the design: <br>
 
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/1_read_timing.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/1_read_timing.png"><br><br>
 
 * Now
 
@@ -2235,11 +2239,11 @@ compile
 ```
 * Timing report after compiling the design: <br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/2_timing_aftercompile.png"><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/2_timing_aftercompile.png"><br><br>
 
 In the timing report above, only an ANd cell is present in the path to y1. In the path to y2 we see only an inverter cell with 'c' as input, this is shown in GUI of the design in the figure below.
 
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/4_GUI.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/4_GUI.png"><br><br>
 
 </details>
 
@@ -2255,9 +2259,9 @@ endmodule
 
 ```
 
-* Expected synthesis of the design is as shown below : <br>
+* Expected synthesis of the design will contain a 2:1 mux with 'a' as select line, i0 = b and i1 = 1. <br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4605.jpeg"><br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
 
 Now if we consider the expression: <br>
 y = a ? 1:b <br>
@@ -2299,7 +2303,7 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/opt_check3.png"><br><br>
 
 Now if we consider the expression: <br>
 y = a ? (c.b):0 <br>
@@ -2338,7 +2342,7 @@ module opt_check4 (input a , input b , input c , output y);
 
 * Expected synthesis of the design is as shown below : <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4606.jpeg"><br><br>
 
 Now if we consider the expression: <br>
 y = a?(b?(a & c ):c):(!c)<br>
@@ -2393,11 +2397,11 @@ module resource_sharing_mult_check (input [3:0] a , input [3:0] b, input [3:0] c
 endmodule
 ```
 
-* Expected synthesis of the design is as shown below : <br>
+* Expected synthesis of the design after resource sharing is as shown below : <br>
 
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
+<img width="500" alt="[icc2_shell" src="hhttps://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/multiplie.png"><br><br>
 
-Now if we consider the expression y = sel ? (a*b) : (c*d), here depending on the value of sel either a*b or c*d takes place. Both the operations never take place toghether. So we can optimise the dsign as follows: <br>
+Now if we consider the expression y = sel ? (a*b) : (c*d), here depending on the value of sel either a*b or c*d takes place. Both the operations never take place toghether. So we can optimise the design as follows: <br>
 
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
 
@@ -2484,6 +2488,12 @@ In the GUI we can see the two Multiplexer and a multiplier, which is what the op
 **Tie Cells**<br>
 
 * To prevent potential damage to the delicate oxide layer of the MOSFETs in CMOS logic circuits, tie cells are essential when providing logic zero or one inputs to a flip-flop. The presence of tie cells safeguards against any fluctuations or disturbances at the gate of the MOSFET, which could otherwise compromise the integrity of the oxide layer, leading to adverse consequences for the chip's functionality and reliability.<br>
+
+Tie cell description is givem in the images below:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/tiecell1.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6a7ad638a52dcd5418a8fb2b54034b661983d9b1/day9/tiecell2.png"><br><br>
+
 * Other uses:<br>
   
 	* Connectivity and Routing
@@ -2511,11 +2521,6 @@ end
 
 endmodule
 ```
-
-* Expected synthesis of the design is as shown below : <br>
-
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
-
 
 * We will begin in dc_shell as follows: <br>
 
@@ -2558,11 +2563,6 @@ end
 
 endmodule
 ```
-
-* Expected synthesis of the design is as shown below : <br>
-
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
-
 
 * We will begin in dc_shell as follows: <br>
 
@@ -2618,11 +2618,6 @@ end
 
 endmodule
 ```
-
-* Expected synthesis of the design is as shown below : <br>
-
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
-
 
 * We will begin in dc_shell as follows: <br>
 
@@ -2952,7 +2947,15 @@ In this observation, it's evident that the load capacitance for val_out_reg[0]/Q
 
 <summary>Multicycle Path</summary><br>
 
-Multicycle path optimization is a technique employed in VLSI (Very Large Scale Integration) design to address specific timing constraints where a signal is allowed to take multiple clock cycles to propagate through a combinational logic path. This optimization aims to ensure that the design meets these relaxed timing requirements while still achieving the desired functionality and performance.
+* In VLSI design, multicycle paths are a critical concept in managing timing constraints within digital circuits. Unlike single-cycle paths, where a signal must traverse its path and stabilize within a single clock cycle, multicycle paths offer more flexibility. These paths allow signals to take multiple clock cycles to propagate from a source register (usually a flip-flop) to a destination register. This extended propagation time can serve various purposes in the design process. <br><br>
+
+* Multicycle paths are encountered in digital designs when specific timing requirements or constraints permit longer propagation delays. These paths can be strategically used to achieve specific functionalities, optimize critical paths, or accommodate variations in clocking schemes.<br><br>
+
+* For a single-cycle path, the setup check occurs at the subsequent clock edge following the launch edge of the flip-flop, and the hold check is performed at the same edge of the flop. Hold checks always occur just before setup checks in a single-cycle path.<br><br>
+
+* In a half-cycle path, the setup check is done at the subsequent falling edge of the flip-flop, while the hold check is performed at the preceding falling edge of the flop. Half-cycle paths have a stringent setup requirement and a more relaxed hold constraint compared to single-cycle paths.<br><br>
+
+* In the case of a multicycle path, designers can utilize specialized tools and constraints. The "-setup" switch specifies the number of clock cycles after the launch edge when the setup check should be performed, allowing for flexibility in setup time. Conversely, the "-hold" switch specifies the number of clock cycles the launch edge advances before checking the hold requirement with the capture edge.<br><br>
 
 Consider the verilog code: <br>
 
