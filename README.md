@@ -2156,6 +2156,87 @@ end
 
 endmodule
 
+module check_boundary (input clk , input res , input [3:0] val_in , output reg [3:0] val_out);
+wire en;
+internal_module u_im (.clk(clk) , .res(res) , .cnt_roll(en));
+
+always @ (posedge clk , posedge res)
+begin
+	if(res)
+		val_out <= 4'b0;
+	else if(en)
+		val_out <= val_in;	
+end
+endmodule
+
+
+module internal_module (input clk , input res , output cnt_roll);
+reg [2:0] cnt;
+
+always @(posedge clk , posedge res)
+begin
+	if(res)
+		cnt <= 3'b0;
+	else
+		cnt <= cnt + 1;
+end
+
+assign cnt_roll = (cnt == 3'b111);
+
+endmodule
+
+
+module check_reg_retime (input clk , input [3:0] a, input [3:0] b , output [7:0] c , input reset);
+
+wire [7:0] mult;
+assign mult = a * b;
+reg [7:0] q1;
+reg [7:0] q2;
+reg [7:0] q3;
+
+
+
+
+always @ (posedge clk , posedge reset)
+begin
+	if(reset)
+	begin
+		q1 <= 8'b0;
+		q2 <= 8'b0;
+		q3 <= 8'b0;
+	end
+	else
+	begin
+		q1 <= mult;
+		q2 <= q1;
+		q3 <= q2;
+	end
+end
+assign c = q3;
+
+endmodule
+
+
+tcl file
+
+#create_the_clocks
+create_clock -name myclk -per 2 [get_ports clk];
+#model the practicalities of the clock
+set_clock_uncertainty -setup 0.3 [get_clocks myclk];
+set_clock_uncertainty -hold 0.1 [get_clocks myclk];
+
+#model IO delays
+set_input_delay -max 1.2 -clock [get_clocks myclk] [all_inputs];
+set_output_delay -max 1.2 -clock [get_clocks myclk] [all_outputs];
+
+set_input_delay -min 0.5 -clock [get_clocks myclk] [all_inputs];
+set_output_delay -min 0.5 -clock [get_clocks myclk] [all_outputs];
+
+set_input_transition -max 0.2 [all_inputs];
+set_input_transition -min 0.05 [all_inputs];
+
+set_load -max 0.2 [all_outputs];
+set_load -min 0.05 [all_outputs];
 
 
 
