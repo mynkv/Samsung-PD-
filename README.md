@@ -2069,6 +2069,8 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 **GOALS** <br>
 
 * Optimazation til the cost is met. <br>
+* Improve the operational speed of the IC by minimizing delays, optimizing critical paths, and ensuring that the design meets specified timing requirements. <br>
+* To prolong the battery life in portable devices and decrease power dissipation in data centers, efforts are directed at minimizing dynamic power consumption. Additionally, reducing static power, often referred to as leakage power, is crucial for decreasing the overall power usage during idle or standby states of the integrated circuit.
 * Over optimization of one goal will harm other goals. <br>
 * Goals for synthesis: <br>
 	* Meet Timing <br>
@@ -2077,7 +2079,16 @@ set_output_delay -max 4.9 [get_ports OUT_Z] -clock [get_clocks MYVCLK];
 
 **COMBINATION LOGIC OPTIMIZATION** <br>
 
+* Combination logic optimization in VLSI (Very Large Scale Integration) design refers to the process of improving the performance, area efficiency, and power consumption of combinational logic circuits. Combinational logic is the part of a digital circuit that performs Boolean operations on inputs to produce outputs without any internal storage elements like flip-flops. Here are some key aspects of combination logic optimization: <br>
+
+* **Logic Minimization**: One of the fundamental steps in combination logic optimization is reducing the number of logic gates and levels in the circuit. This is typically achieved through techniques like Boolean algebra simplification, Karnaugh maps, and Quine-McCluskey minimization. Fewer gates and levels lead to faster operation and reduced power consumption. <br>
+
+* **Gate Selection**: Choosing the appropriate types of logic gates (AND, OR, XOR, etc.) based on the specific logic functions can have a significant impact on optimization. Some gates may be more area-efficient or have lower power consumption for specific functions. <br>
+
 * **Constant Propagation**: <br><br>
+
+* Constant propagation optimization is a technique used in VLSI (Very Large Scale Integration) design to improve the efficiency and performance of digital circuits by identifying and replacing portions of the design with constant values or expressions. This optimization can lead to reduced logic complexity, better power efficiency, and improved timing. <br><br>
+
 Let us consider an exression: Y = (A.B + C)<br>
  
 The expected synthesis of the above function is as shown in figure below:<br><br>
@@ -2146,7 +2157,7 @@ Assuming 4 and 5 input AND gates, above statement can be implemented as shown in
 
 **SEQUENTIAL LOGIC OPTIMIZATION**
 
-**Constant Propagation**
+**Constant Propagation**<br><br>
 Example:<br>
 Consider the following verilog code: <br><br>
 
@@ -2161,16 +2172,17 @@ end
 ```
 
 Graphical reperesentation of above example:<br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/7_dff_con2_gui.PNG"><br>	
-Here there are no flops inferred because output always renains high irrespective of the rst signal
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c4e84c53077bffe1725de7dcff66086bccc9cb8c/7_dff_con2_gui.PNG"><br><br>
 
-**Optimisation of the unloaded outputs**:<br>
+Here there are no flops inferred because output always remains high irrespective of the rst signal
+
+**Optimisation of the unloaded outputs**:<br><br>
 Consider the following counter example as shown in fig below: <br><br>
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_counter1_verilog.PNG"><br><br>
 Here we can clearly see that only th emsb of the counter is used for the output, rest 2 bits are unused. Now let for a counter:<br><br>
-<img width="250" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/77849ff7b577447e818144a1686bbe129eb72ef3/Day3/table.PNG"><br>
+<img width="250" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/77849ff7b577447e818144a1686bbe129eb72ef3/Day3/table.PNG"><br><br>
 Here count[0] is toggling for every clock cycle so the circuit can be optimised. In GUI we can clearty see that only the inverter cell is used to implement the design, this also shown below<br><br>
-<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3498f21ae064587ef6ee7d0770db7d0880ccbd0a/8_count1_gui.PNG"><br><br>
 </details>
 
 
@@ -2213,7 +2225,7 @@ read_verilog opt_check.v
 ```
 * Timing report of the design is as follows, we have not yet linked and compiled the design: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/1_read_timing.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/1_read_timing.png"><br>
 
 * Now
 
@@ -2223,11 +2235,11 @@ compile
 ```
 * Timing report after compiling the design: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/2_timing_aftercompile.png"><br>
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/2_timing_aftercompile.png"><br>
 
 In the timing report above, only an ANd cell is present in the path to y1. In the path to y2 we see only an inverter cell with 'c' as input, this is shown in GUI of the design in the figure below.
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/4_GUI.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/4_GUI.png"><br>
 
 </details>
 
@@ -2264,11 +2276,11 @@ compile
 ```
 * Timing report of the design is as follows: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/5_optcheck2_timinng_post_compile.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/5_optcheck2_timinng_post_compile.png"><br>
 
 In the timing report above, only an OR cell is present in the path to y, with a and b as inputs. Same is depicted in the GUI of the design shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/6_GUI.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d122ee381347a47f680e550a96dbcca039577438/day9/6_GUI.png"><br>
 
 </details>
 
@@ -2305,11 +2317,11 @@ compile
 ```
 * Timing report of the design is as follows: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/7_optcheck3_timinng_post_compile.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/7_optcheck3_timinng_post_compile.png"><br>
 
 In the timing report above, only an 3 input AND cell is present in the path to y, with a, b and c as inputs. Same is depicted in the GUI of the design shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/8_GUI.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/8_GUI.png"><br>
 
 </details>
 	
@@ -2326,7 +2338,7 @@ module opt_check4 (input a , input b , input c , output y);
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
 
 Now if we consider the expression: <br>
 y = a?(b?(a & c ):c):(!c)<br>
@@ -2346,25 +2358,25 @@ compile
 ```
 * Timing report of the design is as follows: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/9_optcheck4_timinng_post_compile.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/9_optcheck4_timinng_post_compile.png"><br><br>
 
-In the timing report above, only a X-NOR cell is present in the path to y, with a and c as inputs. Same is depicted in the GUI of the design shown below: <br>
+In the timing report above, only a X-NOR cell is present in the path to y, with a and c as inputs. Same is depicted in the GUI of the design shown below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/13_GUI.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/13_GUI.png"><br><br>
 
-* Now we will contraint the path from input to output as and check the timing vilation, if any. This is depicted in the image below.<br>
+* Now we will contraint the path from input to output as and check the timing vilation, if any. This is depicted in the image below.<br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/10_set_delay_timing_violate.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/10_set_delay_timing_violate.png"><br><br>
 
 * In the above image we see that slack is getting violated by 20 ps, as we constrainted the input to output path to 60 ps, and at the same time EXNOR gate requires 80 ps alone, hence slack is violated by 20 ps.<br>
-* Now we will change the EXNOR gate with some other exnor gate. Timing report after using the new EXNOR gate is shown below is shown below: <br> 
+* Now we will change the EXNOR gate with some other exnor gate. Timing report after using the new EXNOR gate is shown below is shown below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/11_change_xnor_timing_violate_up.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/11_change_xnor_timing_violate_up.png"><br><br>
 
-* Here timimg violation increases from 20 ps to 50 ps because new EXNOR gate have 110 ps delay.
+* Here timimg violation increases from 20 ps to 50 ps because new EXNOR gate have 110 ps delay.<br>
 * Lets try to optimise the design using compule_ultra. Timing report post com_ultra is shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/12_timing_after_compile.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/12_timing_after_compile.png"><br><br>
 
 * Slack violation has come down to 20 ps again, as tool optimized the design and picked up the previos xnor gate which was used.
 
@@ -2383,11 +2395,11 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
 
 Now if we consider the expression y = sel ? (a*b) : (c*d), here depending on the value of sel either a*b or c*d takes place. Both the operations never take place toghether. So we can optimise the dsign as follows: <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
 
 * We will now optimize the same design in the dc_shell:<br>
 
@@ -2400,7 +2412,7 @@ compile_ultra
 ```
 * Screenshot for ```read_verilog``` and ```compile_ultra``` is shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/14_readv_resourcesharing_compile.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/14_readv_resourcesharing_compile.png"><br>
 
 * Now lets write the ddc file and see the GUI of the design: <br>
 
@@ -2409,57 +2421,57 @@ write -f ddc -out resource_sharing_mult_check1.ddc
 ```
 GUI is shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/15_GUI.png"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/15_GUI.png"><br><br>
 
 In GUI we have multiplexer as shown: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/16_GUI_mux.png"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/16_GUI_mux.png"><br><br>
 
 In the GUI we can see the two Multiplexer and a multiplier, which is what the optimised design looks like with no constraints.<br>
 
 * Area report of the design with no constraints is as shown below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/17_report_area.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/17_report_area.png"><br><br>
 
 * Timing report of the design with no constraints is as shown: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/18_timing_pastcompile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/18_timing_pastcompile.png"><br><br>
 
 * Setting the max delay from all inputs to all outputs paths to 2.5 ns and checking the timing report we see that slack is getting violated. This is shown in the design below: <br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/19_set_delay_timing_violate.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ab3438164aafa93658b1710f9fb9744623800148/day9/19_set_delay_timing_violate.png"><br><br>
 
 * Now we will optimise the design by ```compile_ultra```. Timing report of the design after optimization is as shown below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/20_timing_post_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/20_timing_post_compile.png"><br><br>
 
 * Now slack is met. Area report of the design after constraining the input to ouput paths is shown below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/21_area_report_2.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/21_area_report_2.png"><br><br>
 
 * In the expected design we can see that paths from a, b, c and d to y have the same delay. Now if we tighten the paht from sel to y lets see what happens. This is shown in figure below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/22_sel_delay_timing_report.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/22_sel_delay_timing_report.png"><br><br>
 
 * In the above image we see that slack is getting violated by a huge time. We will now optimise the design by using ```compile_ultra``` and then check the timing report. This is shown in the image below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/23_timing_post_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/23_timing_post_compile.png"><br><br>
 
 * Area report with constrained sel to output y is shown below: <br><br> 
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/25_area_report_3.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/25_area_report_3.png"><br><br>
 
 * Here it is seen that the area has almost tripled, it shows that the instead of one multiplier, two multipliers are used. This can also be seen in the GUI of the design below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/24_GUI.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/24_GUI.png"><br><br>
 
 * Now we will constraint the are using ```set_max_area 800```. Timing report after constraining the area is shown below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/26_timing_report_postareaconstraint.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/26_timing_report_postareaconstraint.png"><br><br>
 
 * Area report after contraining the are is as shown below: <br><br>
 
-<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/27_area_report4.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7db7067913862014c18407e199dd08fc31f79c87/day9/27_area_report4.png"><br><br>
 
 </details>
 
@@ -2502,7 +2514,7 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
 
 
 * We will begin in dc_shell as follows: <br>
@@ -2515,7 +2527,7 @@ compile
 
 * Cells of the design are shown in the figure below: <br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/28_seq_dff_const1_cells.png"><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/28_seq_dff_const1_cells.png"><br>
 
 * Write the ddc file to view the GUI of the design: <br>
 
@@ -2525,7 +2537,7 @@ write -f ddc -out dff-const1.ddc
 
 * In the GUI of the design we can clearly see the Tie cells used to provice the logic 1. GUI of the design is as shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/29_dff_c1_GUI.png"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/29_dff_c1_GUI.png"><br><br>
 
 </details>
 
@@ -2549,7 +2561,7 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>
 
 
 * We will begin in dc_shell as follows: <br>
@@ -2568,15 +2580,15 @@ write -f ddc -out dff-const2.ddc
 
 * In the GUI of the design we can clearly see the Tie cells used to provice the logic 1. GUI of the design is as shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/30_dff_c2_GUI.png"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/30_dff_c2_GUI.png"><br><br>
 
 * We employ a command to prevent optimization from taking place ```set compile_seqmap_propagate_constants false```. Same is shown in the figure below.<br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/31_dff_c2_restrict_optimisation.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/31_dff_c2_restrict_optimisation.png"><br><br>
 
 * The graphical user interface (GUI) for the constrained customization design appears as depicted below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/32_dff_c2_restrict_optimisation.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/32_dff_c2_restrict_optimisation.png"><br><br>
 
 </details>
 
@@ -2609,7 +2621,7 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
 
 
 * We will begin in dc_shell as follows: <br>
@@ -2623,7 +2635,7 @@ write -f ddc -out dff_const3.ddc
 
 * GUI of the design is as shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/33_dff_c3_GUI.png"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/33_dff_c3_GUI.png"><br><br>
 
 </details>
 
@@ -2656,7 +2668,7 @@ endmodule
 
 * Expected synthesis of the design is as shown below : <br>
 
-**<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br>**
+<img width="400" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d4a3c4782955af7ffb46adf1012a771ad6566dbd/Day3/IMG_4603.jpeg"><br><br>
 
 
 * We will begin in dc_shell as follows: <br>
@@ -2670,11 +2682,11 @@ write -f ddc -out dff_const4.ddc
 
 * GUI of the optimised design design is as shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/34_dff_c4_GUI_unconstrained.png"><br><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/34_dff_c4_GUI_unconstrained.png"><br><br>
 
 * We employ a command to prevent optimization from taking place ```set compile_seqmap_propagate_constants false```. The graphical user interface (GUI) for the constrained customization design appears as depicted below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/34_dff_c5_GUI_constrained.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2bd5c81013f8f7017ffbce57ff9cf565777a7be8/day9/34_dff_c5_GUI_constrained.png"><br><br>
 
 </details>
 
@@ -2685,8 +2697,8 @@ write -f ddc -out dff_const4.ddc
 
 Boundary optimization" typically refers to optimizing the boundary of a digital design, often for power, performance, or area (PPA) improvements. It involves optimizing the input and output (I/O) interfaces and the interface between digital blocks.<br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d32cf1d18cae59897643dca48b3fc447b94de244/day9/boundary_1.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d32cf1d18cae59897643dca48b3fc447b94de244/day9/boundary_2.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d32cf1d18cae59897643dca48b3fc447b94de244/day9/boundary_1.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d32cf1d18cae59897643dca48b3fc447b94de244/day9/boundary_2.png"><br><br>
 	
 Consider the verilog code: <br>
 
@@ -2726,25 +2738,25 @@ endmodule
 
 * Reading the design as shown in image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/35_boundary_read.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/35_boundary_read.png"><br><br>
 
 * Compiling the design as shown in image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/36_boundary_compile_ultra.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/36_boundary_compile_ultra.png"><br><br>
 
 * Cells of the design are shown in image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/37_boundary_cell_nohier.png"><br><br>
+<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/37_boundary_cell_nohier.png"><br><br>
 
 * GUI of the design design with no hierarchy is as shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/38_boundary_GUI_nohier.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/38_boundary_GUI_nohier.png"><br><br>
 
 * We employ a command to prevent boundary optimization from taking place ```set_boundary_optimization u_im false```. u-im is the sub module in the design. The GUI of the design with intact hierarchy is shown in the images below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/39_boundary_cells_hier_set_no_hier_in_gui.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/40_compile_ultra.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/41_boundary_GUI_withhier.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/39_boundary_cells_hier_set_no_hier_in_gui.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/40_compile_ultra.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4393691621387a17733fe176052af49ae3a62815/day9/41_boundary_GUI_withhier.png"><br><br>
 
 </details>
 
@@ -2753,7 +2765,7 @@ endmodule
 
 Register retiming is a technique used to optimize the performance of digital circuits by rearranging the registers in the circuit without changing its functionality. The primary goal of register retiming is to minimize the critical path delay, which is the longest path in the circuit from an input to an output.<br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/78ef74baa74f227c15b6a34610e241e443cf0f58/day9/reg_time1.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/78ef74baa74f227c15b6a34610e241e443cf0f58/day9/reg_time1.png"><br><br>
 
 In the aforementioned example, a significant positive slack of 48 ns is observed, indicating that the maximum achievable frequency for the design is 20 MHz. However, by breaking down the large logic blocks into smaller portions, we can enhance the design's performance. Currently, the tool doesn't evenly distribute the logic; it optimizes the design as much as possible. Thus, if the logic is distributed as illustrated, the critical path delay will reduce to 20 ns, resulting in an improved design performance capable of operating at 50 MHz. <br><br>
 	
@@ -2794,15 +2806,15 @@ endmodule
 
 * Reading the design as shown in image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/42_retime_read.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/42_retime_read.png"><br><br>
 
 * Compiling the design as shown in image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/43_retime_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/43_retime_compile.png"><br><br>
 
 * Timing report of the design shows that the path is uncontrained, as shown in image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/44_retime_timing_pastclock.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/44_retime_timing_pastclock.png"><br><br>
 
 * Now to add the clocks, input delays, output delays and other constraints, we will add a tcl file shown below: <br><br>
 
@@ -2829,20 +2841,20 @@ set_load -min 0.05 [all_outputs];
 
 * Now we will source the tickle file and report the clocks as shown in the image below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/45_retime_clocks.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/45_retime_clocks.png"><br><br>
 
 * Timing report of the design without ```retime``` is shown below, it shows that slack violation has occured: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/46_retime_timig_report.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/46_retime_timig_report.png"><br><br>
 
 * Now we will optimise the design with ```retime``` as shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/47_retime_compile_ultra_retime.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/47_retime_compile_ultra_retime.png"><br><br>
 
 * Timing report after the ```retime``` optimization is shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/48_retime_compile_ultra_post_compile.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/49_retime_timing_report_input_post_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/48_retime_compile_ultra_post_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/a923df906d4a167a62f7e387284f60727e25185e/day9/49_retime_timing_report_input_post_compile.png"><br><br>
 
 While there is still a slack violation, it's worth noting that when compared to the previous timing report, the situation has improved significantly. <br>
 
@@ -2855,7 +2867,7 @@ While there is still a slack violation, it's worth noting that when compared to 
 
 In VLSI (Very Large Scale Integration) design, "Isolate Output Ports" optimization refers to a technique where designers aim to optimize the routing and layout of output ports of digital circuits to achieve better performance, power efficiency, and signal integrity. This optimization is particularly important in complex integrated circuits where there are numerous output ports. <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f019af42ef0772aaf2b386c870c83975c06ff582/day9/Isolate1.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f019af42ef0772aaf2b386c870c83975c06ff582/day9/Isolate1.png"><br><br>
 
 * When a variable load is connected to be driven by Flip Flop 1, there's a risk of causing fluctuations in the internal 'path 1' logic. These fluctuations can lead to incorrect outputs from the combinational logic downstream. To mitigate this issue, we can insert a buffer between Flip Flop 1 and the output variable load. This buffer will drive the output load, ensuring that the fluctuations in the 'path 1' logic do not affect the output. Additionally, this buffering approach can also contribute to a reduction in the delay introduced by Flip Flop 1. <br><br>
 
@@ -2893,24 +2905,24 @@ endmodule
 
 * Screenshot for reading the design: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/50_isolate_read.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/50_isolate_read.png"><br><br>
 
 * Screenshot for link and compile the design: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/51_isolate_link_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/51_isolate_link_compile.png"><br><br>
 
 * In this design we get output as a feedback, as shown in the image below: <br>
 
-<img width="500" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/52_isolate_GUI_without_isolate.png"><br>
+<img width="800" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/52_isolate_GUI_without_isolate.png"><br>
 
 * Screenshot for creating clock, setting input - output delays and amx load: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/53_isolate_set_clock_delay_load.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/53_isolate_set_clock_delay_load.png"><br><br>
 
 * Timing report before isolating the output port.: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/54_isolate_timing_report_past_isolate.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/55_isolate_timing_report_toout_past_isolate.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/54_isolate_timing_report_past_isolate.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/55_isolate_timing_report_toout_past_isolate.png"><br><br>
 
 Here we see that val_out_reg[0]/Q have a large output load capacitanc, due which it have a large delay also.
 
@@ -2920,12 +2932,12 @@ Here we see that val_out_reg[0]/Q have a large output load capacitanc, due which
 
 * Compiling the design: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/57_isolate_isolating_ports_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/57_isolate_isolating_ports_compile.png"><br><br>
 
 * Timing reports after isolating the ports: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/58_isolate_timing_report_post_isolate.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/59_isolate_timing_report_toout_post_isolate.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/58_isolate_timing_report_post_isolate.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c69e00a8c7cd03ff6445cdf08edd13e5fb13ab4b/day9/59_isolate_timing_report_toout_post_isolate.png"><br><br>
 
 In this observation, it's evident that the load capacitance for val_out_reg[0]/Q has been significantly reduced, leading to a substantial improvement in the delay of the register.<br><br>
 
@@ -2972,15 +2984,15 @@ endmodule
 
 * Expected GUI of the design is shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/mcp1.png"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/mcp1.png"><br><br>
 
 * Screenshot for reading the design: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/61_mcp_compile_link_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/61_mcp_compile_link_compile.png"><br><br>
 
 * Screenshot for link and compile the design: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/61_mcp_compile_link_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/61_mcp_compile_link_compile.png"><br><br>
 
 * Now to add the clocks, input delays, output delays and other constraints, we will add a tcl file shown below: <br><br>
 
@@ -3009,12 +3021,12 @@ set_load -min 0.05 [all_outputs];
 
 * Screenshot of sourcing the script file and checking the timing: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/62_mcp_source_timing_report.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/63_mcp_source_timing_report.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/62_mcp_source_timing_report.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/63_mcp_source_timing_report.png"><br><br>
 
 * Screenshot of the timing report after optimizing the design: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/64_timing_report_post_-compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/64_timing_report_post_-compile.png"><br><br>
 
 * Screenshot of setting up the multicycle path:<br><br>
 
@@ -3022,7 +3034,7 @@ set_load -min 0.05 [all_outputs];
 
 * Timing report after setting up the multicycle path: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/66_setmcp_timing_report_post_change_tcl.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/66_setmcp_timing_report_post_change_tcl.png"><br><br>
 
 * Changing the constraint file: <br><br>
 
@@ -3051,38 +3063,38 @@ set_load -min 0.05 [all_outputs];
 
 * Timing reports to pro_reg[*]/D: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/67_timing_report_to_prod_reg.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/68_timing_report_to_prod_reg.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/67_timing_report_to_prod_reg.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/68_timing_report_to_prod_reg.png"><br><br>
 
 * Timing reports to pro_reg[*]/D from all_inputs: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/69_timing_report_input_op.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/70_timing_report_input_op.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/69_timing_report_input_op.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/70_timing_report_input_op.png"><br><br>
 
 * Hold timing report: <br><br>
 
-<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/71_timing_delay_min.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/71_timing_delay_min.png"><br><br>
 
 This issue is significant as it's reporting a timing violation spanning from '0 ns' to '4 ns'. The problem lies in the hold check, which should ideally be a zero-cycle check. However, the tool is currently performing a hold check over the entire one-cycle duration of the input path.<br><br>
 
 * Constraining the multicycle path for the hold time and checking the timing report: <br><br>
 
-<img width="1000" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/72_timing_hold_delay_min.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/72_timing_hold_delay_min.png"><br><br>
 
 * Timing reports to pro_reg[*]/D from all_inputs: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/73_timing_delay_min_from_inputs.png"><br><br>
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/74_timing_report_inp_cap.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/73_timing_delay_min_from_inputs.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/74_timing_report_inp_cap.png"><br><br>
 
 The path from the input to pro_reg has now been designated as a zero-cycle path, eliminating any slack violations. However, it's important to note that the load capacitance of pro__reg[10] stands at a notably high value of 403 pF. This substantial load capacitance contributes to a significant delay, prompting us to consider isolation as a means to enhance the delay profile. <br><br>
 
 * Screenshot of isolating the ports and compiling it is shown below: <br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/75_isolate_compile.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/75_isolate_compile.png"><br><br>
 
 * Timing report after isolating the output port:<br><br>
 
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/76_timing_report_last.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e88898dba8f40f70783feae5165583c7ce206ec/day9/76_timing_report_last.png"><br><br>
 
 
 </details>
