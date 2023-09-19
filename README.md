@@ -3129,6 +3129,70 @@ To handle false paths effectively in VLSI design:<br>
 ## Day-10-QOR
 
 
+
+<details>
+<summary>Introduction</summary><br>
+
+* Quality assurance processes in Very Large Scale Integration (VLSI) design and manufacturing play a pivotal role in ensuring the functionality and reliability of integrated circuits (ICs). These quality checks are integral and span multiple phases of both design and manufacturing, serving to detect and rectify potential issues. The VLSI quality assessment is an ongoing and iterative procedure, ensuring that integrated circuits meet high standards of performance, reliability, and manufacturability. To facilitate these checks, advanced simulation and verification tools are frequently employed, streamlining the process. <br><br>
+
+* Within the realm of digital electronics and integrated circuits, propagation delay signifies the time required for an electrical signal to traverse from the input of a digital logic gate or circuit to its output. This parameter holds immense significance in digital design, influencing the speed and overall performance of the circuit. Typically quantified in units of time, such as nanoseconds (ns) or picoseconds (ps), propagation delay hinges on multiple factors, encompassing the specific technology utilized, the length of connecting wires, and the intricacy of the circuit.<br><br>
+
+* **Rising edge propagation delay**, in the context of digital electronics and integrated circuits, refers to the time it takes for an electrical signal to transition from a low voltage level (logic 0) to a high voltage level (logic 1) at the output of a digital logic gate or circuit, following a rising edge (transition from 0 to 1) at the input. <br><br>
+
+* **Falling edge propagation delay**, in the context of digital electronics and integrated circuits, refers to the time it takes for an electrical signal to transition from a high voltage level (logic 1) to a low voltage level (logic 0) at the output of a digital logic gate or circuit, following a falling edge (transition from 1 to 0) at the input. <br><br>
+
+* The difference between rise to fall delay and fall to rise delay in digital circuits is primarily due to the mobility of charge carriers, namely electrons and holes, within semiconductor materials. To understand this difference, it's important to delve into the behavior of these charge carriers in a little more detail: <br><br>
+
+	* Electron Mobility: In semiconductor materials like silicon, electrons are the primary charge carriers responsible for current flow. Electrons have a higher mobility, which means they can move more quickly through the semiconductor lattice when subjected to an electric field. As a result, when transitioning from a low voltage (logic 0) to a high voltage (logic 1), which corresponds to a falling edge, electrons move relatively faster. This results in a shorter rise to fall delay. <br><br>
+
+	* Hole Mobility: In addition to electrons, semiconductor materials also have "holes," which are effectively vacancies left behind when electrons move. These holes can also carry current, but they have lower mobility compared to electrons. When transitioning from a high voltage (logic 1) to a low voltage (logic 0), which corresponds to a rising edge, holes move relatively slower. This leads to a longer fall to rise delay compared to the rise to fall delay. <br><br>
+
+ <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/08ad468fc0de6054b6aa0336d7dc096ca248773b/day10/nand_gate.jpg"><br><br>
+
+ * In the presented scenario, when both A and B are in the logic 0 state, the outcome is a logic 1 at output Y. This implies that both A and B play a role in charging the capacitor. <br>
+
+* In a parallel scenario, when both A and B are set to logic 1, the resulting output Y becomes logic 0. This indicates that both A and B are involved in discharging the capacitor. <br>
+
+* However, in the subsequent situation, when either A or B is set to logic 1, only the input that is at logic 0 actively participates in charging the capacitor. There is no discharging activity, but rather a single MOS (Metal-Oxide-Semiconductor) component charges the capacitor. Consequently, the rise time of the output in this specific case will be prolonged. <br>
+
+Now let us see some the funtionality of some commands: <br><br>
+
+```ruby
+report_timing -from DFFA/CLK -to DFFC/D -delay max: It is used to analyze and report the maximum delay from the clock input of flip-flop DFFA to the data input of flip-flop DFFC.
+report_timing -from DFFA/CLK -to DFFC/D -delay min: It is used to analyze and report the minimum delay from the clock input of flip-flop DFFA to the data input of flip-flop DFFC.
+report_timing -delay min -to DFFC/D: It is used to analyze and report the minimum delay to reach the data input of flip-flop DFFC.
+report_timing -delay max -to DFFC/D: It is used to analyze and report the maximum delay to reach the data input of flip-flop DFFC.
+report_timing -delay max -rise_to DFFC/D: It is used to analyze and report the maximum rise delay to reach the data input of flip-flop DFFC.
+report_timing -delay max -fall_to DFFC/D: It is used to analyze and report the maximum fall delay to reach the data input of flip-flop DFFC.
+report_timing -max_paths 2: It is used to generate timing reports that highlight the top two critical paths in the design. These both paths will have the different end points
+report_timing -max_paths 2 -nworst 2: It is used to generate timing reports that highlight the top two critical paths in the design.
+```
+
+For Example: 
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e60e9a8878ef825486dd6632b666fb918e747ed/day10/i1.jpg"><br><br>
+
+* Now the different timing paths along with delays are as follows:
+
+DFFA(Clk -> Q r) -> INV(A r) -> INV(Y f) -> AND(A f) -> AND(Y f) -> DFFC(f)
+
+0.5 + 0.5 + 0.65 = 1.65ns
+
+DFFA(Clk -> Q f) -> INV(A f) -> INV(Y r) -> AND(A r) -> AND(Y r) -> DFFC(f)
+
+0.4 + 0.4 + 0.7 = 1.5ns
+
+DFFA(Clk -> Q r) -> AND(B r) -> AND(Y r) -> DFFC(r)
+
+0.5 + 0.65 = 1.15 ns
+
+DFFA(Clk -> Q f) -> AND(B f) -> AND(Y f) -> DFFC(f)
+
+0.4 + 0.6 = 1.0 ns
+
+</details>
+
+
 <details>
 
 <summary>Labs on QOR</summary><br>
