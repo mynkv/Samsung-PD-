@@ -3341,23 +3341,28 @@ endmodule
 
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/31_timing_from_en"><br><br>
 
+* GUI of the optimized design is as shown below: <br><br>
 
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/32_gui"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/33_gui_zoomed"><br><br>
 
+* In the provided image, it is evident that buffers are employed to alleviate the load capacitance and fanout, consequently reducing delay. However, the timing reports indicate a notably unfavorable transition delay. To address this issue, we can enhance the situation by executing the command set_max_transition 0.150 [current_design] to establish a maximum transition delay threshold. Subsequently, we will generate constraint reports and proceed with the design compilation: <br><br>
 
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/34_set_max_transition_constraint"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/35_compile"><br><br>
 
+* Violation report of the design is shown below, it shows no violation: <br><br>
 
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/36_report_violators"><br><br>
 
+* Timing reports of the design are shown below: <br><br>
 
-* Compiling the design after setiing the max delay and capacitance to optimize the design: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/37_report_timing"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/38_report_timing_from_en%5C"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c432b0a6b1bb8a9335a0c350c3903306746b5eb2/day10/39_report_timing_to_y116"><br><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/25_compile"><br><br>
+* The timing reports provided indicate that none of the paths exhibit a transition delay exceeding 150 ps. Furthermore, all paths have been adequately buffered, and both load capacitance and fanout are well-managed. Previously, the timing delay to reach the signal at y[116] was approximately 442 ps, but now it has been reduced to 254 ps, marking a substantial improvement of approximately 40%. <br>
 
-* Now checking timing and constraints reports:<br><br>
-
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/26_check_timing_constraint"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/27_timingreport_post_delay_cap_setup"><br><br>
-
-* It is important to note that in the above timing report after specifying the max delay and capacitance, the fanouts have decreased greatly as well as the associated capacitance and delay.<br><br>
 
 </details>
 
