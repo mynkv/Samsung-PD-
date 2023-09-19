@@ -3126,6 +3126,10 @@ To handle false paths effectively in VLSI design:<br>
 </details>
 
 
+
+
+
+
 ## Day-10-QOR
 
 
@@ -3172,23 +3176,43 @@ For Example:
 
 <img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/8e60e9a8878ef825486dd6632b666fb918e747ed/day10/i1.jpg"><br><br>
 
-* Now the different timing paths along with delays are as follows:
+Now the different timing paths along with delays are as follows:<br><br>
 
-DFFA(Clk -> Q r) -> INV(A r) -> INV(Y f) -> AND(A f) -> AND(Y f) -> DFFC(f)
+* Path 1: DFFA(Clk -> Q r) -> INV(A r) -> INV(Y f) -> AND(A f) -> AND(Y f) -> DFFC(f)<br>
 
-0.5 + 0.5 + 0.65 = 1.65ns
+0.5 + 0.5 + 0.65 = 1.65ns<br><br>
 
-DFFA(Clk -> Q f) -> INV(A f) -> INV(Y r) -> AND(A r) -> AND(Y r) -> DFFC(f)
+* Path 2: DFFA(Clk -> Q f) -> INV(A f) -> INV(Y r) -> AND(A r) -> AND(Y r) -> DFFC(f)<br><br>
 
-0.4 + 0.4 + 0.7 = 1.5ns
+0.4 + 0.4 + 0.7 = 1.5ns<br>
 
-DFFA(Clk -> Q r) -> AND(B r) -> AND(Y r) -> DFFC(r)
+* Path 3: DFFA(Clk -> Q r) -> AND(B r) -> AND(Y r) -> DFFC(r)<br><br>
 
-0.5 + 0.65 = 1.15 ns
+0.5 + 0.65 = 1.15 ns<br>
 
-DFFA(Clk -> Q f) -> AND(B f) -> AND(Y f) -> DFFC(f)
+* Path 4: DFFA(Clk -> Q f) -> AND(B f) -> AND(Y f) -> DFFC(f)<br><br>
 
-0.4 + 0.6 = 1.0 ns
+0.4 + 0.6 = 1.0 ns <br>
+
+```ruby
+report_timing -from DFFA/CLK -to DFFC/D -delay max
+path 1
+
+report_timing -from DFFA/CLK -to DFFC/D -delay min
+path 2
+
+report_timing -delay min -to DFFC/D
+path 4
+
+report_timing -delay max -to DFFC/D
+path 1
+
+report_timing -delay max -rise_to DFFC/D
+path 2
+
+report_timing -delay max -fall_to DFFC/D
+path 1
+```
 
 </details>
 
