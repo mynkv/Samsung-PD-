@@ -3243,36 +3243,123 @@ set_load -min 0.1 [get_ports OUT_Y];
 
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/16_post_source_check_timing"><br><br>
 
-* Screenshot of the timing report from IN_A: <br><br>
+* Timing report after sourcing the constraint tcl file: <br><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/6_timing_report"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/17_post_source_report_timing"><br><br>
 
-* Screenshot for ```report_timing -rise_from IN_A -sig 4 -trans -cap -nets -inp``` , ```-rise_from``` is used to timing path for the transsition from 0 to 1 or Vdd:<br><br>
+* Constraint report after sourcing the constraint tcl file:<br><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/8_timing_report_rise"><br><br>
-
-* Screenshot for ```report_timing -rise_from IN_A -sig 4 -trans -cap -nets -inp -to REG_A_reg/D```: <br><br>
-
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/9_timing_report_from_to"><br><br>
-
-* If we notice the above three timing reports, we see that there is a rise to fall mismatch U14 cell as well as the inverter. Also the library setup time for the for rise and fall timing report is different.
-
-* Hold Timing report is shown below:
-
-* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/10_timing_report_hold_in_a"><br><br>
-
-* Setup Timing report through U15/Y:
-
-* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/11_timing_report_thr_U15"><br><br>
-
-* Hold Timing report through U15/Y shown below:
-
-* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/11_timing_report_thr_U16_hold"><br><br>
-
-* If we compare the hold and setup timing report for the U15 cell, we can see that while doing setup analysis, U15 cell delay is 50 ps (i.e. fro the max timing path) but while doing the hold analysis it is 70 ps.
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/18_post_source_report_cons"><br><br>
 
 </details>
 
+
+
+<details>
+
+<summary>Lab on mux_generate_128</summary><br>
+
+Consider the verilog code: <br>
+
+```ruby
+module mux_generate ( input [127:0] in, input [6:0] sel, output reg y);
+integer k;
+always @ (*)
+begin
+for(k = 0; k < 128; k=k+1) begin
+	if(k == sel)
+		y = in[k];
+end
+end
+endmodule
+
+```
+
+* SS for reading, linking, checking and compiling the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/20_read_check_link_compile"><br><br>
+
+* In this we see that the latch is inferred in the design because of the for loop. 
+
+* Netlist of the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/21_netlist"><br><br>
+
+* After compiling the design there are no latches seen in the netlist of the design. This we can also verify from the seeing the cells of the design as shown below: <br><br
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/22_cells_report_timing"><br><br>
+																						 >
+* In the timing report present in the above image we see that there too many fanout to the enable, and consecutively the delay is very large. To reduce the fanout we can the set the max capacitance value allowed at a particular node as shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/23_set_max_delay_capacitance"><br><br>
+
+* Violated Constraint report can be seen by command ```report_constraints -all_violators```: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/24_constraints_violators"><br><br>
+
+* Compiling the design after setiing the max delay and capacitance to optimize the design: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/25_compile"><br><br>
+
+* Now checking timing and constraints reports:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/26_check_timing_constraint"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/27_timingreport_post_delay_cap_setup"><br><br>
+
+* It is important to note that in the above timing report after specifying the max delay and capacitance, the fanouts have decreased greatly as well as the associated capacitance and delay.<br><br>
+
+</details>
+
+
+
+
+
+<details>
+<summary>Lab on en_128</summary><br>
+
+Consider the verilog code: <br>
+
+```ruby
+module en_128 (input [127:0] x , output [127:0] y , input en);
+	assign y[127:0] = en ?x[127:0]:128'b0;
+endmodule
+```
+
+* SS for reading, linking, and compiling the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/28_new_design_en_128"><br><br>
+
+* Timing Report of the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/29_report_timing"><br><br>
+																						 >
+* In the timing report present in the above image we see that there too many fanout to the enable, and consecutively the delay is very large. To reduce the fanout we can the set the max capacitance value allowed at a particular node and compile the design again as shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/30_set_cap_repot_timing_compile"><br><br>
+
+* Timing report after setting the max capacitance, here we can see that fanout and capacitance is drastically reduced: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/31_timing_from_en"><br><br>
+
+
+
+
+
+
+
+
+* Compiling the design after setiing the max delay and capacitance to optimize the design: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/25_compile"><br><br>
+
+* Now checking timing and constraints reports:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/26_check_timing_constraint"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/451e6ab62673c1d0f36d299a700fea0d4005af54/day10/27_timingreport_post_delay_cap_setup"><br><br>
+
+* It is important to note that in the above timing report after specifying the max delay and capacitance, the fanouts have decreased greatly as well as the associated capacitance and delay.<br><br>
+
+</details>
 
 
 
