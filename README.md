@@ -3126,6 +3126,153 @@ To handle false paths effectively in VLSI design:<br>
 </details>
 
 
+## Day-10-QOR
+
+
+<details>
+
+<summary>Labs on QOR</summary><br>
+
+Consider the verilog code: <br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/1_file_verilog"><br><br>
+
+* SS for reading and linking the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/2_read_link"><br><br>
+
+* Constraints for the design are: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/3_constraint.png"><br><br>
+
+* Screenshot for sourcing the constraint file and compiling the design: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/4_source_compile"><br><br>
+
+* In the timing report we can see that it is for the max_path and it even comsists the library setup time, this tells us that the timing report is for setup. Setup timing report is shown below: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/5_timing_report"><br><br>
+
+* Screenshot of the timing report from IN_A: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/6_timing_report"><br><br>
+
+* Screenshot for ```report_timing -rise_from IN_A -sig 4 -trans -cap -nets -inp``` , ```-rise_from``` is used to timing path for the transsition from 0 to 1 or Vdd:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/8_timing_report_rise"><br><br>
+
+* Screenshot for ```report_timing -rise_from IN_A -sig 4 -trans -cap -nets -inp -to REG_A_reg/D```: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/9_timing_report_from_to"><br><br>
+
+* If we notice the above three timing reports, we see that there is a rise to fall mismatch U14 cell as well as the inverter. Also the library setup time for the for rise and fall timing report is different.
+
+* Hold Timing report is shown below:
+
+* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/10_timing_report_hold_in_a"><br><br>
+
+* Setup Timing report through U15/Y:
+
+* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/11_timing_report_thr_U15"><br><br>
+
+* Hold Timing report through U15/Y shown below:
+
+* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/11_timing_report_thr_U16_hold"><br><br>
+
+* If we compare the hold and setup timing report for the U15 cell, we can see that while doing setup analysis, U15 cell delay is 50 ps (i.e. fro the max timing path) but while doing the hold analysis it is 70 ps.
+
+</details>
+
+
+
+<details>
+
+<summary>Lab on correctly loading the design in DC</summary><br>
+
+Consider the verilog code: <br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/1_file_verilog"><br><br>
+
+* SS for reading, linking and checking the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/12_read_check_design"><br><br>
+
+* SS for compiling the design is shown below: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/13_compile"><br><br>
+
+* Now we will check the design. Here we see that all the end ports are not constrained yet: <br><br>
+
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/14_check_timing"><br><br>
+
+* Constraint report can be seen by command ```report_constraints```. If we have not specified the constraints yet, then it will show the default constraints set up by the tool: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/15_report_cons"><br><br>
+
+* Constraints are shown below: <br><br>
+
+```ruby
+create_clock -name MYCLK -per 10 [get_ports clk];
+
+set_clock_latency -source 2 [get_clocks MYCLK];
+set_clock_latency 1 [get_clocks MYCLK];
+set_clock_uncertainty -setup 0.5 [get_clocks MYCLK];
+set_clock_uncertainty -hold 0.1 [get_clocks MYCLK];
+
+set_input_delay -max 4 -clock [get_clocks MYCLK] [get_ports IN_A];
+set_input_delay -max 4 -clock [get_clocks MYCLK] [get_ports IN_B];
+set_input_delay -min 1 -clock [get_clocks MYCLK] [get_ports IN_A];
+set_input_delay -min 1 -clock [get_clocks MYCLK] [get_ports IN_B];
+
+set_input_transition -max 0.4 [get_ports IN_A];
+set_input_transition -max 0.4 [get_ports IN_B];
+set_input_transition -min 0.1 [get_ports IN_A];
+set_input_transition -min 0.1 [get_ports IN_B];
+
+create_generated_clock -name MYGEN_CLK -master MYCLK -source [get_ports clk] -div 1 [get_ports out_clk];
+create_generated_clock -name MYGEN_DIV_CLK -master MYCLK -source [get_ports clk] -div 2 [get_ports out_div_clk]; 
+
+set_output_delay -max 4 -clock [get_clocks MYGEN_CLK] [get_ports OUT_Y];
+set_output_delay -min 1 -clock [get_clocks MYGEN_CLK] [get_ports OUT_Y];
+
+set_load -max 0.4 [get_ports OUT_Y];
+set_load -min 0.1 [get_ports OUT_Y];
+```
+
+* Once we have sources the constraint tcl file, and check the design by ```check_timing``` we see that end ports are all constrained now: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/16_post_source_check_timing"><br><br>
+
+* Screenshot of the timing report from IN_A: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/6_timing_report"><br><br>
+
+* Screenshot for ```report_timing -rise_from IN_A -sig 4 -trans -cap -nets -inp``` , ```-rise_from``` is used to timing path for the transsition from 0 to 1 or Vdd:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/8_timing_report_rise"><br><br>
+
+* Screenshot for ```report_timing -rise_from IN_A -sig 4 -trans -cap -nets -inp -to REG_A_reg/D```: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/9_timing_report_from_to"><br><br>
+
+* If we notice the above three timing reports, we see that there is a rise to fall mismatch U14 cell as well as the inverter. Also the library setup time for the for rise and fall timing report is different.
+
+* Hold Timing report is shown below:
+
+* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/10_timing_report_hold_in_a"><br><br>
+
+* Setup Timing report through U15/Y:
+
+* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/11_timing_report_thr_U15"><br><br>
+
+* Hold Timing report through U15/Y shown below:
+
+* <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/7bc6f3ee1d2bec01fe58a9f00f768cf8522dcbf5/day10/11_timing_report_thr_U16_hold"><br><br>
+
+* If we compare the hold and setup timing report for the U15 cell, we can see that while doing setup analysis, U15 cell delay is 50 ps (i.e. fro the max timing path) but while doing the hold analysis it is 70 ps.
+
+</details>
+
 
 
 
