@@ -3179,19 +3179,15 @@ For Example:
 Now the different timing paths along with delays are as follows:<br><br>
 
 * Path 1: DFFA(Clk -> Q r) -> INV(A r) -> INV(Y f) -> AND(A f) -> AND(Y f) -> DFFC(f)<br>
-
 0.5 + 0.5 + 0.65 = 1.65ns<br><br>
 
-* Path 2: DFFA(Clk -> Q f) -> INV(A f) -> INV(Y r) -> AND(A r) -> AND(Y r) -> DFFC(f)<br><br>
-
+* Path 2: DFFA(Clk -> Q f) -> INV(A f) -> INV(Y r) -> AND(A r) -> AND(Y r) -> DFFC(f)<br>
 0.4 + 0.4 + 0.7 = 1.5ns<br>
 
-* Path 3: DFFA(Clk -> Q r) -> AND(B r) -> AND(Y r) -> DFFC(r)<br><br>
-
+* Path 3: DFFA(Clk -> Q r) -> AND(B r) -> AND(Y r) -> DFFC(r)<br>
 0.5 + 0.65 = 1.15 ns<br>
 
-* Path 4: DFFA(Clk -> Q f) -> AND(B f) -> AND(Y f) -> DFFC(f)<br><br>
-
+* Path 4: DFFA(Clk -> Q f) -> AND(B f) -> AND(Y f) -> DFFC(f)<br>
 0.4 + 0.6 = 1.0 ns <br>
 
 ```ruby
