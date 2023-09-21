@@ -3661,7 +3661,7 @@ There are several types of DACs, each with its own characteristics and applicati
 
 The choice of DAC type depends on the specific application's requirements, including resolution, speed, linearity, and cost considerations. Each type of DAC has its advantages and trade-offs, making them suitable for different use cases.<br>
 
-</details><br>
+</details>
 
 <details>
 
