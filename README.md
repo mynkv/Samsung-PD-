@@ -3558,7 +3558,73 @@ In conclusion the Samsung Exynos 9611 processor exemplifies the capabilities of 
 
 </details>
 
+
+
+## Day-12_BabySOC_Pre-synthesis-simulation
+
+**DAC**:<br><br>
+
+* Terminal commands to generate executable file for DAC: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/7_dac_cmd"><br><br>
+
+* Simulation results for DAC on GTKWAVE: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/6_dac_simulation"><br><br>
+
+
+**PLL**:<br><br>
+
+* Terminal commands to generate executable file for PLL: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/5_pll_cmd"><br><br>
+
+* Simulation results for PLL on GTKWAVE: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/4_pll_simulation"><br><br>
+
+**RISC-V Processor - rvmyth**:<br><br>
+
+* Terminal commands to generate executable file for rvmyth: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/13_mythcore_cmd"><br><br>
+
+* Simulation results for rvmyth on GTKWAVE: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/14_mythcore_simulation"><br><br>
+
+**Interfacing rvmyth and DAC**:<br><br>
+
+* Terminal commands to generate executable file for interface of rvmyth and DAC: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/8_rvmyth_dac_cmd"><br><br>
+
+* Simulation results for interface of rvmyth and DAC on GTKWAVE: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/9_rvmyth_dac_simulation"><br><br>
+
+
+
+**Interfacing rvmyth and PLL**:<br><br>
+
+* Terminal commands to generate executable file for interface of rvmyth and PLL: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/10_rvmyth_pll_cmd"><br><br>
+
+* Simulation results for interface of rvmyth and PLL on GTKWAVE: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/11_rvmyth_pll_simulation"><br><br>
+
+
+**Interfacing rvmyth, DAC and PLL**:<br><br>
+
+* Terminal commands to generate executable file for interface of rvmyth, DAC and PLL: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/15_all_cmdf"><br><br>
+
+* Simulation results for interface of rvmyth, DAC and PLL on GTKWAVE: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/16_all_simulation"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/17_all_simulation"><br><br>
+
+<details>
+<summary>4 Bit UP-Down Counter</summary>
+
+Verilog Code: <br><br>
+
+
 ```ruby
+
+// DESIGN FILE
+
 module counter_4 (input clk, direc, rst, output [3:0] counter);
 
 reg [3:0] count = 0 ;
@@ -3587,6 +3653,9 @@ begin
 end
 
 endmodule
+
+// TESTBENCH
+
 module counter_4_tb ();
 reg clk = 0, direc, rst;
 wire [3:0] counter;
@@ -3612,5 +3681,25 @@ end
 
 endmodule
 ```
+
+* Terminal screenshot to generate the vcd file: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/3_commandpromopt_counter"><br><br>
+
+* Simulation result for the up-down counter: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/1_counter_gtk"><br><br>
+
+
+
+</details>
+
+
+
+
+
+
+
+
+
+
 
 
