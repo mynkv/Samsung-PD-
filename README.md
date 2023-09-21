@@ -3785,6 +3785,10 @@ end
 endmodule
 ```
 
+* The provided code implements a 4-bit up-down counter. Its behavior is determined by the 'direc' signal: when 'direc' is high, the counter increments by one on the next clock cycle, and when 'direc' is low, the counter decrements by one on the next clock cycle.<br>
+
+* In the case of an up counter, when the counter reaches its maximum value, it resets to one. In contrast, for a down counter, when the counter reaches its minimum value, it resets to its maximum possible value. The 'rst' signal is employed to reset the counter's output value.<br><br>
+  
 * Terminal screenshot to generate the vcd file: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/3_commandpromopt_counter"><br><br>
 
