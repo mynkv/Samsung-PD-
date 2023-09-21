@@ -3596,6 +3596,38 @@ RISC-V, pronounced as "risk-five," is an Instruction Set Architecture (ISA) know
 * Registers: RV64I also provides 32 general-purpose registers (integer registers) just like RV32I. However, these registers are 64 bits wide, allowing for more extensive data manipulation and support for 64-bit data types.<br>
 * Instruction Set: Similar to RV32I, RV64I defines a specific set of instructions, but these instructions operate on 64-bit data.<br>
 
+5-stages of RISC-V pipelined architecture is explained below:<br><br>
+
+1. **Fetch Stage (IF - Instruction Fetch)**:<br>
+* In this stage, the processor fetches the next instruction from memory.<br>
+* The program counter (PC) holds the address of the instruction to be fetched.<br>
+* The instruction is typically 32 bits in RISC-V.<br>
+* The PC is updated for the next instruction (PC + 4) to maintain instruction sequencing.<br><br>
+
+2. Decode Stage (ID - Instruction Decode):<br>
+* In this stage, the fetched instruction is decoded to determine the operation to be performed and the operands involved.<br>
+* The opcode (operation code) is extracted from the instruction, which identifies the instruction type.<br>
+* Operand registers are identified, and their values are read from the register file.<br>
+* Immediate values, if needed, are also extracted from the instruction.<br><br>
+
+3. Execute Stage (EX - Execution):<br>
+* This stage performs the actual execution of the instruction.<br>
+* Arithmetic and logical instructions, such as add and subtract, operate on the operands obtained in the decode stage.<br>
+* Branch instructions evaluate conditions to determine whether to take a branch or not.<br>
+* Memory operations, like load and store, calculate memory addresses and perform data transfers.<br><br>
+
+4. Memory Stage (MEM - Memory Access):<br>
+* In this stage, memory-related instructions access the data memory or cache.<br>
+* Load instructions retrieve data from memory and write it back to the register file.<br>
+* Store instructions write data from a register into memory.<br>
+* Other instructions that do not involve memory access pass through this stage without any memory operations.<br><br>
+
+5. Write-back Stage (WB - Write-back):<br>
+* In this final stage, the results of the executed instruction are written back to the register file.<br>
+* The destination register specified by the instruction is updated with the result.<br>
+* Control signals ensure that only the correct register is updated, preventing hazards.<br><br>
+
+
 **PLL**:<br><br>
 
 A Phase-Locked Loop (PLL) is an electronic control system that is used to stabilize or synchronize the phase and frequency of an oscillator with a reference signal. PLLs are widely used in various applications across electronics and communications for tasks such as clock generation, frequency synthesis, demodulation, and signal recovery. Here's a breakdown of how a PLL works and its key components:<br><br>
