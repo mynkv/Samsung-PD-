@@ -3560,20 +3560,124 @@ In conclusion the Samsung Exynos 9611 processor exemplifies the capabilities of 
 
 
 
-## Day-12_BabySOC_Pre-synthesis-simulation
+## Day-12_BabySOC_Modelling
+
+<details>
+<summary>Introduction</summary><br>
+
+Modeling and simulation involve employing a physical or abstract representation of a system to produce data that assists in decision-making or predicting system behavior. Models serve as tools for defining, examining, and conveying a collection of ideas. In the VLSI (Very Large Scale Integration) domain, modeling and simulation are extensively utilized. <br>
+
+The objectives of modeling are as follows:<br>
+
+* Facilitating the analysis, specification,<br>
+* Enabling design,<br>
+* Supporting verification,<br>
+* Facilitating validation of a system,<br>
+* Additionally, conveying specific information about it.<br><br>
+
+Intellectual Property (IP) refers to a legal concept that grants exclusive rights to individuals or entities over creations of the mind or intellectual endeavors. These creations can include inventions, literary and artistic works, symbols, names, images, and designs used in commerce. Intellectual property is divided into several categories, each with its own set of protections and regulations. Three main intellectual property which we are goint to model are:<br><br>
+1. RVMYTH modelling<br>
+2. PLL modelling<br>
+3. DAC modelling <br><br>
+
+**RVMYTH - Risc-V based MYTH**<br><br>
+
+RISC-V, pronounced as "risk-five," is an Instruction Set Architecture (ISA) known for its Reduced Instruction Set Computer (RISC) principles. This ISA defines a fundamental set of instructions referred to as the base integer ISA, which must be present in any RISC-V implementation. Additionally, RISC-V allows for optional extensions to enhance its capabilities. The base integer instruction set is distinguished by characteristics such as the width of integer registers, the size of the address space it supports, and the number of available integer registers. Notably, there are two primary base integer variants within RISC-V, known as RV32I and RV64I. <br><br>
+
+1. **RV32I**:<br>
+* 32-Bit Variant: RV32I refers to the 32-bit version of the RISC-V architecture. In this variant, the CPU's data and address registers are 32 bits wide.<br>
+* Address Space: RV32I supports a 32-bit virtual address space, meaning it can address up to 2^32 unique memory locations, which equals 4 gigabytes of memory.<br>
+* Registers: RV32I provides 32 general-purpose registers (integer registers) for performing arithmetic and data manipulation operations.<br>
+* Instruction Set: It defines a specific set of instructions for 32-bit RISC-V processors, including arithmetic, logic, load, store, and control flow instructions.<br>
+
+2. **RV64I**:<br>
+* 64-Bit Variant: RV64I represents the 64-bit version of the RISC-V architecture. In this variant, both data and address registers are 64 bits wide.<br>
+* Address Space: RV64I offers a much larger virtual address space compared to RV32I. It can address up to 2^64 unique memory locations, which is an astronomically large address space.<br>
+* Registers: RV64I also provides 32 general-purpose registers (integer registers) just like RV32I. However, these registers are 64 bits wide, allowing for more extensive data manipulation and support for 64-bit data types.<br>
+* Instruction Set: Similar to RV32I, RV64I defines a specific set of instructions, but these instructions operate on 64-bit data.<br>
+
+**PLL**:<br><br>
+
+A Phase-Locked Loop (PLL) is an electronic control system that is used to stabilize or synchronize the phase and frequency of an oscillator with a reference signal. PLLs are widely used in various applications across electronics and communications for tasks such as clock generation, frequency synthesis, demodulation, and signal recovery. Here's a breakdown of how a PLL works and its key components:<br><br>
+
+* Phase Detector <br>
+* Low-Pass Filter <br>
+* Voltage-Controlled Oscillato <br>
+* Feedback Loop <br><br>
+
+A Phase-Locked Loop (PLL) is an essential component in many System-on-Chip (SoC) designs for several reasons:<br><br>
+
+1. **Clock Generation and Distribution**: One of the primary functions of a PLL in an SoC is to generate stable and precise clock signals. Modern SoCs consist of numerous subsystems and components that may require different clock frequencies and phases. The PLL can generate these diverse clock signals from a single reference clock source, ensuring synchronization and coherence across the chip. This is crucial for the proper operation of digital circuits, data transfer, and the coordination of various processing units.<br>
+
+2. **Frequency Synthesis**: SoCs often need to operate at multiple frequencies to optimize power consumption and performance. PLLs can generate these different frequencies by multiplying or dividing the reference clock signal. This flexibility allows an SoC to dynamically adjust its clock speeds to meet varying processing demands while maintaining synchronization.<br>
+
+3. **Clock Domain Crossing**: Inside an SoC, different functional blocks or cores may operate on different clock domains due to their distinct processing requirements. PLLs are used to generate clocks for these domains and to facilitate clock domain crossing, where data is transferred between blocks operating on different clock frequencies. Properly designed PLLs help manage data transfer, synchronization, and latency issues when crossing clock domains.<br>
+
+4. **I/O Interfaces**: Many SoCs have various I/O interfaces that communicate with external devices or other components. These interfaces often require specific clock signals. PLLs can generate these clocks while ensuring they meet the required timing specifications, such as data setup and hold times, which are critical for reliable data transmission.<br>
+
+5. **Power Management**: PLLs can help manage power consumption in an SoC. By dynamically adjusting the clock frequency or shutting down parts of the SoC when not in use, PLLs contribute to power efficiency. For example, when a component enters a low-power state, the PLL can reduce the clock frequency to minimize power consumption.<br>
+
+6. **Jitter and Noise Reduction**: PLLs are adept at reducing jitter and noise in clock signals. This is essential for maintaining signal integrity in high-speed data transmission and analog-to-digital conversion processes within an SoC.<br>
+
+7. **Clock Recovery**: In communication systems, PLLs are used for clock recovery from incoming data signals. This is crucial for accurate data demodulation and synchronization.<br><br>
+
+In summary, PLLs are a critical component of SoC designs because they provide clock generation, synchronization, and management capabilities that are essential for the reliable and efficient operation of complex digital systems. They enable the SoC to manage various clock domains, optimize power consumption, and ensure data integrity, all of which are fundamental requirements in modern electronic devices.<br><br>
+
+**DAC**: <br><br>
+
+A Digital-to-Analog Converter (DAC) is an electronic device that converts digital data into analog signals. In other words, it takes a series of binary or digital values and produces a continuous analog output voltage or current that represents the digital input. DACs are used in various applications, including audio systems, communication systems, instrumentation, and more.<br>
+
+There are several types of DACs, each with its own characteristics and applications:<br>
+
+1. **Binary-Weighted DAC (BWDAC)**:<br>
+* In a binary-weighted DAC, each bit of the digital input has a different weight. The least significant bit (LSB) has the smallest weight, while the most significant bit (MSB) has the largest weight.<br>
+* The output voltage is determined by the sum of weighted currents or voltages from each bit. The more bits you have, the finer the resolution.<br>
+* Binary-weighted DACs are straightforward but can be limited by component matching and precision requirements.<br><br>
+
+2. **R-2R Ladder DAC**:<br>
+* An R-2R ladder DAC uses a network of resistors in a ladder configuration. The values of the resistors are either R or 2R.<br>
+* The input bits control switches that connect to either R or 2R resistors, allowing for binary-weighted current division.<br>
+* R-2R ladder DACs are known for their good linearity and are often used in high-resolution audio applications.<br><br>
+
+3. **Segmented DAC (Subranging DAC)**:<br>
+* A segmented DAC combines multiple DACs in parallel, each with a different range. These segments are usually binary-weighted.<br>
+* The input code determines which segment is active, and the outputs of all segments are combined to produce the final analog output.<br>
+* Segmented DACs are used in applications where high resolution and accuracy are required.<br><br>
+
+4.** Delta-Sigma (ΔΣ) DAC**:<br>
+* Delta-sigma DACs use oversampling and noise shaping to achieve high resolution and low noise.<br>
+* They are commonly used in applications like audio DACs, where high audio quality is essential.<br>
+* Delta-sigma DACs have a quantization noise at high frequencies, which is then filtered to obtain a high-resolution, low-noise analog signal.<br><br>
+
+5 **Current-Steering DAC (Current DAC)**:<br>
+* Current-steering DACs use a series of switches to direct current sources into or away from the output node.<br>
+* The digital input controls which current sources are active, determining the analog output current.<br>
+* They are often used in high-speed applications and are suitable for direct connection to differential amplifiers.<br><br>
+
+6 **String DAC**:<br>
+* String DACs use a chain of resistor elements in series, with each resistor dividing the voltage by a specific fraction.<br>
+* The digital input code selects which resistors are included in the chain, allowing for precise voltage division.<br>
+* String DACs are relatively simple but can be limited by the number of bits and resistor accuracy.<br><br>
+
+The choice of DAC type depends on the specific application's requirements, including resolution, speed, linearity, and cost considerations. Each type of DAC has its advantages and trade-offs, making them suitable for different use cases.<br>
+
+</details><br>
+
+<details>
+
+<summary>Lab on modelling IP's </summary><br>
 
 **DAC**:<br><br>
 
-* Terminal commands to generate executable file for DAC: <br><br>
+* Terminal commands to generate .vcd file for DAC: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/7_dac_cmd"><br><br>
 
 * Simulation results for DAC on GTKWAVE: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/6_dac_simulation"><br><br>
 
-
 **PLL**:<br><br>
 
-* Terminal commands to generate executable file for PLL: <br><br>
+* Terminal commands to generate .vcd file for PLL: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/5_pll_cmd"><br><br>
 
 * Simulation results for PLL on GTKWAVE: <br><br>
@@ -3581,7 +3685,7 @@ In conclusion the Samsung Exynos 9611 processor exemplifies the capabilities of 
 
 **RISC-V Processor - rvmyth**:<br><br>
 
-* Terminal commands to generate executable file for rvmyth: <br><br>
+* Terminal commands to generate .vcd file for rvmyth: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/13_mythcore_cmd"><br><br>
 
 * Simulation results for rvmyth on GTKWAVE: <br><br>
@@ -3589,31 +3693,30 @@ In conclusion the Samsung Exynos 9611 processor exemplifies the capabilities of 
 
 **Interfacing rvmyth and DAC**:<br><br>
 
-* Terminal commands to generate executable file for interface of rvmyth and DAC: <br><br>
+* Terminal commands to generate .vcd file for interface of rvmyth and DAC: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/8_rvmyth_dac_cmd"><br><br>
 
 * Simulation results for interface of rvmyth and DAC on GTKWAVE: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/9_rvmyth_dac_simulation"><br><br>
 
-
-
 **Interfacing rvmyth and PLL**:<br><br>
 
-* Terminal commands to generate executable file for interface of rvmyth and PLL: <br><br>
+* Terminal commands to generate .vcd file for interface of rvmyth and PLL: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/10_rvmyth_pll_cmd"><br><br>
 
 * Simulation results for interface of rvmyth and PLL on GTKWAVE: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/11_rvmyth_pll_simulation"><br><br>
 
-
 **Interfacing rvmyth, DAC and PLL**:<br><br>
 
-* Terminal commands to generate executable file for interface of rvmyth, DAC and PLL: <br><br>
+* Terminal commands to generate .vcd file for interface of rvmyth, DAC and PLL: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/15_all_cmdf"><br><br>
 
 * Simulation results for interface of rvmyth, DAC and PLL on GTKWAVE: <br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/16_all_simulation"><br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/17_all_simulation"><br><br>
+
+</details>
 
 <details>
 <summary>4 Bit UP-Down Counter</summary>
