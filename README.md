@@ -3673,7 +3673,7 @@ The choice of DAC type depends on the specific application's requirements, inclu
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/7_dac_cmd"><br><br>
 
 * Simulation results for DAC on GTKWAVE: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/6_dac_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/6_dac_simulation"><br><br>
 
 **PLL**:<br><br>
 
@@ -3681,7 +3681,7 @@ The choice of DAC type depends on the specific application's requirements, inclu
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/5_pll_cmd"><br><br>
 
 * Simulation results for PLL on GTKWAVE: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/4_pll_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/4_pll_simulation"><br><br>
 
 **RISC-V Processor - rvmyth**:<br><br>
 
@@ -3689,7 +3689,7 @@ The choice of DAC type depends on the specific application's requirements, inclu
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/13_mythcore_cmd"><br><br>
 
 * Simulation results for rvmyth on GTKWAVE: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/14_mythcore_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/14_mythcore_simulation"><br><br>
 
 **Interfacing rvmyth and DAC**:<br><br>
 
@@ -3697,7 +3697,7 @@ The choice of DAC type depends on the specific application's requirements, inclu
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/8_rvmyth_dac_cmd"><br><br>
 
 * Simulation results for interface of rvmyth and DAC on GTKWAVE: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/9_rvmyth_dac_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/9_rvmyth_dac_simulation"><br><br>
 
 **Interfacing rvmyth and PLL**:<br><br>
 
@@ -3705,7 +3705,7 @@ The choice of DAC type depends on the specific application's requirements, inclu
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/10_rvmyth_pll_cmd"><br><br>
 
 * Simulation results for interface of rvmyth and PLL on GTKWAVE: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/11_rvmyth_pll_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/11_rvmyth_pll_simulation"><br><br>
 
 **Interfacing rvmyth, DAC and PLL**:<br><br>
 
@@ -3713,8 +3713,8 @@ The choice of DAC type depends on the specific application's requirements, inclu
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/15_all_cmdf"><br><br>
 
 * Simulation results for interface of rvmyth, DAC and PLL on GTKWAVE: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/16_all_simulation"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/17_all_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/16_all_simulation"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day_12_updated/17_all_simulation"><br><br>
 
 </details>
 
@@ -3789,7 +3789,7 @@ endmodule
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/3_commandpromopt_counter"><br><br>
 
 * Simulation result for the up-down counter: <br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/1_counter_gtk"><br><br>
+<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/1_counter_gtk"><br><br>
 
 
 
