@@ -4212,25 +4212,31 @@ assign counter = count;
 always @ (rst, direc, clk)
 	
 begin
-	if (rst)
-		begin
-		count = 4'b0;
-		end
-	else if (direc == 1)
-		begin
-		count = count + 1;
-		if (count == 4'b1111)
-		count = 0;
-		end
-	else if (direc == 0)
-		begin
-		count = count - 1;
-		if (count == 0)
-		count = 4'b1111;
-		end
+case ({rst, direc})
+2'b10:
+	begin
+	count = 4'b0;
+	end
+2'b11:
+	begin
+	count = 4'b0;
+	end
+2'b01:
+	begin
+	count = count + 1;
+	end
+2'b00:
+	begin
+	count = count - 1;
+	end
+
+default: count = 4'b0;
+
+endcase
 end
 
 endmodule
+
 
 // TESTBENCH
 
