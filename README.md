@@ -4277,7 +4277,7 @@ endmodule
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/3_commandpromopt_counter"><br><br>
 
 * Simulation result for the up-down counter: <br><br>
-<img width="900" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/42bdb8f61dff35841708b884e17c3d8564f9eda7/day12/1_counter_gtk"><br><br>
+<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/1504b07642b295536263c2771347bee9780ffd5b/day12/18_counter_new_simulation"><br><br>
 
 
 
