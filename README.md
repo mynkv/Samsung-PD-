@@ -4209,34 +4209,37 @@ reg [3:0] count = 0 ;
 
 assign counter = count;
 
-always @ (rst, direc, clk)
+always @ (posedge clk)
 	
 begin
 case ({rst, direc})
 2'b10:
 	begin
-	count = 4'b0;
+	count = 4'b0000;
 	end
 2'b11:
 	begin
-	count = 4'b0;
+	count = 4'b0000;
 	end
 2'b01:
 	begin
 	count = count + 1;
+	if (count == 4'b1111)
+	count = 4'b0000;
 	end
 2'b00:
 	begin
 	count = count - 1;
-	end
+	if (count == 4'b0000)
+	count = 4'b1111;
+	end	
 
-default: count = 4'b0;
+default: count = 4'b0000;
 
 endcase
 end
 
 endmodule
-
 
 // TESTBENCH
 
@@ -4266,7 +4269,7 @@ end
 endmodule
 ```
 
-* The provided code implements a 4-bit up-down counter. Its behavior is determined by the 'direc' signal: when 'direc' is high, the counter increments by one on the next clock cycle, and when 'direc' is low, the counter decrements by one on the next clock cycle.<br>
+* The provided code implements a 4-bit up-down synchronous counter. Its behavior is determined by the 'direc' signal: when 'direc' is high, the counter increments by one on the next positive edge of clock cycle, and when 'direc' is low, the counter decrements by one on the next positive edge of clock cycle.<br>
 
 * In the case of an up counter, when the counter reaches its maximum value, it resets to one. In contrast, for a down counter, when the counter reaches its minimum value, it resets to its maximum possible value. The 'rst' signal is employed to reset the counter's output value.<br><br>
   
