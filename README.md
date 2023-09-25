@@ -4299,12 +4299,14 @@ write -f verilog -out rvmyth_net.v
 * The netlist being written here as out is the output of the clk_gate as it is default in code, so the current_design is changed to core.<br>
 * Screenshor for the above commands is provided below: <br><br>
 
-<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/1_mythcore_lib_read.png"><br><br>
-<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/2_mythcore_link_netist.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/1_mythcore_lib_read.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/2_mythcore_link_netist.png"><br><br>
+
 
 Netlist for the rvmyth is shown below: <br><br>
 
-<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/3_mythcore_netlist.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/3_mythcore_netlist.png"><br><br>
+
 
 * To simulate the netlist for gls, the commands are shown below:<br><br
 									    >
@@ -4315,7 +4317,8 @@ gtkwave dump.vcd
 ```
 GLS of the rvmyth design is shown below:<br><br>
 
-<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/4_mythcore_gls.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/4_mythcore_gls.png"><br><br>
+
 
 The processor output increments in the same way as at the pre-synthesis stage. So, the logic is properly defined. The output of Pre-Synthesis simulation and Post-synthesis simulation are obtained same. Hence the logical correctness of the design is verified.<br>
 
