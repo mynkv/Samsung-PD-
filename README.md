@@ -4279,10 +4279,87 @@ endmodule
 * Simulation result for the up-down counter: <br><br>
 <img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/1504b07642b295536263c2771347bee9780ffd5b/day12/18_counter_new_simulation"><br><br>
 
-
-
 </details>
 
+
+## Day-13-Post Synthesis-Simulation
+
+<details>
+<summary>Post-Synthesis of BabySoC</summary>
+
+The commands used for generating the out netlist are as follows:: 
+
+```ruby
+read_verilog mythcore_test.v
+link
+compile_ultra
+current_design core
+write -f verilog -out rvmyth_net.v
+```
+* The netlist being written here as out is the output of the clk_gate as it is default in code, so the current_design is changed to core.<br>
+* Screenshor for the above commands is provided below: <br><br>
+
+<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/1_mythcore_lib_read"><br><br>
+<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/2_mythcore_link_netist"><br><br>
+
+Netlist for the rvmyth is shown below: <br><br>
+
+<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/3_mythcore_netlist"><br><br>
+
+* To simulate the netlist for gls, the commands are shown below:<br><br
+									    >
+```ruby
+iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 rvmyth_net.v testbench.v primitives.v sky130_fd_sc_hd.v avsddac.v avsdpll.v vsdbabysoc.v
+./a.out
+gtkwave dump.vcd
+```
+GLS of the rvmyth design is shown below:<br><br>
+
+<img width="900" alt="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/4_mythcore_gls"><br><br>
+
+The processor output increments in the same way as at the pre-synthesis stage. So, the logic is properly defined. The output of Pre-Synthesis simulation and Post-synthesis simulation are obtained same. Hence the logical correctness of the design is verified.<br>
+
+</details>
+	
+
+<details>
+<summary>Post Synthesis of 4 bit up down counter</summary><br>
+
+For post synthesis simulation of up down countyer, we first generate the netlist of thye design. Commands to generate the netlist of the design are shown in the tcl script below: <br><br> 
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/6_tcl_counter"><br><br>
+
+Screenshot for the read and compile are shown below: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/7_counter_read_compile"><br><br>
+
+Generated netlist of the design is shown below:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/8_counter_netlist"><br><br>
+
+The following are the sequnece of steps for simulating the gls.
+
+```ruby
+iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 counter_net.v counter_4_tb.v primitives.v sky130_fd_sc_hd.v 
+./a.out
+gtkwave counter_4_tb.vcd 
+```
+
+The iverilog command uses the simulated gatelevel netlist and the same testbench for post-synthesis simulation. The ./a.out dumps the vcd format file with respect to netlist. The gtkwave is used to view the waveform. GLS of the design is shown below:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/9_counter_gls"><br><br>
+
+So, The output of post-synthesis and pre-synthesis exactly matches so the logical corectness of the design is verified.
+
+The following sequence of commands writes the netlist and ddc format as follows: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/6_tcl_counter"><br><br>
+
+GUI of the design is as follows: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/93fd5ef227f301c946742f249b218f1a075b93ff/day13/10_counter_gui"><br><br>
+
+</details>
 
 
 
