@@ -5653,6 +5653,180 @@ Date   : Wed Sep 27 16:16:01 2023
   --------------------------------------------------------------------
 
 ```
+```ruby
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : vsdbabysoc
+Version: T-2022.03-SP5-1
+Date   : Wed Sep 27 16:17:29 2023
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: nom_pvt   Library: avsddac
+Wire Load Model Mode: top
+
+  Startpoint: core1/CPU_src1_value_a3_reg[1]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: core1/CPU_Xreg_value_a4_reg[22][25]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  core1/CPU_src1_value_a3_reg[1]/CLK (sky130_fd_sc_hd__dfxtp_2)
+                                                          0.00 #     0.00 r
+  core1/CPU_src1_value_a3_reg[1]/Q (sky130_fd_sc_hd__dfxtp_2)
+                                                          1.27       1.27 r
+  core1/U2114/Y (sky130_fd_sc_hd__inv_2)                  0.14       1.41 f
+  core1/U1091/Y (sky130_fd_sc_hd__inv_2)                  0.17       1.58 r
+  core1/U306/Y (sky130_fd_sc_hd__nand2_2)                 0.15       1.73 f
+  core1/U303/Y (sky130_fd_sc_hd__nand2_2)                 0.19       1.92 r
+  core1/U1933/Y (sky130_fd_sc_hd__nand3_2)                0.19       2.11 f
+  core1/U2102/Y (sky130_fd_sc_hd__nand3_2)                0.21       2.32 r
+  core1/U2291/Y (sky130_fd_sc_hd__nand3_2)                0.20       2.51 f
+  core1/U176/Y (sky130_fd_sc_hd__nand3_2)                 0.21       2.72 r
+  core1/U175/Y (sky130_fd_sc_hd__nand3_2)                 0.18       2.90 f
+  core1/U2299/Y (sky130_fd_sc_hd__inv_2)                  0.22       3.12 r
+  core1/U1934/Y (sky130_fd_sc_hd__inv_4)                  0.17       3.28 f
+  core1/U3636/Y (sky130_fd_sc_hd__o21ai_1)                0.43       3.72 r
+  core1/U3637/Y (sky130_fd_sc_hd__inv_1)                  0.22       3.94 f
+  core1/U3638/Y (sky130_fd_sc_hd__xnor2_1)                0.33       4.27 f
+  core1/U3639/Y (sky130_fd_sc_hd__nand2_1)                0.20       4.47 r
+  core1/U1907/Y (sky130_fd_sc_hd__nand3_2)                0.23       4.70 f
+  core1/U1830/Y (sky130_fd_sc_hd__nand2_2)                0.27       4.97 r
+  core1/U4369/Y (sky130_fd_sc_hd__inv_2)                  0.18       5.15 f
+  core1/U4538/Y (sky130_fd_sc_hd__inv_1)                  0.24       5.39 r
+  core1/U5434/Y (sky130_fd_sc_hd__o22ai_2)                0.18       5.57 f
+  core1/CPU_Xreg_value_a4_reg[22][25]/D (sky130_fd_sc_hd__dfxtp_4)
+                                                          0.00       5.57 f
+  data arrival time                                                  5.57
+
+  clock clk (rise edge)                                   0.10       0.10
+  clock network delay (ideal)                             0.00       0.10
+  core1/CPU_Xreg_value_a4_reg[22][25]/CLK (sky130_fd_sc_hd__dfxtp_4)
+                                                          0.00       0.10 r
+  library setup time                                     -0.82      -0.72
+  data required time                                                -0.72
+  --------------------------------------------------------------------------
+  data required time                                                -0.72
+  data arrival time                                                 -5.57
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -6.29
+
+
+
+Information: Checking generated_clocks...
+
+Information: Checking loops...
+
+Information: Checking no_input_delay...
+Warning: The following input ports have no clock_relative delay specified, the command set_input_delay without -clock option will be ignored. (TIM-216)
+--------------------
+reset
+
+Information: Checking unconstrained_endpoints...
+
+Warning: The following end-points are not constrained for maximum delay.
+
+End point
+---------------
+core1/CPU_reset_a1_reg/D
+
+Information: Checking pulse_clock_cell_type...
+
+Information: Checking no_driving_cell...
+
+Information: Checking partial_input_delay...
+ 
+****************************************
+Report : qor
+Design : vsdbabysoc
+Version: T-2022.03-SP5-1
+Date   : Wed Sep 27 16:18:55 2023
+****************************************
+
+
+  Timing Path Group 'clk'
+  -----------------------------------
+  Levels of Logic:              20.00
+  Critical Path Length:          5.57
+  Critical Path Slack:          -6.29
+  Critical Path Clk Period:      0.10
+  Total Negative Slack:      -6722.40
+  No. of Violating Paths:     1191.00
+  Worst Hold Violation:          0.00
+  Total Hold Violation:          0.00
+  No. of Hold Violations:        0.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:          1
+  Hierarchical Port Count:         12
+  Leaf Cell Count:               7391
+  Buf/Inv Cell Count:            2209
+  Buf Cell Count:                  48
+  Inv Cell Count:                2161
+  CT Buf/Inv Cell Count:            0
+  Combinational Cell Count:      6199
+  Sequential Cell Count:         1192
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:    31507.717916
+  Noncombinational Area: 24200.709721
+  Buf/Inv Area:           8648.294146
+  Total Buffer Area:           364.10
+  Total Inverter Area:        8284.19
+  Macro/Black Box Area:      0.000000
+  Net Area:                  0.000000
+  -----------------------------------
+  Cell Area:             55708.427637
+  Design Area:           55708.427637
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:          7397
+  Nets With Violations:             0
+  Max Trans Violations:             0
+  Max Cap Violations:               0
+  -----------------------------------
+
+
+  Hostname: ssirlab03
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    2.16
+  Logic Optimization:                 12.27
+  Mapping Optimization:               41.18
+  -----------------------------------------
+  Overall Compile Time:               76.77
+  Overall Compile Wall Clock Time:    78.23
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 6.29  TNS: 6722.40  Number of Violating Paths: 1191
+
+
+  Design (Hold)  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+
+  --------------------------------------------------------------------
+
+```
+
 
 
 
