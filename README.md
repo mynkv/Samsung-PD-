@@ -4364,11 +4364,276 @@ GUI of the design is as follows: <br><br>
 
 </details>
 
+## Day-14-QOR
+
+<details>
+<summary>Post-Synthesis of BabySoC</summary>
+
+The commands used for generating the out netlist are as follows:: 
+
+```ruby
+read_verilog mythcore_test.v
+link
+compile_ultra
+current_design core
+write -f verilog -out rvmyth_net.v
+```
+* The netlist being written here as out is the output of the clk_gate as it is default in code, so the current_design is changed to core.<br>
+* Screenshor for the above commands is provided below: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/1_mythcore_lib_read.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/2_mythcore_link_netist.png"><br><br>
+
+
+Netlist for the rvmyth is shown below: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/3_mythcore_netlist.png"><br><br>
+
+
+* To simulate the netlist for gls, the commands are shown below:<br><br
+									    >
+```ruby
+iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 rvmyth_net.v testbench.v primitives.v sky130_fd_sc_hd.v avsddac.v avsdpll.v vsdbabysoc.v
+./a.out
+gtkwave dump.vcd
+```
+GLS of the rvmyth design is shown below:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/ec9c3ab5baccf47030a6af26ab001f15bd937df6/day13/4_mythcore_gls.png"><br><br>
+
+
+The processor output increments in the same way as at the pre-synthesis stage. So, the logic is properly defined. The output of Pre-Synthesis simulation and Post-synthesis simulation are obtained same. Hence the logical correctness of the design is verified.<br>
+
+</details>
+
+
+```ruby
+set target_library {avsddac.db avsdpll.db sky130_fd_sc_hd__ff_100C_1v65.db};
+set link_library {* avsddac.db avsdpll.db sky130_fd_sc_hd__ff_100C_1v65.db};
+read_verilog mythcore_test.v;
+current_design core;
+reset_design;
+read_verilog vsdbabysoc.v;
+link;
+source vsdbabysoc_synthesis.sdc;
+compile_ultra;
+report_qor;
+
+
+set target_library {avsddac.db avsdpll.db sky130_fd_sc_hd__ff_100C_1v95.db};
+set link_library {* avsddac.db avsdpll.db sky130_fd_sc_hd__ff_100C_1v95.db};
+read_verilog mythcore_test.v;
+current_design core;
+reset_design;
+read_verilog vsdbabysoc.v;
+link;
+source vsdbabysoc_synthesis.sdc;
+compile_ultra;
+report_qor;
+
+set target_library {avsddac.db avsdpll.db sky130_fd_sc_hd__ff_n40C_1v56.db};
+set link_library {* avsddac.db avsdpll.db sky130_fd_sc_hd__ff_n40C_1v56.db};
+read_verilog mythcore_test.v;
+current_design core;
+reset_design;
+read_verilog vsdbabysoc.v;
+link;
+source vsdbabysoc_synthesis.sdc;
+compile_ultra;
+report_qor;
+
+set target_library {avsddac.db avsdpll.db sky130_fd_sc_hd__ss_100C_1v40.db};
+set link_library {* avsddac.db avsdpll.db sky130_fd_sc_hd__ss_100C_1v40.db};
+read_verilog mythcore_test.v;
+current_design core;
+reset_design;
+read_verilog vsdbabysoc.v;
+link;
+source vsdbabysoc_synthesis.sdc;
+compile_ultra;
+report_timing;
+check_timing;
+report_qor;
+
+set target_library {avsddac.db avsdpll.db sky130_fd_sc_hd__ss_100C_1v60.db};
+set link_library {* avsddac.db avsdpll.db sky130_fd_sc_hd__ss_100C_1v60.db};
+read_verilog mythcore_test.v;
+current_design core;
+reset_design;
+read_verilog vsdbabysoc.v;
+link;
+source vsdbabysoc_synthesis.sdc;
+compile_ultra;
+report_timing;
+check_timing;
+report_qor;
+
+```
+```ruby
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : vsdbabysoc
+Version: T-2022.03-SP5-1
+Date   : Wed Sep 27 15:59:48 2023
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: nom_pvt   Library: avsddac
+Wire Load Model Mode: top
+
+  Startpoint: core1/CPU_src1_value_a3_reg[9]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: core1/CPU_Xreg_value_a4_reg[5][31]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  core1/CPU_src1_value_a3_reg[9]/CLK (sky130_fd_sc_hd__dfxtp_4)
+                                                          0.00 #     0.00 r
+  core1/CPU_src1_value_a3_reg[9]/Q (sky130_fd_sc_hd__dfxtp_4)
+                                                          0.24       0.24 f
+  core1/U481/Y (sky130_fd_sc_hd__nor2_2)                  0.09       0.33 r
+  core1/U483/Y (sky130_fd_sc_hd__o22ai_2)                 0.04       0.37 f
+  core1/U842/Y (sky130_fd_sc_hd__a21oi_1)                 0.07       0.44 r
+  core1/U1005/Y (sky130_fd_sc_hd__o21ai_1)                0.05       0.49 f
+  core1/U336/Y (sky130_fd_sc_hd__inv_2)                   0.04       0.53 r
+  core1/U565/Y (sky130_fd_sc_hd__nand2_4)                 0.05       0.58 f
+  core1/U542/Y (sky130_fd_sc_hd__inv_2)                   0.06       0.64 r
+  core1/U433/Y (sky130_fd_sc_hd__o21ai_1)                 0.05       0.69 f
+  core1/U432/Y (sky130_fd_sc_hd__xnor2_1)                 0.09       0.78 f
+  core1/U431/Y (sky130_fd_sc_hd__nand2_1)                 0.05       0.83 r
+  core1/U424/Y (sky130_fd_sc_hd__nand3_2)                 0.07       0.90 f
+  core1/U3937/Y (sky130_fd_sc_hd__inv_1)                  0.10       1.00 r
+  core1/U3931/Y (sky130_fd_sc_hd__o22ai_1)                0.03       1.03 f
+  core1/CPU_Xreg_value_a4_reg[5][31]/D (sky130_fd_sc_hd__dfxtp_1)
+                                                          0.00       1.03 f
+  data arrival time                                                  1.03
+
+  clock clk (rise edge)                                   0.10       0.10
+  clock network delay (ideal)                             0.00       0.10
+  core1/CPU_Xreg_value_a4_reg[5][31]/CLK (sky130_fd_sc_hd__dfxtp_1)
+                                                          0.00       0.10 r
+  library setup time                                     -0.07       0.03
+  data required time                                                 0.03
+  --------------------------------------------------------------------------
+  data required time                                                 0.03
+  data arrival time                                                 -1.03
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -1.00
 
 
 
+Information: Checking generated_clocks...
+
+Information: Checking loops...
+
+Information: Checking no_input_delay...
+Warning: The following input ports have no clock_relative delay specified, the command set_input_delay without -clock option will be ignored. (TIM-216)
+--------------------
+reset
+
+Information: Checking unconstrained_endpoints...
+
+Warning: The following end-points are not constrained for maximum delay.
+
+End point
+---------------
+core1/CPU_reset_a1_reg/D
+
+Information: Checking pulse_clock_cell_type...
+
+Information: Checking no_driving_cell...
+
+Information: Checking partial_input_delay...
+ 
+****************************************
+Report : qor
+Design : vsdbabysoc
+Version: T-2022.03-SP5-1
+Date   : Wed Sep 27 15:59:52 2023
+****************************************
 
 
+  Timing Path Group 'clk'
+  -----------------------------------
+  Levels of Logic:              13.00
+  Critical Path Length:          1.03
+  Critical Path Slack:          -1.00
+  Critical Path Clk Period:      0.10
+  Total Negative Slack:      -1075.32
+  No. of Violating Paths:     1191.00
+  Worst Hold Violation:          0.00
+  Total Hold Violation:          0.00
+  No. of Hold Violations:        0.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:          1
+  Hierarchical Port Count:         12
+  Leaf Cell Count:               6750
+  Buf/Inv Cell Count:            1833
+  Buf Cell Count:                  93
+  Inv Cell Count:                1740
+  CT Buf/Inv Cell Count:            0
+  Combinational Cell Count:      5558
+  Sequential Cell Count:         1192
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:    28997.810840
+  Noncombinational Area: 23998.015255
+  Buf/Inv Area:           7337.036600
+  Total Buffer Area:           580.56
+  Total Inverter Area:        6756.48
+  Macro/Black Box Area:      0.000000
+  Net Area:                  0.000000
+  -----------------------------------
+  Cell Area:             52995.826095
+  Design Area:           52995.826095
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:          6756
+  Nets With Violations:             0
+  Max Trans Violations:             0
+  Max Cap Violations:               0
+  -----------------------------------
+
+
+  Hostname: ssirlab03
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    2.18
+  Logic Optimization:                 12.37
+  Mapping Optimization:               37.75
+  -----------------------------------------
+  Overall Compile Time:               70.02
+  Overall Compile Wall Clock Time:    71.66
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 1.00  TNS: 1075.32  Number of Violating Paths: 1191
+
+
+  Design (Hold)  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+
+  ---------------------------------------------------
+```
 
 
 
