@@ -4406,6 +4406,21 @@ The processor output increments in the same way as at the pre-synthesis stage. S
 
 </details>
 
+
+
+## Day-14-WNS-for-different-libs
+
+I invoked tools on day-0 using these commands, each briefly explained.
+
+	
+ <details>
+ <summary>dc_shell </summary>
+Design Compiler is the command line interface of Synopsys synthesis tool and is invoked by either typing dc_shell in a UNIX shell. The dc_shell is the original format that is based on Synopsys's own language while dc_shell-t uses the standard Tcl language.
+Below is the screenshot showing sucessful launch of dc_shell:
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+
+
 ```ruby
 ****************************************
 Report : timing
