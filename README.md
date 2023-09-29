@@ -1,4 +1,4 @@
-# Samsung-PD-
+![image](https://github.com/mynkv/Samsung-PD-/assets/121084815/94e95130-0aef-4ffa-9401-7df7641d91b1)# Samsung-PD-
 ## Day-0-Invoking-tools
 
 I invoked tools on day-0 using these commands, each briefly explained.
@@ -4408,18 +4408,93 @@ The processor output increments in the same way as at the pre-synthesis stage. S
 
 
 
-## Day-14-WNS-for-different-libs
+## Day-14-Synopsys DC and timing analysis
 
-I invoked tools on day-0 using these commands, each briefly explained.
+<details>
+<summary>PVT</summary><br>
 
-	
- <details>
- <summary>dc_shell </summary>
-Design Compiler is the command line interface of Synopsys synthesis tool and is invoked by either typing dc_shell in a UNIX shell. The dc_shell is the original format that is based on Synopsys's own language while dc_shell-t uses the standard Tcl language.
-Below is the screenshot showing sucessful launch of dc_shell:
+**PVT**:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+PVT refers to the three key factors that affect the performance and behavior of integrated circuits:<br>
 
+1. **Process**: This factor accounts for the variations in manufacturing that result in differences in transistor characteristics across a single chip. These variations can be described using terms like "tt" (typical-typical), "ff" (fast-fast), "ss" (slow-slow), "fs" (fast-slow), and "sf" (slow-fast) to characterize different transistor behaviors across the chip's surface.<br>
+
+2. **Voltage**: Voltage refers to the varying electrical potential on the chip during its operation. Fluctuations in voltage can be caused by various factors, such as voltage drops in input/output (IO) lines or supply noise resulting from parasitic inductance.<br>
+
+3. **Temperature**: Temperature is the measure of the chip's heat during operation, primarily caused by power dissipation in the MOS transistors. Temperature fluctuations can significantly impact the performance and timing of the circuit elements on the chip.<br><br>
+
+So, PVT analysis takes into account the interplay of these three factors to understand and optimize the behavior of integrated circuits.<br><br>
+
+**PVT Corners**: These are specific sets of conditions that designers consider when developing integrated circuits. These conditions represent different combinations of Process, Voltage, and Temperature (PVT) parameters and are essential for ensuring that the chip functions reliably in a variety of real-world scenarios. Each PVT corner represents a distinct set of environmental and operational conditions that can affect the performance and behavior of the integrated circuit. Designers analyze the chip's behavior under these PVT corners to guarantee its functionality across a range of situations. <br><br>
+
+**PVT terminologies**: <br><br>
+
+**WNS**: <br>
+* Negative slack, in this context, indicates that a signal is failing to meet its timing requirement. "Worst Negative Slack" identifies the most significant timing violation in a circuit, meaning it represents the scenario where a signal is failing to meet its timing constraint by the largest margin, potentially indicating a critical issue that needs attention.<br>
+* Designers use Worst Negative Slack information to identify and address the most critical timing problems in a design, which is crucial for ensuring that the integrated circuit operates reliably and as intended.<br><br>
+
+
+**TNS**:<br>
+* Negative slack indicates that a particular timing path or signal in the circuit is failing to meet its timing constraint. Total Negative Slack, therefore, adds up all the individual negative slack values from various timing paths within the circuit to give an overall measure of how far the entire circuit is from meeting its timing requirements.<br>
+* Designers use Total Negative Slack to assess the overall timing performance of a design and to identify areas where timing violations are most critical. Reducing TNS is a crucial step in optimizing a design to ensure that it operates reliably and meets its intended functionality.<br>
+
+</details>
+
+<details>
+<summary>Labs on PVT Corners</summary><br>
+
+* Our primary objective is to assess the timing characteristics of our designed circuit under diverse conditions, encompassing Process (variations in manufacturing), Voltage (fluctuations in power supply), and Temperature (variations in heat). Collectively, these factors are known as PVT corners. Understanding how these factors impact our circuit's performance is vital to ensure its reliability and adherence to specified timing criteria.<br>
+
+* In our analysis, we conducted synthesis for the design while accounting for various PVT corners. We focused on evaluating three critical timing parameters: Total Negative Slack (TNS), Worst Negative Slack (WNS), and Worst Hold Slack (WHS). TNS offers a comprehensive evaluation of timing issues across the entire design, while WNS and WHS help identify the most critical timing challenges, including setup and hold violations.<br>
+
+* Before commencing the synthesis process with Synopsys Design Compiler (dc_shell), it's crucial to transform the necessary .lib files into a compatible .db format using lc_shell. The commands employed for converting a .lib file to a .db file are as follows:<br><br>
+
+```ruby
+csh
+lc_shell
+read_lib <library_name>
+write_lib <library_name> -f db -o <name_of_the_db_file>
+```
+
+* Constraint file used in the design is: <br><br>
+
+```ruby
+set_units -time ns;
+create_clock -name MYCLK -per 2 [get_pins {pll/CLK}];
+
+set_clock_latency -source 1 [get_clocks MYCLK]
+set_clock_uncertainty -setup 0.5 [get_clocks MYCLK]; 
+set_clock_uncertainty -hold 0.4 [get_clocks MYCLK]; 
+
+set_input_delay -max 1 -clock \[get_clocks MYCLK] [all_inputs];
+set_input_delay -min 0.5 -clock \[get_clocks MYCLK] [all_inputs];
+set_output_delay -max 1 -clock \[get_clocks MYCLK] [all_outputs];
+set_output_delay -min 0.5 -clock \[get_clocks MYCLK] [all_outputs];
+
+set_input_transition -max 0.2 \[all_inputs];
+set_input_transition -min 0.1 \[all_inputs];
+
+set_max_area  800;
+
+set_load -max 0.2 \[all_outputs];
+set_load -min 0.1 \[all_outputs];
+```
+
+* To test the various PVT corners in the design, it's necessary to navigate to dc_shell and configure the required libraries accordingly. Below is a script for accomplishing this task: <br><br>
+
+```ruby
+set target_library { <sky130_PVT_corner> , avsddac.db , avsdpll.db}
+set link_library {* sky130_PVT_corner> , avsddac.db , avsdpll.db}
+read_verilog vsdbabysoc.v
+link
+source <constraints_file_name>
+compile_ultra
+report_qor
+```
+
+The reports below depict the setup delay and the Quality of Results (QoR) across various PVT corners: <br><br>
+
+1. sky130_fd_sc_hd__ff_100C_1v65: <br><br>
 
 ```ruby
 ****************************************
@@ -4561,6 +4636,9 @@ Date   : Thu Sep 28 11:06:58 2023
   --------------------------------------------------------------------
 
 ```
+
+
+2. sky130_fd_sc_hd__ff_100C_1v95: <br><br>
 
 ```ruby
 ****************************************
@@ -4705,6 +4783,11 @@ Date   : Thu Sep 28 11:09:42 2023
   --------------------------------------------------------------------
 
 ```
+
+
+
+3. sky130_fd_sc_hd__ff_n40C_1v56: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -4853,6 +4936,8 @@ Date   : Thu Sep 28 11:13:01 2023
   --------------------------------------------------------------------
 ```
 
+4. sky130_fd_sc_hd__ff_n40C_1v65: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -4998,6 +5083,9 @@ Date   : Thu Sep 28 11:14:27 2023
   --------------------------------------------------------------------
 
 ```
+
+5. sky130_fd_sc_hd__ff_n40C_1v76: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -5140,6 +5228,9 @@ Date   : Thu Sep 28 11:16:49 2023
 
   --------------------------------------------------------------------
 ```
+
+6. sky130_fd_sc_hd__ss_100C_1v40: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -5286,6 +5377,8 @@ Date   : Thu Sep 28 11:19:52 2023
   --------------------------------------------------------------------
 
 ```
+
+7. sky130_fd_sc_hd__ss_100C_1v60: <br><br>
 
 ```ruby
 ****************************************
@@ -5435,6 +5528,8 @@ Date   : Thu Sep 28 11:21:31 2023
   --------------------------------------------------------------------
 
 ```
+
+8. sky130_fd_sc_hd__ss_n40C_1v28: <br><br>
 
 ```ruby
 ****************************************
@@ -5587,6 +5682,8 @@ Date   : Thu Sep 28 11:24:05 2023
 
 ```
 
+9. sky130_fd_sc_hd__ss_n40C_1v35: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -5738,6 +5835,8 @@ Date   : Thu Sep 28 11:25:47 2023
 
 ```
 
+10. sky130_fd_sc_hd__ss_n40C_1v40: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -5886,6 +5985,8 @@ Date   : Thu Sep 28 11:27:53 2023
   --------------------------------------------------------------------
 
 ```
+
+11. sky130_fd_sc_hd__ss_n40C_1v44: <br><br>
 
 ```ruby
 ****************************************
@@ -6038,6 +6139,8 @@ Date   : Thu Sep 28 11:29:39 2023
 
 ```
 
+12. sky130_fd_sc_hd__ss_n40C_1v76: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -6186,6 +6289,8 @@ Date   : Thu Sep 28 11:32:28 2023
   ---------------------------------------------------------------
 ```
 
+13. sky130_fd_sc_hd__tt_025C_1v80: <br><br>
+
 ```ruby
 ****************************************
 Report : timing
@@ -6332,6 +6437,16 @@ Date   : Thu Sep 28 11:36:27 2023
   --------------------------------------------------------------------
 
 ```
+
+
+
+
+
+
+
+
+
+</details>
 
 
 
