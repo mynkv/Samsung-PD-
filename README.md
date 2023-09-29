@@ -1,4 +1,4 @@
-![image](https://github.com/mynkv/Samsung-PD-/assets/121084815/94e95130-0aef-4ffa-9401-7df7641d91b1)# Samsung-PD-
+
 ## Day-0-Invoking-tools
 
 I invoked tools on day-0 using these commands, each briefly explained.
@@ -6438,11 +6438,39 @@ Date   : Thu Sep 28 11:36:27 2023
 
 ```
 
+* The table provided displays the Worst Negative Slack (WNS) and Total Negative Slack (TNS) values associated with violations in both Hold and Setup timing constraints.: <br><br>
 
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/60b2589fe343cb8e262cd18dc80f173caad9b9ad/day14/pic_0.1/1.table.PNG"><br><br>
 
+* The graph presented illustrates the Worst Negative Slack (WNS) and Total Negative Slack (TNS) values in the context of Setup timing violations. The left-hand side (LHS) axis represents WNS, while the right-hand side (RHS) axis represents TNS: <br><br>
 
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/60b2589fe343cb8e262cd18dc80f173caad9b9ad/day14/pic_0.1/2.Setup_wns_tns.png"><br><br>
 
+* The graph presented illustrates the Worst Negative Slack (WNS) and Total Negative Slack (TNS) values in the context of Hold timing violations. The left-hand side (LHS) axis represents WNS, while the right-hand side (RHS) axis represents TNS: <br><br>
 
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/60b2589fe343cb8e262cd18dc80f173caad9b9ad/day14/pic_0.1/3.hold_wns_tns.png"><br><br>
+
+* The graph below provides a comparison of Total Negative Slack (TNS) values for both Hold and Setup timing violations. The left-hand side (LHS) axis corresponds to Setup, while the right-hand side (RHS) axis corresponds to Hold: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/60b2589fe343cb8e262cd18dc80f173caad9b9ad/day14/pic_0.1/4.%20tns-setup_hold.png"><br><br>
+
+* The graph below provides a comparison of Worst Negative Slack (TNS) values for both Hold and Setup timing violations. The left-hand side (LHS) axis corresponds to Setup, while the right-hand side (RHS) axis corresponds to Hold: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/60b2589fe343cb8e262cd18dc80f173caad9b9ad/day14/pic_0.1/5.%20WNS-setup_hold.png"><br><br>
+
+* Conclusions:<br><br>
+
+Hold Violations and Setup Issues are common challenges encountered in digital circuit design. Here's a breakdown of their characteristics and insights into specific Process, Voltage, and Temperature (PVT) corners:<br><br>
+
+* **Hold Violations**: These tend to be more prevalent in faster cells. Hold time represents the minimum duration for data to stabilize before the clock edge, ensuring reliable capture by a flip-flop. Faster cells process data quickly, leaving less time for data to stabilize, making them more susceptible to hold violations.<br>
+
+* **Setup Issues**: Conversely, setup problems tend to arise in slower cells. Setup time is the minimum required duration for data to remain stable after the clock edge to be correctly captured. Slower cells necessitate a longer setup time due to their slower data processing, potentially leading to setup violations if this requirement isn't met.<br><br>
+
+Regarding PVT corners:<br><br>
+
+* **Worst Setup Corner**: The most critical PVT corner for setup issues is sky130_fd_sc_hd__ss_n40C_1v28. This corner signifies a slow process (ss), low temperature (n40C), and a supply voltage of 1.28 volts. Ensuring that our design meets timing requirements under these challenging conditions is crucial, as success here suggests robust performance across varying conditions.<br>
+
+* **Best PVT Corner**: Conversely, the best PVT corner is sky130_fd_sc_hd__ff_n40C_1v76. In this corner, setup violations are absent, and hold violations are minimal. It is considered the most favorable condition because it offers the highest overall performance and reliability.<br>
 
 
 
