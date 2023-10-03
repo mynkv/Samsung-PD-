@@ -6483,10 +6483,7 @@ Regarding PVT corners:<br><br>
 **How to talk to computers**<br>
 <details>
 <summary>Introduction to QFN-48 Package, chip, pads, core, die and IPs</summary>v
-Design Compiler is the command line interface of Synopsys synthesis tool and is invoked by either typing dc_shell in a UNIX shell. The dc_shell is the original format that is based on Synopsys's own language while dc_shell-t uses the standard Tcl language.
-Below is the screenshot showing sucessful launch of dc_shell:
-
-<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/1.jpeg">
 </details>
 
 <details>
@@ -6508,7 +6505,8 @@ RISC-V is designed to scale from microcontrollers and embedded systems to high-p
 **Customization**:<br>
 One of RISC-V's strengths is its adaptability. Users can define their own custom instructions and extensions to meet specific application needs. This flexibility is valuable for optimizing performance and power efficiency.<br><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/2.jpeg"><br><br>
+
 </details>
 
 <details>
@@ -6524,8 +6522,8 @@ A compiler is a software tool that translates human-readable source code written
 An assembler is a low-level programming tool used to translate assembly language code into machine code. Assembly language is a human-readable representation of machine code instructions, and the assembler converts this symbolic language into the binary instructions that a computer's central processing unit (CPU) can execute directly.<br><br>
 
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/3.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/4.jpeg"><br><br>
 </details>
 
 
@@ -6534,7 +6532,7 @@ An assembler is a low-level programming tool used to translate assembly language
 <details>
 <summary>Introduction to all components of open-source digital asic design</summary><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/5.jpeg"><br><br>
 
 **PDK**: <br>
 A Process Design Kit is a collection of files, data, and documents provided by semiconductor foundries or manufacturers to enable integrated circuit (IC) designers to design and verify their custom ICs using the foundry's manufacturing process.<br><br>
@@ -6554,7 +6552,7 @@ Here are the key components and purposes of a Process Design Kit (PDK) in VLSI:<
 * Technology Files: These files contain information about the layers, materials, and manufacturing processes used by the foundry. This information is critical for CAD (Computer-Aided Design) tools to correctly interpret and generate layouts and masks for fabrication.<br><br>
 
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/6.jpeg"><br><br>
 
 The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open-source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater's facility.<br>
 
@@ -6564,22 +6562,22 @@ The SkyWater Open Source PDK is a collaboration between Google and SkyWater Tech
 <summary>Simplified RTL2GDS flow</summary><br>
 
 1. Synthesis: <br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/7.jpeg"><br><br>
 
 2. Floor planning and power planning: <br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/8.jpeg"><br><br>
 
 3. Placement: <br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/9.jpeg"><br><br>
 
 4. CTS: <br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/10.jpeg"><br><br>
 
 5. Routing: <br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/11.jpeg"><br><br>
 
 6. Sign Off: <br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/12.jpeg"><br><br>
 
 </details>
 
@@ -6588,7 +6586,8 @@ The SkyWater Open Source PDK is a collaboration between Google and SkyWater Tech
 
 OpenLANE is an open-source digital ASIC (Application-Specific Integrated Circuit) design flow that provides a complete end-to-end solution for designing and fabricating custom digital integrated circuits. It is an initiative to democratize and simplify the process of designing and manufacturing custom silicon chips. OpenLANE is part of the larger open-source Electronic Design Automation (EDA) ecosystem and is primarily focused on digital designs using standard cell libraries.<br><br>
 
-
+Strive Family: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/12.2.PNG"><br><br>
 
 
 The primary goal of OpenLANE is to provide an automated and self-contained digital ASIC design flow, with an emphasis on producing a clean GDSII file without requiring human intervention (no-human-in-the-loop). This means it aims to automate various stages of the design process to achieve the following outcomes:<br><br>
@@ -6618,17 +6617,30 @@ Two Modes of Operation:<br>
 </details>
 
 <details>
-<summary>IIntroduction to OpenLANE detailed ASIC design flow</summary><br>
+<summary>Introduction to OpenLANE detailed ASIC design flow</summary><br>
 
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
-
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/13.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/14.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/15.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/16.jpeg"><br><br>
 
 </details>
 
+**Get familiar to open-source EDA tools**: <br><br>
 
+<details>
+<summary>OpenLANE Directory structure in detail</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/17_file%2Binside_pdk_sky130.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/18.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/20_designs.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/21.PNG"><br><br>
+
+Running a design in openLANE: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/22.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/23.PNG"><br><br>
+</details>
 
 
 
