@@ -6685,8 +6685,82 @@ Two Modes of Operation:<br>
 
 </details>
 
+## Day 16: Understand importance of good floorplan vs bad floor plan and introduction to library cells
+
+# Chip Floor planning considerations
+
+<details>
+<summary>Utilization factor and aspect ratio</summary>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/1.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/2.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/3.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/4.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/5.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/6.png"><br>
+</details>
+
+<details>
+<summary>Concept of pre-placed cells</summary>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/7.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/8.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/9.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/b9ed0ccb817a656429e370d9c17bab91706ee3e7/day16.1/10.png"><br>
+</details>
+
+<details>
+<summary>De-coupling capacitors</summary><br>
+
+* Let's examine the level of switching activity necessary for the complex circuit depicted below:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e759674b37cb7d3ca0345e59ebf6ea39271c0d7d/day16.1/11.PNG"><br><br>
+
+1. Disregarding capacitance for this discussion, we have well-defined values for Rdd, Rss, Ldd, and Lss.<br>
+2. During the switching operation, the circuit requires a peak switching current (peak).<br>
+3. Due to the presence of Rdd and Ldd, there will be a voltage drop across them, causing Node 'A' to have a voltage Vdd' instead of Vdd.<br>
+4. For instance, if 1 volt flows from the source to Vdd', it will be less than 1 volt due to this voltage drop.<br>
+5. If Vdd' drops below the noise margin because of Rdd and Ldd, a logic 1 at the circuit's output may not be recognized as a logic 1 at the input.<br>
+6. Referring to the noise margin graph, there are three regions: logic 0, undefined, and logic 1. If Vdd falls between Vil and Vih, it is considered undefined, posing a risk.<br>
+7. However, if Vdd falls between Vih and Voh, it will be detected as logic 1, and for logic 0, it will occur when Vdd falls between Vil and Vol.<br><br>
+
+* To address this problem, coupling capacitors are employed as depicted below: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e759674b37cb7d3ca0345e59ebf6ea39271c0d7d/day16.1/12.PNG"><br><br>
+
+1. Decoupling capacitors are added in parallel with the circuit.<br>
+2. Each time the circuit switches, it draws current from Ca, while the RL network is used to replenish the charge into Ca.<br>
+3. These capacitors are strategically placed between blocks to ensure that all blocks receive the necessary power supply when switching occurs.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e759674b37cb7d3ca0345e59ebf6ea39271c0d7d/day16.1/13.png"><br><br>
+
+</details>
+
+<details>
+<summary>Power Planing</summary><br>
+
+* Let's examine the complex circuit depicted below:<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/14.PNG"><br><br>
 
 
+1. As observed, the voltage source supplied power to four blocks.<br>
+2. In this scenario, there arises an issue where it becomes challenging to ensure stable supply from the source (it's not feasible to place all the decoupling capacitors).<br>
+3. We designate logic 1 for capacitor charging and logic 0 for discharging.<br>
+4. This 16-bit bus is connected to an inverter, resulting in an inverted output compared to the input. Consequently, logic 1 becomes a discharge, and logic 0 becomes a charge.<br>
+5. Consequently, all capacitors initially charged to a certain voltage will discharge to 0V through a single ground tap point. This action leads to a bump at the ground tap point.<br>
+7. If this bounce surpasses the noise margin level, the outcome becomes unpredictable.<br>
+8. Additionally, all capacitors initially at 0 volts will need to charge to 0V through a single Vdd tap point. This results in a reduction in voltage at the Vdd tap point, potentially causing a voltage droop within the noise margin level, which may lead to an undefined state.<br><br>
+
+* To address this issue, we will implement the following solution:<br><br>
+
+	1. Instead of relying on a single power supply, we will employ multiple power supplies.<br>
+	2. These multiple power supplies will be directed to the nearest blocks, ensuring that each block receives a reliable power supply without any possibility of missing out.<br><br>
+
+* The concept is straightforward: all logic elements will access the nearest power supply source, enhancing the overall stability of the system.<br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/15.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/16.PNG"><br><br>
+
+</details>
 
 
 
