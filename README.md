@@ -6480,7 +6480,7 @@ Regarding PVT corners:<br><br>
 ## Day 15 - Inception of EDA and PDK
 
 
-**How to talk to computers**<br>
+### How to talk to computers<br>
 <details>
 <summary>Introduction to QFN-48 Package, chip, pads, core, die and IPs</summary>v
 <img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f3a76e9f739cba8bb557042148dfdb0af7360131/day16/1.jpeg">
@@ -6527,7 +6527,7 @@ An assembler is a low-level programming tool used to translate assembly language
 </details>
 
 
-**SoC design and OpenLANE**<br>
+### SoC design and OpenLANE<br>
 
 <details>
 <summary>Introduction to all components of open-source digital asic design</summary><br>
@@ -6626,7 +6626,7 @@ Two Modes of Operation:<br>
 
 </details>
 
-**Get familiar to open-source EDA tools**:
+### Get familiar to open-source EDA tools:
 
 <details>
 <summary>OpenLANE Directory structure in detail</summary><br>
@@ -6758,12 +6758,17 @@ Two Modes of Operation:<br>
 
 * The concept is straightforward: all logic elements will access the nearest power supply source, enhancing the overall stability of the system.<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/15.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/16.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/15.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/02bd414550683d681937e1ecd0d1fee81c75c851/day16.1/16.PNG"><br><br>
 
 </details>
 
+<details>
+<summary>Pin placement and logical cell placement blockage</summary><br>
 
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/07989294668a7a1e4c1a0a04862cf19f7879d8b3/day16.1/17.png"><br><br>
+
+</details>
 
 
 
