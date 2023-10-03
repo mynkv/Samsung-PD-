@@ -6626,7 +6626,7 @@ Two Modes of Operation:<br>
 
 </details>
 
-**Get familiar to open-source EDA tools**: <br><br>
+**Get familiar to open-source EDA tools**:
 
 <details>
 <summary>OpenLANE Directory structure in detail</summary><br>
@@ -6662,8 +6662,26 @@ Two Modes of Operation:<br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/94a6612dfc5f6826f20393944b695e4a8b601f38/day16/26.PNG"><br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/94a6612dfc5f6826f20393944b695e4a8b601f38/day16/27.PNG"><br><br>
 
-*Synthesizing the desig using command ```% run_synthesis```: <br>
+* Synthesizing the design using command ```% run_synthesis```: <br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e63da18b55a1da8f9a9092e494af84254f04fc70/day16/28.PNG"><br><br>
+
+</details>
+
+<details>
+
+<summary>Steps to characterize synthesis results</summary><br>
+
+* Checking the reports after synthesizing the design: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/151c1d880f386387244ad1caf1c4c1e8f9e62220/day16/29.PNG"><br><br>
+
+* Inside 1-yosys_4.stat.rpt: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/151c1d880f386387244ad1caf1c4c1e8f9e62220/day16/30_flopratio.PNG"><br><br>
+
+* Inside 2-opensta.rpt: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/151c1d880f386387244ad1caf1c4c1e8f9e62220/day16/31.PNG"><br><br>
+
+* Inside opensta.timing.rpt: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/151c1d880f386387244ad1caf1c4c1e8f9e62220/day16/32.PNG"><br><br>
 
 </details>
 
