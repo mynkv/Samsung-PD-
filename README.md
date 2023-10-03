@@ -6636,12 +6636,36 @@ Two Modes of Operation:<br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/20_designs.PNG"><br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/21.PNG"><br><br>
 
-Running a design in openLANE: <br><br>
-
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/22.PNG"><br><br>
-<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/23.PNG"><br><br>
 </details>
 
+<details>
+
+<summary>Design Preparation Step</summary><br>
+	
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/22.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c7bc80fc2511695cfd9dbb7da49ef1d164ab2d8a/day16/23.PNG"><br><br>
+
+</details>
+
+
+<details>
+
+<summary>Review files after design prep and run synthesis</summary><br>
+
+* Checking the design after merging lef: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/94a6612dfc5f6826f20393944b695e4a8b601f38/day16/24.PNG"><br><br>
+
+* Inside config.tcl: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/94a6612dfc5f6826f20393944b695e4a8b601f38/day16/25.PNG"><br><br>
+
+* Inside merged.lef: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/94a6612dfc5f6826f20393944b695e4a8b601f38/day16/26.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/94a6612dfc5f6826f20393944b695e4a8b601f38/day16/27.PNG"><br><br>
+
+*Synthesizing the desig using command ```% run_synthesis```: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e63da18b55a1da8f9a9092e494af84254f04fc70/day16/28.PNG"><br><br>
+
+</details>
 
 
 
