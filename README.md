@@ -6473,8 +6473,177 @@ Regarding PVT corners:<br><br>
 * **Best PVT Corner**: Conversely, the best PVT corner is sky130_fd_sc_hd__ff_n40C_1v76. In this corner, setup violations are absent, and hold violations are minimal. It is considered the most favorable condition because it offers the highest overall performance and reliability.<br>
 
 
+</details>
+
+
+
+## Day 15 - Inception of EDA and PDK
+
+
+**How to talk to computers**<br>
+<details>
+<summary>Introduction to QFN-48 Package, chip, pads, core, die and IPs</summary>v
+Design Compiler is the command line interface of Synopsys synthesis tool and is invoked by either typing dc_shell in a UNIX shell. The dc_shell is the original format that is based on Synopsys's own language while dc_shell-t uses the standard Tcl language.
+Below is the screenshot showing sucessful launch of dc_shell:
+
+<img width="600" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png">
+</details>
+
+<details>
+<summary>Introduction to RISC-V</summary><br>
+RISC-V is an open-source instruction set architecture (ISA) that has gained significant attention and popularity in recent years. Here's an introduction to RISC-V:<br>
+
+What is RISC-V?<br>
+RISC-V (pronounced "risk-five") is an open and extensible ISA designed to be simple, modular, and customizable. ISA defines the interface between a computer's hardware and software, specifying the instructions that a processor can execute.<br><br>
+
+**Open Source Philosophy**:<br>
+RISC-V is unique because it is open-source. Anyone can access the specifications, contribute to its development, and build their own RISC-V compatible processors without needing to pay licensing fees. This openness has led to a vibrant ecosystem of RISC-V projects, tools, and hardware implementations.<br><br>
+
+**Simplicity and Modularity**:<br>
+RISC-V's ISA is intentionally kept simple and minimalistic, which makes it easier to implement in hardware and software. It has a small set of base integer instructions, with optional extensions for specialized tasks (e.g., floating-point, SIMD, cryptography). This modularity allows designers to choose only the features they need, reducing complexity.<br><br>
+
+**Scalability**:<br>
+RISC-V is designed to scale from microcontrollers and embedded systems to high-performance server processors. It supports both 32-bit and 64-bit address spaces, making it suitable for a wide range of applications.<br><br>
+
+**Customization**:<br>
+One of RISC-V's strengths is its adaptability. Users can define their own custom instructions and extensions to meet specific application needs. This flexibility is valuable for optimizing performance and power efficiency.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+</details>
+
+<details>
+<summary>From Software Applications to Hardware</summary><br>
+
+**Operating System**:<br>
+An operating system (OS) is a fundamental software component that manages computer hardware resources and provides a set of services to software applications. It acts as an intermediary between the hardware and the software, enabling the efficient execution of tasks and the use of system resources. <br><br>
+
+**Compiler**:<br>
+A compiler is a software tool that translates human-readable source code written in a high-level programming language into machine code or a lower-level intermediate code that can be executed by a computer's central processing unit (CPU). The primary purpose of a compiler is to enable the execution of high-level programming languages on a computer by converting them into a form that the hardware can understand and execute.<br><br>
+
+**Assembler**: <br>
+An assembler is a low-level programming tool used to translate assembly language code into machine code. Assembly language is a human-readable representation of machine code instructions, and the assembler converts this symbolic language into the binary instructions that a computer's central processing unit (CPU) can execute directly.<br><br>
+
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+</details>
+
+
+**SoC design and OpenLANE**<br>
+
+<details>
+<summary>Introduction to all components of open-source digital asic design</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+**PDK**: <br>
+A Process Design Kit is a collection of files, data, and documents provided by semiconductor foundries or manufacturers to enable integrated circuit (IC) designers to design and verify their custom ICs using the foundry's manufacturing process.<br><br>
+
+Here are the key components and purposes of a Process Design Kit (PDK) in VLSI:<br>
+
+* Process Technology Information: The PDK includes detailed information about the foundry's manufacturing process. This includes data about the available silicon wafer sizes, transistor types and characteristics, metal layers, via structures, and other critical process parameters. Designers need this information to ensure that their designs are compatible with the foundry's process.<br><br>
+
+* Libraries: PDKs provide libraries of standard cells, which are fundamental building blocks for digital IC design. These libraries contain pre-designed logic gates, flip-flops, latches, and other commonly used components. These libraries are optimized for the specific manufacturing process and are critical for creating digital designs efficiently.<br><br>
+
+* Device Models: PDKs contain transistor-level models for the different types of transistors available in the process (e.g., NMOS, PMOS, CMOS). These models describe the electrical behavior of transistors under different operating conditions and are essential for accurate circuit simulations.<br><br>
+
+* Design Rules: The PDK includes design rules that specify the minimum dimensions, spacing, and other layout requirements to ensure that the IC can be manufactured correctly. These rules are crucial for ensuring that the physical layout of the IC meets the foundry's process requirements.<br><br>
+
+* Simulation Models: PDKs may provide simulation models for passive components like resistors and capacitors, as well as models for interconnect parasitics (resistance, capacitance, and inductance) that affect the performance of ICs.<br><br>
+
+* Technology Files: These files contain information about the layers, materials, and manufacturing processes used by the foundry. This information is critical for CAD (Computer-Aided Design) tools to correctly interpret and generate layouts and masks for fabrication.<br><br>
+
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open-source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater's facility.<br>
 
 </details>
+
+<details>
+<summary>Simplified RTL2GDS flow</summary><br>
+
+1. Synthesis: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+2. Floor planning and power planning: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+3. Placement: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+4. CTS: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+5. Routing: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+6. Sign Off: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+</details>
+
+<details>
+<summary>Introduction to OpenLANE and Strive chipsets</summary><br>
+
+OpenLANE is an open-source digital ASIC (Application-Specific Integrated Circuit) design flow that provides a complete end-to-end solution for designing and fabricating custom digital integrated circuits. It is an initiative to democratize and simplify the process of designing and manufacturing custom silicon chips. OpenLANE is part of the larger open-source Electronic Design Automation (EDA) ecosystem and is primarily focused on digital designs using standard cell libraries.<br><br>
+
+
+
+
+The primary goal of OpenLANE is to provide an automated and self-contained digital ASIC design flow, with an emphasis on producing a clean GDSII file without requiring human intervention (no-human-in-the-loop). This means it aims to automate various stages of the design process to achieve the following outcomes:<br><br>
+
+1. **No LVS Violations**: It ensures that the layout and schematic of the designed chip match correctly without any errors, as checked by Layout Versus Schematic (LVS) checks.<br>
+
+2. **No DRC Violations**: It enforces adherence to design rules, ensuring that the chip's layout complies with manufacturing process constraints, as verified by Design Rule Checking (DRC).<br>
+
+3. **No Timing Violations**: It guarantees that the chip meets the specified timing requirements, including setup and hold times, with no violations.<br><br>
+
+OpenLANE is specifically tuned for use with the SkyWater 130nm Open PDK, but it also supports other process technologies, such as XFAB180 and GF130G, making it versatile for various semiconductor manufacturing processes.<br><br>
+
+Key Features of OpenLANE:<br>
+
+1. **Containerized**: OpenLANE is packaged as a container, allowing it to be functional "out of the box" with minimal setup. Additionally, instructions for building and running it natively will be provided for flexibility.<br>
+
+2. **Macro and Chip Hardening**: It can be used for hardening macros (reusable blocks) and full custom chips, providing a comprehensive solution for ASIC design.<br><br>
+
+Two Modes of Operation:<br>
+
+1. **Autonomous**: In this mode, OpenLANE operates with minimal user interaction, automating the design process as much as possible.<br>
+2. **Interactive**: For users who require more control or wish to intervene at specific stages, an interactive mode is available.<br><br>
+
+* Design Space Exploration: OpenLANE offers a feature for exploring the design space to find the best set of flow configurations. This helps designers optimize their designs for various objectives, such as power, performance, or area.<br>
+* Design Examples: OpenLANE comes with a substantial collection of design examples (currently 43 designs) along with their best configurations. This allows users to learn from and build upon existing designs as a valuable resource.<br>
+
+</details>
+
+<details>
+<summary>IIntroduction to OpenLANE detailed ASIC design flow</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3e1d8985e957a169015f340f7cc1de32cf8976d5/Samsung_PD_%23day0/dc_shell.png"><br><br>
+
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
