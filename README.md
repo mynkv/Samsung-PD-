@@ -6685,9 +6685,10 @@ Two Modes of Operation:<br>
 
 </details>
 
+
 ## Day 16: Understand importance of good floorplan vs bad floor plan and introduction to library cells
 
-# Chip Floor planning considerations
+### Chip Floor planning considerations
 
 <details>
 <summary>Utilization factor and aspect ratio</summary>
