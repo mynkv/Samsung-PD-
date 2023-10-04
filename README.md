@@ -6770,7 +6770,54 @@ Two Modes of Operation:<br>
 
 </details>
 
+<details>
+<summary>Steps to run floorplan using OpenLANE and review it </summary><br>
+
+* Running the floorplan i openlane using ```run_floorplan``` as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L2_run_floorplan.png"><br><br>
+
+* To review the floorplan we open the logs in the floorplan directory: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_1_floorplan_results.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_2_ioplacer.png"><br><br>
+
+* In the above image we do not see the HLAYER and VLAYER values as they are not specified yet.<br><br>
+* Now we will see the ```config.tcl``` file in the runs. <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_3_runs_config.png"><br><br>
+* The values for the horizontal metal layer being 4, the vertical metal layer being 3, and the utilization factor being 35 are chosen based on a set of priorities. Least priority is given to the ```floorplan.tcl``` in the cofigurartion directory. Below image shows the ```floorplan.tcl```. <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_3_configuration_folder_floorplan_tcl.png"><br><br>
+* On the priority list second comes the ```config.tcl``` in the picorv32a folder in the design directory. Below image shows the ```config.tcl```. <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_5_picorv_config_tcl.png"><br><br>
+* Maximum priority is given to the ```sky130A_sky130_fd_sc_hd.tcl``` in the picorv32a directory. Below image shows the ```sky130A_sky130_fd_sc_hd.tcl```. <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_6_picorv_sky_tcl.png"><br><br>
+
+* Now lets see the .def" file for the design. Design Exchange Format, is a commonly used file format that contains information about the physical layout of an integrated circuit (IC) design. This file is an essential component of the design process and provides detailed information for the fabrication and manufacturing of the IC.
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_7_results_floorplan_def.png"><br><br>
+* Here ```DIEAREA = (lower_left_x_value lower_left_y_value)(upper_rigth_x_value upper_rigth_y_value)```
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L1_8_results_floorplan_def.png"><br><br>
+</details>
+
+
+
+<details>
+<summary>Review floorplan layout in Magic</summary><br>
+
+* Invike the ```magic``` tool as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L2_2_invoke_magic_run_floorplan.png"><br><br>
+
+* Floorplan for the design in the mgic is shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L3_floorplan.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L4_floorplan_zoomed_pin.png"><br><br>
+
+* To view the details of particular pin, place the cursor over the pin and press s, that pin will get highlighted. Now go to the ```tkcon 2.3``` window and type what:<br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L5_pin_details.png"><br><br>
+
+* Similarly we can vie the standard cells in the floorplan as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L6_std_cells.png"><br><br>
+</details>
+
 ### Library Binding and Placement
+
 
 
 
