@@ -6818,13 +6818,68 @@ Two Modes of Operation:<br>
 
 ### Library Binding and Placement
 
+<details>
+<summary>Netlist binding</summary><br>
+
+* First all the gates in teh nelist are converted to the cells as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/18.2.PNG"><br><br>
+
+* To proceed towards the placement we need the floorplan, netlist and physical view of the cells as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/18.png"><br><br>
+
+* FF1 (yellow) is positioned in proximity to pin 1 on the floor plan, while FF2 (yellow) is located near pin out 1. This strategic placement is necessary because placing FF1 and FF2 too far apart would result in increased delays. This is due to the need for data to traverse through combinational cells between FF1 and FF2. The same rationale governs the placement of other cells within the design.
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/raw2png/L4_floorplan_zoomed_pin.png"><br><br>
+
+</details>
+
+<details>
+<summary>Final Placement optimization</summary><br>
+
+* Consider the estimation process for the connection between FF1 and Din2. Before routing, it's crucial to gauge the wire's length and capacitance to determine whether repeaters should be inserted.
+
+* Repeater insertion involves placing buffers along the signal path to reinforce the signal and duplicate it. It's worth noting that adding more repeaters consumes additional chip area.
+
+* Repeaters become necessary when the distance between FF1 and Din2 is excessively long. In such cases, a repeater is employed to transmit the signal from FF1 to Din2 efficiently.
+
+* While the connection between FF1 (yellow) and Din 1 is acceptable, there's a challenge when crossing other flip-flops due to excessive distance. To address this, buffers are introduced, and to avoid congestion, they are placed on a separate layer.
+
+* Increasing the number of gates, especially with flip-flops in close proximity to one another, can reduce signal delay but will also occupy more chip area.
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/21.PNG"><br><br>
+
+
+</details>
+
+
+<details>
+<summary>Need for libraries and characterization</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/bbb750c4783c328b376c0e7e4b16f02f42f57e1c/day16.1/22.jpeg"><br><br>
+
+
+</details>
+
+
+<details>
+<summary>Placement</summary><br>
+
+* We run the placment using command ```run_placement``` : <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/be9bc5135a6c7accf3793d69e625bc6053923b45/day16.1/raw2png/L7_run_placement.png"><br><br>
+
+* Now we invoke the ```magic``` tool to view the placement. Command to invoke magic is shown in the image below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/be9bc5135a6c7accf3793d69e625bc6053923b45/day16.1/raw2png/L8_cdm_placement.png"><br><br>
+
+* Placement of the design is as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/be9bc5135a6c7accf3793d69e625bc6053923b45/day16.1/raw2png/L9_placement_gui.png"><br><br>
+
+* In the image below we can see the the placement of different standard cells of the design: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/be9bc5135a6c7accf3793d69e625bc6053923b45/day16.1/raw2png/L10_placement_zoomed_gui.png"><br><br>
 
 
 
 
 
-
-
+</details>
 
 
 
