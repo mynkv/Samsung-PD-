@@ -7080,6 +7080,119 @@ Finally, Mask 16 is applied to bore open contact holes within this layer, enabli
 
 </details>
 
+<details>
+<summary>Lab introduction to Sky130 basic layers layout and LEF using inverter</summary><br>
 
+* Invoke magic: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/invoke_magic.png"><br><br>
 
+* Inverter cell layout: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/2_magic_inverter_layout.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/start/17.png"><br><br>
+
+* Information about inverter: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/3_nmos.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/4_pmos.png"><br><br>
+
+* Connection of PMOS and  NMOS drain: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/5_connection_pmos_nmos.png"><br><br>
+
+* Connection of PMOS source: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/6_connection_pmos_source_vdd.png"><br><br>
+
+* Connection of NMOS source: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/7_connection_nmos_source_vss.png"><br><br>
+
+</details>
+
+<details>
+<summary>Finding DRC error</summary><br>
+
+* DRC Find next error: <br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/9_find_next_error.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/10_errors_in_DRC.png"><br><br>
+
+* Information about inverter: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/3_nmos.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/4_pmos.png"><br><br>
+
+* Extracting the spice Model of CMOS inverter: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/11_create_spice_file.png"><br><br>
+
+* Exploring ```sky130_inv.ext: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/12_sky131_ext.png"><br><br>
+
+* Original Spice file of the inverter: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/12_sky130_spice.png"><br><br>
+
+* Pshort and Nshort libraries: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/14_pshort_lib.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/15_nshort_lib.png"><br><br>
+
+* Editted spice file for the CMOS Inverter: <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/71184f6dda9921a2f1cd22dc2a49d612c154509e/day17/16_spice_editted_for_simulation.png"><br><br>
+
+</details>
+
+### Cell design and characterization flows
+
+<details>
+<summary>Lab introduction to Magic and steps to load Sky130 tech-rulesn</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/18.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/19.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Lab exercise to fix poly.9 error in Sky130 tech-file</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/20.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/21.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/22.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/23.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Lab exercise to implement poly resistor spacing to diff and tap</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/24.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Lab challenge exercise to describe DRC error as geometrical construct</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/25.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/26.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/27.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/28.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Lab challenge to find missing or incorrect rules and fix themt</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/29.jpeg"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/30.jpeg"><br><br>
+
+</details>
 
