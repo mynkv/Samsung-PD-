@@ -6941,9 +6941,144 @@ Characterization is the process of generating accurate models (often in Liberty 
 </details>
 
 
+## Day-17-Design and characterise one library cell using Layout tool and spice simulator
+
+<details>
+<summary>IO Mode</summary><br>
+
+* I/O mode is employed to alter the spacing between the pins on a chip. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c8683d28fd1cbb7d60c2b1fa316d0d6699b8f50d/day17/start/1_IO_mode.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c8683d28fd1cbb7d60c2b1fa316d0d6699b8f50d/day17/start/1_IO_mode_gui.png"><br><br>
+
+</details>
+
+<details>
+<summary>SPICE deck creation for CMOS inverter</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c8683d28fd1cbb7d60c2b1fa316d0d6699b8f50d/day17/start/3_spice.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c8683d28fd1cbb7d60c2b1fa316d0d6699b8f50d/day17/start/4_spicemodel.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Switching Threshold (Vm)</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c8683d28fd1cbb7d60c2b1fa316d0d6699b8f50d/day17/start/5_switching_threshold.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/c8683d28fd1cbb7d60c2b1fa316d0d6699b8f50d/day17/start/6_vm_diff_w_p.jpeg"><br><br>
+
+</details>
+
+### Inception of Layout & CMOS fabrication process
+
+<details>
+<summary>The 16-Mask Process</summary><br>
+
+* Substrate selection is a crucial step in the fabrication process of GDSII, which represents the entire design. There are various substrate options available, with P-type silicon substrate being the most commonly used choice. It possesses specific characteristics, such as high resistivity ranging from 5 to 50 ohms, a doping level of 10^15/cm^3, and an orientation of (100). It's important to ensure that the substrate's doping level is lower than that of the well, as wells are used to fabricate NMOS and PMOS components separately.<br>
+
+* Creating an active region for transistors involves forming pockets on the P-substrate where NMOS and PMOS cells will be placed. Effective isolation between these pockets is essential. This isolation is achieved by growing a silicon dioxide layer, which acts as an insulator with a thickness of approximately 40nm.<br>
+
+* Subsequently, an 80nm layer of silicon nitride (Si3N4) is deposited. To create the wells, the silicon nitride layer is then covered with a photoresist layer, which can be either negative or positive, and has a thickness of about 1um. In fabrication terms, a layout corresponds to a mask used in this process.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/7.png"><br><br>
+
+* These masks serve as protective barriers for the underlying photoresist, while UV light is directed through the substrate. Consequently, the portion beneath the mask remains unaffected, and the surplus photoresist is removed by means of a developing solution. Subsequently, the masks themselves are taken off.<br>
+
+* The silicon nitride layer is subjected to etching. Notably, the photoresist is eliminated since the silicon nitride acts as a protective layer, enabling the growth of additional layers. The photoresist is chemically stripped away.<br>
+
+* Following this, the substrate is positioned in an oxidation furnace where a second layer of oxide is grown. The region beneath the silicon nitride is safeguarded, allowing oxide to form exclusively on the exposed area.<br>
+
+* The process continues by creating isolation between the regions where transistors are developed. This is achieved by cultivating a field oxide, a method commonly referred to as LOCOS, which stands for Local Oxidation of Silicon.<br>
+
+* The Silicon nitrite is stripped off using hot phosphoric acid. A strict electrical isolation is created between NOS and PMOS.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/8.png"><br><br>
+
+* Formation of N-well and P-well is a crucial step, with the P-well serving for NMOS fabrication and the N-well for PMOS fabrication.<br>
+
+* Initially, a photoresist layer is applied to delineate the protective pattern for subsequent layers. A portion of the substrate is shielded, exposed to UV light, and then removed using a solution.<br>
+
+* To establish the P-well, boron is employed. This involves diffusing boron into the p-type substrate through ion implantation, requiring an energy level of approximately 200keV to penetrate the oxide layer effectively.<br>
+
+* Likewise, the other portion is now masked, covered with photoresist, etched, and subjected to ion implantation for phosphorus diffusion. In this case, an energy of around 400keV is necessary to facilitate the process through the oxide layer.<br>
+
+* The creation of these wells is an essential step, and their diffusion needs to ensure that they occupy approximately half of the substrate area. To achieve this, the substrate is subjected to a high-temperature furnace, operating at about 1100°C, in a process known as the twin-tub process. This results in the formation of well-defined wells.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/9.png"><br><br>
+
+* The formation of the gate terminal is a critical step in both PMOS and NMOS devices, as it plays a pivotal role in controlling the threshold voltage, which is the voltage required to activate the transistor. The threshold voltage is contingent on several factors, including the body effect coefficient, doping concentration, and oxide capacitance. During the fabrication process, these variables are carefully managed to achieve the desired threshold voltage.<br>
+
+* Subsequently, a new mask is applied, etched, and boron diffusion is carried out with lower energy, approximately 60keV, to ensure diffusion reaches the surface's edge.<br>
+
+* This mask is used for the N-well, and after etching, n-type material is diffused with lower energy, positioning it just below the surface.<br>
+
+* However, the oxide layer can become damaged due to the implantation and penetration of p-type and n-type dopants through it. The original oxide is removed using a hydrofluoric acid solution.<br>
+
+* Following the removal of the damaged oxide, a new oxide layer is grown to provide a high-quality oxide, typically with a thickness of around 10nm. The control of this thickness is crucial in achieving the desired threshold voltage.<br>
+
+The gate formation is done by<br>
+
+* Deposit a polysilicon layer of 0.4um. The gate area needs to be of low resistance. The layer is doped with impurities such as phosphorous or arsenic.<br>
+
+* Again, deposit a photoresist and gate mask is used and etch away extra exposed layer and photoresist is removed forming the gate terminal.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/10.png"><br><br>
+
+The formation of Lightly Doped Drain (LDD) regions is influenced by changes in the doping profile in PMOS within the n-well and NMOS within the p-well due to several factors:<br>
+
+2. **Hot Electron Effect**: When the device size shrinks, the electric field intensifies while the power supply remains constant. This results in high-energy charge carriers that can disrupt Si-Si bonds, leading to increased undesirable electron flow. Furthermore, the energy levels may become so high that they surpass the 3.2eV barrier between the Si conduction band and the SiO2 conduction band. If this barrier is breached, it may infiltrate the oxide layer just above the surface, giving rise to liability concerns.<br>
+
+3. **Short Channel Effect**: In the case of short channel lengths, the drain field permeates the channel. To put it simply, as the channel length decreases, the applied gate voltage has a more direct impact on the device, leading to a loss of control over the current flow within the device. This effect can result in variations in the doping profile in the n-well and p-well for PMOS and NMOS devices, respectively.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/11.png"><br><br>
+
+The process for creating the Lightly Doped Drain (LDD) structure involves the following steps:<br>
+
+1. Using Mask7, a photoresist layer is applied. It is exposed to UV light, etched, and then washed. Phosphorous is diffused with controlled energy to implant it just beneath the surface. N+ denotes a heavily doped concentration, and N- represents a lightly doped concentration. The gate design prevents phosphorous from infiltrating beneath it.<br>
+
+2. Similarly, Mask8 is used on a new layer of photoresist. Boron is then diffused with the appropriate energy to implant it just beneath the surface.<br>
+
+4. The entire layer is covered with either SiO2 or Si3N4.<br>
+
+5. Plasma anisotropic etching, a directed etching process, is employed to remove the oxide layer, except for the portions on the side walls of the gate. These side-wall spacers serve to protect the lightly doped areas, preserving their integrity.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/12.png"><br><br>
+
+The process of forming the Source and Drain regions involves a few important steps:<br>
+
+1. A thin layer of screen oxide is introduced to mitigate the channeling effect. This screen oxide layer serves to randomize the direction of ions during the implantation process. Channeling effect occurs when the velocity vector of ions aligns with the crystalline structure of the p-type substrate, potentially allowing ions to penetrate deeper into the substrate without interacting with silicon atoms.<br>
+2. Mask 9, used in conjunction with the photolithographic process, is applied to cover the n-well region, while Mask 10 is employed to cover the p-well region.<br>
+
+3. Below the surface of the N-well region, P+ areas are created, and beneath the P-well region, N+ areas are formed. These areas are essential for the establishment of the Source and Drain regions in the semiconductor device.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/13.png"><br><br>
+
+The lightly doped drain areas are still intact and the boron(~50keV) and arsenic (~75keV) are diffused into n-well and p-well respectively. 8. Contacts and local interconnects First, remove the thin screen oxide using HF solution. The oxide layer is etched to form the interconnects<br>
+
+* Deposit titanium on wafer surface using sputtering. When titanium metal reacts with argom gas, the titanium ions moves from the metal surface to the surface of substrate.<br>
+* Then, Wafer is heated at about 650-700c in nitrogen ambience.The lowresistant TiSi2 gets deposited all over the surface that can be used for local interconnects.<br>
+* The mask 11 is used to create the gaps to draw interconnects to top.The extra TiN is etched by RCA cleaning. The RCA solution consists of deionized water, hydropgen peroxide, ammmonium hydroxide.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/14.png"><br><br>
+
+* To achieve a more even surface, as the surface topography is typically uneven, a thick SiO2 layer doped with phosphorous or boron is deposited. Chemical mechanical polishing is then utilized to planarize the surface of the wafer.<br>
+
+* Next, contact holes are created through a photolithographic process using Mask 12. Once the holes are formed, the mask is removed. A thin layer of TiN is grown, which serves as both an effective adhesion layer for SiO2 and a barrier between the lower and upper interconnects.<br>
+
+* A blanket layer of tungsten is deposited, followed by the deposition of an aluminum layer on top. Mask 13 is applied to the aluminum layer as part of the photolithographic process, allowing for the formation of metal contacts.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/15.png"><br><br>
+
+SiO2 is once more deposited, and then holes are generated using Mask 14 via the photolithographic process. Afterward, a TiN layer is deposited.<br>
+
+Mask 15 is employed to establish the desired pattern above this second tungsten layer. The thickness of the metal layer gradually increases from the bottom to the top.<br>
+
+Finally, Mask 16 is applied to bore open contact holes within this layer, enabling the creation of desired connections.<br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/dd7b807eee42f34cfa021a80fbf594039eba5477/day17/start/16.png"><br><br>
 
 
-
+</details>
 
 
 
