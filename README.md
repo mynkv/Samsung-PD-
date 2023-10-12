@@ -1,3 +1,26 @@
+set ::env (CLOCK PORT) clk set ::env (CLOCK_ PERIOD) 12.000
+set ::env(SYNTH DRIVING CELL) sky130 fd sc hd inv B set ::env(SYNTH DRIVING CELL PIN) Y set ::env (SYNTH CAP LOAD) 17.65 - create clock [get ports Strenv(CLOCK PORT)]
+-name Strenv(CLOCK PORT) -period stren(CLOCK PERIOD)
+set ::env(IO PCT) 0.2
+set input delay value [expr $::env(CLOCK PERIOD)
+Sitenv(10 PCT)]
+set output delay value (expr $::env(CLOCK PERIOD)
+Si:env(IO PCT) ]
+puts "\[INFON]: Setting output delay to: Soutput delay value" buts NINFONI: Setting input delay to: sinput delay value" reset max fanout S::env(SYNTH MAX FANOUT) (current design)
+set clk indx Ilsearch [all inputs] (get port S: renv(CLOCK PORT)]]
+set rst indx [isearch (all inputs) Iget port resetn]]
+set all inputs wo clk [replace [all inputs] selk indx selk indx]
+set all inputs wo clk rst (treplace sall inputs wo clk srst indx Srst indx] set all_inputs wo_clk rst Sall_inputs_wo_clk
+• correct resetn
+set input delay sinput delay value
+-clock [get_clocks $: renv(CLOCK PORT)] sall_inputs_wo_clk_rst
+set input delay 6.0 -clock [get clocks S::env(CLOCK PORT)] (resetn)
+set output delay soutput_delay_value
+-clock |get clocks strenv(CLOCK PORT)] [all outputs]
+TODO set this as parameter
+set driving cell -lib cell s: renv(SYNTH DRIVING CELL) -pin S::env(SYNTH DRIVING CELL PIN) [all inputs]
+set cap load [expr $: renv (SYNTH CAP LOAD) / 1000.01 puts
+*TINFOvi: Setting Load to? scap_load" set load scap_load [all outputs]
 
 ## Day-0-Invoking-tools
 
