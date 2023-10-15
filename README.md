@@ -1,27 +1,3 @@
-set ::env (CLOCK PORT) clk set ::env (CLOCK_ PERIOD) 12.000
-set ::env(SYNTH DRIVING CELL) sky130 fd sc hd inv B set ::env(SYNTH DRIVING CELL PIN) Y set ::env (SYNTH CAP LOAD) 17.65 - create clock [get ports Strenv(CLOCK PORT)]
--name Strenv(CLOCK PORT) -period stren(CLOCK PERIOD)
-set ::env(IO PCT) 0.2
-set input delay value [expr $::env(CLOCK PERIOD)
-Sitenv(10 PCT)]
-set output delay value (expr $::env(CLOCK PERIOD)
-Si:env(IO PCT) ]
-puts "\[INFON]: Setting output delay to: Soutput delay value" buts NINFONI: Setting input delay to: sinput delay value" reset max fanout S::env(SYNTH MAX FANOUT) (current design)
-set clk indx Ilsearch [all inputs] (get port S: renv(CLOCK PORT)]]
-set rst indx [isearch (all inputs) Iget port resetn]]
-set all inputs wo clk [replace [all inputs] selk indx selk indx]
-set all inputs wo clk rst (treplace sall inputs wo clk srst indx Srst indx] set all_inputs wo_clk rst Sall_inputs_wo_clk
-• correct resetn
-set input delay sinput delay value
--clock [get_clocks $: renv(CLOCK PORT)] sall_inputs_wo_clk_rst
-set input delay 6.0 -clock [get clocks S::env(CLOCK PORT)] (resetn)
-set output delay soutput_delay_value
--clock |get clocks strenv(CLOCK PORT)] [all outputs]
-TODO set this as parameter
-set driving cell -lib cell s: renv(SYNTH DRIVING CELL) -pin S::env(SYNTH DRIVING CELL PIN) [all inputs]
-set cap load [expr $: renv (SYNTH CAP LOAD) / 1000.01 puts
-*TINFOvi: Setting Load to? scap_load" set load scap_load [all outputs]
-
 ## Day-0-Invoking-tools
 
 I invoked tools on day-0 using these commands, each briefly explained.
@@ -7218,4 +7194,197 @@ Finally, Mask 16 is applied to bore open contact holes within this layer, enabli
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/61d93d3f2b07c18810a66125ef41cc421b7a152a/day17/start/30.jpeg"><br><br>
 
 </details>
+
+
+
+## Day-18-Pre-layout timing analysis and importance of good clock tree
+
+### Timing modelling using delay tables
+
+<details>
+<summary>Track info and lab steps to convert magic layout to std cell LEF</summary><br>
+
+In the context of physical design, "tracks" typically refer to horizontal and vertical routing channels used to connect various components and elements on an integrated circuit (IC) or printed circuit board (PCB). These tracks are also known as signal traces, conductive traces, or routing channels. The term "tracks" can be applied in both electronic and semiconductor design, but there are some differences in their usage. The image below illustrates the arrangement of metal layers for both horizontal and vertical routing, including the designated tracks and spacing for each layer. <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a30000164e696c370f51d3628d8e05fc11531b6/day18/1_tracks.png"><br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a30000164e696c370f51d3628d8e05fc11531b6/day18/2_tracks.png"><br><br>
+
+* All the contacts should meet the tracks and space that are defined in the the ```tracks.info```. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a30000164e696c370f51d3628d8e05fc11531b6/day18/2_tracks.png"><br><br>
+
+* Press ```g``` to turn on the grid. Now we will set the grid size. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a30000164e696c370f51d3628d8e05fc11531b6/day18/3_grid_tracks.png"><br><br>
+
+* The image provided displays Port A and Y positioned at the intersection of the x and y-axis of the routing tracks, ensuring that connections can be established in both routing directions.
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a30000164e696c370f51d3628d8e05fc11531b6/day18/4_a_y_on_intersection.png"><br><br>
+
+* In the image below we can see height of the cell is the integral multiple of the height of the cell. <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/5_height_multiple.png"><br><br>
+
+* The image below illustrates the process of connecting to Port A. To achieve this, you should position the cursor above the port and press the ```s``` key twice. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/6_PORTa_CONNECTIONS.png"><br><br>
+
+* The image below illustrates the process of connecting to Port ```Y```. To achieve this, you should position the cursor above the port and press the ```s``` key twice. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/7_PORT_Y_CONNECTIONS.png"><br><br>
+
+* Writing the spice model and LEF file for the inverter: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/8_save_inv_write_lef.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/9_save_inv_write_lef.png"><br><br>
+
+* LEF file: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/10_lef_file.png"><br><br>
+
+* Copy all the libraries and lef to the picorv32a design folder: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4235faf5fff22ad17a32f003f8b00b94a6461f39/day18/new_new/2.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/13_fast_lib.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/14_slow_lib.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/3a2ed59a653ccd5b2105fa3af536276ffb2e4b57/day18/15_typical_lib.png"><br><br>
+
+* Modify the config file as shown below: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4235faf5fff22ad17a32f003f8b00b94a6461f39/day18/16_editted_tcl.png"><br><br>
+
+* Now setup the openlane and run the design: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4235faf5fff22ad17a32f003f8b00b94a6461f39/day18/17_prep_design.png"><br><br>
+
+* Now add the lef files as shown in the figure below: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/4235faf5fff22ad17a32f003f8b00b94a6461f39/day18/18_add_lef.png"><br><br>
+
+</details>
+
+
+<details>
+<summary>Introduction to delay tables</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new_new/3.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new_new/4.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new_new/5.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new_new/6.jpeg"><br><br>
+
+</details>
+
+<details>
+
+
+<summary>Lab steps to configure synthesis settings to fix slack and include vsdinvs</summary><br>
+
+* Run Synthesis: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/19_synthesis.png"><br><br>
+
+* Nww to fix the ```tns``` and ```wns``` we will make the following changes: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d7d6f30eb3b795eadfb24a4c468bdb0c01b0e3d9/day18/new_new/7.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/21_fix_tns_wns.png"><br><br>
+
+* Run Synthesis again: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/22_fixed_tns_wns.png"><br><br>
+
+* Run Floorplan: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/23_error_floorplan.png"><br><br>
+
+* To resolve the above error, make the changes as shown in the figure below: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/24_modified.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/25_FLOORPLAN_tcl_modified.png"><br><br>
+
+* Run floorplan again and placement: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/26_floorplan.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d7d6f30eb3b795eadfb24a4c468bdb0c01b0e3d9/day18/new/28_placement_gui.png"><br><br>
+
+</details>
+
+### Timing analysis with ideal clocks using open STA
+
+<details>
+<summary>Setup timing analysis, clock jitter and uncertainity</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e83df0e3135a8af7da53d2cb9aab1eea5d270a51/day18/new_new/8.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e83df0e3135a8af7da53d2cb9aab1eea5d270a51/day18/new_new/9.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e83df0e3135a8af7da53d2cb9aab1eea5d270a51/day18/new_new/10.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e83df0e3135a8af7da53d2cb9aab1eea5d270a51/day18/new_new/11.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Timing Analysis in open STA</summary><br>
+
+* Create a file named ```pre_sta.conf``` in openlane directory: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d7d6f30eb3b795eadfb24a4c468bdb0c01b0e3d9/day18/new/29_my_base_sdc.png"><br><br>
+
+* Create a file named ```my_base.sdc``` in openlane directory: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d7d6f30eb3b795eadfb24a4c468bdb0c01b0e3d9/day18/new/30_pre_sta_cong.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e83df0e3135a8af7da53d2cb9aab1eea5d270a51/day18/new/31_cap_value.png"><br><br>
+
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f1f5e1cc05e29f18c0c3b49e773d06f3a819b6da/day18/new_new/12.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f1f5e1cc05e29f18c0c3b49e773d06f3a819b6da/day18/new_new/13.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f1f5e1cc05e29f18c0c3b49e773d06f3a819b6da/day18/new_new/14.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f1f5e1cc05e29f18c0c3b49e773d06f3a819b6da/day18/new_new/15.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f1f5e1cc05e29f18c0c3b49e773d06f3a819b6da/day18/new_new/16.jpeg"><br><br>
+
+</details>
+
+### Clock tree synthesis TritonCTS and signal integrity
+
+<details>
+<summary>CLock tree and cross talk</summary><br>
+
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2f0fe2ecc4454b16f0001c8799a95865e8e52bdc/day18/new_new/17.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2f0fe2ecc4454b16f0001c8799a95865e8e52bdc/day18/new_new/18.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2f0fe2ecc4454b16f0001c8799a95865e8e52bdc/day18/new_new/19.jpeg"><br><br>
+
+* Run CTS: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2f0fe2ecc4454b16f0001c8799a95865e8e52bdc/day18/new/40_run_cts.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/30.png"><br><br>
+
+</details>
+
+
+### Timing analysis with real clocks using openSTA
+ 
+<details>
+<summary>Setup and Hold timing analysis using real clocks</summary><br>
+
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/20.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/21.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/22.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/23.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Lab steps to analyze timing with real clocks using OpenSTA</summary><br>
+
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/24.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/25.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/26.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/27.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/28.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/86598dae2d268095e70c6b49dbbfd68045e3692a/day18/new_new/29.jpeg"><br><br>
+
+</details>
+
+
+
+
+
 
