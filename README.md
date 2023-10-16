@@ -7384,6 +7384,126 @@ In the context of physical design, "tracks" typically refer to horizontal and ve
 </details>
 
 
+## Day-19 - Final steps for RTL2GDS
+
+### Power Distribution Network and routing
+
+<details>
+<summary>Introduction to Maze Routing Lee’s algorithm</summary><br>
+
+* Lee's Algorithm is a method designed for determining the most efficient path between two points within a grid. Routing, on the other hand, involves establishing actual wire connections in a design to identify the most direct route between a starting point and a destination, minimizing both distance and the number of zigzag turns. Nonetheless, it's crucial for the algorithm to account for any obstacles that might hinder the routing process in a particular area.
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/1.PNG"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/2.jpeg"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/3.PNG"><br><br>
+
+* Routing a single path is relatively uncomplicated, but when confronted with the task of routing between millions of different start and end points, this approach can become highly demanding in terms of both time and memory resources. <br>
+* For large-scale designs, maze routing becomes even more time and memory-intensive.<br>
+* To mitigate these issues, certain techniques like the line-search algorithm and the stanner-tree algorithm can be employed to reduce the consumption of time and memory resources.<br>
+
+</details>
+
+<details>
+<summary>Design Rule Check</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/4.jpeg"><br><br>
+
+* On the same layer, there is an unintended intersection between two wires that should not be connected. This situation could lead to operational malfunctions and requires a solution. To rectify this, simply relocate one of the wires to an alternative metal layer. It's important to note that there are new design rule requirements that need to be adhered to in the process. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/5.PNG"><br><br>
+
+* Every network or wire inherently possesses parasitic capacitance. We must conduct parasitic extraction, a procedure in which we retrieve and utilize the resistances and capacitances associated with the wires for subsequent stages in the process. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/6.PNG"><br><br>
+
+</details>
+
+### Power Distribution Network and routing
+
+
+<details>
+<summary>Lab steps to build power distribution network</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/7.jpeg"><br><br>
+
+</details>
+
+<details>
+	
+<summary>Lab steps from power straps to std cell power</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/8.jpeg"><br><br>
+
+</details>
+
+<details>
+<summary>Basics of global and detail routing and configure TritonRoute</summary><br>
+
+Routing, in the context of electronic design and integrated circuits, refers to the process of determining the physical paths or connections for electrical signals on a chip or a printed circuit board (PCB). It involves deciding how wires, traces, or interconnects should be laid out to ensure that signals can travel from their source to their destination while meeting various design constraints, such as timing, area constraints, and avoiding interference. <br><br>
+
+**Global and detailed routing are two phases within the routing process:**<br><br>
+
+**Global Routing:**<br>
+
+* Global routing is the initial phase in the routing process, where the overall path for connections is established at a high level.<br>
+* It focuses on determining the general path and direction of wires or signal paths while taking into account high-level design constraints.<br>
+* At this stage, specific paths for each wire or signal are not yet defined in detail. Instead, it involves creating a rough plan for how wires should traverse the chip or PCB to connect various components.<br>
+* Global routing helps define the general topology of the interconnections and ensures that there are no major conflicts or congestion issues in the design.<br><br>
+
+**Detailed Routing:**<br>
+
+* Detailed routing, also known as track assignment or channel routing, is the subsequent phase that follows global routing.<br>
+* In this phase, the exact paths for each wire or signal are defined in detail. This includes determining the specific locations of vias, routing layers, and obstacles that may be encountered.<br>
+* Detailed routing takes into consideration the intricacies of the design, adheres to design rules, and aims to optimize the routing for various objectives such as minimizing wirelength, reducing crosstalk, and avoiding congestion. <br>
+* It's a more computationally intensive and fine-grained process than global routing and requires careful consideration of various design constraints and objectives. <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/9.jpeg"><br><br>
+
+</details>
+
+### TritonRoute Features
+
+<details>
+	
+<summary>TritonRoute feature 1 - Honors pre-processed route guides</summary><br>
+
+* TritonRoute is an open-source detailed routing tool designed for contemporary industrial designs. This router comprises key components such as pin access analysis, track assignment, initial detailed routing, search and repair functionalities, and a DRC engine.<br>
+* TritonRoute was created by graduate students Lutong Wang and Bangqi Xu at UC San Diego and serves as the detailed routing component within the OpenROAD project.<br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/10.PNG"><br><br>
+
+</details>
+
+<details>
+
+<summary>TritonRoute Feature2 & 3 - Inter-guide connectivity and intra- & inter-layer routing</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/089433b219fcb36d9d14ed8864eb1792b9432c76/day19/13.png"><br><br>
+
+In the above image: <br>
+* Purple colour is common between M1 and M2 which mean they are connected.
+* Then the tool will put via.
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/11.PNG"><br><br>
+
+In the above image: <br>
+* Intra mean within laver.<br>
+* Inter mean between layer. <br>
+* The dash line are called panel.<br>
+* Each routing guide are assign to 1 panel.<br>
+* Routing intra-layer will happen in parallel. <br>
+* Routing interlayer (M1 to M2) will happen in sequence. <br>
+
+</details>
+
+<details>
+	
+<summary>TritonRoute method to handle connectivity</summary><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d508e3180c813c781a533b1a4cc110ec1f9d3dc5/day19/12.jpeg"><br><br>
+
+</details>
+
 
 
 
