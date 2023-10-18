@@ -7504,7 +7504,7 @@ In the above image: <br>
 
 </details>
 
-## Day-Floorplanning and power planning labs
+## Day 20 - Floorplanning and power planning labs
 
 <details >
 <summary>Lab on floorplan and powe planning</summary>
@@ -7632,21 +7632,65 @@ start_gui
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/36_timing_reduced_slack.png"><br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/37_estimate_timing.png"><br><br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
 </details>
 
+## Day-21 Placement and CTS labs
+
+<details>
+<summary>Labs on Placement and it's reports</summary>
+
+* In the script ```top.tcl```, for placement we have used create_placement as shown in the image below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/1_placement_tcl.png"><br><br>
+
+* Informaton on pin placement is also present in the ```top.tcl``` as shown in the figure below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/2_pin_placement.png"><br><br>
+
+* Reports generated for the placement are also listed in the ```top.tcl```: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/3_timing_constraint.png"><br><br>
+
+* Noe will go on with exploring the different types of the reports genearted for the placement: <br><br>
+
+1. **check_design.pre_pin_placement** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/4_placement_report_location.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/5_placement_report.png"><br><br>
+
+2. **report_port_placement.rpt** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/6_report_port_placement_location.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/7_report_port_placement.png"><br><br>
+
+3. **icc2_output.txt** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/8_icc2_output_location.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/9_icc3_output.png"><br><br>
+
+4. **icc2_output.txt** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/8_icc2_output_location.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/9_icc3_output.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/10_icc2_output.png"><br><br>
+
+5. **vsdbabysoc.post_estimated_timing.rpt** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/12_timing_rpt.png"><br><br>
+
+6. **vsdbabysoc.post_estimated_timing.qor** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/13_placement_qor_location.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/14_placement_qor.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/15_placement_qor.png"><br><br>
+
+7. **vsdbabysoc.post_estimated_timing.qor.sum** <br><br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/17_placement_qor_sum.png"><br><br>
+
+
+
+
+
+
+
+</details>
 
 
