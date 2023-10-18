@@ -7828,9 +7828,9 @@ Successful placement and Clock Tree Synthesis are critical for achieving a funct
 
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/6c34f82df6426cc79d5d12ab712ae38195c3ee76/day21/17_placement_qor_sum.png"><br><br>
 
+### CTS schematic design: <br><br>
 
-
-
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/e12b4ebea1fabc9ee043d66deebf155b7136e110/day21/18.png"><br><br>
 
 
 
