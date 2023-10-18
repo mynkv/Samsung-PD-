@@ -7307,6 +7307,12 @@ In the context of physical design, "tracks" typically refer to horizontal and ve
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/50e308e393733b6859f932fb6c5b08074d6fcc16/day18/new/26_floorplan.png"><br><br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d7d6f30eb3b795eadfb24a4c468bdb0c01b0e3d9/day18/new/28_placement_gui.png"><br><br>
 
+* Inverter in with my name is shown in the figure below: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/885e759f65a9ab31afca5751f40fb6f63c1ee65c/inverter/5_inverter.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/885e759f65a9ab31afca5751f40fb6f63c1ee65c/inverter/6_inverter.png"><br><br>
+
+
 </details>
 
 ### Timing analysis with ideal clocks using open STA
