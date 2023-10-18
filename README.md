@@ -7586,6 +7586,62 @@ git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
 * Now we will modify the pns_example.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
 <img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/24_pns_example.png"><br><br>
 
+#### Output Layout 
+
+* Invoke ```icc2_shell``` by commands shown below: <br>
+
+```ruby
+csh
+icc2_shell
+source top.tcl
+start_gui
+```
+* ```start_gui``` run only when it is not specified in the top.tcl: <br>
+* Gui of the design with core utilization of 0.07 is shown below: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/25_gui.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/26_gui_zoomed.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/27_gui_zoomed.png"><br><br>
+
+* Now we will ```set_propagated_clock [all_clocks]``` and check the timing report: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/28_set_clock_timig.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/29_report_timing.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/30_report_timing.png"><br><br>
+
+* Now we will try ```estimate_timing``` as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/31_estimate_timing.png"><br><br>
+
+* Now we will try ```report_constraints -all_violators -nosplit -verbose -significant_digits 4 > a``` as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/32_constraint.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/33_constraint_report.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/34_constraint_report.png"><br><br>
+
+* Now we will set the ```-core_utilization 0.40``` to 40 % and check the gui: <br>
+```ruby
+csh
+icc2_shell
+source top.tcl
+start_gui
+```
+
+* GUI of the design wiht core utilization of 40 % is shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/35_gui_utilization_40.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/36_gui_utilization_zoomed_41.png"><br><br>
+
+* Now after increasing the core utilisation, we see slack getting improved from ```-2.43``` to ```-1.94``` : <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/36_timing_reduced_slack.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/24e151ea475d9c2acee547e63bd38c25e89160e1/day20/37_estimate_timing.png"><br><br>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
