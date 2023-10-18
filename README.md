@@ -7504,7 +7504,93 @@ In the above image: <br>
 
 </details>
 
+## Day-Floorplanning and power planning labs
 
+<details >
+<summary>Lab on floorplan and powe planning</summary>
+
+* To start up, we fist need to clone the foolowing github dierectories:<br>
+
+ ```ruby
+git clone https://github.com/manili/VSDBabySoC.git
+git clone https://github.com/Devipriya1921/VSDBabySoC_ICC2.git
+git clone https://github.com/bharath19-gs/synopsys_ICC2flow_130nm.git
+git clone https://github.com/kunalg123/icc2_workshop_collaterals.git
+git clone https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd.git
+git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+```
+* In the dierctory VSDBabySoC_ICC2, edit vsdbabysoc.tcl as shown in the figure below:<br>
+  
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/1_tcl"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/2_tcl"><br><br>
+
+* In the dierctory VSDBabySoC_ICC2, edit avsdpll.lib as shown in the figure below:<br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/3_avsdpll_lib.png"><br><br>
+
+* Now we will source the vsdbabysoc.tcl in dc_shell: <br>
+
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/4_source_tcl.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/5_sourcing_completed.png"><br><br>
+
+#### Area Report of the desing 
+<br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/6_area_report.png"><br><br>
+
+
+#### Power Report of the desing 
+<br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/7_power_report.png"><br><br>
+
+
+#### Timing Report of the desing 
+<br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/8_timing_report.png"><br><br>
+
+
+#### SDC Constraints Report of the desing 
+<br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/9_sdc.png"><br><br>
+
+#### Output schematic of the desing 
+<br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/10_schemativ.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/11_schemativ.png"><br><br>
+
+#### RVMYTH core of the desing 
+<br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/12_schemativ.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/13_schemativ.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/14_schemativ.png"><br><br>
+
+### Now we will do the floor plan and power palnning 
+<br>
+* First we will modify the top.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/15_top_tcl.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/17_top_tcl.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/18_top_tcl.png"><br><br>
+
+* Now we will modify the icc2_common_setup.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/19_icc2_common.png"><br><br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/20_icc2_common.png"><br><br>
+
+* Now we will modify the icc2_dp_setup.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/21_icc2_common.png"><br><br>
+
+* Now we will modify the init_design.read_parasitic_tech_example.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/22_icc2_common.png"><br><br>
+
+* Now we will modify the init_design.mcmm_example.auto_expanded.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/23_expanded_tcl.png"><br><br>
+
+* Now we will modify the pns_example.tcl in the VSDBabySoC_ICC2 and put the location of the files according to our personal machines. Screenshots for the same are as shown below: <br>
+<img width="700" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/130209c3c13abe81dd2c0c7a770fb2a9251eb3b6/day20/24_pns_example.png"><br><br>
+
+
+
+
+ 
+</details>
 
 
 
