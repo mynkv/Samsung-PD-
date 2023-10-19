@@ -7975,7 +7975,8 @@ check_legality succeeded.
 * Now we will have to modify some constraints in the ```vsdbabysoc.tcl```: <br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/2_vsdbabysoc_tcl.png"><br>
 
-
+* Generated ```vsdbabysoc.sdc``` after synthesis
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/3_report_clock_tree.png"><br>
 
 
 </details>
