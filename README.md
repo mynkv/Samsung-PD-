@@ -7965,3 +7965,21 @@ check_legality succeeded.
 **************************
 ```
 
+## Day-22-CTS analysis labs
+
+ <details>
+ <summary>Labs on CTS Analysis</summary>
+* Below is the tcl script sourced to: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/1_utilization_40.png"><br>
+
+* Now we will have to modify some constraints in the ```vsdbabysoc.tcl```: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/2_vsdbabysoc_tcl.png"><br>
+
+
+
+
+</details>
+
+
+
+
