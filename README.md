@@ -7967,17 +7967,117 @@ check_legality succeeded.
 
 ## Day-22-CTS analysis labs
 
+
+<details>
+
+<summary>CTS</summary>
+
+* Clock Tree Synthesis (CTS) is a critical phase in the physical design of integrated circuits, particularly in digital ASIC (Application-Specific Integrated Circuit) and FPGA (Field-Programmable Gate Array) designs. CTS focuses on the generation of an optimized clock distribution network to ensure that clock signals reach all the sequential elements (e.g., flip-flops or latches) in a synchronous digital design with minimal skew and appropriate timing.<br><br>
+
+* Here's an overview of the CTS process in physical design:<br><br>
+
+1. **Input Constraints**:<br>
+
+* **Clock Constraints**: Designers define clock constraints such as clock frequency, clock edges, and setup/hold time requirements.<br>
+* **Clock Domain Information**: Identify different clock domains within the design, each with its own set of clock signals.<br><br>
+
+2. **Clock Tree Generation**:<br>
+
+* **Buffer Insertion**: Clock buffers are inserted into the clock tree to fan-out the clock signal and reduce skew.
+* **Clock Network Topology**: The tool determines the topology of the clock network, including the placement of buffers and routing paths.<br>
+* **Clock Gating**: Clock gating cells may be used to reduce dynamic power consumption by disabling clock signals when not needed.<br><br>
+
+3. **Clock Tree Optimization**:<br>
+
+* **Skew Minimization**: The goal is to minimize clock skew, which is the variation in clock arrival times at different registers. Equalizing skew ensures that all registers see the same clock edge with minimal delay.<br>
+* **Buffer Sizing**: The sizing of clock buffers is adjusted to control skew and meet timing constraints.<br>
+* **Balancing Loads**: The clock tree is designed to balance loads on each branch to minimize skew.<br>
+* **Clock Tree Insertion**: Additional buffers may be inserted if necessary to meet timing requirements.<br><br>
+
+4. **Timing Analysis**:<br>
+
+* **Clock Path Analysis**: Timing analysis is performed to ensure that all clock paths meet setup and hold time requirements.<br>
+* **Data Path Integration**: The clock tree's impact on data paths is considered to ensure that data signals meet timing constraints in the presence of clock signals.<br><br>
+
+5. **Verification and Optimization Iteration**:<br>
+
+* After CTS, the design is verified to check if it meets timing and other constraints. If issues are found, designers iterate through the optimization process.<br><br>
+
+6. **Clock Domain Crossing (CDC) Analysis**:<br>
+
+* Designers analyze and address issues that can arise when signals cross clock domains. Special synchronizers or techniques may be used to ensure data integrity.<br><br>
+
+7. **Final Checks**:<br>
+
+Final physical design checks and sign-off are performed, including DRC (Design Rule Check) and LVS (Layout versus Schematic) checks.<br><br>
+
+8. **Layout and Tapeout**:<br>
+
+* Once the design is fully validated and optimized, the physical layout is generated, and the design is ready for tapeout, which is the process of preparing the design for fabrication.<br><br>
+
+CTS is a critical step in achieving a reliable and high-performance integrated circuit design, as it ensures that clock signals are distributed efficiently, and that the design meets timing and power requirements. The specific tools and methodologies used in CTS can vary depending on the design flow, technology node, and design requirements.
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/1_utilization_40.png"><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/1_utilization_40.png"><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/1_utilization_40.png"><br>
+
+</details>
+
+
+
  <details>
+	 
  <summary>Labs on CTS Analysis</summary>
+	 
 * Below is the tcl script sourced to: <br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/1_utilization_40.png"><br>
 
 * Now we will have to modify some constraints in the ```vsdbabysoc.tcl```: <br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/2_vsdbabysoc_tcl.png"><br>
 
-* Generated ```vsdbabysoc.sdc``` after synthesis
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/065d202f5927b0f7adf7cf9049b1f515a666d3c3/daay22/3_report_clock_tree.png"><br>
+* Usage of ```check_clock_tree```:<br>
 
+Analysis: The ```check_clock_tree``` command is used to analyze the quality and characteristics of the generated clock tree. It checks for issues such as skew, insertion delay, and hold time violations, which could affect the functionality and performance of the design.<br>
+
+**Optimization**: After running the command, you can make adjustments to the clock tree, if necessary, to improve its quality. This might involve changing buffer placements, resizing buffers, or altering the clock tree topology.<br>
+
+**Verification**: It's important to ensure that the clock tree meets the design specifications and requirements. The check_clock_tree command helps in verifying that the clock tree adheres to these specifications and constraints.<br>
+
+* Below ss shows the report for ```check_clock_tree```: <br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/3_report_clock_tree.png"><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/4_report_clock_tree.png"><br><br>
+
+* The ```check_legality``` command in IC Compiler II (ICC2) is a tool used in the context of digital integrated circuit design to check the legality or compliance of your physical design with various design rules and constraints. It helps ensure that your design adheres to the required specifications and constraints, particularly in the placement and routing stages. This is crucial for producing a manufacturable and functional integrated circuit.<br>
+
+* Checking for Design Rule Violations: One of the primary purposes of the ```check_legality``` command is to verify that your design complies with design rules. Design rules are a set of constraints provided by the semiconductor foundry or design team to ensure that the manufacturing process can produce a working chip. These rules cover various aspects, such as minimum spacing, minimum width, metal layer usage, and more.<br>
+
+* The ```report_clock_timing -type summary``` command in IC Compiler II (ICC2) is used to generate a summary report of the clock timing information for your digital integrated circuit design. This command provides a high-level overview of the clock timing performance, which is essential for ensuring the proper functioning of synchronous digital circuits.<br>
+
+* Output: When you execute this command, it generates a summary report that includes key timing information related to the clock signals in your design.<br>
+
+* Here's how to use the ```report_clock_timing``` -type summary command in ICC2:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/5_report_clock_timing_summary.png"><br><br>
+
+* The ```report_clock_timing -type skew``` command in IC Compiler II (ICC2) is used to generate a report that provides information about the skew in the clock tree of your digital integrated circuit design. Clock skew is the variation in arrival times of clock signals at different elements (e.g., flip-flops or latches) in the design. Understanding and managing clock skew is essential to ensure the reliable operation of synchronous digital circuits.<br>
+
+* Here's how to use the ```report_clock_timing -type skew``` command in ICC2:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/6_report_clock_timing_skew.png"><br><br>
+
+* The ```report_clock_timing -type latency``` command in IC Compiler II (ICC2) is used to generate a report that provides information about the clock latency in your digital integrated circuit design. Clock latency refers to the time it takes for a clock signal to propagate through the clock tree and reach specific elements (e.g., flip-flops or latches) in the design. Understanding and managing clock latency is crucial to ensure the proper operation and performance of synchronous digital circuits.<br>
+
+* Here's how to use the ```report_clock_timing -type latency``` command in ICC2:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/7_report_clock_timing_latency.png"><br><br>
+
+* The ```report_clock_timing -type transition``` command in IC Compiler II (ICC2) is used to generate a report that provides information about the transition times of signals in your digital integrated circuit design. Transition time refers to the time it takes for the signal to change from one logic state (e.g., high or low) to another. Understanding and managing signal transition times is important for analyzing signal integrity, power consumption, and overall design performance.<br>
+
+* Here's how to use the ```report_clock_timing -type transition``` command in ICC2:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/8_report_clock_timing_transit.png"><br><br>
 
 </details>
 
