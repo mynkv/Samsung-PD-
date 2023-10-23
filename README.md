@@ -8083,6 +8083,43 @@ check_legality succeeded.
 ## Day-23-Clock gating technique
 
 <details>
+	
+<summary>Clock gating technique</summary> <br>
+
+In a digital circuit having many clocks and power consumption is a concern, dividing the chip into smaller sections with their own clock trees and implementing clock gating at various levels can be an effective strategy to manage power and keep the design more manageable. This approach allows for fine-grained control over clock signals, reducing power usage in parts of the chip that are not actively processing data or logic.<br><br>
+
+Clock Gating (CG) is a power-saving technique commonly used in digital circuit design to reduce dynamic power consumption in synchronous systems, particularly in the context of clock trees. This technique involves selectively enabling or disabling clock signals to specific sections or components of a digital circuit, depending on their operational requirements. By turning off clock signals to idle or unused portions of a circuit, you can significantly reduce power consumption while still maintaining proper functionality.<br><br>
+
+Here's an elaboration on the concept of Clock Gating:<br><br>
+
+1. **Dynamic Power Consumption**: In digital circuits, dynamic power consumption is a significant concern. This type of power is consumed when transistors switch states, which happens with every clock cycle. The more frequently the clock toggles, the higher the power consumption.<br><br>
+
+2. **Clock Tree**: A clock tree is a hierarchical structure that distributes clock signals from a single source (usually a PLL or oscillator) to various parts of a digital chip. It ensures that the clock signals reach all the flip-flops, registers, and other synchronous elements in the chip while maintaining skew and delay constraints.<br><br>
+
+4. **Clock Gating**: Clock Gating is a method to selectively enable or disable the clock signals to specific regions or components of the chip. By doing this, you can effectively reduce the number of clock cycles during which the circuits are active. Clock Gating is achieved by inserting special logic gates, known as clock gating cells, into the clock tree. These gating cells decide whether to propagate the clock signal or block it based on certain conditions.<br><br>
+
+5. **Conditions for Gating**: Clock gating can be controlled by various conditions, such as:<br><br>
+
+* **Functional Requirements**: Clock signals can be gated based on the actual need of the logic within a particular block. For example, if a certain module is not actively processing data, its clock can be gated off to save power.<br>
+* **ctivity or Idle Status**: Clock gating can be based on the activity or idle status of a module. If a module is inactive for some time, its clock can be disabled.<br>
+* **Data Dependencies**: Some clock gating may depend on the availability of valid data or control signals.<br>
+* **Power Management Modes**: In low-power modes, some clock domains may be completely shut down.<br><br>
+
+6. **Benefits**:<br>
+
+* **Reduced Power Consumption**: Clock gating effectively reduces dynamic power consumption because it reduces the number of clock cycles where circuits are active.<br>
+* **Improved Timing**: By selectively gating the clock, it is possible to manage clock skew and improve timing closure in complex designs.<br>
+* **Heat Reduction**: Lower power consumption translates to reduced heat generation, which is especially important for high-performance and high-density chips.<br><br>
+
+7. **Challenges**:<br>
+
+* **Timing Constraints**: Careful consideration of timing constraints is necessary to ensure that gating does not violate setup and hold times.<br>
+* **Verification and Testing**: Complex clock gating logic can introduce new challenges for design verification and testing.<br>
+
+
+</details>
+
+<details>
 
 <summary>Labs</summary>
 
