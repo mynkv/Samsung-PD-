@@ -8116,6 +8116,8 @@ Here's an elaboration on the concept of Clock Gating:<br><br>
 * **Timing Constraints**: Careful consideration of timing constraints is necessary to ensure that gating does not violate setup and hold times.<br>
 * **Verification and Testing**: Complex clock gating logic can introduce new challenges for design verification and testing.<br>
 
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f7a35c40df4a6cda0ba68c9b0c388433de4c7783/day23/1.jpeg"><br><br>
+
 
 </details>
 
@@ -8129,11 +8131,15 @@ Here's an elaboration on the concept of Clock Gating:<br><br>
 
 * Clock and signal routing:<br>
 
-```place_opt``` is used to place and optimize the current design.<br>
+```place_opt```: The ```place_opt``` command in ICC2 (Integrated Circuit Compiler 2) is used to perform placement optimization for digital integrated circuit design. It is a part of the Cadence Design Systems suite of EDA (Electronic Design Automation) tools and is typically used for ASIC (Application-Specific Integrated Circuit) and FPGA (Field-Programmable Gate Array) design. The primary purpose of the ```place_opt``` command is to improve the physical layout of the design, which can impact factors such as performance, power, and area utilization. <br>
 
-```clock_opt``` is used to synthesize and route the clocks, and then further optimize the design based on the propagated clock latencies.<br>
+```clock_opt```: The ```clock_opt``` command in Cadence's ICC2 (Integrated Circuit Compiler 2) is used for clock tree synthesis and optimization in digital integrated circuit design. Clock tree synthesis is a critical step in the design process to ensure that the clock signal is efficiently distributed to various parts of the chip, while meeting timing, power, and skew constraints. <br>
 
-```route_auto``` is used to run global routing, trace assignment, and detailed routing at once/automatically.<br>
+```route_auto``` The route_auto command in Cadence's ICC2 (Integrated Circuit Compiler 2) is used for automatic routing in digital integrated circuit design. This command allows the tool to automatically generate the routing for the connections between different components in your design, based on the netlist and constraints.<br>
+
+```set_lib_cell_purpose```: The ```set_lib_cell_purpose``` command in Cadence's ICC2 (Integrated Circuit Compiler 2) is used to specify the usage purpose of standard cells from technology libraries in your digital integrated circuit design. This command is helpful for providing guidance to the tool regarding the intended purpose of each standard cell, such as whether a cell is meant for combinational logic, flip-flops, latches, or other purposes.<br><br>
+
+* Above commands in tcl file are shown below: <br><br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/2_top_tcl.png"><br><br>
 
@@ -8232,7 +8238,7 @@ ICG reference list:
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/9_report_timing_delay_max.png"><br><br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/10_report_timing_delay_max.png"><br><br>
 
-* We see t6hat there are timing violations, in further days we will try to improve the timing profile.
+* We see that there are timing violations, in further days we will try to improve the timing profile.
 
 </details>
 
