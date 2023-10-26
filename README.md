@@ -8247,7 +8247,7 @@ ICG reference list:
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/7_report_clock_timing_summary.png"><br><br>
 
-* Here we see that latency as well as skew has increased in the clcok paths because we have added new buffer cells in the clock path. When latency and skew increase in the clock paths due to the addition of new buffer cells in the physical design circuit, it's typically a trade-off that has implications for circuit performance. Let's break this down:<br><br>
+* Here we see that latency as well as skew has increased in the clock paths because we have added new buffer cells in the clock path. When latency and skew increase in the clock paths due to the addition of new buffer cells in the physical design circuit, it's typically a trade-off that has implications for circuit performance. Let's break this down:<br><br>
 
 1. **Latency**: The addition of buffer cells, which are used to improve clock signal distribution and control, introduces additional delay into the clock paths. Buffer cells are inserted to maintain signal integrity, reduce clock skew, and ensure that the clock signal reaches all sequential elements (like flip-flops) in a synchronized manner. However, each buffer cell has a certain delay associated with it, so as you add more buffers to the clock path, you increase the overall latency of the clock signal. This means that the clock signal takes more time to propagate from the source (e.g., a clock generator) to the destination flip-flops.<br><br>
 
@@ -8255,7 +8255,7 @@ ICG reference list:
 
 * Timing reports are shown below: <br>
 
-1. Hols violation timing report: <br><br>
+1. Hold violation timing report: <br><br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/8_report_timing_delay_min.png"><br><br>
 
