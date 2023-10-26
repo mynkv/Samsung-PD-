@@ -8242,6 +8242,91 @@ ICG reference list:
 
 </details>
 
+## DAY 24 Timing violations and ECO
 
+<details>
+
+<summary>Labs</summary>
+
+* Setup violation report for our design is shown below: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/2_old_timing.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/3_old_timing.png"><br><br>
+
+* To view this path in the GUI, in the console of the GUI write the command: ```change_selection [get_timing_path -from <start_point> -to <end_point>]```. These start and endpoints are in the setup timing report of the design. Below ss shows the wns path for the setup: <br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/5_old_path_highlight.png"><br><br>
+
+* Now to fix the setup violations, we will upsize the combinational path cells to reduce the data path delay. Cells which are upsized are shown in the figure below: <br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/6_eco.png"><br><br>
+
+*Now we will again check the setup timing report. Here we find that now the setup slack is met by 150 ps as shown in the figures below: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/7_new_timing_max.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/8_new_timing_max.png"><br><br>
+
+* Now we will see the hold violation of the design: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/9_old_timing_hold.png"><br><br>
+
+* Lets see this path in the GUI: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/10_old_timing_path.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/11_old_timing_path.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/14_path_min.png"><br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/12_clk_path_launch.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/13_clk_path_launch.png"><br><br>
+
+* In order to fix the hold violation we can add a bufferin the data path, for that we first need to check the setup margin: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/16_setup_margin_hold_path.png"><br><br>
+
+* In the above image we can see that we have enough setup margin to insert a buffer, command to do so is: ```insert_buffer <instance name of the pin before/after which buffer needs to be placed> <reference name of the buffer>``` 
+* Same is shown in the figure below: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/17_inserting_buffer.png"><br><br>
+
+* Hold timing report after inserting the buffer: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/18_new_hold_timing.png"><br><br>
+
+* Hold violated path which is fixed now, shown in the GUI: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/15_path_min_fixed.png"><br><br>
+
+* In the global timing report for the design, there are no hold or setup violation left, as seen in the image below: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/19_global_violations.png"><br><br>
+
+* Filler and decap cells of the design are shown in the figure below: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/21_decap_filler_cells.png"><br><br>
+
+* Now lets see the transition violation of the design: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/22_constraint_report_transition.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/23_constraint_report_transition.png"><br><br>
+
+* We see in total there are 9 transition violations in the design. To fix these, first we find the net driving cell and upsize it to fix the trnasition violation. To find the net driving cell we use ```report_timing -through <net_name>```. In the timing report we will the get the cell with a arrow marker. Now to upsize this cell we will ```size_cell <instance_name> <ref_name_upsized_cell>```. This is done repeatidly for all the nine nets which have the timing violation as shown in the images below: <br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/24_fix_tran_net_one.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/25_fix_tran_net_one.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/26_fix_tran_net_one.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/27_fix_tran_net_two.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/28_fix_tran_net_three.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/29_fix_tran_net_four.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/30_fix_tran_net_five.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/31_fix_tran_net_six.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/32_fix_tran_net_seven.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/33_fix_tran_net_eight.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/34_fix_tran_net_nine.png"><br><br>
+
+* Now after fixing all the transition violation, lets again check ```report_constranits -max_transition -all-violators````, here we see that all the transition violations are fixed: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/35_no_tran_violation.png"><br><br>
+
+* QOR report of the desing is shown below: <br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/36_report_qor.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/2018b735dc92c2dfff39f374ab6a99c3d721f344/day24/37_report_qor.png"><br><br>
+
+* In the QOR report we can see that there are no:<br><br>
+1. Setup timing violation<br>
+2. Hold timing violation<br>
+3. Max Trans Violation<br>
+4. Max Cap Violation <br>
+
+
+ 
+</details>
 
 
