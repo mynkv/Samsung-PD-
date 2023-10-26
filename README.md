@@ -8056,9 +8056,24 @@ check_legality succeeded.
 
 * Output: When you execute this command, it generates a summary report that includes key timing information related to the clock signals in your design.<br>
 
-* Here's how to use the ```report_clock_timing``` -type summary command in ICC2:<br><br>
+* Here's how to use the ```report_clock_timing -type summary``` command in ICC2:<br><br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/03f99aac37fcdb759d22cab277ae46b8dd686ebb/daay22/5_report_clock_timing_summary.png"><br><br>
+
+* Different terms of the above report are explained below: <br>
+
+1. **Minimum setup launch latency**: The term "launch flip-flop maximum setup latency" refers to the maximum allowable time delay between the launch flip-flop (the flip-flop that sends out data) and the data becoming stable and valid at its output. <br><br>
+2. **Minimum setup capture latency**: The term "minimum setup capture latency" refers to the minimum amount of time it takes for a digital flip-flop or latch to successfully capture and store an input signal as valid data. It's essential to ensure that the captured data meets the setup time requirement of the receiving flip-flop or latch.<br>
+* Clock-to-Q Delay<br>
+* Data Arrival Time<br>
+* Clock Skew<br>
+* Timing Constraints<br>
+* Data Path Delays<br>
+* Clock Frequency<br><br>
+3. Minimum hold launch latency: The term "launch flip-flop minimum hold latency" refers to the minimum amount of time that data must remain stable and valid at the output of the launch flip-flop after it is captured by a receiving element (such as a capture flip-flop) in order for that data to be reliably captured.<br><br>
+4. Maximum hold capture latency: The term "capture flip-flop maximum hold latency" refers to the maximum allowable time delay between the data being captured at the input of a capture flip-flop and the clock edge triggering the capture.<br><br>
+5. **Maximum setup skew**: In digital circuit design, "setup skew" refers to the intentional or controlled variation in the arrival times of clock signals to different elements of the circuit, such as flip-flops or latches. The concept of "maximum setup skew" is associated with ensuring that the clock signal arrives at all relevant elements within a specified time window while considering the worst-case scenario.<br><br>
+6. **Maximum hold skew**: In digital circuit design, "hold skew" refers to the controlled variation in the arrival times of clock signals to different elements of the circuit, such as flip-flops or latches, specifically in the context of ensuring that data remains stable for the required hold time. The "maximum hold skew" is the maximum allowed difference in clock arrival times at different flip-flops while still ensuring that data meets the hold time requirement for reliable operation.<br><br>
 
 * The ```report_clock_timing -type skew``` command in IC Compiler II (ICC2) is used to generate a report that provides information about the skew in the clock tree of your digital integrated circuit design. Clock skew is the variation in arrival times of clock signals at different elements (e.g., flip-flops or latches) in the design. Understanding and managing clock skew is essential to ensure the reliable operation of synchronous digital circuits.<br>
 
@@ -8232,11 +8247,36 @@ ICG reference list:
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/7_report_clock_timing_summary.png"><br><br>
 
+* Here we see that latency as well as skew has increased in the clcok paths because we have added new buffer cells in the clock path. When latency and skew increase in the clock paths due to the addition of new buffer cells in the physical design circuit, it's typically a trade-off that has implications for circuit performance. Let's break this down:<br><br>
+
+1. **Latency**: The addition of buffer cells, which are used to improve clock signal distribution and control, introduces additional delay into the clock paths. Buffer cells are inserted to maintain signal integrity, reduce clock skew, and ensure that the clock signal reaches all sequential elements (like flip-flops) in a synchronized manner. However, each buffer cell has a certain delay associated with it, so as you add more buffers to the clock path, you increase the overall latency of the clock signal. This means that the clock signal takes more time to propagate from the source (e.g., a clock generator) to the destination flip-flops.<br><br>
+
+2. **Skew**: Clock skew refers to the variation in arrival times of the clock signal at different points in the circuit. It's important to minimize skew to ensure synchronous operation. When you add buffer cells to the clock paths, you might introduce variations in clock signal arrival times due to differences in the delay of these buffer cells. In some cases, if not managed properly, this can lead to increased clock skew, making it more challenging to meet timing constraints.<br><br>
+
 * Timing reports are shown below: <br>
 
+1. Hols violation timing report: <br><br>
+
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/8_report_timing_delay_min.png"><br><br>
+
+* **Arrival Time (arrival)**: Arrival time is the time at which the data at the input of a flip-flop (or any sequential element) is considered to have reached a stable and valid state with respect to the clock edge. It's the moment when the data is ready to be captured by the flip-flop. In most cases, this is determined by the clock edge.<br>
+
+* **Required Time (required)**: Required time is the minimum amount of time that the data must remain stable and valid after the clock edge to ensure correct and reliable capture by the flip-flop. It's the amount of time the data must be held stable to meet the hold time requirement.<br>
+
+* A hold violation occurs when data changes its state too quickly after the clock edge arrives. In other words, the data doesn't remain stable for the required time (required) after the clock edge (arrival time). To avoid a hold violation, the data at the input of the flip-flop should meet the required condition, which means it must remain stable for at least that duration after the clock edge.<br>
+
+* In our case the the data arrival time or time at which data changes its state is less than the data required time, due to which we can see the hold violation. <br><br>
+
+2. Setup violation timing report: <br><br>
+
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/9_report_timing_delay_max.png"><br><br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/10_report_timing_delay_max.png"><br><br>
+
+* A setup violation occurs when data doesn't reach a stable and valid state for a sufficient duration (data required time) before the clock edge (data arrival time) arrives.<br>
+
+* To avoid a setup violation, the data at the input of the flip-flop should meet the data required time condition, meaning it must be stable for at least that duration before the clock edge arrives. If the data changes its state too late, such that it doesn't meet the data required time condition, it might result in incorrect capture by the flip-flop.<br>
+
+* In our case data arrival time is greater than the data requred time, that means data becomes unstable within setup window of the capture flip flop, hence we see the hold timing violation.<br><br>
 
 * We see that there are timing violations, in further days we will try to improve the timing profile.
 
