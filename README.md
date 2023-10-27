@@ -8242,6 +8242,26 @@ ICG reference list:
 * Now we will see the clcok sink cells in the gui: <br>
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d6124e5427e7d07d1eae2dc064ebb048cf1f1ce9/day23/6_clock_sink.png"><br><br>
+*  The ```report_clock_timing -type summary``` command generates a report of clock  timing  information  for  the current design.<br>
+*  There  are several reporting types provided, which allow you to examine skew, latency and transition time attributes of a given  clock  network or  sub network at various levels of generality. By default, the report displays the values of these attributes only at sink pins (that is, the clock  pins  of  sequential  devices) of the clock network. You use the -verbose option to display source-to-sink path traces. If  you  specify several clock domains, the report_clock_timing command generates a separate subreport for each clock domain.<br>
+* The summary style report is at the highest level of  abstraction.  This report  provides only a list of maxima and minima of the skew, latency, and transition time attributes over the  given  networks.  At  a  lower level  of  abstraction  are  the  transition,  latency,  and  skew type reports, called list style reports, in which you can sort, filter and display the worst set of sink pins in the given network with respect toa single attribute of interest. For skew reports, each report entry  is a  pair  of  sink  pins and their relative skew. For transition time or latency reports, each entry corresponds to a single sink pin. The  lowest  level  of  abstraction is provided by verbose mode, which replaces every sink pin in a list style report by a corresponding source-to-sink path trace.<br>
+* The ```report_clock_timing -type summary``` command in IC Compiler II (ICC2) is used to generate a summary report of the clock timing information for your digital integrated circuit design. This command provides a high-level overview of the clock timing performance, which is essential for ensuring the proper functioning of synchronous digital circuits. It specifies a  summary  report,  which  shows  the  worst  instances  of transition time, latency and skew over the clock networks or subnetworks of interest. If you specify a  summary report,  you  can  use only the -clock, -to_list,  -from_list, -include_uncertainty_in_skew, -nosplit, and  -significant_dig- its options.<br>
+* For  non  summary  reports,  report  entries  are ordered with respect to the specified  attribute  of  interest  (transition time,  latency,  or  skew).   Note that all skews reported are  "local" skews. For an  explanation  of  local  skew,  see  the DESCRIPTION section.<br><br>
+       
+* Different terms of the report ```report_clock_timing -type summary``` are explained below: <br>
+
+1. **Minimum setup launch latency**: The term "launch flip-flop maximum setup latency" refers to the maximum allowable time delay between the launch flip-flop (the flip-flop that sends out data) and the data becoming stable and valid at its output. <br><br>
+2. **Minimum setup capture latency**: The term "minimum setup capture latency" refers to the minimum amount of time it takes for a digital flip-flop or latch to successfully capture and store an input signal as valid data. It's essential to ensure that the captured data meets the setup time requirement of the receiving flip-flop or latch.<br>
+* Clock-to-Q Delay<br>
+* Data Arrival Time<br>
+* Clock Skew<br>
+* Timing Constraints<br>
+* Data Path Delays<br>
+* Clock Frequency<br><br>
+3. Minimum hold launch latency: The term "launch flip-flop minimum hold latency" refers to the minimum amount of time that data must remain stable and valid at the output of the launch flip-flop after it is captured by a receiving element (such as a capture flip-flop) in order for that data to be reliably captured.<br><br>
+4. Maximum hold capture latency: The term "capture flip-flop maximum hold latency" refers to the maximum allowable time delay between the data being captured at the input of a capture flip-flop and the clock edge triggering the capture.<br><br>
+5. **Maximum setup skew**: In digital circuit design, "setup skew" refers to the intentional or controlled variation in the arrival times of clock signals to different elements of the circuit, such as flip-flops or latches. The concept of "maximum setup skew" is associated with ensuring that the clock signal arrives at all relevant elements within a specified time window while considering the worst-case scenario.<br><br>
+6. **Maximum hold skew**: In digital circuit design, "hold skew" refers to the controlled variation in the arrival times of clock signals to different elements of the circuit, such as flip-flops or latches, specifically in the context of ensuring that data remains stable for the required hold time. The "maximum hold skew" is the maximum allowed difference in clock arrival times at different flip-flops while still ensuring that data meets the hold time requirement for reliable operation.<br><br>
 
 * Now compare the ```report_clock_timing -type summary``` report with day 22: <br>
 
