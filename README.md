@@ -8306,6 +8306,33 @@ ICG reference list:
 
 <details>
 
+<summary>ECO</summary>
+
+An Engineering Change Order (ECO) is a critical part of the semiconductor design and manufacturing process. It is used to incorporate last-minute changes into a design after the initial design phase has started. ECOs are particularly important in the context of chip design and manufacturing because they help ensure that the final product meets the desired specifications and standards. Here's an elaboration of the steps you mentioned:<br><br>
+
+1. **Investigate the Problem**: The first step in the ECO process is to identify and investigate the problem or changes required in the design. This could be due to various reasons, such as changes in specifications, bug fixes, or improvements. Designers typically use the recent database, which includes all the information about the current design, to understand the problem fully.<br>
+
+2. **ECO Generation**: Once the problem is understood, the next step is to generate the ECO. This involves making the necessary changes at the gate-level netlist and, as you mentioned, also replicating these changes in the RTL (Register-Transfer Level) representation. The ECO document specifies the modifications required to address the issue, including changes to the logic gates, connections, or any other relevant components in the design.<br>
+
+3. **ECO Implementation**: After generating the ECO, designers proceed to implement it in the design. This means making the actual changes in the gate-level netlist and RTL. It's crucial to ensure that these changes do not introduce new issues or violations. Verification checks should be carried out to confirm that the modifications meet the required specifications. These checks include both formal verification (ensuring the changes adhere to design rules) and functional verification (ensuring the design still functions correctly).<br>
+
+4. **Database Update**: Once the ECO has been successfully implemented and all verification checks have passed, the changes are saved in the design database. This step is important for maintaining a comprehensive and up-to-date record of the design, ensuring that the modifications are preserved for future reference and use. The database is essentially the master copy of the design that encapsulates all changes and adjustments made during the design process.<br>
+
+5. **Trade-offs and PPA Optimization**: Throughout the ECO process, it's important to consider the trade-offs between Power, Performance, and Area (PPA). Changes made during the ECO may have implications for one or more of these aspects, and the engineering team should analyze these trade-offs to make informed decisions. Implementation tools can assist in optimizing PPA, but they may not resolve all issues, and engineers often need to fine-tune the design manually.<br>
+
+6. **Sign-Off Checks**: ECOs may involve additional sign-off checks beyond what was done during the initial Physical Design (PD) flow. This is to ensure that the changes introduced by the ECO are compliant with design constraints and do not lead to new issues or violations.<br>
+
+7. **Final Documentation**: As part of the ECO process, it's important to maintain proper documentation. This includes records of the problem, the changes made, verification results, and any trade-offs considered. This documentation is crucial for traceability and for future reference, especially in case further changes or revisions are needed.<br><br>
+
+ECOs are a critical part of chip design, as they allow design teams to adapt to changing requirements, fix issues, and optimize the design for performance, power, and area without starting the design process from scratch. The successful execution of ECOs requires a balance between the need for changes and the maintenance of design integrity.
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/40983a2bf189b6f7d6123e6177ff579d135e3fc8/day24/eco.png"><br><br>
+
+ 
+</details>
+
+<details>
+
 <summary>Labs</summary>
 
 * Setup violation report for our design is shown below: <br>
