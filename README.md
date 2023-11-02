@@ -8551,4 +8551,90 @@ The  read_parasitics command reads parasitic data from a file and anno-
        relevant.
 ```
 
+```ruby```
 
+The report_si_bottleneck command reports the nets that have the largest
+       crosstalk effects that contribute to timing violations. You can  choose
+       any one of the following "cost functions" to consider in the analysis:
+
+       o  delta_delay  (the default) -- Reports the victim nets with the worst
+         change in absolute delay
+
+       o delta_delay_ratio -- Reports the victim nets with the worst change in
+         delay as a fraction of the total stage delay
+
+       o  total_victim_delay_bump  -- Reports the victim nets with the largest
+         crosstalk bumps
+
+       o delay_bump_per_aggressor -- Reports the aggressor nets  that  produce
+         the largest total bump voltages in victim nets of failing paths
+
+       By default, the analysis considers only crosstalk effects that contrib-
+       ute to timing violations. Paths with zero or better slack are  ignored.
+       You can change this by using the -slack_lesser_than option.
+
+       By default, the analysis considers both maximum-delay (setup) and mini-
+       mum-delay (hold) constraints. To restrict the analysis to only one con-
+       straint type, use the -max or -min option.
+
+       To  create  a  collection  of  victim or aggressor nets reported by the
+       report_si_bottleneck command, use the get_si_bottleneck_nets command.
+
+       If a victim fails to meet the slack criteria only for one of its  tran-
+       sition senses (rise or fall), only the timing information for the fail-
+       ing sense is considered.
+
+       By default, clock nets are not included in bottleneck victim  analysis,
+       as  the slack of the clock nets is infinite. However, clock nets can be
+       included  as  victims  in  the   bottleneck   search   by   using   the
+       -include_clock_nets  option.  Even without this option, clock aggressor
+       nets are returned by the total_victim_delay_bump cost type.
+
+       Crosstalk problems can be caused by one or more of the  following  fac-
+       tors:
+       o Large coupling capacitance
+       o Weak victim net driver or slow victim transition
+       o Strong aggressor net driver
+
+       Depending  on the relative victim and aggressor slacks, one of the fol-
+       lowing repairs could be considered:
+       o Downsize the aggressor net driver to a weaker driver
+       o Resize the victim net driver to a stronger driver
+       o Specify physical decoupling with the set_coupling_separation command
+       o Insert a buffer on the victim net to break up long coupled routes
+
+       When  sizing  cells,  it  can  be  useful  to  use   the   get_alterna-
+       tive_lib_cells command to report equivalent cells, or the report_alter-
+       native_lib_cells command to evaluate their potential slack improvement.
+
+       The aggressor-based cost  factor  can  be  useful  for  finding  strong
+       aggressors  that attack many failing victim nets.  If the aggressor has
+       positive setup slack, it might be preferable to downsize the  aggressor
+       driver  and  weaken its effect over multiple victims, or to separate it
+       from the victims using the set_coupling_separation command.  When  per-
+       forming  such an aggressor downsizing, ensure that the resulting weaker
+       aggressor driver  does  not  violate  any  library  max_capacitance  or
+       max_transition DRC requirements.
+
+       When many aggressors attack a victim net, you can take advantage of the
+       statistical nature of many aggressors where the chances of all of  them
+       switching  at  the  same time are very low.  To find the failing victim
+       nets that are attacked by many  aggressors,  you  can  use  the  -mini-
+       mum_active_aggressors  option.  The  number  of  active  aggressors  is
+       defined as the number of effective aggressors that are active  for  the
+       worst-case aggressor alignment.
+
+       For  example, a victim net can have ten effective aggressors.  However,
+       for any given min/max rise/fall scenario, perhaps no more than five  of
+       these  ten  effective aggressors are active in the worst-case alignment
+       for that sense. Such a victim would not meet a  -minimum_active_aggres-
+       sors value higher than five.
+
+       To  exclude  specific  crosstalk victim/aggressor interactions from the
+       analysis without changing the parasitics, use the set_si_delay_analysis
+       -exclude command.
+
+       For   bottleneck   analysis,   crosstalk   analysis   must  be  enabled
+       (si_enable_analysis set to true).   Bottleneck  analysis  automatically
+       sets the timing_save_pin_arrival_and_slack variable to true.
+```
