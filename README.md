@@ -8416,4 +8416,139 @@ ECOs are a critical part of chip design, as they allow design teams to adapt to 
  
 </details>
 
+```ruby```
+read_parasitics
+The  read_parasitics command reads parasitic data from a file and anno-
+       tates that data on the nets of the current  design.  For  best  perfor-
+       mance,  run this command as soon as possible after the link_design com-
+       mand.
+
+       The command can read data in SPEF, DSPF, RSPF,  and  Galaxy  Parasitics
+       Database (GPD) format. For SPEF, RSPF, and DSPF, the file can be a sim-
+       ple ASCII file, or it can be compressed with gzip. The  read_parasitics
+       command  automatically  detects  this format information from the file,
+       but you can specify the base format using the -format option.
+
+       GPD is an efficient format for sharing parasitics among Synopsys appli-
+       cations.  You can use the PrimeTime write_parasitics command to write a
+       parasitics file in GPD format.
+
+       You can specify parasitics in either reduced or detailed form.  Reduced
+       parasitics consist of an RC pi model specified for each driver pin of a
+       net. An RC pi model contains two capacitances and one  resistance.  The
+       first  capacitance  connects to the net driver pin; the resistance con-
+       nects to the net driver pin and to a subnode to which the second capac-
+       itance  connects.  Both  capacitances  connect to the ground. The para-
+       sitics file, using the reduced form, also specifies the pin-to-pin  net
+       delays.   The  RC pi model is used to compute the effective capacitance
+       of the nets at each driver of the net. The effective capacitance deter-
+       mines  the  cell delays and output slews. You can specify reduced para-
+       sitics with the SPEF, DSPF, or RSPF format.
+
+       Detailed parasitics consist of a network  of  resistances  and  capaci-
+       tances  for each net specified in the parasitics file. The capacitances
+       must be with respect to the ground. Coupling capacitances are not  sup-
+       ported unless the -keep_capacitive_coupling option is specified and you
+       are using the SPEF or GPD format. Resistances connected to  the  ground
+       are not connected. The detailed RC network must be complete; incomplete
+       RC networks are discarded but the delays are computed using the  incom-
+       plete  subset of resistances and capacitances. You can specify detailed
+       parasitics with the SPEF, GPD, DSPF, or RSPF formats.
+
+       The read_parasitics command does not overwrite lumped  parasitics  (set
+       using  the set_load or set_resistance command) if they already exist on
+       the design. Instead, a warning is issued.  If the lumped parasitics are
+       subsequently  removed  (using  the remove_capacitance and remove_resis-
+       tance commands) PrimeTime reverts to  the  reduced  or  detailed  para-
+       sitics.
+
+       Incremental  annotations  are  supported; if a small number of nets are
+       affected, a full timing update is not required if the design is already
+       timed.  The  maximum  number  of affected nets that avoid a full timing
+       update depends on the total design size.
+
+       Multiple resistances and capacitances between the same nodes  are  also
+       accepted.  The values of multiple capacitances between a node are added
+       together and multiple resistances between the same two nodes  are  kept
+       separately and are considered during the delay calculation.
+
+       It  is most efficient to read the top level last to minimize the amount
+       of stitching that must be performed.
+
+       Net and instance pin names in the design must match instance  names  in
+       the  parasitics  file.  For  example, if you create the parasitics file
+       from a design using VHDL naming conventions, the design name  must  use
+       VHDL naming conventions.
+
+       Parasitics  of HyperScale instances are automatically read by PrimeTime
+       when these instances are instantiated at top level, and  user-specified
+       parasitics  reading  of  these instances is automatically skipped. Note
+       that if the -path option in read_parasitics includes multiple instances
+       among  which  some are HyperScale instances and the others are not, the
+       parasitics reading for those non-HyperScale instances are not skipped.
+
+       To remove parasitics that were read and annotated with  the  read_para-
+       sitics   command,  use  the  remove_annotated_parasitics  command.  The
+       reset_design command removes all attributes from  the  current  design,
+       including annotated parasitics.
+
+       In  PrimeTime,  the delay calculation algorithms impose no limit on the
+       number of resistances and capacitances that can  be  annotated  onto  a
+       single  network; however, there are two shell variables you can manipu-
+       late to track and filter  annotations  that  might  cause  unexpectedly
+       large  runtime. Use the parasitics_warning_net_size variable to specify
+       the threshold number of nodes for which the PARA-003 message is  to  be
+       issued,  indicating  that a large amount of annotation has been encoun-
+       tered  for  a  given  network.  Similarly,  use  the  parasitics_rejec-
+       tion_net_size  variable  to specify when such detailed annotation is to
+       be rejected in favor of lumped annotation, issuing the PARA-004 warning
+       message.
+
+       PrimeTime  can  also  load  locations information from parasitic files.
+       This capability is  controlled  by  the  read_parasitics_load_locations
+       variable.   By  default,  this  variable is false, and no locations are
+       read into PrimeTime. You can set this variable to true  to  load  loca-
+       tions.
+
+       Hierarchical  parasitics  with  locations require geometric transforma-
+       tions to be associated with the sub-blocks (i.e.; -path option). Prime-
+       Time  computes these transformations based on: user defined transforma-
+       tion; StarRC location guidance for SPEF/GPD; Automatic determination of
+       location transformation.
+
+       When  reading  PARA format the parasitics might not be the same as what
+       is specified by the -triplet_type option.  This happens when the speci-
+       fied  type  does  not exist.  In that case, the read_parasitics command
+       chooses something according to the following table:
+
+                                   Parasitics stored as
+           triplet_type      |   typ   min-max    min-max-typ
+         --------------------+----------------------------------
+             min             |   typ     min          min
+             typ             |   typ     max          typ
+             max             |   typ     max          max
+
+       PrimeTime can currently read multicorner parasitic file and select  one
+       corner of interest. You must specify the corner name by using the para-
+       sitic_corner_name variable, before using the  read_parasitics  command.
+       After  the parasitic corner is set, it cannot be changed between subse-
+       quent read_parasitics commands.  Also, in formats other than GPD, read-
+       ing  a multicorner parasitic file without setting this variable results
+       in an error. In GPD format, the first corner is read by default.   With
+       this  feature, the parasitics for only one specific corner from the set
+       of corners is read and annotated. All other  parasitic  commands  would
+       operate  on  this  given corner. The feature is supported for both SPEF
+       and GPD.
+
+       The mode parasitic_explorer_enable_analysis allows to read and annotate
+       all  the  corners  in  a  GPD. Then, all other parasitic commands would
+       operate on the default corner or the corner specified by parasitic_cor-
+       ner_name.
+
+       For  GPD  format, the log of read_parasitics command will show the list
+       of annotated corners, with the first one being the selected corner  for
+       PrimeTime  commands.   The  order  of the other corners, if any, is not
+       relevant.
+```
+
 
