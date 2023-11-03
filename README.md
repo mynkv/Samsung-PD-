@@ -8412,11 +8412,95 @@ ECOs are a critical part of chip design, as they allow design teams to adapt to 
 3. Max Trans Violation<br>
 4. Max Cap Violation <br>
 
+</details>
 
+<details>
+
+<summary>Crosstalk and signal intergrity</summary><br>
+
+1. **Signal Integrity**:<br>
+Signal integrity is a critical consideration in digital design, particularly for high-speed digital circuits. It refers to the ability of an electrical signal to propagate through a transmission medium (such as a printed circuit board or an on-chip interconnect) while retaining its quality and without suffering degradation. Signal integrity issues can result in signal distortion, data errors, and other problems.<br><br>
+
+2. **Crosstalk**:<br>
+Crosstalk is a common signal integrity issue in high-density and high-speed digital circuits. It occurs due to the unwanted electromagnetic coupling between adjacent signal lines, typically through capacitive and inductive effects. Crosstalk can result in noise on the affected signal lines, potentially corrupting data and causing signal integrity problems. As the geometry of cells reduces and the distance between interconnects decreases, the capacitive cross-coupling between these interconnects increases. This increased capacitive coupling can exacerbate crosstalk issues. The narrower spacing between wires allows for more efficient capacitive coupling, and as signals transition quickly through these narrow spaces, the potential for crosstalk interference also increases. Design techniques, such as careful routing, spacing, and the use of shielding or guard traces, are employed to mitigate crosstalk effects and improve signal integrity.<br>
+* Types of Glitches --> Rise, Fall, Overshoot, Undershoot<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/37c1d0595ed53d43f74e1fcaebaa32871eddb781/day27/1.1.png"><br><br>
+
+
+### Reasons for crossstalk:<br>
+
+1. **High Routing Density**:<br><br>
+* Increasing the routing density and incorporating a larger number of standard cells is a common practice in advanced semiconductor processes. This is often achieved by reducing the channel length of MOSFETs, which results in smaller transistors and therefore a reduction in the overall size of combinational logic cells. This downsizing of individual cells allows for more circuitry to fit within a given area, making it possible to instantiate multiple instances of a circuit or similar circuits within the same chip area.<br>
+
+* For example, consider a circuit designed for tasks like sending and receiving messages, calls, processing, and running various applications. Before reducing the MOSFET size, this area might accommodate only one or two such applications. However, after reducing the transistor size, it becomes feasible to house nine or more of these applications within the same chip area, greatly increasing the chip's functionality and versatility.<br>
+
+* Nonetheless, there is a notable drawback to shrinking the size of components, especially in processes with channel lengths of 0.1 micrometers and below. In these advanced processes, components like wires and nets are positioned very closely to each other, and this proximity can lead to interference issues. This close placement of components is a major factor contributing to crosstalk.<br>
+
+* Initially, there might be 20 standard cells in the design. However, after reducing the component sizes, the number of standard cells increases substantially, often by a factor of nine or more. As a result, there's a significant increase in the number of routes and interconnections between these cells. The routing paths become tightly packed and, in close proximity to one another, which can lead to various design failures, notably due to crosstalk.<br><br>
+
+2. **Dominant Lateral Capacitance**:<br>
+
+The increase in the number of metal layers in semiconductor manufacturing has several implications, one of which is the rise in lateral capacitance, leading to crosstalk issues.<br><br>
+
+Types of Capacitance:<br><br>
+There are two primary types of capacitance involved here:<br>
+
+i. **Interlayer Capacitance**: This capacitance exists between two consecutive metal layers in a semiconductor structure.<br>
+
+ii. **Lateral Capacitance**: This capacitance occurs between two wires on the same level and metal layer.<br><br>
+
+* **Factors Contributing to Lateral Capacitance Increase**:<br>
+	* The increase in the number of metal layers is driven by the need to reduce resistance and lower the overall resistance of the chip. To accomplish this, wider metal layers are introduced.<br>
+
+	* One reason for the rise in lateral capacitance is the substantial overlap area between adjacent metal layers, which leads to higher lateral capacitance. This is particularly noticeable in the 0.25-micrometer and above processes, where interlayer capacitance tends to be dominant.<br><br>
+
+* **Effects of Reducing MOSFET Size and Increasing Standard Cells**:<br>
+	* Reducing the size of individual transistors (MOSFETs) allows for more standard cells to fit in a given area. This increase in the number of standard cells results in a greater number of connections, leading to a proliferation of routing.<br>
+
+	* In response to the high routing demand, the width of the metal layers is reduced. However, this reduction alone is often insufficient to accommodate the extensive routing requirements.<br><br>
+
+* **Alternative Routing Strategies**:<br>
+	* To address these challenges, alternative routing strategies are employed. These strategies often involve routing signals in a more direct manner, such as limiting them to a single metal layer (e.g., metal 1), avoiding unnecessary transfers to higher metal layers. This approach is necessary due to the limited routing resources in the densely packed chip area.<br><br>
+
+* **Lateral Capacitance Dominance and Crosstalk Issues**:<br>
+	* As a result of the changes described above, lateral capacitance becomes more dominant. This is problematic because lateral capacitance primarily affects signals within the same layer. When two adjacent signals on the same metal layer are closely spaced, they are prone to crosstalk interference. The close proximity of wires on the same layer means that any switching activity in one wire can immediately affect adjacent wires on the same layer.<br><br>
+ 
+3. **Noise Margin**:<br>
+
+Voltage levels in digital circuits are crucial for determining logic states, and understanding the boundaries of these levels is essential.<br><br>
+
+**Definition of Logic Levels**:<br>
+
+* Any voltage falling between VOL (Output Low Voltage) and VIL (Input Low Voltage) is typically considered as representing a logic 0.<br>
+* Similarly, voltage levels between VIL and VIH (Input High Voltage) are considered an undefined region, where the logic state is ambiguous and can transition from logic 1 to logic 0 or vice versa.<br>
+* Voltages above VIH and up to VOH (Output High Voltage) are consistently treated as logic 1.<br><br>
+
+**Concern with the Undefined Region**:<br>
+* The undefined region poses a significant concern since it's challenging to determine whether the voltage should be interpreted as logic 1 or logic 0. This can lead to unpredictable behavior and logic errors in a digital circuit.<br><br>
+
+**Dealing with Voltage Variations**:<br>
+* When voltage levels vary, it's important to avoid allowing signals to enter the undefined region. Large physical distances between the main power supply and the circuit can introduce voltage variations and noise, making it crucial to maintain a stable and clear distinction between logic 0 and logic 1.<br><br>
+
+**Noise Margin**:<br>
+* To address this issue, the concept of noise margin is employed. Noise margin defines a range of input voltage levels where the output remains correctly interpreted. For example:<br><br>
+	* Any voltage within the noise margin above VOH and below VIH is reliably detected as logic 1.<br>
+	* Voltages within the noise margin below VIL are unambiguously considered as logic 0.<br>
+In the noise margin range, noise or voltage variations can be tolerated without causing logic level misinterpretations.<br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/37c1d0595ed53d43f74e1fcaebaa32871eddb781/day27/2.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/37c1d0595ed53d43f74e1fcaebaa32871eddb781/day27/3.png"><br><br>
+
+</details>
+
+<details>
+
+<summary>Labs on crosstalk</summary>
  
 </details>
 
-```ruby```
+
+```ruby
 read_parasitics
 The  read_parasitics command reads parasitic data from a file and anno-
        tates that data on the nets of the current  design.  For  best  perfor-
@@ -8551,7 +8635,7 @@ The  read_parasitics command reads parasitic data from a file and anno-
        relevant.
 ```
 
-```ruby```
+```ruby
 
 The report_si_bottleneck command reports the nets that have the largest
        crosstalk effects that contribute to timing violations. You can  choose
