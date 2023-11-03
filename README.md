@@ -8689,17 +8689,17 @@ report_timing -delay_type min
 
 ```report_si_aggressor_exclusion```: The report_si_aggressor_exclusion command  reports  all  the  exclusive groups that have been set by the set_si_aggressor_exclusion command.
 * Arguments: <br><br>
-```-rise```:  Reports all the exclusive groups that have been set as exclusive
+       -rise:  Reports all the exclusive groups that have been set as exclusive
               in  the  rise  direction.  If  neither  the  -rise nor the -fall
               options are specified, the exclusive  groups  of  the  aggressor
               nets anets in both rise and fall directions are reported.<br>
 
-       ```-fall```  Reports all the exclusive groups that have been set as exclusive
+       -fall  Reports all the exclusive groups that have been set as exclusive
               in the fall direction.  If  neither  the  -rise  nor  the  -fall
               options  are  specified,  the  exclusive groups of the aggressor
               nets anets in both rise and fall directions are reported.<br>
 
-       ```-nosplit```
+       -nosplit
               Prevents line splitting  and  facilitates  writing  software  to
               extract  information  from  the report output. If you do not use
               this option, most of the design information is listed in  fixed-
@@ -8707,7 +8707,7 @@ report_timing -delay_type min
               column width, the next field begins on a new line,  starting  in
               the correct column.<br>
 
-       ```net_list```:
+       net_list:
               Specifies  the  list  of  nets  for  exclusive  groups  you want
               reported.  You can use this option  with  either  the  -rise  or
               -fall  options to specify exclusive groups only in that particu-
