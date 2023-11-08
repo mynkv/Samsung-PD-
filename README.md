@@ -8748,3 +8748,68 @@ report_si_noise_analysis
 </details>
 
 
+## Day 28 Introduction to DRC/LVS
+
+<details>
+
+<summary>Lab: Tool installations and basic DRC/LVS design flow tools</summary>
+
+#### Opensource EDA Tools: Check Tool Installations
+
+**Magic**
+
+* To access the magic interface through the command prompt, you can utilize the ```magic``` command. When you execute this command, it will bring up two windows: a layout window and a console window. These windows serve as your workspace for executing layout and action commands.
+
+* If you wish to run a Tcl interpreter within your terminal instead of a separate console window, you can achieve this by adding the ```magic -noconsole``` option to your command.
+
+* For situations where you don't require the graphical layout window, and only want to use Magic in a text-based mode, you can use the ```magic -dnull -noconsole``` option. This is particularly useful when running Magic from a script, and the command should be formatted accordingly.
+
+* For batch mode execution, use the command ```magic -dnull -noconsole filename.tcl``` to run Magic without the graphical interface. This is handy for automated or script-driven tasks.
+
+**Netgen**
+
+* To start Netgen from the terminal, simply use the ```netgen``` command. Netgen is a text-based tool with no graphical user interface. The console window it opens is a standard Tcl interpreter similar to what you find in Magic.
+
+* If you prefer to use the Tcl interpreter in your terminal rather than a separate console window, you can achieve this by adding the ```netgen -noconsole``` option to your command.
+
+* For running Netgen in batch mode, the command to use is ```netgen -batch source filename.tcl``` This is ideal for automated or scripted tasks.
+
+* While Netgen primarily operates in a command-driven mode, it also offers a GUI window built in Python. You can access this GUI at ```usr/local/lib/netgen/python/lvs_manager.py``` However, it's worth noting that this GUI may not expose all the advanced features and options available in the command-line interface.
+
+**Xschem**
+
+* To launch Xschem from the terminal, simply use the ```xschem``` command. This will open a schematics window where you can work on your designs.
+
+* Unlike Netgen and Magic, Xschem does not spawn a separate console window. Instead, it utilizes the native command-line terminal for executing Tcl commands.
+
+* To run Xschem in batch mode, you can use the command ```xschem --tcl filename.tcl -q```. This is a useful option when you need to automate tasks or work with Xschem in a script-driven fashion.
+
+**Ngspice**
+
+* To initiate Ngspice on a Linux system, simply enter the ```ngspice``` command in the terminal.
+
+* Ngspice operates with its own built-in prompt, running a distinct set of interpreter commands that are not derived from Tcl or any other scripting language.
+
+* For batch mode execution in Ngspice, the command ```ngspice -b``` is employed. This mode is advantageous when you want to automate tasks or run Ngspice from scripts without manual intervention.
+
+#### Creating Sky130 Device Layout In Magic
+
+* In the home directory: <br>
+
+```ruby
+mkdir inverter
+cd inverter
+mkdir xschem
+mkdir mag
+mkdir netgen
+```
+
+
+
+
+
+
+
+
+ 
+</details>
