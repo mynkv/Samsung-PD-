@@ -8752,6 +8752,66 @@ report_si_noise_analysis
 
 <details>
 
+<summary>Introduction to Skywater PDK</summary>
+
+The SkyWater Open Source Process Design Kit (PDK) is a collaborative effort between Google and SkyWater Technology Foundry. It offers a complete open-source PDK and associated resources for the semiconductor industry.<br>
+
+The public repository for the SkyWater Open Source PDK includes:<br>
+
+* Documentation: Detailed information can be found at https://skywater-pdk.readthedocs.io/en/main/.<br>
+
+* PDK Library and Files: You can access the PDK library and associated files at https://github.com/google/skywater-pdk.<br>
+
+* Community: For engaging with the community and discussions, you can visit https://invite.skywater.tools/.<br>
+
+This initiative aims to provide accessible and open resources for semiconductor design and development.<br>
+* "130" in SKY130 stands for the feature size, which is the length of smallest transistor that can be manufactured in the process.<br><br>
+
+Open-Source EDA Tools<br>
+
+Open_PDKs is an installer based on Makefile that takes data from the SkyWater PDKs and adapts it for a range of open-source EDA (Electronic Design Automation) tools.<br>
+
+The open_pdks tool supports the following EDA tools:<br>
+
+1. Magic<br>
+2. Klayout<br>
+3. Openlane<br>
+4. Xschem<br>
+5. Netgen<br>
+6. Ngspice<br>
+7. IVerilog<br>
+8. qflow<br>
+9. IRSIM<br>
+10. xcircuit<br><br>
+
+
+The libraries that open_pdks supports are categorized as follows:<br><br>
+
+1. Digital standard cells (e.g., sky130_fd_sc_hd)<br>
+2. Primitive devices and analog components (e.g., sky130_fd_pr)<br>
+3. I/O cells (e.g., sky130_fd_io)<br>
+4. 3rd party libraries (e.g., sky130_ml_xx_hd)<br><br>
+
+Open_PDKs maintains a consistent file system structure, with SkyWater PDKs located under the /usr/share/pdk/sky130A/ directory. Within this directory, there are two subdirectories:<br><br>
+
+1. libs.tech: This directory contains subdirectories for setting up open-source EDA tools.<br>
+
+2. libs.ref: This directory contains reference libraries in various formats.<br>
+
+The project_root/ directory serves as the project's main directory and contains subdirectories for each tool or workflow needed.<br><br>
+
+**Physical Verification and Design Flow**<br>
+
+Physical verification is an essential step to ensure that the mask layout corresponds to the expected circuit design. This verification process involves two major steps:<br>
+
+1. Design Rule Checking (DRC): DRC verifies that the layout adheres to all the specific rules provided by the foundry for the given semiconductor process.<br>
+
+2. Layout Vs. Schematic (LVS): LVS confirms that the layout's netlist matches the schematic netlist, ensuring that the physical design corresponds to the intended circuit design.<br>
+ 
+</details>
+
+<details>
+
 <summary>Lab: Tool installations and basic DRC/LVS design flow tools</summary>
 
 #### Opensource EDA Tools: Check Tool Installations
@@ -8803,6 +8863,250 @@ mkdir xschem
 mkdir mag
 mkdir netgen
 ```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+```ruby
+cd xschem
+ln -s /usr/share/pdk/sky130A/libs.tech/xschem/xschemrc
+ln -s ln -s /usr/share/pdk/sky130A/libs.tech/ngspice/spinit .spiceinit
+cd ../mag/
+ln -s /usr/share/pdk/sky130A/libs.tech/magic/sky130A.magicrc .magicrc
+cd ../netgen/
+ln -s /usr/share/pdk/sky130A/libs.tech/netgen/sky130A_setup.tcl setup.tcl
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+```ruby	
+cd inverter/xschem/
+xschem
+```
+
+* Upon launching Xschem, a display appears featuring numerous sample schematics, including SKY130 devices.
+
+* To access these examples, simply click on the corresponding rectangle and then press the "E" key on your keyboard. You can return to the menu by pressing ```CTRL+E```. Additionally, if you'd like to resize the schematic to fit the window, you can do so by pressing the ```F``` key.
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+**MAGIC**
+
+```ruby
+cd ../mag/
+magic
+magic -d XR     (To invoke a cairo graphics package that uses 3D acceleration to get better rendering than the default graphics)
+magic -d -OGL   (An OpenGL based graphics package)
+```
+
+* Executing these commands will open two Magic windows. The layout window will present information such as "Technology: sky130A" along with a range of colors and icons that represent the available layers within this technology.
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+**Helpful Magic Shortcuts**:<br><br>
+
+* Adjust the cursor box using the left and right mouse buttons.<br>
+* Zoom out by pressing Shift+Z.<br>
+* Select a layer (also referred to as painting) using the middle mouse button or the P key.<br>
+* Erase content within the cursor box with the E key (you can also achieve this by clicking the middle mouse button on an empty part of the layout).<br>
+* View the entire layout with the V key.<br>
+* Open the parameter options for the selected device with CTRL+P.<br>
+* Select layers using the S key.<br>
+* Obtain information about the selected layer by typing the "what" command in the Magic console.<br>
+* Use the ";" key to type commands in the Magic console without switching between windows, which will execute the command when you press Enter.<br>
+* Select a device with the I key.<br>
+* Move the selected device using the M key.<br>
+
+To modify the settings in the Devices drop-down menu, follow these steps:<br><br>
+
+1. Click on "Devices 1."<br>
+2. Choose "nmos (MOSFET)."<br>
+3. Under "Devices 1," adjust the width to 2 um, the length to 0.5 um, and set the number of fingers to 3.<br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+#### Creating Simple Schematic In Xschem
+
+```ruby
+cd ../xschem/
+xschem
+```
+
+1. Open the "Choose symbol" window with the "Insert" key.<br>
+2.Navigate to the SkyWater library directory path to access its components.<br>
+3. Select the "fd_pr" library.<br>
+4. From the insert window, pick the nfet and pfet devices.<br>
+5. Place these devices anywhere you desire within the schematic.<br><br>
+
+To work with pins, which are not specific to a Process Design Kit (PDK) and can be found in the xschem library within the insert window, follow these steps:<br><br>
+
+1. Locate the pins in the xschem library, named as "ipin.sym," "opin.sym," and "iopin.sym."<br>
+2. Place the pins on the schematic and use the "M" key to move components around.<br>
+3. Employ the "C" key to copy components and the "Del" key to delete them.<br>
+4. Use the "W" key to insert wires between components and make connections.<br>
+5. Rename each pin with meaningful labels by using the "Q" key to bring up the parameter window.<br>
+6. Select components by clicking on them and use the "Q" key to open the parameter windows to configure their properties.<br><br>
+
+For the nfet device, make the following adjustments:<br><br>
+
+* Change the length to 0.18 (the default of 0.15 is limited to SRAM devices).<br>
+* Set the number of fingers to 3.<br>
+* Set the width of each finger to 1.5.<br>
+* Since there are 3 fingers, ensure that the total width in the parameter window is set to 3 times the width of each finger, which is 4.5.<br><br>
+
+Similarly, for the pfet device:<br><br>
+
+* Adjust the parameters for 3 fingers.<br>
+* Set the width to 1 for each finger.<br>
+* Set the length to 0.18.<br>
+* Specify that the body should be connected to the Vdd pin, as it is a 3-pin pfet.<br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+* Save the design by clicking tab File --> save as --> inverter.sch. <br><br>
+
+#### Creating Symbol And Exporting Schematic In Xschem
+
+To perform functional validation of the schematic, you'll need to create a testbench that's separate from the schematic. Here's how to go about it:<br><br>
+
+1. Start by creating a symbol for the schematic since the schematic will appear as a symbol in the testbench. To do this, go to the "Symbol" menu and select "Make symbol from schematic."<br>
+
+2. Then, create a testbench schematic using the "new schematic" option and insert the generated symbol from the local directory using the "Insert" key.<br>
+
+3. In the "File" tab, select "new schematic" and choose "inverter.sch" under your home directory. Paste it into the schematic window.<br>
+
+4. The testbench will be quite simple. You'll generate a ramp input and observe the output response after connecting the power supplies. To achieve this, insert two voltage sources from the default xschem library, one for the input and one for the supply. Connect them, and add a GND node to the supply connections. Create "ipins" and "opins" for the input and output signals you want to observe in Ngspice.<br>
+
+5. Set the supply voltage 1 to 1.8 V. For the input voltage, you need to set it as a piece-wise linear function to generate a ramp. The PWL function specifies voltage and time values. It will start at 0V, then begin to ramp up from 20 ns until it reaches its final value at 900 ns of 1.8 V.<br>
+
+6. Next, insert two more statements for Ngspice. Since these statements are not specific to any component, they should be placed in text boxes. To add a text box, select the "code_shown.sym" component under the xschem library.<br>
+
+7. The first text box specifies the location of the device models used in the device schematic. It uses a ".lib" statement to select a top-level file that informs Ngspice where to find all the models and specifies a simulation corner for all the models. value = ```".lib /usr/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt" could be used to specify the typical corner with the value = "tt"```.<br>
+
+8. The second text box includes the statement:<br>
+```
+".control
+tran 1n 1u
+plot V(in) V(out)
+.endc"
+```
+This instructs Ngspice to run a transient simulation for 1 ns and monitor voltages for the "in" and "out" pins.<br>
+
+9. Finally, save this complete testbench schematic as "inverter_tb.sch."<br>
+
+* This testbench setup will help you verify the functionality of your schematic by generating input signals, simulating the circuit, and observing the output response using Ngspice.<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+* To create the netlist, click on the ```Netlist``` button, and then proceed to simulate it using Ngspice by clicking the ```Simulate``` button.<br>
+
+* The resulting waveform will confirm that the schematic operates as an inverter, as demonstrated below.<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+* After verified the schematic, create a layout for it. To do this, go back to the inverter schematic.<br>
+
+* Firstly, click on the Simulation menu and select "LVS netlist: Top Lvel is a .subckt" option.<br><br>
+
+#### Importing Schematic To Layout And Inverter Layout Steps
+
+
+To bring the schematic into the layout in Magic, follow these steps:<br><br>
+
+1. Launch Magic by running the command:<br>
+```ruby
+cd ../mag/
+magic -d XR
+```
+2. Click on "File" and select "Import SPICE."<br>
+3. Then, choose the "inverter.spice" file from the xschem directory.<br>
+If performed correctly, the layout corresponding to the schematic will be displayed in Magic as shown:<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+Regarding the layout that was generated earlier, it's important to note that the schematic import process doesn't handle analog placement and routing automatically because of its complexity. Therefore, you need to manually position the components in the best locations and create the connections.<br><br>
+
+Here are the steps:<br><br>
+
+1. Begin by placing the pfet device above the nfet and adjust the positions of the input, output, and supply pins as illustrated in the figure.<br>
+
+2. Next, configure certain parameters that are only adjustable in the layout, which will simplify the wiring process.<br>
+
+3. To access the parameter editing section, press the "S" key, then select the object using the "I" key. Finally, open the parameter options for the selected device by pressing CTRL+P.<br>
+
+4. Set the "Top guard ring via coverage" to 100. This will add a local interconnect to metal1 via at the top of the guard ring. For the "Source via coverage," set it to +40, and for the "Drain via coverage," set it to -40. This configuration will separate the source and drain contacts, making them easier to connect with wires.<br>
+
+5. For the nfet, set the "Bottom guard ring via coverage" to 100, and configure the source and drain via coverages as +40 and -40, respectively, similar to the pfet.<br>
+
+6. Now, start creating the wire connections using the metal1 layers. Connect the source of the pfet to Vdd and the source of the nfet to Vss. Then, connect the drains of both mosfets to the output. Finally, connect the input to all the poly contacts of the gate.<br>
+
+This manual placement and routing process ensures that the layout is properly configured and connected for the desired functionality.<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+* Save the file and select the autowrite option.<br>
+
+* Run the following commands in the magic console:<br>
+```ruby
+extract do local    (Ensuring that magic writes all results to the local directory)
+extract all         (Performing the actual extraction)
+ext2spice lvs       (Simulating and setting up the netlist to hierarchical spice output in ngspice format with no parasitic components)
+ext2spice           (Generating the spice netlist)
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+```ruby
+rm *.ext                                          (Clear any unwanted files -> .ext files are just intermediate results from the extraction)
+/usr/share/pdk/bin/cleanup_unref.py -remove .     (Clean up extra .mag files -> files containing paramaterised cells that were created and saved but not used in the design)
+netgen -batch lvs "../mag/inverter_new.spice inverter_new" "../xschem/inverter_new.spice inverter_new"    (Run LVS by entering the netgen subdirectory)
+```
+
+* Ensure that when using the "netgen" command, you always place the layout netlist first and the schematic netlist second, essentially creating a side-by-side comparison where the layout is on the left and the schematic is on the right.<br>
+
+* Each netlist is denoted by a pair of keywords enclosed in quotes, with the first representing the location of the netlist file and the second specifying the name of the subcircuit for comparison.<br>
+
+* Upon examining the results, it becomes evident that there is a wiring problem causing a mismatch between the netlists. This issue stems from wiring errors in the layout.<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+#### Debugging errors in netlist, rerun and save layout
+
+```ruby
+extract do local
+extract all
+ext2spice lvs
+ext2spice cthresh 0     (Tells magic to add all the parasitic capacitances to the spice netlist)
+ext2spice
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+* Referring to the netlist file below, there are multiple lines beginning with C, which detail the parasitic capacitances. <br>
+
+```vim inverter.spice```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+
+
+
 
 
 
