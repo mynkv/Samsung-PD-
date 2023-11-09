@@ -9119,7 +9119,7 @@ cp ../xschem/.spiceinit .
 ngspice inverter_tb.spice
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/31.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
 
 
  
