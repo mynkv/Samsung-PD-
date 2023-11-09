@@ -8989,7 +8989,7 @@ To perform functional validation of the schematic, you'll need to create a testb
 7. The first text box specifies the location of the device models used in the device schematic. It uses a ".lib" statement to select a top-level file that informs Ngspice where to find all the models and specifies a simulation corner for all the models. value = ```".lib /usr/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt" could be used to specify the typical corner with the value = "tt"```.<br>
 
 8. The second text box includes the statement:<br>
-```
+```ruby
 ".control
 tran 1n 1u
 plot V(in) V(out)
