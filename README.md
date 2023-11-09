@@ -9104,7 +9104,5 @@ ext2spice
 ```vim inverter.spice```
 
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-
-
  
 </details>
