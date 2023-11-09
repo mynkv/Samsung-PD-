@@ -8864,7 +8864,7 @@ mkdir mag
 mkdir netgen
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/2_directories.png"><br><br>
 
 ```ruby
 cd xschem
@@ -8876,7 +8876,7 @@ cd ../netgen/
 ln -s /usr/share/pdk/sky130A/libs.tech/netgen/sky130A_setup.tcl setup.tcl
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/3_ln_commands.png"><br><br>
 
 ```ruby	
 cd inverter/xschem/
@@ -8887,9 +8887,10 @@ xschem
 
 * To access these examples, simply click on the corresponding rectangle and then press the "E" key on your keyboard. You can return to the menu by pressing ```CTRL+E```. Additionally, if you'd like to resize the schematic to fit the window, you can do so by pressing the ```F``` key.
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/4_xschemgui_examples.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/5_xschem_example.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/6_xschem_example.png"><br><br>
+
 
 **MAGIC**
 
@@ -8902,8 +8903,8 @@ magic -d -OGL   (An OpenGL based graphics package)
 
 * Executing these commands will open two Magic windows. The layout window will present information such as "Technology: sky130A" along with a range of colors and icons that represent the available layers within this technology.
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/7_magic_OGL.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/7_magic_XR.png"><br><br>
 
 **Helpful Magic Shortcuts**:<br><br>
 
@@ -8925,9 +8926,9 @@ To modify the settings in the Devices drop-down menu, follow these steps:<br><br
 2. Choose "nmos (MOSFET)."<br>
 3. Under "Devices 1," adjust the width to 2 um, the length to 0.5 um, and set the number of fingers to 3.<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/8_nmos_magic.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/9_nfet_5v_norings.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/10_what.png"><br><br>
 
 #### Creating Simple Schematic In Xschem
 
@@ -8965,8 +8966,8 @@ Similarly, for the pfet device:<br><br>
 * Set the length to 0.18.<br>
 * Specify that the body should be connected to the Vdd pin, as it is a 3-pin pfet.<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/11_inverter_sch.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/12_inverter_sch.png"><br><br>
 
 * Save the design by clicking tab File --> save as --> inverter.sch. <br><br>
 
@@ -9001,18 +9002,16 @@ This instructs Ngspice to run a transient simulation for 1 ns and monitor voltag
 
 * This testbench setup will help you verify the functionality of your schematic by generating input signals, simulating the circuit, and observing the output response using Ngspice.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/13_inverter_symbol.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/14_v_source_2.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/15_v1_ramp.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/16_lib.tech.png"><br><br>
 
 * To create the netlist, click on the ```Netlist``` button, and then proceed to simulate it using Ngspice by clicking the ```Simulate``` button.<br>
 
 * The resulting waveform will confirm that the schematic operates as an inverter, as demonstrated below.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/17_tb_simulation.png"><br><br>
 
 * After verified the schematic, create a layout for it. To do this, go back to the inverter schematic.<br>
 
@@ -9029,11 +9028,11 @@ cd ../mag/
 magic -d XR
 ```
 2. Click on "File" and select "Import SPICE."<br>
-3. Then, choose the "inverter.spice" file from the xschem directory.<br>
+3. Then, choose the "inverter_new.spice" file from the xschem directory.<br>
 If performed correctly, the layout corresponding to the schematic will be displayed in Magic as shown:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/18_spice_import.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/19_instance.png"><br><br>
 
 Regarding the layout that was generated earlier, it's important to note that the schematic import process doesn't handle analog placement and routing automatically because of its complexity. Therefore, you need to manually position the components in the best locations and create the connections.<br><br>
 
@@ -9053,11 +9052,11 @@ Here are the steps:<br><br>
 
 This manual placement and routing process ensures that the layout is properly configured and connected for the desired functionality.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/20_parameters.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/21_pfer_para.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/22_pfet_para.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/23_pin_connection.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/24_inv_mag_wiht_pins.png"><br><br>
 
 * Save the file and select the autowrite option.<br>
 
@@ -9069,7 +9068,7 @@ ext2spice lvs       (Simulating and setting up the netlist to hierarchical spice
 ext2spice           (Generating the spice netlist)
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/25_extract_spice.png"><br><br>
 
 ```ruby
 rm *.ext                                          (Clear any unwanted files -> .ext files are just intermediate results from the extraction)
@@ -9083,9 +9082,9 @@ netgen -batch lvs "../mag/inverter_new.spice inverter_new" "../xschem/inverter_n
 
 * Upon examining the results, it becomes evident that there is a wiring problem causing a mismatch between the netlists. This issue stems from wiring errors in the layout.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/26_remove_parameterised_cells.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/27_lvs.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/28_lvs.png"><br><br>
 
 #### Debugging errors in netlist, rerun and save layout
 
@@ -9097,12 +9096,31 @@ ext2spice cthresh 0     (Tells magic to add all the parasitic capacitances to th
 ext2spice
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/29.png"><br><br>
 
 * Referring to the netlist file below, there are multiple lines beginning with C, which detail the parasitic capacitances. <br>
 
 ```vim inverter.spice```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/f736be11d3a57500da5b40dc7ed968b1140366a8/day27/17_report_si_bottleneck.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/30_inverter_spice.png"><br><br>
+
+```ruby
+cp ../xschem/inverter_tb.spice .
+vim inverter_tb.spice
+```
+
+* Modify the test bench netlist file:
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/31.png"><br><br>
+
+```ruby
+/usr/share/pdk/bin/cleanup_unref.py -remove .
+cp ../xschem/.spiceinit .
+ngspice inverter_tb.spice
+```
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/Usha-Mounika/Samsung_PD/blob/058c8fce48ad6e955aea587eefd70ae0165203e8/day29/day28/31.png"><br><br>
+
+
  
 </details>
