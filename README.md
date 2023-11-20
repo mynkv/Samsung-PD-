@@ -9127,11 +9127,9 @@ ngspice inverter_tb.spice
 
 ## TCL Programming
 
-Day 1: Introduction to TCL and VSDSYNTH Toolbox Usage
-
 <details>
 
- <summary>Day 1: Introduction to TCL and VSDSYNTH Toolbox Usage</summary>
+ <summary>Day 1: Introduction to TCL and VSDSYNTH Toolbox Usage</summary><br>
 
 We hete target at utilizing TCL scripting to generate a comprehensive report from a design using the free and open-source EDA tools, Yosys and Opentimer. The input for the program consists of paths to design files in CSV format. By the end of the fifth day, the objective is to supply design information, specifically the paths of design data, to the "TCL BOX" (synui). This TCL BOX, powered by Yosys and Opentimer, is responsible for executing the design and producing detailed timing reports.<br><br>
 
@@ -9241,7 +9239,7 @@ Within my synui command, I've incorporated a total of 5 general scenarios as per
 
 <details>
 
-<summary>Day 2 - Variable Creation and Processing Constraints from CSV</summary>
+<summary>Day 2 - Variable Creation and Processing Constraints from CSV</summary><br>
 
 
 The objective for the second day involves establishing variables, verifying the existence of files/directories, and transforming a constraints CSV file into both format[1] and SDc format. This task is accomplished by coding in the synui.tcl file.<br><br>
@@ -9407,7 +9405,7 @@ puts "OUTPUTS starting row in CSV file = $outputs_start "
 
 <details>
 	
-<summary>Day 3 - Processing Clock and Input Constraints from CSV and dumping SDC</summary>
+<summary>Day 3 - Processing Clock and Input Constraints from CSV and dumping SDC</summary><br>
 
 The task for Day 3 primarily involves analyzing clock and input constraints within a CSV file and generating SDC commands in a .sdc file containing the processed data. This process incorporates various matrix search algorithms, including one specifically designed to differentiate between inputs classified as buses and individual bits.<br><br>
 
@@ -9573,7 +9571,7 @@ while { $i < $end_of_inputs } {
 
 <details>
 	
-<summary>Day 4 - Complete Scripting and Yosys Synthesis Introduction</summary>
+<summary>Day 4 - Complete Scripting and Yosys Synthesis Introduction</summary><br>
 
 Day 4 tasks encompassed processing the output section, writing SDC commands to a file, verifying the Yosys hierarchy, addressing errors, and conducting a sample Yosys synthesis utilizing a memory example, accompanied by detailed explanations.<br>
 
@@ -9787,7 +9785,7 @@ if { $error_flag } {
 
 <details>
 	
-<summary>Day 5 - Advanced Scripting Techniques and Quality of Results (QoR) Generation</summary>
+<summary>Day 5 - Advanced Scripting Techniques and Quality of Results (QoR) Generation</summary><br>
 
 **Advanced Scripting Techniques**:<br>
 
