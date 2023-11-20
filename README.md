@@ -9787,7 +9787,7 @@ if { $error_flag } {
 
 <details>
 	
-<summry>Day 5 - Advanced Scripting Techniques and Quality of Results (QoR) Generation</summry>
+<summary>Day 5 - Advanced Scripting Techniques and Quality of Results (QoR) Generation</summary>
 
 **Advanced Scripting Techniques**:
 
