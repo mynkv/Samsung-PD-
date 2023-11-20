@@ -9133,29 +9133,29 @@ Day 1: Introduction to TCL and VSDSYNTH Toolbox Usage
 
  <summary>Day 1: Introduction to TCL and VSDSYNTH Toolbox Usage</summary>
 
-We hete target at utilizing TCL scripting to generate a comprehensive report from a design using the free and open-source EDA tools, Yosys and Opentimer. The input for the program consists of paths to design files in CSV format. By the end of the fifth day, the objective is to supply design information, specifically the paths of design data, to the "TCL BOX" (synui). This TCL BOX, powered by Yosys and Opentimer, is responsible for executing the design and producing detailed timing reports.
+We hete target at utilizing TCL scripting to generate a comprehensive report from a design using the free and open-source EDA tools, Yosys and Opentimer. The input for the program consists of paths to design files in CSV format. By the end of the fifth day, the objective is to supply design information, specifically the paths of design data, to the "TCL BOX" (synui). This TCL BOX, powered by Yosys and Opentimer, is responsible for executing the design and producing detailed timing reports.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/1.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/2.png"><br><br>
 
-On the first day of the training course, the primary objective is to develop a command (in this case, synui) and establish a mechanism for transferring a .csv file from the UNIX shell to the TCL script. This process is designed to accommodate three distinct scenarios from the user's perspective: 
+On the first day of the training course, the primary objective is to develop a command (in this case, synui) and establish a mechanism for transferring a .csv file from the UNIX shell to the TCL script. This process is designed to accommodate three distinct scenarios from the user's perspective: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/3.png"><br><br>
 
-Review of input file - openMSP430_design_details.csv
+Review of input file - openMSP430_design_details.csv<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/4.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/5.PNG"><br><br>
 
-#### Implementation
+#### Implementation<br>
 
-Developing the script for the synui command and the synui.tcl files: 
+Developing the script for the synui command and the ```synui.tcl``` files: <br><br>
 
-synui code: 
+* **synui code**: <br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/6.PNG"><br><br>
 
-The provided code illustrates the fundamental structure of Bash code employed for implementing common scenarios:
+The provided code illustrates the fundamental structure of Bash code employed for implementing common scenarios:<br>
 
 ```ruby
 #Code to handle the scenario where user does not give any file, does not give .csv file, gives more than one file as argument
@@ -9207,31 +9207,31 @@ else
 fi
 ```
 
-Within my synui command, I've incorporated a total of 5 general scenarios as perceived from the user's standpoint in the bash script:
+Within my synui command, I've incorporated a total of 5 general scenarios as perceived from the user's standpoint in the bash script:<br><br>
 
-1. No input file provided
+1. No input file provided:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/7.PNG"><br><br>
 
-2. File provided exists but is not of .csv format
+2. File provided exists but is not of .csv format:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/8.PNG"><br><br>
 
-3. More than one file or parameters provided
+3. More than one file or parameters provided:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/9.PNG"><br><br>
 
-4. Provide a .csv file that does not exist
+4. Provide a .csv file that does not exist:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/10.PNG"><br><br>
 
-5. Type "-help" to find out usage
+5. Type "-help" to find out usage:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/11.PNG"><br><br>
 
-6. providing a correct .csv file:
+6. providing a correct .csv file:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/11_2.PNG"><br><br>
 
 
 
@@ -9244,22 +9244,22 @@ Within my synui command, I've incorporated a total of 5 general scenarios as per
 <summary>Day 2 - Variable Creation and Processing Constraints from CSV</summary>
 
 
-The objective for the second day involves establishing variables, verifying the existence of files/directories, and transforming a constraints CSV file into both format[1] and SDc format. This task is accomplished by coding in the synui.tcl file.
+The objective for the second day involves establishing variables, verifying the existence of files/directories, and transforming a constraints CSV file into both format[1] and SDc format. This task is accomplished by coding in the synui.tcl file.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/12.png"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/13.png"><br><br>
 
-Review of input file - openMSP430_design_constraints.csv
+Review of input file - openMSP430_design_constraints.csv<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/14.PNG"><br><br>
 
-* Now tclbox.tcl is edited throught the workshop as follows for different requirements.
+* Now tclbox.tcl is edited throught the workshop as follows for different requirements.<br><br>
 
-**Creating variables**:
+**Creating variables**:<br>
 
-I've automatically generated variables by converting the CSV file into a matrix and subsequently into an array. Additionally, I've implemented a specific condition to identify the design name. Moreover, I've included a command to capture the script's start time, enabling runtime calculation at the end.
+I've automatically generated variables by converting the CSV file into a matrix and subsequently into an array. Additionally, I've implemented a specific condition to identify the design name. Moreover, I've included a command to capture the script's start time, enabling runtime calculation at the end.<br><br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 #!/bin/tclsh
@@ -9299,9 +9299,9 @@ while {$i < $n_rows} {
 }
 ```
 
-Output of above code:
+Output of above code:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/15.PNG"><br><br>
 
 * Above code has set following variables.
 	* Design Name : 'openMSP430'
@@ -9318,10 +9318,10 @@ Output of above code:
 
 **File and Directory Existence Check**:
 
-As the presence of these files and directories is crucial for the program's functionality, I've incorporated code to verify their existence. If the input files are not found, the code exits, except in the case of the output directory, which is created if absent. The following screenshots showcase the terminal displaying this functionality, along with the basic code for the process.
+As the presence of these files and directories is crucial for the program's functionality, I've incorporated code to verify their existence. If the input files are not found, the code exits, except in the case of the output directory, which is created if absent. The following screenshots showcase the terminal displaying this functionality, along with the basic code for the process.<br><br>
 
-* The following code will assess the presence of the required directories and files to ensure successful execution.
-* Code: synui.tcl
+* The following code will assess the presence of the required directories and files to ensure successful execution.<br>
+* Code: synui.tcl<br>
 
 ```ruby
 ############# FILE AND DIRECTORY EXISTENCE CHECK ###################
@@ -9362,14 +9362,14 @@ if { ![file exists $Constraints_File] } {
 }  
 ```
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/16.PNG"><br><br>
 
 
-**Processing openMSP430_design_constraints.csv file**:
+**Processing openMSP430_design_constraints.csv file**:<br>
 
-The file was effectively analyzed and transformed into a matrix. Subsequently, the initial rows of clocks, inputs, and outputs were extracted, along with the count of rows and columns. Presented below is the basic code for this process, along with a terminal screenshot illustrating numerous "puts" commands recording the variables.
+The file was effectively analyzed and transformed into a matrix. Subsequently, the initial rows of clocks, inputs, and outputs were extracted, along with the count of rows and columns. Presented below is the basic code for this process, along with a terminal screenshot illustrating numerous "puts" commands recording the variables.<br><br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 # Constraints csv file data processing for convertion to format[1](excel) and SDC
@@ -9399,9 +9399,9 @@ puts "INPUTS starting row in CSV file = $inputs_start "
 puts "OUTPUTS starting row in CSV file = $outputs_start "
 ```
 
-* Output:
+* Output:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/17.PNG"><br><br>
 
 </details>
 
@@ -9409,13 +9409,13 @@ puts "OUTPUTS starting row in CSV file = $outputs_start "
 	
 <summary>Day 3 - Processing Clock and Input Constraints from CSV and dumping SDC</summary>
 
-The task for Day 3 primarily involves analyzing clock and input constraints within a CSV file and generating SDC commands in a .sdc file containing the processed data. This process incorporates various matrix search algorithms, including one specifically designed to differentiate between inputs classified as buses and individual bits.
+The task for Day 3 primarily involves analyzing clock and input constraints within a CSV file and generating SDC commands in a .sdc file containing the processed data. This process incorporates various matrix search algorithms, including one specifically designed to differentiate between inputs classified as buses and individual bits.<br><br>
 
-**Processing of the constraints .csv file for CLOCKS and dumping SDC commands to .sdc**:
+**Processing of the constraints .csv file for CLOCKS and dumping SDC commands to .sdc**:<br>
 
-The processing of the CSV file containing CLOCK data has been completed successfully. Clock-based SDC commands, featuring unique clock names achieved by appending "_synui" to the SDC create_clock command, have been written to the .sdc file. Provided below are terminal screenshots displaying numerous "puts" statements showcasing variables, user debug information, and the output.sdc file, along with the basic code for this process:
+The processing of the CSV file containing CLOCK data has been completed successfully. Clock-based SDC commands, featuring unique clock names achieved by appending "_synui" to the SDC create_clock command, have been written to the .sdc file. Provided below are terminal screenshots displaying numerous "puts" statements showcasing variables, user debug information, and the output.sdc file, along with the basic code for this process:<br><br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 # Conversion of constraints csv file to SDC
@@ -9475,19 +9475,19 @@ puts "\n Clock actual starting row = $clocks_start_row_actual"
 puts "\n Clock actual ending row = $end_of_clocks"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/18.PNG"><br><br>
 
-* openMSP430.sdc
+* openMSP430.sdc<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/19.PNG"><br><br>
 
 **Processing of the constraints .csv file for INPUTS and dumping SDC commands to .sdc**
 
-The constraints .csv file for INPUTS has been effectively processed, distinguishing between bit and bus inputs. Subsequently, SDC commands based on input constraints have been successfully written to a .sdc file. Terminal screenshots are provided below, featuring numerous "puts" statements displaying variables, user debug information, and the output.sdc file, along with the essential code for this process.
+The constraints .csv file for INPUTS has been effectively processed, distinguishing between bit and bus inputs. Subsequently, SDC commands based on input constraints have been successfully written to a .sdc file. Terminal screenshots are provided below, featuring numerous "puts" statements displaying variables, user debug information, and the output.sdc file, along with the essential code for this process.<br><br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 # Finding the starting column number for input clock latency in INPUTS section
@@ -9561,13 +9561,13 @@ while { $i < $end_of_inputs } {
 }
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/20.PNG"><br><br>
 
-* openMSP430.sdc
+* openMSP430.sdc<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/21.PNG"><br><br>
 
 </details>
 
@@ -9575,17 +9575,17 @@ while { $i < $end_of_inputs } {
 	
 <summary>Day 4 - Complete Scripting and Yosys Synthesis Introduction</summary>
 
-Day 4 tasks encompassed processing the output section, writing SDC commands to a file, verifying the Yosys hierarchy, addressing errors, and conducting a sample Yosys synthesis utilizing a memory example, accompanied by detailed explanations.
+Day 4 tasks encompassed processing the output section, writing SDC commands to a file, verifying the Yosys hierarchy, addressing errors, and conducting a sample Yosys synthesis utilizing a memory example, accompanied by detailed explanations.<br>
 
-**Review of input file - openMSP430_design_constraints.csv**:
+**Review of input file - openMSP430_design_constraints.csv**:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/22.PNG"><br><br>
 
-**Processing of the constraints .csv file for OUTPUTS and dumping SDC commands to .sdc**
+**Processing of the constraints .csv file for OUTPUTS and dumping SDC commands to .sdc**<br>
 
-I have successfully processed the CSV file containing output data, distinguished between bit and bus outputs, and subsequently written output-based SDC commands to a .sdc file. The provided images showcase the terminal, featuring numerous "puts" statements displaying variables, user debug information, and the output.sdc file, along with the basic code for this process.
+I have successfully processed the CSV file containing output data, distinguished between bit and bus outputs, and subsequently written output-based SDC commands to a .sdc file. The provided images showcase the terminal, featuring numerous "puts" statements displaying variables, user debug information, and the output.sdc file, along with the basic code for this process.<br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 # Finding column number starting for output clock latency in OUTPUTS section only
@@ -9656,12 +9656,12 @@ close $sdc_file
 puts "\nInfo-SDC: SDC created. Please use constraints in path $Output_Directory/$Design_Name.sdc"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/23.PNG"><br><br>
 
-Memory module yosys synthesis and explanation
-The verilog code memory.v for a single-bit address and single-bit data memory unit is given below.
+Memory module yosys synthesis and explanation<br>
+The verilog code memory.v for a single-bit address and single-bit data memory unit is given below.<br>
 
 Code:
 
@@ -9684,7 +9684,7 @@ always @(posedge CLK) begin
 endmodule
 ```
 
-The basic Yosys script memory.ys to run this and obtain a gate-level netlist and 2D representation of the memory module in gate components is provided below.
+The basic Yosys script memory.ys to run this and obtain a gate-level netlist and 2D representation of the memory module in gate components is provided below.<br>
 
 ```
 # Reading the library
@@ -9707,42 +9707,42 @@ show
 ~
 ```
 
-The output view of netlist from the code is shown below.
+The output view of netlist from the code is shown below.<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/24.png"><br><br>
 
-Memory write process explained in following images using truth table
+Memory write process explained in following images using truth table<br>
 
-Basic illustration of the write process
+Basic illustration of the write process<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/25.png"><br><br>
 
-Before first rising edge of the clock
+Before first rising edge of the clock<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/26.png"><br><br>
 
-After first rising edge of the clock - write process done
+After first rising edge of the clock - write process done<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/27.png"><br><br>
 
-Memory read process explained in following images using truth table
+Memory read process explained in following images using truth table<br>
 
-Basic illustration of the read process
+Basic illustration of the read process<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/28.png"><br><br>
 
-After first rising edge and before second rising edge of the clock
+After first rising edge and before second rising edge of the clock<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/29.png"><br><br>
 
-After second rising edge of the clock - read process done
+After second rising edge of the clock - read process done<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/30.png"><br><br>
 
-**Hierarchy check script
+**Hierarchy check script**:<br>
 
-* Below code is the hierarchy check script.
-* Code: synui.tcl
+* Below code is the hierarchy check script.<br>
+* Code: synui.tcl<br>
 
 ```ruby
 # Hierarchy check error handling
@@ -9772,15 +9772,15 @@ if { $error_flag } {
 }
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-[Image31]
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/31.PNG"><br><br>
 
-* openMSP430.hierarchy_check.log
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+* openMSP430.hierarchy_check.log<br><br>
+
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/32.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/33.PNG"><br><br>
 
 
 </details>
@@ -9789,14 +9789,14 @@ if { $error_flag } {
 	
 <summary>Day 5 - Advanced Scripting Techniques and Quality of Results (QoR) Generation</summary>
 
-**Advanced Scripting Techniques**:
+**Advanced Scripting Techniques**:<br>
 
-* The task of day5 is to automate the running synthesis in yosys and writing the files needed for the OpenTimer tool, like .conf,.spef, and timing Create an OpenTimer script, launch an OpenTimer STA, and gather the information needed to create a QoR.
-* Finally, print the data in a tool-standard QoR output format using the results file that was created during the OpenTimer STA run.
+* The task of day5 is to automate the running synthesis in yosys and writing the files needed for the OpenTimer tool, like .conf,.spef, and timing Create an OpenTimer script, launch an OpenTimer STA, and gather the information needed to create a QoR.<br>
+* Finally, print the data in a tool-standard QoR output format using the results file that was created during the OpenTimer STA run.<br>
 
-Yosys synthesis
-* In below code .ys file is created and it is used further by yosys tool for synthesis
-* Code: synui.tcl
+**Yosys synthesis**:<br>
+* In below code .ys file is created and it is used further by yosys tool for synthesis.<br>
+* Code: synui.tcl<br>
 
 ```ruby
 # Main Synthesis Script for yosys
@@ -9821,11 +9821,11 @@ close $fileId
 puts "\nInfo: Synthesis script created and can be accessed from path $Output_Directory/$Design_Name.ys"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/34.PNG"><br><br>
 
-* Below is script is to run sythesis and handling error:
+* Below is script is to run sythesis and handling error:<br>
 
 ```ruby
 puts "\nInfo: Running synthesis......."
@@ -9840,16 +9840,15 @@ if { [catch {exec yosys -s $Output_Directory/$Design_Name.ys >& $Output_Director
 puts "\nInfo: Please refer to log $Output_Directory/$Design_Name.synthesis.log"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-[image35]
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/35.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/36.PNG"><br><br>
 
-* Procs can be used to create user-defined commands.
-* Different procs used throught the training is given below:
+* Procs can be used to create user-defined commands.<br>
+* Different procs used throught the training is given below:<br><br>
 
-1. **reopenStdout.proc**
+1. **reopenStdout.proc**<br>
 
 ```ruby
   #!/bin/tclsh
@@ -9860,7 +9859,7 @@ proc reopenStdout {file} {
 }
 ```
 
-2. **set_multi_cpu_usage.proc**:
+2. **set_multi_cpu_usage.proc**:<br>
 
 ```ruby
 #!/bin/tclsh
@@ -9893,7 +9892,7 @@ proc set_multi_cpu_usage {args} {
 #set_multi_cpu_usage -localCpu 5 -help
 ```
 
-3. **read_lib.proc**:
+3. **read_lib.proc**:<br>
 
 ```ruby
 #!/bin/tclsh
@@ -9923,7 +9922,7 @@ proc read_lib args {
 }
 ```
 
-4. **read_verilog.proc**:
+4. **read_verilog.proc**:<br>
 
 ```ruby
 proc read_verilog {arg1} {
@@ -9931,7 +9930,7 @@ puts "set_verilog_fpath $arg1"
 }
 ```
 
-5. **read_sdc.proc**
+5. **read_sdc.proc**<br>
 
 ```ruby
 proc read_sdc {arg1} {
@@ -10118,10 +10117,10 @@ puts "set_timing_fpath $sdc_dirname/$sdc_filename.timing"
 }
 ```
 
-**Using the procs to write timing files**
+**Using the procs to write timing files**<br>
 
-* In below code procs are used to create timing configuration files required for the OpenTimer tool.
-* Code: tclbox.tcl
+* In below code procs are used to create timing configuration files required for the OpenTimer tool.<br>
+* Code: tclbox.tcl<br>
 
 ```ruby
 ############################################# Calling procs needed to generate .timing file ###################################################
@@ -10149,16 +10148,15 @@ reopenStdout /dev/tty
 #puts "closed .conf and redirected to stdout"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-[image38]
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/37.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/38.PNG"><br><br>
 
-**Preparation of .CONF and SPEF file for OpenTimer STA**
+**Preparation of .CONF and SPEF file for OpenTimer STA**<br>
 
-* In below code procs are used to generate the .conf and .SPEF file required for the OpenTimer tool for timing analysis.
-* Code: synui.tcl
+* In below code procs are used to generate the .conf and .SPEF file required for the OpenTimer tool for timing analysis.<br>
+* Code: synui.tcl<br><br>
 
 ```ruby
 ################################################ SPEF and CONF creation #########################################################################
@@ -10192,14 +10190,14 @@ puts $conf_file "report_worst_paths -numPaths 10000 "
 close $conf_file
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/39.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/40.PNG"><br><br>
 
-#### Running STA and generating the QOR
+#### Running STA and generating the QOR<br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 ################################# Starting Timing Analysis ##########################################################
@@ -10211,13 +10209,13 @@ puts "\nInfo: STA finished in $time_elapsed_in_sec seconds"
 puts "\nInfo: Refer to $Output_Directory/$Design_Name.results for warnings and errors"
 ```
 
-* Output:
+* Output:<br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/41.PNG"><br><br>
 
-**Data extraction from .results file for QOR**
+**Data extraction from .results file for QOR**<br><br>
 
-Code: synui.tcl
+Code: synui.tcl<br>
 
 ```ruby
 # Find worst output violation
@@ -10310,13 +10308,13 @@ puts "\nInfo: Number of Instances = $Instance_count"
 puts "\nInfo: Time elapsed = $time_elapsed_in_sec"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/42.PNG"><br><br>
 
-**Final QOR Report generation**
+**Final QOR Report generation**<br>
 
-* Code: synui.tcl
+* Code: synui.tcl<br>
 
 ```ruby
 # Quality of Results (QoR) generation
@@ -10333,12 +10331,12 @@ puts [format $formatStr "-----------" "-------" "--------------" "---------" "--
 puts "\n"
 ```
 
-* Output:
+* Output:<br><br>
 
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
-<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/45c893f8a13cc0addd07570285248c8665ec147a/day27/last.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/43.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/44.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/45.PNG"><br><br>
+<img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/46.PNG"><br><br>
 
 
 
