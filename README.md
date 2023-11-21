@@ -10336,7 +10336,4 @@ puts "\n"
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/45.PNG"><br><br>
 <img width="1085" alt="[icc2_shell" src="https://github.com/mynkv/Samsung-PD-/blob/d0ba9c88a12bb024322ea2f5411c3c1cea58b668/Day30/46.PNG"><br><br>
 
-
-
-
  </details>
